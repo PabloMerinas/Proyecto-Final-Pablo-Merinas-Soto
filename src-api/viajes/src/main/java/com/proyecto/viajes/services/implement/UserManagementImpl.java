@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.proyecto.viajes.persistence.model.User;
+import com.proyecto.viajes.persistence.model.UserEntity;
 import com.proyecto.viajes.persistence.repositories.UserRepositoryI;
 import com.proyecto.viajes.services.interfaces.UserManagementI;
 
@@ -19,18 +19,18 @@ public class UserManagementImpl implements UserManagementI {
 	}
 
 	@Override
-	public User addUser(User u) {
+	public UserEntity addUser(UserEntity u) {
 		userRepositoryI.save(u);
 		return u;
 	}
 
 	@Override
-	public List<User> findAllUsers() {
+	public List<UserEntity> findAllUsers() {
 		return userRepositoryI.findAll();
 	}
 
 	@Override
-	public Optional<User> findUserById(Long id) {
+	public Optional<UserEntity> findUserById(Long id) {
 		return userRepositoryI.findById(id);
 	}
 

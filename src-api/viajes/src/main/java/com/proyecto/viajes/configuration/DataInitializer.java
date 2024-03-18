@@ -1,35 +1,67 @@
 package com.proyecto.viajes.configuration;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
+import com.proyecto.viajes.persistence.model.UserEntity;
+import com.proyecto.viajes.persistence.repositories.UserRepositoryI;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Component
 public class DataInitializer {
 
 	private final JdbcTemplate jdbcTemplate;
 
-	public DataInitializer(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+	private UserRepositoryI usuarioRepository;
+	private PasswordEncoder passwordEncoder;
 
 	@PostConstruct
 	public void initializeData() {
-	    String passwordAdmin = new BCryptPasswordEncoder().encode("admin");
-	    String passwordUser = new BCryptPasswordEncoder().encode("user");
-
-	    executeSqlStatement(
-	            "INSERT INTO T_USER (C_USERNAME, C_NAME, C_PASSWORD, C_EMAIL, C_ROLES) VALUES ('admin','Pablo Administrador', '"
-	                    + passwordAdmin + "', 'admin@admin.com', 'ROLE_ADMIN');");
-	    executeSqlStatement(
-	    		"INSERT INTO T_USER (C_USERNAME, C_NAME, C_PASSWORD, C_EMAIL, C_ROLES) VALUES ('user','Pablo Usuario', '"
-	    				+ passwordUser + "', 'user@user.com', 'ROLE_USER');");
+		insertarUsuario("admin", "admin123", "admin@admin.com", false, false);
+		insertarRol("admin", "ADMIN");
+		insertarUsuario("user", "admin123", "admin@admin.com", false, false);
+		insertarRol("user", "USER");
 	}
-
 
 	private void executeSqlStatement(String sqlStatement) {
 		jdbcTemplate.execute(sqlStatement);
+	}
+
+	@Transactional
+	private UserEntity crearOBuscarUsuario(String username, String email, String password) {
+		return usuarioRepository.findByUsername(username).orElseGet(() -> {
+
+			UserEntity nuevoUsuario = new UserEntity();
+			nuevoUsuario.setUsername(username);
+			nuevoUsuario.setPassword(passwordEncoder.encode(password));
+			nuevoUsuario.setEmail(email);
+			nuevoUsuario.setLocked(false);
+			nuevoUsuario.setDisabled(false);
+			return usuarioRepository.save(nuevoUsuario);
+		});
+	}
+
+	@Transactional
+	private UserEntity insertarUsuario(String username, String password, String email, Boolean locked,
+			Boolean disabled) {
+		return usuarioRepository.findByUsername(username).orElseGet(() -> {
+
+			UserEntity nuevoUsuario = new UserEntity();
+			nuevoUsuario.setUsername(username);
+			nuevoUsuario.setPassword(passwordEncoder.encode(password));
+			nuevoUsuario.setEmail(email);
+			nuevoUsuario.setLocked(false);
+			nuevoUsuario.setDisabled(false);
+			return usuarioRepository.save(nuevoUsuario);
+		});
+	}
+
+	private void insertarRol(String username, String rol) {
+		executeSqlStatement("INSERT INTO t_user_role (username, role) VALUES ('" + username + "', '" + rol + "')");
 	}
 }
