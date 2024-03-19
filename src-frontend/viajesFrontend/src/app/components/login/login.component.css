@@ -1,0 +1,20 @@
+.login {
+    width: 512px;
+    height: 712px;
+    border: 1px solid black;
+    margin: 0px auto;
+    font-family: Inter;
+    
+
+}
+
+span {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 27.5px;
+}
+

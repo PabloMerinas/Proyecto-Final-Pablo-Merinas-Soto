@@ -23,15 +23,16 @@ public class AuthController {
 	private final JwtUtils jwtUtil;
 
 	@PostMapping("/login")
-	public ResponseEntity<Void> login(@RequestBody LoginDto loginDto) {
+	public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(),
 				loginDto.getPassword());
 		Authentication authentication = this.authenticationManager.authenticate(login);
 
-		System.out.println(authentication.isAuthenticated());
-		System.out.println(authentication.getPrincipal());
-
 		String jwt = this.jwtUtil.create(loginDto.getUsername());
-		return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, jwt).build();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + jwt);
+
+		return ResponseEntity.ok().headers(headers).body("Bearer token: " + jwt);
 	}
 }

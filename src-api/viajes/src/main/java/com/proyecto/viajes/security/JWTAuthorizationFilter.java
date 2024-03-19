@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
-public class JwtFilter extends OncePerRequestFilter {
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final JwtUtils jwtUtil;
 	private final UserDetailsService userDetailsService;

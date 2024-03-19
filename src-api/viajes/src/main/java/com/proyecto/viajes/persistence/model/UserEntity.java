@@ -27,12 +27,15 @@ public class UserEntity {
 	@Column(length = 50)
 	private String email;
 
-	@Column(nullable = false, columnDefinition = "TINYINT")
-	private Boolean locked;
+	@Column(length = 12)
+	private String phone;
+
+	@Column(length = 256)
+	private String bio;
 
 	@Column(nullable = false, columnDefinition = "TINYINT")
-	private Boolean disabled;
+	private Boolean active;
 
-	@OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<UserRoleEntity> roles;
 }

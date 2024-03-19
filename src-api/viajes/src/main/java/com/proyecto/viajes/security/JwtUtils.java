@@ -12,11 +12,11 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 @Component
 public class JwtUtils {
 
-	private static String SECRET_KEY = "pablo_merinas";
-	private static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
+	private static final String SECRET_KEY = "pablo_merinas";
+	private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
 
 	public String create(String username) {
-		return JWT.create().withSubject(username).withIssuer("pablo_merinas").withIssuedAt(new Date(0))
+		return JWT.create().withSubject(username).withIssuer("Pablo Merinas").withIssuedAt(new Date(0))
 				.withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(15))).sign(ALGORITHM);
 	}
 

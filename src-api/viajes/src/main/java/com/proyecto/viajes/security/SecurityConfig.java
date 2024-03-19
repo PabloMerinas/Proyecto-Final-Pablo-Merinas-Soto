@@ -1,5 +1,7 @@
 package com.proyecto.viajes.security;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,15 +21,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SecurityConfig {
 
-	private final JwtFilter jwtFilter;
+	private final JWTAuthorizationFilter jwtFilter;
 
-	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().cors().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll()
-				.requestMatchers("/v1/users/user").permitAll().anyRequest().authenticated().and()
+		http.csrf(csrf -> csrf.disable()).cors(withDefaults())
+				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(requests -> requests.requestMatchers("/api/auth/**").permitAll()
+						.requestMatchers("/v1/users/user").permitAll().anyRequest().authenticated())
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();

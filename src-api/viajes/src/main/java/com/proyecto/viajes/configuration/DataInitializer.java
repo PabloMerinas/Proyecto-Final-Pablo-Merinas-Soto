@@ -40,8 +40,7 @@ public class DataInitializer {
 			nuevoUsuario.setUsername(username);
 			nuevoUsuario.setPassword(passwordEncoder.encode(password));
 			nuevoUsuario.setEmail(email);
-			nuevoUsuario.setLocked(false);
-			nuevoUsuario.setDisabled(false);
+			nuevoUsuario.setActive(true);
 			return usuarioRepository.save(nuevoUsuario);
 		});
 	}
@@ -55,8 +54,7 @@ public class DataInitializer {
 			nuevoUsuario.setUsername(username);
 			nuevoUsuario.setPassword(passwordEncoder.encode(password));
 			nuevoUsuario.setEmail(email);
-			nuevoUsuario.setLocked(false);
-			nuevoUsuario.setDisabled(false);
+			nuevoUsuario.setActive(false);
 			return usuarioRepository.save(nuevoUsuario);
 		});
 	}
