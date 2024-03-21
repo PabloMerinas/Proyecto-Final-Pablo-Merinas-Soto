@@ -33,6 +33,7 @@ public class AuthController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + jwt);
 
-		return ResponseEntity.ok().headers(headers).body("Bearer token: " + jwt);
+//		return ResponseEntity.ok().headers(headers).body("Bearer token: " + jwt);
+		return ResponseEntity.ok().headers(headers).body(jwt);
 	}
 }

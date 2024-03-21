@@ -1,16 +1,13 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import LoginForm from './components/LoginForm';
+import Register from './pages/register/Register'; 
 
 function App() {
   return (
     <div className="App">
-
       <main>
-        <LoginForm></LoginForm>
+        <Register></Register>
       </main>
-      <footer>
-        {/* Puedes añadir aquí el pie de página común */}
-      </footer>
     </div>
   );
 }

@@ -1,0 +1,262 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+
+.header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #e5e8ea;
+  display: flex;
+  height: 65px;
+  justify-content: space-around;
+  padding: 12px 20px;
+  position: relative;
+  width: 100%;
+  align-items: center;
+
+}
+
+.header .depth-frame {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  height: 22.5px;
+  position: relative;
+  width: 1250px;
+}
+
+.header .depth-frame-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  height: 22.5px;
+  margin-right: -16.98px;
+  position: relative;
+  width: 161.88px;
+}
+
+.header .div {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  height: 22.5px;
+  position: relative;
+  width: 161.88px;
+}
+
+.header .png-transparent-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.header .png-transparent {
+  height: 17px;
+  margin-bottom: -1px;
+  margin-right: -11px;
+  object-fit: cover;
+  position: relative;
+  width: 27px;
+}
+
+.header .div-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 22.5px;
+  position: relative;
+  width: 129.88px;
+}
+
+.header .depth-frame-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  margin-bottom: -0.5px;
+  position: relative;
+  width: 100%;
+}
+
+.header .text-wrapper {
+  color: #0c111c;
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.27px;
+  line-height: 22.5px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.header .depth-frame-3 {
+  align-items: flex-start;
+  display: flex;
+  gap: 32px;
+  height: 40px;
+  justify-content: flex-end;
+  margin-bottom: -8.75px;
+  margin-right: -1104.09px;
+  margin-top: -8.75px;
+  position: relative;
+  width: 1055.11px;
+}
+
+.header .depth-frame-4 {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  height: 40px;
+  position: relative;
+  width: 286.94px;
+}
+
+.header .depth-frame-5 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 21px;
+  position: relative;
+  width: 65px;
+}
+
+.header .depth-frame-6 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  margin-right: -1px;
+  position: relative;
+  width: 66px;
+}
+
+.header .text-wrapper-2 {
+  color: #0c111c;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.header .depth-frame-7 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 21px;
+  position: relative;
+  width: 39px;
+}
+
+.header .depth-frame-8 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.header .depth-frame-9 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 21px;
+  position: relative;
+  width: 74px;
+}
+
+.header .depth-frame-10 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 21px;
+  position: relative;
+  width: 43.22px;
+}
+
+.header .text-wrapper-3 {
+  color: #0c111c;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-right: -23.78px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.header .depth-frame-11 {
+  align-items: flex-start;
+  display: flex;
+  gap: 8px;
+  height: 40px;
+  position: relative;
+  width: 88px;
+}
+
+.header .depth-frame-12 {
+  align-items: center;
+  background-color: #e8eaf2;
+  border-radius: 12px;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  width: 40px;
+}
+
+.header .depth-frame-13 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  position: relative;
+  width: 20px;
+}
+
+.header .vector-wrapper {
+  height: 20px;
+  position: relative;
+  width: 20px;
+}
+
+.header .vector {
+  height: 15px;
+  left: 2px;
+  position: absolute;
+  top: 4px;
+  width: 16px;
+}
+
+.header .img {
+  height: 16px;
+  left: 3px;
+  position: absolute;
+  top: 2px;
+  width: 15px;
+}
+
+.header .depth-frame-14 {
+  background-image: url(profileImage.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 20px;
+  height: 40px;
+  position: relative;
+  width: 40px;
+}
