@@ -22,9 +22,9 @@ public class DataInitializer {
 
 	@PostConstruct
 	public void initializeData() {
-		insertarUsuario("admin", "admin123", "admin@admin.com", false, false);
+		insertarUsuario("admin", "admin", "admin@admin.com", false, false);
 		insertarRol("admin", "ADMIN");
-		insertarUsuario("user", "admin123", "admin@admin.com", false, false);
+		insertarUsuario("user", "user", "user@user.com", false, false);
 		insertarRol("user", "USER");
 	}
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderBasic from '../../components/HeaderBasic/HeaderBasic';
-import { Register } from '../../components/RegisterForm/RegisterForm';
+import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
 
 function RegisterPage() {
     return (
         <div>
             <HeaderBasic></HeaderBasic>
-            <Register></Register>
+            <RegisterForm></RegisterForm>
         </div>
     );
 }

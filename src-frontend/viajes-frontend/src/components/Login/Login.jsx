@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./style.css";
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 
 export const Login = () => {
@@ -52,6 +52,7 @@ export const Login = () => {
       // Limpiar los campos del formulario en caso de error
       setUsername('');
       setPassword('');
+      
     }
   };
 
