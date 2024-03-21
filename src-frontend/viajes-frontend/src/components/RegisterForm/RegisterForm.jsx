@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 export const RegisterForm = () => {
@@ -8,16 +8,11 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   // Función para manejar el envío del formulario
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
-
-    // Aquí puedes realizar cualquier lógica que desees con los valores del formulario
-    console.log('Username:', username);
-    console.log('Password:', password);
-    console.log('Email:', email);
-    //const navigate = useNavigate();
+    e.preventDefault();
 
     try {
       const response = await fetch('http://localhost:8080/v1/users/addUser', {
@@ -34,10 +29,9 @@ export const RegisterForm = () => {
       }
 
       const data = await response.text();
+      navigate('/account');
 
-      //navigate('/account');
 
-      // Aquí podrías manejar la respuesta del servidor según tus necesidades
     } catch (error) {
       console.error('Error al registrar el usuario:', error.message);
       // Manejar el error, mostrar un mensaje al usuario, etc.
@@ -84,7 +78,7 @@ export const RegisterForm = () => {
                 </div>
                 <div className="p-rincipal-depth7-frame1">
                   <div className="p-rincipal-depth8-frame0">
-                    <div className="p-rincipal-depth9-frame0  custom-width">
+                    <div className="p-rincipal-depth9-frame0 custom-width">
                       <div className="p-rincipal-depth10-frame0">
                         <label htmlFor="email" className="p-rincipal-text04">
                           <input type="email" id="email" placeholder="you@example.com" required
@@ -150,7 +144,7 @@ export const RegisterForm = () => {
             <div className="p-rincipal-depth6-frame1">
               <div className="p-rincipal-depth7-frame04">
                 <label htmlFor="terms" className="p-rincipal-text14">
-                  <input type="checkbox" id="terms" className="mr-2" />
+                  <input type="checkbox" id="terms" className="mr-2" required/>
                   <span> I agree to the terms and conditions.</span>
                 </label>
               </div>
@@ -163,7 +157,7 @@ export const RegisterForm = () => {
           </div>
         </form>
 
-        <Link to="/">
+        <Link to="/" id='link'>
           <div>Already have an account</div>
         </Link>
       </div>

@@ -8,7 +8,7 @@ export const Header = () => {
         <div className="depth-frame-wrapper">
           <div className="div">
             <div className="png-transparent-wrapper">
-              <i class="fa-solid fa-plane-departure"></i>
+              <i className="fa-solid fa-plane-departure"></i>
             </div>
             <div className="div-wrapper">
               <div className="depth-frame-2">

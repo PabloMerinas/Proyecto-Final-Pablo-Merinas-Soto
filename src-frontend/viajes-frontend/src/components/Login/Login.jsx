@@ -18,10 +18,6 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
 
-    // Aquí puedes realizar cualquier lógica que desees con los valores del formulario
-    console.log('Username:', username);
-    console.log('Password:', password);
-
     try {
       const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
@@ -37,7 +33,7 @@ export const Login = () => {
       }
 
       const data = await response.text();
-      console.log('Respuesta del servidor:', data);
+      //console.log('Respuesta del servidor:', data);
 
       // Guardo el token en sesion
       localStorage.setItem('authToken', data);
@@ -52,7 +48,7 @@ export const Login = () => {
       // Limpiar los campos del formulario en caso de error
       setUsername('');
       setPassword('');
-      
+
     }
   };
 
@@ -127,7 +123,7 @@ export const Login = () => {
         <div className="depth-frame-9">
           <div className="depth-frame-10">
             <input type="checkbox" id="remember-me-checkbox" />
-            <label for="remember-me-checkbox">Remember me</label>
+            <label htmlFor="remember-me-checkbox">Remember me</label>
           </div>
         </div>
         <div className="depth-frame-14">
@@ -143,7 +139,7 @@ export const Login = () => {
         </div>
       </form>
       <div className="depth-frame-17">
-      <Link to="/register" className="depth-frame-7">
+        <Link to="/register" className="depth-frame-7">
           <div className="text-wrapper-6">Create an account</div>
         </Link>
       </div>

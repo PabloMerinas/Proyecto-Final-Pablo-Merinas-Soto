@@ -7,7 +7,7 @@ function HeaderBasic() {
         <>
             <div className="divHeader">
                 <div className="div-2">
-                    <i class="fa-solid fa-plane-departure"></i>
+                    <i className="fa-solid fa-plane-departure"></i>
                     <div className="div-3">EasyTravels</div>
                 </div>
             </div>
