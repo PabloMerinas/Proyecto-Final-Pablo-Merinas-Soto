@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import "./style.css";
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export const Login = () => {
+  // Elimino la cookie para garantizar que este eliminado el token de acceso cada vez que accedo al login
+  localStorage.removeItem('authToken');
+
   // Estado para almacenar los valores de los campos del formulario
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   // Función para manejar el envío del formulario
   const handleLogin = async (e) => {
@@ -15,7 +22,6 @@ export const Login = () => {
     console.log('Username:', username);
     console.log('Password:', password);
 
-    // Por ejemplo, podrías enviar los datos del formulario a través de una solicitud HTTP
     try {
       const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
@@ -33,10 +39,19 @@ export const Login = () => {
       const data = await response.text();
       console.log('Respuesta del servidor:', data);
 
+      // Guardo el token en sesion
+      localStorage.setItem('authToken', data);
+
+      navigate('/account');
+
       // Aquí podrías manejar la respuesta del servidor según tus necesidades
     } catch (error) {
       console.error('Error al iniciar sesión:', error.message);
       // Manejar el error, mostrar un mensaje al usuario, etc.
+      setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+      // Limpiar los campos del formulario en caso de error
+      setUsername('');
+      setPassword('');
     }
   };
 
@@ -68,11 +83,12 @@ export const Login = () => {
                   <div className="depth-frame-6">
                     <div className="depth-frame-7">
                       <div className="text-wrapper-3">
-                        <input
+                        <input className='custom-input'
                           type="text"
                           value={username}
                           onChange={handleUsernameChange}
                           placeholder="Enter your username"
+                          required
                         />
                       </div>
                     </div>
@@ -93,11 +109,12 @@ export const Login = () => {
                   <div className="depth-frame-8">
                     <div className="depth-frame-7">
                       <div className="text-wrapper-3">
-                        <input
+                        <input className='custom-input'
                           type="password"
                           value={password}
                           onChange={handlePasswordChange}
                           placeholder="Enter your password"
+                          required
                         /></div>
                     </div>
                   </div>
@@ -108,18 +125,8 @@ export const Login = () => {
         </div>
         <div className="depth-frame-9">
           <div className="depth-frame-10">
-            <div className="depth-frame-11">
-              <div className="depth-frame-12">
-                <div className="vector-wrapper">
-                  <img className="vector" alt="Vector" src="/img/vector-0.svg" />
-                </div>
-              </div>
-            </div>
-            <div className="depth-frame-13">
-              <div className="depth-frame-7">
-                <div className="text-wrapper-4">Remember me</div>
-              </div>
-            </div>
+            <input type="checkbox" id="remember-me-checkbox" />
+            <label for="remember-me-checkbox">Remember me</label>
           </div>
         </div>
         <div className="depth-frame-14">
@@ -135,10 +142,11 @@ export const Login = () => {
         </div>
       </form>
       <div className="depth-frame-17">
-        <div className="depth-frame-7">
+      <Link to="/register" className="depth-frame-7">
           <div className="text-wrapper-6">Create an account</div>
-        </div>
+        </Link>
       </div>
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };

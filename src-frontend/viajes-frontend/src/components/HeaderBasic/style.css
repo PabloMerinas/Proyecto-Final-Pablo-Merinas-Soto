@@ -1,0 +1,39 @@
+.divHeader {
+    justify-content: center;
+    align-items: start;
+    border-color: rgba(229, 232, 235, 1);
+    border-style: solid;
+    border-bottom-width: 1px;
+    display: flex;
+    font-size: 18px;
+    color: #0d121c;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: -0.27px;
+    padding: 12px 20px;
+  }
+  @media (max-width: 991px) {
+    .div {
+      white-space: initial;
+    }
+  }
+  .div-2 {
+    display: flex;
+    gap: 5px;
+  }
+  @media (max-width: 991px) {
+    .div-2 {
+      white-space: initial;
+    }
+  }
+  .img {
+    aspect-ratio: 1.59;
+    object-fit: auto;
+    object-position: center;
+    width: 27px;
+    margin: auto 0;
+  }
+  .div-3 {
+    font-feature-settings: "dlig" on;
+    font-family: Inter, sans-serif;
+  }

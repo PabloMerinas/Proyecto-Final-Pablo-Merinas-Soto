@@ -1,14 +1,13 @@
 import React from 'react';
 import { Header } from '../../components/Header/Header';
-import { Login } from '../../components/Login/Login';
 
-function Register() {
+function AccountPage() {
     return (
         <div>
             <Header></Header>
-            <Login></Login>
+            <p>Account</p>
         </div>
     );
 }
 
-export default Register;
+export default AccountPage;

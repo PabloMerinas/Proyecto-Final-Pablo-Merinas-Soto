@@ -295,10 +295,42 @@
   position: relative;
   white-space: nowrap;
   width: fit-content;
+  position: relative;
+  left: -135px;
 }
 
-input, button{
-  border: 1px solid black;
+.custom-input, button{
+  border: none;
   background-color: transparent;
-  width: 100%;
+  width: 480px;
+  height: 40px;
+  position: relative;
+  left: -160px;
+  top: -7px;
+  text-align: center;
+  
+}
+
+input:focus{
+  outline: none;
+}
+
+button{
+  left: -220px;
+  color: white;
+  font-weight: 600;
+}
+
+#remember-me-checkbox{
+  position: relative;
+  top: 7px;
+}
+
+.text-wrapper-6 {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit; /* Hereda el color del texto */
+}
+
+.error-message{
+  color: red;
 }
