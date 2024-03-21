@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.proyecto.viajes.persistence.model.UserEntity;
 
 @Component
 public class JwtUtils {
@@ -32,5 +33,6 @@ public class JwtUtils {
 	public String getUsername(String jwt) {
 		return JWT.require(ALGORITHM).build().verify(jwt).getSubject();
 	}
+	
 
 }
