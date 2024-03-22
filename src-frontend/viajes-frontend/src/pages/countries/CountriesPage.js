@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
-import { PersonalInfo } from '../../components/PersonalInfo/PersonalInfo';
 import { useNavigate } from 'react-router-dom';
+import { Countries } from '../../components/Options/Countries'
 
-function PersonalInfoPage() {
+function CountriesPage(page) {
     const navigate = useNavigate();
     const activeUser = localStorage.getItem("activeUser");
 
@@ -17,7 +17,7 @@ function PersonalInfoPage() {
         return (
             <div>
                 <Header />
-                <PersonalInfo />
+                <Countries />
             </div>
         );
     }
@@ -25,4 +25,4 @@ function PersonalInfoPage() {
     return null;
 }
 
-export default PersonalInfoPage;
+export default CountriesPage;

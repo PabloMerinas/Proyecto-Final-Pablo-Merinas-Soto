@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./style.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { getUserInfo } from '../../service/getUserInfo';
 
 export const Login = () => {
   // Elimino la cookie para garantizar que este eliminado el token de acceso cada vez que accedo al login
@@ -32,6 +33,9 @@ export const Login = () => {
       }
 
       const data = await response.text();
+      const userData = await getUserInfo(data);
+      localStorage.setItem('activeUser', JSON.stringify(userData));
+      //console.log(JSON.stringify(userData));
       //console.log('Respuesta del servidor:', data);
 
       // Guardo el token en sesion

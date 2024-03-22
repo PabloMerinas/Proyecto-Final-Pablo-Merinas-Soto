@@ -25,7 +25,7 @@ export const getUserInfo = async (token) => {
     const roles = rolesResponse.data;
     response.data.roles = roles;
 
-    console.log(response.data);
+    //console.log(response.data);
     return response.data; // Devolver los datos del usuario obtenidos del backend
   } catch (error) {
     console.error('Error al recuperar los datos del usuario:', error);

@@ -35,11 +35,11 @@ export const RegisterForm = () => {
       }
 
       const data = await response.text();
-      // console.log(data);
+      const activeUser = await getUserInfo(data);
 
-      // Guardo el token en sesion
+      // Guardo el token en sesion y el usuario
       localStorage.setItem('authToken', data);
-      console.log(data);
+      localStorage.setItem('activeUser',JSON.stringify(activeUser));
       
       navigate('/account');
 
