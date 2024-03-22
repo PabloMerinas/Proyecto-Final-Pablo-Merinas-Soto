@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import "./style.css";
 import { Link, useNavigate } from 'react-router-dom';
 
-
-
 export const Login = () => {
   // Elimino la cookie para garantizar que este eliminado el token de acceso cada vez que accedo al login
   localStorage.removeItem('authToken');
-
+  localStorage.removeItem('activeUser');
+  
   // Estado para almacenar los valores de los campos del formulario
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

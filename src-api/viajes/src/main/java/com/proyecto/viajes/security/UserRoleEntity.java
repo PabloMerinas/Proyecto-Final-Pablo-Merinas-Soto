@@ -30,4 +30,5 @@ public class UserRoleEntity {
 	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
 	private UserEntity user;
+	
 }

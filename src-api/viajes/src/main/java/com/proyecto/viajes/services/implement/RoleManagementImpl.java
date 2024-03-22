@@ -35,4 +35,11 @@ public class RoleManagementImpl implements RoleManagementI {
 		return rolesOfUser;
 	}
 
+	@Override
+	public void save(UserRoleEntity r) {
+		roleRepository.save(r);
+	}
+	
+	
+
 }

@@ -25,7 +25,7 @@ public class DataInitializer {
 		insertarUsuario("admin", "admin", "admin@admin.com", false, false);
 		insertarUsuario("user", "user", "user@user.com", false, false);
 		insertarRol("admin", "ADMIN");
-		insertarRol("admin", "ADMIN2");
+		insertarRol("admin", "CUSTOMER");
 		insertarRol("user", "CUSTOMER");
 	}
 

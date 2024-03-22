@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getUserInfo } from "../../service/getUserInfo";
+
 import './style.css';
 
 export const RegisterForm = () => {
+
+  // Borro la cookie del usuario y el token al cargar el registro
+  localStorage.removeItem("activeUser");
+  localStorage.removeItem("authToken");
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,12 +35,18 @@ export const RegisterForm = () => {
       }
 
       const data = await response.text();
+      // console.log(data);
+
+      // Guardo el token en sesion
+      localStorage.setItem('authToken', data);
+      console.log(data);
+      
       navigate('/account');
 
 
     } catch (error) {
       console.error('Error al registrar el usuario:', error.message);
-      // Manejar el error, mostrar un mensaje al usuario, etc.
+      // Manejar el error, mostrar un mensaje al usuario.
       setError('El usuario ya existe.');
       // Limpiar los campos del formulario en caso de error
       setUsername('');
@@ -144,7 +156,7 @@ export const RegisterForm = () => {
             <div className="p-rincipal-depth6-frame1">
               <div className="p-rincipal-depth7-frame04">
                 <label htmlFor="terms" className="p-rincipal-text14">
-                  <input type="checkbox" id="terms" className="mr-2" required/>
+                  <input type="checkbox" id="terms" className="mr-2" required />
                   <span> I agree to the terms and conditions.</span>
                 </label>
               </div>

@@ -34,7 +34,7 @@
   width: 161.88px;
 }
 
-.header .div {
+.header .header-div {
   align-items: center;
   display: flex;
   gap: 16px;
@@ -259,4 +259,17 @@
   height: 40px;
   position: relative;
   width: 40px;
+}
+
+.header-links{
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Alinear los iconos al centro */
+.vector-wrapper{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }

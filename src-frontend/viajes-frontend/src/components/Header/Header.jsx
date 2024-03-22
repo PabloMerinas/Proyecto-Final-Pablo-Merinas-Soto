@@ -6,16 +6,18 @@ export const Header = () => {
     <div className="header">
       <div className="depth-frame">
         <div className="depth-frame-wrapper">
-          <div className="div">
-            <div className="png-transparent-wrapper">
-              <i className="fa-solid fa-plane-departure"></i>
-            </div>
-            <div className="div-wrapper">
-              <div className="depth-frame-2">
-                <div className="text-wrapper">EasyTravels</div>
+          <a href="/account" className="header-links">
+            <div className="header-div">
+              <div className="png-transparent-wrapper">
+                <i className="fa-solid fa-plane-departure"></i>
+              </div>
+              <div className="div-wrapper">
+                <div className="depth-frame-2">
+                  <div className="text-wrapper">EasyTravels</div>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <div className="depth-frame-3">
           <div className="depth-frame-4">

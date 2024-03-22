@@ -12,6 +12,7 @@ export const Account = () => {
             try {
                 const userData = await getUserInfo(token); // Obtener la información del usuario utilizando el token
                 setUserInfo(userData);
+                localStorage.setItem('activeUser', JSON.stringify(userData));
             } catch (error) {
                 console.error('Error al cargar la información del usuario:', error);
             }
@@ -20,7 +21,7 @@ export const Account = () => {
         fetchUserInfo();
     }, []);
 
-    console.log(userInfo);
+    //console.log(userInfo);
 
     function generateItem(awesomeIco, title, description, link) {
         return (
@@ -65,7 +66,7 @@ export const Account = () => {
                     </div>
                 </div>
                 <div className="account-p-rincipal-depth4-frame2">
-                    {generateItem("fa-solid fa-heart", "Personal info", "View my profile")}
+                    {generateItem("fa-solid fa-heart", "Personal info", "View my profile", "/personal")}
                     {generateItem("fa-solid fa-heart", "Admin Dashboard", "View and manage all modules")}
                     {generateItem("fa-solid fa-heart", "Countries", "View all the countries")}
                     {generateItem("fa-solid fa-heart", "Cities", "View all the cities")}

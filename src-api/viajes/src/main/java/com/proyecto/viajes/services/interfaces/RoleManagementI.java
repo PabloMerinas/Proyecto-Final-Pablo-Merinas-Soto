@@ -8,4 +8,5 @@ public interface RoleManagementI {
 
 	List<UserRoleEntity> getAllRoles();
 	List<UserRoleEntity> getRolesOfUsername(String username);
+	void save(UserRoleEntity r);
 }
