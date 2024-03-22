@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
-import { Countries } from '../../components/Options/Countries'
 
-function CountriesPage(page) {
+function AdminPage() {
     const navigate = useNavigate();
     const activeUser = localStorage.getItem("activeUser");
 
@@ -17,7 +16,7 @@ function CountriesPage(page) {
         return (
             <div>
                 <Header />
-                <Countries />
+                admin
             </div>
         );
     }
@@ -25,4 +24,4 @@ function CountriesPage(page) {
     return null;
 }
 
-export default CountriesPage;
+export default AdminPage;
