@@ -24,8 +24,9 @@ public class DataInitializer {
 	public void initializeData() {
 		insertarUsuario("admin", "admin", "admin@admin.com", false, false);
 		insertarUsuario("user", "user", "user@user.com", false, false);
-//		insertarRol("admin", "ADMIN");
-//		insertarRol("user", "CUSTOMER");
+		insertarRol("admin", "ADMIN");
+		insertarRol("admin", "ADMIN2");
+		insertarRol("user", "CUSTOMER");
 	}
 
 	private void executeSqlStatement(String sqlStatement) {

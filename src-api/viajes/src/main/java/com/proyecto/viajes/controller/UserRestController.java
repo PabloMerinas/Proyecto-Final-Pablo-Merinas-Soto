@@ -18,6 +18,7 @@ import com.proyecto.viajes.persistence.model.UserEntity;
 import com.proyecto.viajes.security.JwtUtils;
 import com.proyecto.viajes.security.UserRoleEntity;
 import com.proyecto.viajes.services.implement.UserManagementImpl;
+import com.proyecto.viajes.services.interfaces.RoleManagementI;
 
 import lombok.AllArgsConstructor;
 
@@ -27,7 +28,7 @@ import lombok.AllArgsConstructor;
 public class UserRestController {
 
 	private UserManagementImpl userRepository;
-//	private RoleManagementImpl roleRepository;
+	private RoleManagementI roleRepository;
 
 	private PasswordEncoder passwordEncoder;
 	private JwtUtils jwtUtils;
@@ -81,7 +82,11 @@ public class UserRestController {
 			finalUser.setBio(userOptional.get().getBio());
 			finalUser.setPassword(userOptional.get().getPassword());
 			finalUser.setPhone(userOptional.get().getPhone());
-			List<UserRoleEntity> roles = userOptional.get().getRoles();
+			
+			List<UserRoleEntity> rol = roleRepository.getRolesOfUsername(username);
+			for (UserRoleEntity userRoleEntity : rol) {
+				System.out.println(userRoleEntity.getRole());
+			}
 
 		} else {
 			throw new NoSuchElementException("Usuario no encontrado para el token proporcionado");

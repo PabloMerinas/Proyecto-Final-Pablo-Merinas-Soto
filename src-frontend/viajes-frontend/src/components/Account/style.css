@@ -177,7 +177,19 @@
     font-stretch: normal;
     text-decoration: none;
 }
-.account-p-rincipal-depth4-frame1{
+
+.account-p-rincipal-depth4-frame1 {
     position: relative;
     left: -320px;
+}
+
+.account-p-rincipal-depth4-frame1 {
+    position: relative;
+    left: 0px;
+}
+
+/* Le quito todos los efectos a los enlaces para que no afecte el diseño */
+.account-links{
+    text-decoration: none;
+    color: inherit;
 }

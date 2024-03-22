@@ -44,14 +44,14 @@ export const Header = () => {
             <div className="depth-frame-12">
               <div className="depth-frame-13">
                 <div className="vector-wrapper">
-                  <i class="fa-regular fa-envelope"></i>
+                  <i className="fa-regular fa-envelope"></i>
                 </div>
               </div>
             </div>
             <div className="depth-frame-12">
               <div className="depth-frame-13">
                 <div className="vector-wrapper">
-                  <i class="fa-regular fa-bell"></i>
+                  <i className="fa-regular fa-bell"></i>
                 </div>
               </div>
             </div>

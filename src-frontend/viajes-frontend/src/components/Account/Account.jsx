@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import './style.css';
+import { getUserInfo } from "../../service/getUserInfo";
 
 export const Account = () => {
-    function generateItem(awesomeIco, title, description) {
+
+    const token = localStorage.getItem('authToken');
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const userData = await getUserInfo(token); // Obtener la información del usuario utilizando el token
+                setUserInfo(userData);
+            } catch (error) {
+                console.error('Error al cargar la información del usuario:', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
+
+    console.log(userInfo);
+
+    function generateItem(awesomeIco, title, description, link) {
         return (
+            <a href={link} className='account-links'>
             <div className="account-p-rincipal-depth5-frame01">
                 <div className="account-p-rincipal-depth6-frame01">
                     <i className={awesomeIco}></i>
@@ -25,6 +46,7 @@ export const Account = () => {
                     </div>
                 </div>
             </div>
+            </a>
         )
     }
 
@@ -50,12 +72,12 @@ export const Account = () => {
                     {generateItem("fa-solid fa-heart", "Attractions", "View all the attractions")}
                     {generateItem("fa-solid fa-heart", "Itineraries", "View all the itineraries")}
                     {generateItem("fa-solid fa-heart", "Notifications", "View my notifications")}
-                    {generateItem("fa-solid fa-heart", "Log out", "Log out my session")}
+                    {generateItem("fa-solid fa-heart", "Log out", "Log out my session", "/")}
                 </div>
                 <div className="account-p-rincipal-depth4-frame1">
                     <div className="account-p-rincipal-depth5-frame02">
                         <span className="account-p-rincipal-text34">
-                            Pablo Merinas, pablomersot@gmail.com
+                            {userInfo.username}, {userInfo.email}
                         </span>
                     </div>
                 </div>
