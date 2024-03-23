@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getUserInfo = async (token) => {
   try {
     // Obtengo el usuario
-    const response = await axios.get('http://localhost:8080/v1/users/getUserByToken', {
+    const response = await axios.get('http://localhost:8080/v1/user/getUserByToken', {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -14,7 +14,7 @@ export const getUserInfo = async (token) => {
     });
 
     // Obtengo sus roles
-    const rolesResponse = await axios.get('http://localhost:8080/v1/users/getRolesByToken', {
+    const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByToken', {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },

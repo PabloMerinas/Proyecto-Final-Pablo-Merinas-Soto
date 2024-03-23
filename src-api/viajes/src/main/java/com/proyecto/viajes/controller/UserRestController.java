@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ import com.proyecto.viajes.services.implement.UserManagementImpl;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/v1/user")
 @AllArgsConstructor
 public class UserRestController {
 
@@ -37,22 +36,6 @@ public class UserRestController {
 	private PasswordEncoder passwordEncoder;
 	private JwtUtils jwtUtils;
 
-	@Secured("ROLE_ADMIN")
-	@GetMapping("/admin")
-	public ResponseEntity<String> get() {
-		return ResponseEntity.ok("admin!");
-	}
-
-	@Secured("ROLE_USER")
-	@GetMapping("/user")
-	public ResponseEntity<String> get2() {
-		return ResponseEntity.ok("Usuario!");
-	}
-
-	@GetMapping
-	public ResponseEntity<String> prueba() {
-		return ResponseEntity.ok("Usuario!");
-	}
 
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
@@ -105,7 +88,6 @@ public class UserRestController {
 //				System.err.println("ROL " + userRoleEntity.getRole());
 //			}
 
-
 		} else {
 			throw new NoSuchElementException("Usuario no encontrado para el token proporcionado");
 		}
@@ -116,24 +98,24 @@ public class UserRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping("/getRolesByToken")
 	public List<String> getRolesByToken(@RequestParam String token) {
-		 List<String> roles = new ArrayList<>();
-		    
-		    // Buscar el usuario por el nombre de usuario
-		    Optional<UserEntity> userOptional = userRepository.findUserByUsername(jwtUtils.getUsername(token));
-		    
-		    if (userOptional.isPresent()) {
-		        UserEntity user = userOptional.get();
-		        
-		        // Obtener los roles del usuario
-		        List<UserRoleEntity> userRoles = roleRepository.getRolesOfUsername(user.getUsername());
-		        
-		        // Agregar los roles a la lista
-		        for (UserRoleEntity userRole : userRoles) {
-		            roles.add(userRole.getRole());
-		        }
-		    }
-		    
-		    return roles;
+		List<String> roles = new ArrayList<>();
+
+		// Buscar el usuario por el nombre de usuario
+		Optional<UserEntity> userOptional = userRepository.findUserByUsername(jwtUtils.getUsername(token));
+
+		if (userOptional.isPresent()) {
+			UserEntity user = userOptional.get();
+
+			// Obtener los roles del usuario
+			List<UserRoleEntity> userRoles = roleRepository.getRolesOfUsername(user.getUsername());
+
+			// Agregar los roles a la lista
+			for (UserRoleEntity userRole : userRoles) {
+				roles.add(userRole.getRole());
+			}
+		}
+
+		return roles;
 	}
 
 }

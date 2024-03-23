@@ -29,7 +29,8 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()).cors(withDefaults())
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/api/auth/**").permitAll()
-						.requestMatchers("/v1/users/**").permitAll().anyRequest().authenticated())
+						.requestMatchers("/v1/user/**").permitAll().
+						requestMatchers("/v1/country/**").permitAll().anyRequest().authenticated())
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();

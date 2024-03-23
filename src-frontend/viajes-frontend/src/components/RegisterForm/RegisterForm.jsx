@@ -21,7 +21,7 @@ export const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/v1/users/addUser', {
+      const response = await fetch('http://localhost:8080/v1/user/addUser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
