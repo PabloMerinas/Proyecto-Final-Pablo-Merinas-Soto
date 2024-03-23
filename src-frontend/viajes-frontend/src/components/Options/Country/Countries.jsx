@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import './countries.css';
-import { getCountries } from "../../service/getCountries";
+import { getCountries } from "../../../service/getCountries";
+import { CountryInfoCard } from './CountryInfoCard';
 
-function generateCountry(country, countryCode, currencyCode, currencySymbol, languageCode, info) {
+function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
 
-    const handleInfoClick = (info) => {
-        // TODO agregar popup
-    };
+    const handleInfoClick = () => {
+        const parentElement = document.querySelector('.countries-p-rincipal-countries');
+        while (parentElement.firstChild) {
+            parentElement.removeChild(parentElement.firstChild);
+        }
 
-    const handleReloadClick = () => {
-        window.location.reload();
+        const newCountryInfoCard = document.createElement('div');
+        newCountryInfoCard.className = 'country-info-card';
+
+        // Crear el componente CountryInfoCard
+        const countryInfoCardComponent = <CountryInfoCard />
+
+        newCountryInfoCard.innerHTML = ReactDOMServer.renderToStaticMarkup(countryInfoCardComponent);
+        parentElement.appendChild(newCountryInfoCard);
+
     };
 
     return (
@@ -24,7 +35,7 @@ function generateCountry(country, countryCode, currencyCode, currencySymbol, lan
             <div className="countries-p-rincipal-depth9-frame11">
                 <div className="countries-p-rincipal-depth10-frame007">
                     <span className="countries-p-rincipal-text18">
-                        <span>{countryCode}</span>
+                        <span>{capital}</span>
                     </span>
                 </div>
             </div>
@@ -48,7 +59,7 @@ function generateCountry(country, countryCode, currencyCode, currencySymbol, lan
                 </div>
             </div>
             <div className="countries-p-rincipal-depth9-frame51">
-                <div onClick={() => handleInfoClick(info)} className="countries-p-rincipal-depth10-frame011">
+                <div onClick={() => handleInfoClick()} className="countries-p-rincipal-depth10-frame011">
                     <div className="countries-p-rincipal-depth11-frame0">
                         <div className="countries-p-rincipal-depth12-frame0">
                             <span className="countries-p-rincipal-text25">
@@ -66,6 +77,8 @@ function generateCountry(country, countryCode, currencyCode, currencySymbol, lan
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
+    const [filteredCountries, setFilteredCountries] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     // Recupero el token
     const token = localStorage.getItem("authToken");
@@ -76,6 +89,7 @@ export const Countries = () => {
             try {
                 const countriesData = await getCountries(token);
                 setCountries(countriesData);
+                setFilteredCountries(countriesData);
             } catch (error) {
                 console.error('Error al obtener los países:', error);
             }
@@ -84,16 +98,18 @@ export const Countries = () => {
         fetchCountries();
     }, []);
 
-    // Manejo la logica de la barra de busqueda
-    const [searchText, setSearchText] = useState('');
 
     const handleInputChange = (event) => {
-        setSearchText(event.target.value);
+        setSearchText(event.target.value || '');
+        filterCountries(event.target.value || ''); // Llamo al metodo para filtrar ( Lo dejo aqui para que se vaya actualizando solo)
+
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // TODO LOGICA
-        
+    // Metodo para filtrar paises
+    const filterCountries = (text) => {
+        const filtered = countries.filter(country =>
+            country.country.toLowerCase().includes(text.toLowerCase())
+        );
+        setFilteredCountries(filtered);
     };
 
     return (
@@ -113,19 +129,17 @@ export const Countries = () => {
                         <div className="countries-p-rincipal-depth6-frame01">
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <form onSubmit={handleSubmit}>
-                            <div className="countries-p-rincipal-depth6-frame1">
-                                <div className="countries-p-rincipal-depth7-frame01">
-                                    <span className="countries-p-rincipal-text02">
-                                        <input
-                                            type="text"
-                                            value={searchText}
-                                            onChange={handleInputChange}
-                                            placeholder="Buscar países" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
-                                        /> </span>
-                                </div>
+                        <div className="countries-p-rincipal-depth6-frame1">
+                            <div className="countries-p-rincipal-depth7-frame01">
+                                <span className="countries-p-rincipal-text02">
+                                    <input
+                                        type="text"
+                                        value={searchText}
+                                        onChange={handleInputChange}
+                                        placeholder="Buscar países" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                    /> </span>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div className="countries-p-rincipal-depth4-frame2">
@@ -143,7 +157,7 @@ export const Countries = () => {
                                     <div className="countries-p-rincipal-depth9-frame1">
                                         <div className="countries-p-rincipal-depth10-frame001">
                                             <span className="countries-p-rincipal-text06">
-                                                <span>Country code</span>
+                                                <span>Capital</span>
                                             </span>
                                         </div>
                                     </div>
@@ -178,9 +192,9 @@ export const Countries = () => {
                                 </div>
                             </div>
                             <div className="countries-p-rincipal-depth7-frame1">
-                                {countries.map(country => (
+                                {filteredCountries.map(country => (
                                     <div key={country.id}>
-                                        {generateCountry(country.country, country.countryCode, country.currencyCode, country.currencySymbol, country.languageCode, country.info)}
+                                        {generateCountry(country.country, country.capital, country.currencyCode, country.currencySymbol, country.languageCode)}
                                     </div>
                                 ))}
                             </div>

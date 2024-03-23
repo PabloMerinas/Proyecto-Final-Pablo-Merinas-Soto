@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
-import { Countries } from '../../components/Options/Countries'
+import { Countries } from '../../components/Options/Country/Countries'
 
 function CountriesPage() {
     const navigate = useNavigate();

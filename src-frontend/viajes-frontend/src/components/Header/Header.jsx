@@ -23,22 +23,22 @@ export const Header = () => {
           <div className="depth-frame-4">
             <div className="depth-frame-5">
               <div className="depth-frame-6">
-                <div className="text-wrapper-2">Countries</div>
+                <a className="header-a" href="/countries"><div className="text-wrapper-2">Countries</div></a>
               </div>
             </div>
             <div className="depth-frame-7">
               <div className="depth-frame-8">
-                <div className="text-wrapper-2">Cities</div>
+                <a className="header-a" href="/cities"> <div className="text-wrapper-2">Cities</div></a>
               </div>
             </div>
             <div className="depth-frame-9">
               <div className="depth-frame-8">
-                <div className="text-wrapper-2">Attractions</div>
+                <a className="header-a" href="/attractions"> <div className="text-wrapper-2">Attractions</div></a>
               </div>
             </div>
             <div className="depth-frame-10">
               <div className="depth-frame-8">
-                <div className="text-wrapper-3">Itineraries</div>
+                <a className="header-a" href="/itineraries"> <div className="text-wrapper-3">Itineraries</div></a>
               </div>
             </div>
           </div>

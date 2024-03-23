@@ -19,7 +19,13 @@ public class CountryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private String imgUrl;
+	
+	private String capital;
 
+	private Integer population;
+	
 	private String country;
 	
 	private String countryCode;

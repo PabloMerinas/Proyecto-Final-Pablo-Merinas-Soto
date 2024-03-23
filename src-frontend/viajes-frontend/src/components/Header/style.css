@@ -273,3 +273,8 @@
   text-align: center;
   align-items: center;
 }
+
+/* Quitar estilos a los enlaces */
+.header-a{
+  text-decoration: none;
+}
