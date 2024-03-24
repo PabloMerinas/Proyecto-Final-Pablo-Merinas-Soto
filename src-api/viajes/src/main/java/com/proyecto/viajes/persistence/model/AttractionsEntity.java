@@ -24,9 +24,9 @@ public class AttractionsEntity {
 
 	private CATEGORY category;
 
-	@ManyToOne
-	@JoinColumn(name = "city_id")
-	private CityEntity city;
+//	@ManyToOne
+//	@JoinColumn(name = "city_id")
+//	private CityEntity city;
 
 	private String info;
 

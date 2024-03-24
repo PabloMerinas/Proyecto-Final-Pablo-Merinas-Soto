@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyecto.viajes.persistence.model.CountryEntity;
-import com.proyecto.viajes.services.implement.CountryManagementImpl;
+import com.proyecto.viajes.persistence.model.CityEntity;
+import com.proyecto.viajes.services.implement.CityManagementImpl;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/v1/country")
+@RequestMapping("/v1/city")
 @AllArgsConstructor
-public class CountryRestController {
+public class CityRestController {
 
-	private CountryManagementImpl countryRepository;
-	
+	private CityManagementImpl cityRepository;
+
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
-	@GetMapping("/getCountries")
-	public List<CountryEntity> getCountries(){
-        return countryRepository.findAll();
+	@GetMapping("/getCities")
+	public List<CityEntity> getCities() {
+		return cityRepository.findAll();
 	}
-	
+
 }

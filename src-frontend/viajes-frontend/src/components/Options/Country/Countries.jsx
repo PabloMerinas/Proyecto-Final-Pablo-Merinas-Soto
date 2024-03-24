@@ -13,8 +13,8 @@ export const Countries = () => {
 
     // Recupero el token
     const token = localStorage.getItem("authToken");
-    // Recupero las ciudades
 
+    // Recupero los paises
     useEffect(() => {
         async function fetchCountries() {
             try {

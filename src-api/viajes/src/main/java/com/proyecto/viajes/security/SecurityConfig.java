@@ -29,8 +29,9 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()).cors(withDefaults())
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/api/auth/**").permitAll()
-						.requestMatchers("/v1/user/**").permitAll().
-						requestMatchers("/v1/country/**").permitAll().anyRequest().authenticated())
+						.requestMatchers("/v1/user/**").permitAll().requestMatchers("/v1/country/**").permitAll()
+						.requestMatchers("/v1/city/**").permitAll().anyRequest().permitAll()) // Cambiar permitAll() a
+																								// authenticated()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
@@ -45,6 +46,5 @@ public class SecurityConfig {
 	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
 	}
-	
-	
+
 }

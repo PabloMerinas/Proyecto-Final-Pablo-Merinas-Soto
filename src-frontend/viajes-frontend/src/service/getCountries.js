@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Metodo para devolver las ciudades, se le pasa el token para verificar el usuario
+// Metodo para devolver los paises, se le pasa el token para verificar el usuario
 export const getCountries = async (token) => {
     try {
         // LLamo a la api
@@ -10,11 +10,11 @@ export const getCountries = async (token) => {
             }
         });
 
-        //Guardo las ciudades
+        //Guardo los paises
         const countries = response.data;
         return countries;
     } catch (error) {
-        console.error("Error al recuperar las ciudades:", error);
-        throw new Error('Error al recuperar las ciudades');
+        console.error("Error al recuperar los paises:", error);
+        throw new Error('Error al recuperar los paises');
     }
 };
