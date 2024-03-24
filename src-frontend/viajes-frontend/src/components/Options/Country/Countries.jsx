@@ -6,7 +6,9 @@ import { CountryInfoCard } from './CountryInfoCard';
 
 function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
 
+    // Logica para renderizar la tarjeta del pais
     const handleInfoClick = () => {
+        // Elimino la lista
         const parentElement = document.querySelector('.countries-p-rincipal-countries');
         while (parentElement.firstChild) {
             parentElement.removeChild(parentElement.firstChild);
@@ -18,6 +20,7 @@ function generateCountry(country, capital, currencyCode, currencySymbol, languag
         // Crear el componente CountryInfoCard
         const countryInfoCardComponent = <CountryInfoCard />
 
+        // Incorporo el componente
         newCountryInfoCard.innerHTML = ReactDOMServer.renderToStaticMarkup(countryInfoCardComponent);
         parentElement.appendChild(newCountryInfoCard);
 

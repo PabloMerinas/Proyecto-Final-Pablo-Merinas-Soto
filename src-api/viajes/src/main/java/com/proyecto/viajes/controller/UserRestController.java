@@ -56,7 +56,6 @@ public class UserRestController {
 			String jwt = jwtUtils.create(u.getUsername());
 			HttpHeaders headers = new HttpHeaders();
 
-			// TODO Agregarle un rol cualquiera
 			// Le agrego el rol por defecto: CUSTOMER
 			UserRoleEntity customer = new UserRoleEntity();
 			customer.setUsername(u.getUsername());
@@ -77,12 +76,13 @@ public class UserRestController {
 		UserEntity finalUser = new UserEntity();
 		if (userOptional.isPresent()) {
 			finalUser.setUsername(username);
-			finalUser.setActive(userOptional.get().getActive());
-			finalUser.setEmail(userOptional.get().getEmail());
-			finalUser.setBio(userOptional.get().getBio());
+			finalUser.setImgUrl(userOptional.get().getImgUrl());
 			finalUser.setPassword(userOptional.get().getPassword());
+			finalUser.setEmail(userOptional.get().getEmail());
 			finalUser.setPhone(userOptional.get().getPhone());
-
+			finalUser.setBio(userOptional.get().getBio());
+			finalUser.setActive(userOptional.get().getActive());
+			
 //			List<UserRoleEntity> rol = roleRepository.getRolesOfUsername(username);
 //			for (UserRoleEntity userRoleEntity : rol) {
 //				System.err.println("ROL " + userRoleEntity.getRole());

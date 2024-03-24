@@ -21,6 +21,8 @@ public class UserEntity {
 	@Column(nullable = false, length = 20)
 	private String username;
 
+	private String imgUrl;
+	
 	@Column(nullable = false, length = 100)
 	private String password;
 

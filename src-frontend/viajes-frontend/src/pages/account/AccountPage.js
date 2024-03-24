@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 function AccountPage() {
     const navigate = useNavigate();
-    const activeUser = localStorage.getItem("activeUser");
+    // Recupero el usuario activo
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+    // console.log(activeUser);
+
 
     useEffect(() => {
         if (!activeUser) {

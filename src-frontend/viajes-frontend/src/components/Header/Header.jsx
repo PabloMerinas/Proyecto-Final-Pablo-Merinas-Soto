@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import defaultImg from "./profileImgs/default.png";
 
+// Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
+
+  // Logica para cargar la imagen del usuario, se guarda una por defecto
+  const [imgUrl, setImgUrl] = useState(defaultImg);
+
+  useEffect(() => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+    if (activeUser && activeUser.imgUrl) {
+      import(`./profileImgs/${activeUser.imgUrl}`)
+        .then((module) => {
+          setImgUrl(module.default);
+        })
+    }
+  }, []);
+
+
   return (
     <div className="header">
       <div className="depth-frame">
@@ -58,7 +75,9 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <a href="/account"><div className="depth-frame-14" />
+          {/* <a href="/account"><div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
+          <a href="/account">
+            <div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
           </a>
         </div>
       </div>

@@ -22,8 +22,8 @@ public class DataInitializer {
 
 	@PostConstruct
 	public void initializeData() {
-		insertarUsuario("admin", "admin", "admin@admin.com", false, false);
-		insertarUsuario("user", "user", "user@user.com", false, false);
+		insertarUsuario("admin", "admin", "admin@admin.com", false, false, "adminImg.png");
+		insertarUsuario("user", "user", "user@user.com", false, false, "");
 		insertarRol("admin", "ADMIN");
 		insertarRol("admin", "CUSTOMER");
 		insertarRol("user", "CUSTOMER");
@@ -47,8 +47,8 @@ public class DataInitializer {
 	}
 
 	@Transactional
-	private UserEntity insertarUsuario(String username, String password, String email, Boolean locked,
-			Boolean disabled) {
+	private UserEntity insertarUsuario(String username, String password, String email, Boolean locked, Boolean disabled,
+			String imgUrl) {
 		return usuarioRepository.findByUsername(username).orElseGet(() -> {
 
 			UserEntity nuevoUsuario = new UserEntity();
@@ -56,6 +56,7 @@ public class DataInitializer {
 			nuevoUsuario.setPassword(passwordEncoder.encode(password));
 			nuevoUsuario.setEmail(email);
 			nuevoUsuario.setActive(false);
+			nuevoUsuario.setImgUrl(imgUrl);
 			return usuarioRepository.save(nuevoUsuario);
 		});
 	}
