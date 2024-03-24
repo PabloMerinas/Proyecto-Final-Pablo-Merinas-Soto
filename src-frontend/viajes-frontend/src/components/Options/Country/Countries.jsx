@@ -4,79 +4,7 @@ import './countries.css';
 import { getCountries } from "../../../service/getCountries";
 import { CountryInfoCard } from './CountryInfoCard';
 
-function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
 
-    // Logica para renderizar la tarjeta del pais
-    const handleInfoClick = () => {
-        // Elimino la lista
-        const parentElement = document.querySelector('.countries-p-rincipal-countries');
-        while (parentElement.firstChild) {
-            parentElement.removeChild(parentElement.firstChild);
-        }
-
-        const newCountryInfoCard = document.createElement('div');
-        newCountryInfoCard.className = 'country-info-card';
-
-        // Crear el componente CountryInfoCard
-        const countryInfoCardComponent = <CountryInfoCard />
-
-        // Incorporo el componente
-        newCountryInfoCard.innerHTML = ReactDOMServer.renderToStaticMarkup(countryInfoCardComponent);
-        parentElement.appendChild(newCountryInfoCard);
-
-    };
-
-    return (
-        <div className="countries-p-rincipal-depth8-frame01">
-            <div className="countries-p-rincipal-depth9-frame01">
-                <div className="countries-p-rincipal-depth10-frame006">
-                    <span className="countries-p-rincipal-text16">
-                        <span>{country}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="countries-p-rincipal-depth9-frame11">
-                <div className="countries-p-rincipal-depth10-frame007">
-                    <span className="countries-p-rincipal-text18">
-                        <span>{capital}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="countries-p-rincipal-depth9-frame21">
-                <div className="countries-p-rincipal-depth10-frame008">
-                    <span className="countries-p-rincipal-text20">
-                        <span>{currencyCode}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="countries-p-rincipal-depth9-frame31">
-                <div className="countries-p-rincipal-depth10-frame009">
-                    <span className="countries-p-rincipal-text22">{currencySymbol}</span>
-                </div>
-            </div>
-            <div className="countries-p-rincipal-depth9-frame41">
-                <div className="countries-p-rincipal-depth10-frame010">
-                    <span className="countries-p-rincipal-text23">
-                        <span>{languageCode}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="countries-p-rincipal-depth9-frame51">
-                <div onClick={() => handleInfoClick()} className="countries-p-rincipal-depth10-frame011">
-                    <div className="countries-p-rincipal-depth11-frame0">
-                        <div className="countries-p-rincipal-depth12-frame0">
-                            <span className="countries-p-rincipal-text25">
-                                <span>Info</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
@@ -114,6 +42,92 @@ export const Countries = () => {
         );
         setFilteredCountries(filtered);
     };
+
+    // Metodo para generar la linea del pais y llamar a su tarjeta con la información
+    function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
+
+        // Logica para renderizar la tarjeta del pais
+        const handleInfoClick = (clickedCountry) => {
+            // Elimino la lista
+            const parentElement = document.querySelector('.countries-p-rincipal-countries');
+            while (parentElement.firstChild) {
+                parentElement.removeChild(parentElement.firstChild);
+            }
+
+            const newCountryInfoCard = document.createElement('div');
+            newCountryInfoCard.className = 'country-info-card';
+
+            // Crear el componente CountryInfoCard con los datos del country seleccionado
+            const actualCountry = filteredCountries.find(country => country.country === clickedCountry);
+            const countryInfoCardComponent = <CountryInfoCard 
+            capital={actualCountry.capital}
+            country={actualCountry.country}
+            countryCode={actualCountry.countryCode}
+            currencyCode={actualCountry.currencyCode}
+            currencySymbol={actualCountry.currencySymbol}
+            imgUrl={actualCountry.imgUrl}
+            info={actualCountry.info}
+            population={actualCountry.population}
+            languageCode={actualCountry.languageCode}
+            />
+
+            // Incorporo el componente
+            newCountryInfoCard.innerHTML = ReactDOMServer.renderToStaticMarkup(countryInfoCardComponent);
+            parentElement.appendChild(newCountryInfoCard);
+
+        };
+
+        return (
+            <div className="countries-p-rincipal-depth8-frame01">
+                <div className="countries-p-rincipal-depth9-frame01">
+                    <div className="countries-p-rincipal-depth10-frame006">
+                        <span className="countries-p-rincipal-text16">
+                            <span>{country}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame11">
+                    <div className="countries-p-rincipal-depth10-frame007">
+                        <span className="countries-p-rincipal-text18">
+                            <span>{capital}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame21">
+                    <div className="countries-p-rincipal-depth10-frame008">
+                        <span className="countries-p-rincipal-text20">
+                            <span>{currencyCode}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame31">
+                    <div className="countries-p-rincipal-depth10-frame009">
+                        <span className="countries-p-rincipal-text22">{currencySymbol}</span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame41">
+                    <div className="countries-p-rincipal-depth10-frame010">
+                        <span className="countries-p-rincipal-text23">
+                            <span>{languageCode}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame51">
+                    <div onClick={() => handleInfoClick(country)} className="countries-p-rincipal-depth10-frame011">
+                        <div className="countries-p-rincipal-depth11-frame0">
+                            <div className="countries-p-rincipal-depth12-frame0">
+                                <span className="countries-p-rincipal-text25">
+                                    <span>Info</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        )
+    }
 
     return (
         <div className="countries-p-rincipal-container">
