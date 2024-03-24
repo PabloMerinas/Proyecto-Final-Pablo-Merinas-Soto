@@ -12,6 +12,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,16 @@ public class UserRestController {
 	private PasswordEncoder passwordEncoder;
 	private JwtUtils jwtUtils;
 
+	/**
+	 * Metodo por defecto GET, devuelve la lista de todos los usuarios.
+	 * 
+	 * @return Lista con todos los usuarios
+	 */
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@GetMapping
+	public List<UserEntity> getAllUsers() {
+		return userRepository.findAll();
+	}
 
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
@@ -82,7 +93,7 @@ public class UserRestController {
 			finalUser.setPhone(userOptional.get().getPhone());
 			finalUser.setBio(userOptional.get().getBio());
 			finalUser.setActive(userOptional.get().getActive());
-			
+
 //			List<UserRoleEntity> rol = roleRepository.getRolesOfUsername(username);
 //			for (UserRoleEntity userRoleEntity : rol) {
 //				System.err.println("ROL " + userRoleEntity.getRole());
@@ -117,5 +128,53 @@ public class UserRestController {
 
 		return roles;
 	}
+
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@PutMapping
+	public ResponseEntity<String> updateUser(@RequestBody UserEntity updatedUser) {
+		Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(updatedUser.getUsername());
+
+		if (existingUserOptional.isPresent()) {
+			UserEntity existingUser = existingUserOptional.get();
+
+			// Actualizar la información del usuario
+			existingUser.setEmail(updatedUser.getEmail());
+			existingUser.setPhone(updatedUser.getPhone());
+			existingUser.setBio(updatedUser.getBio());
+			existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+
+			// Guardar los cambios
+			userRepository.save(existingUser);
+
+			return ResponseEntity.ok().body("Usuario actualizado correctamente");
+		} else {
+			// Usuario no encontrado
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+    @Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+    @PutMapping("/updateByUsername")
+    public ResponseEntity<String> updateUserByUsername(@RequestParam String username, @RequestBody UserEntity updatedUser) {
+        Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(username);
+
+        if (existingUserOptional.isPresent()) {
+            UserEntity existingUser = existingUserOptional.get();
+
+            // Actualizar la información del usuario
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPhone(updatedUser.getPhone());
+            existingUser.setBio(updatedUser.getBio());
+            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+
+            // Guardar los cambios
+            userRepository.save(existingUser);
+
+            return ResponseEntity.ok().body("Usuario actualizado correctamente");
+        } else {
+            // Usuario no encontrado
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

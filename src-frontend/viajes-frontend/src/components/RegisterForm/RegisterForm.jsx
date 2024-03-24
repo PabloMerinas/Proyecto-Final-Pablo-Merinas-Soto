@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserInfo } from "../../service/getUserInfo";
+import { getUserInfo } from "../../service/userService";
 
 import './style.css';
 

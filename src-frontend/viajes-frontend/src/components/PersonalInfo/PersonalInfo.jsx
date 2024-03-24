@@ -1,40 +1,116 @@
-import React from "react";
+import React, { useState } from "react";
 import './style.css'
-
-
-function generateOption(awesomeIco, title, description) {
-    return (
-        <div className="personal-info-p-rincipal-depth5-frame06">
-            <div className="personal-info-p-rincipal-depth6-frame06">
-                <div className="personal-info-p-rincipal-depth7-frame012">
-                    <i className={awesomeIco}></i>
-                </div>
-            </div>
-            <div className="personal-info-p-rincipal-depth6-frame16">
-                <div className="personal-info-p-rincipal-depth7-frame013">
-                    <div className="personal-info-p-rincipal-depth8-frame017">
-                        <span className="personal-info-p-rincipal-text28">
-                            <span>{title}</span>
-                        </span>
-                    </div>
-                </div>
-                <div className="personal-info-p-rincipal-depth7-frame14">
-                    <div className="personal-info-p-rincipal-depth8-frame018">
-                        <span className="personal-info-p-rincipal-text30">
-                            <span>
-                                {description}
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+import { getUserInfo, updateUser } from "../../service/userService";
 
 export const PersonalInfo = () => {
-    const activeUser = localStorage.getItem("activeUser");
+    // Traigo al usuario actual
+    let activeUser = JSON.parse(localStorage.getItem("activeUser"));
+    const token = localStorage.getItem("authToken");
+    // Defino las variables y sus valores por defecto
+    const [editMode, setEditMode] = useState(false);
+    const [email, setEmail] = useState(activeUser.email);
+    const [password, setPassword] = useState(editMode ? activeUser.password : '********');
+    const [phone, setPhone] = useState(activeUser.phone || 'Add your phone number');
+    const [photo, setPhoto] = useState('Add a profile photo.');
+    const [bio, setBio] = useState(activeUser.bio || 'Complete your profile for a better experience.');
+
+
+
+
     //console.log(JSON.parse(activeUser).username);
+
+    // Metodo para cambiar el modo entre guardar y editar, sirve para guardar los ajustes tambien
+    const changeMode = async () => {
+        // console.log(activeUser);
+        if(editMode){
+            try {
+                let username = activeUser.username;
+                // Actualizo la cookie con el nuevo valor y actualizo el user
+                await updateUser(token, {  username ,email, password, phone, photo, bio });
+    
+                // Vuelvo a guardar los datos del usuario actualizado y a actualizar activeUser
+                const newActiveUser = await getUserInfo(token);
+                localStorage.setItem('activeUser',JSON.stringify(newActiveUser));
+                activeUser = JSON.parse(localStorage.getItem("activeUser"));
+
+
+                // Actualizo el activeUser con los datos nuevos y los valores de los textos
+                setEmail(activeUser.email);
+                // setPassword(!editMode ? activeUser.password : '********');
+                setPhone(activeUser.phone || 'Add your phone number');
+                setPhoto('Add a profile photo.');
+                setBio(activeUser.bio || 'Complete your profile for a better experience.');
+            } catch (error) {
+                console.error('Error actualizando el usuario: ', error);
+            }
+        }
+        setEditMode(!editMode);
+
+    }
+
+
+    // Manejador de cambio de email
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    // Manejador de cambio de contraseña
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    // Manejador de cambio de teléfono
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value);
+    };
+
+    // Manejador de cambio de foto
+    const handlePhotoChange = (event) => {
+        setPhoto(event.target.value);
+    };
+
+    // Manejador de cambio de bio
+    const handleBioChange = (event) => {
+        setBio(event.target.value);
+    };
+
+
+    // Funcion para generar la opcion
+    function generateOption(awesomeIco, title, value, handleChange) {
+        const inputClass = editMode ? 'input-edit-mode' : 'input-view-mode';
+        return (
+            <div className="personal-info-p-rincipal-depth5-frame06">
+                <div className="personal-info-p-rincipal-depth6-frame06">
+                    <div className="personal-info-p-rincipal-depth7-frame012">
+                        <i className={awesomeIco}></i>
+                    </div>
+                </div>
+                <div className="personal-info-p-rincipal-depth6-frame16">
+                    <div className="personal-info-p-rincipal-depth7-frame013">
+                        <div className="personal-info-p-rincipal-depth8-frame017">
+                            <span className="personal-info-p-rincipal-text28">
+                                <span>{title}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="personal-info-p-rincipal-depth7-frame14">
+                        <div className="personal-info-p-rincipal-depth8-frame018">
+                            <span className="personal-info-p-rincipal-text30">
+                                <input 
+                                    type="text"
+                                    className={`personal-info-p-rincipal-input ${inputClass}`}
+                                    value={value}
+                                    onChange={handleChange}
+                                    readOnly={!editMode} // Solo se podra editar si esta en modo editar
+                                />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="personal-info-p-rincipal-container">
             <div className="personal-info-p-rincipal-my-profile">
@@ -97,31 +173,34 @@ export const PersonalInfo = () => {
                         </div>
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame1">
-                        {generateOption("fa-solid fa-envelope", `Email address || ${JSON.parse(activeUser).email}`, `You will receive notifications about your account and bookings at this email address`)}
+                        {generateOption("fa-solid fa-envelope", `Email address`, email, handleEmailChange)}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame2">
-                        {generateOption("fa-solid fa-key", "Password", "********")}
+                        {generateOption("fa-solid fa-key", "Password", password, handlePasswordChange)}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame3">
-                        {generateOption("fa-solid fa-phone", "Phone number", "********")}
+                        {generateOption("fa-solid fa-phone", "Phone number", phone, handlePhoneChange)}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame4">
-                        {generateOption("fa-solid fa-user", "Profile photo", "Add a profile photo.")}
+                        {generateOption("fa-solid fa-user", "Profile photo", photo, handlePhotoChange)}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame5">
-                        {generateOption("fa-solid fa-info", "Bio", "Complete your profile for a better experience.")}
+                        {generateOption("fa-solid fa-info", "Bio", bio, handleBioChange)}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame7">
-                        <div className="personal-info-p-rincipal-depth5-frame07">
-                            <div className="personal-info-p-rincipal-depth6-frame07">
-                                <div className="personal-info-p-rincipal-depth7-frame014">
-                                    <span className="personal-info-p-rincipal-text32">
-                                        <span>Save</span>
-                                    </span>
+                        <button onClick={changeMode} id="personal-info-button">
+                            <div className="personal-info-p-rincipal-depth5-frame07">
+                                <div className="personal-info-p-rincipal-depth6-frame07">
+                                    <div className="personal-info-p-rincipal-depth7-frame014">
+                                        <span className="personal-info-p-rincipal-text32">
+                                            <span>{editMode ? 'Save' : 'Edit'}</span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
+
                 </div>
             </div>
         </div>

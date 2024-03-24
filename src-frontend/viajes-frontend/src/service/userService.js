@@ -8,7 +8,7 @@ export const getUserInfo = async (token) => {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
-      params:{
+      params: {
         token: token
       }
     });
@@ -18,7 +18,7 @@ export const getUserInfo = async (token) => {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
-      params:{
+      params: {
         token: token
       }
     });
@@ -32,3 +32,20 @@ export const getUserInfo = async (token) => {
     throw new Error('Error al recuperar los datos del usuario');
   }
 };
+
+
+export const updateUser = async (token, newData) => {
+  try {
+    // Realizar la solicitud para actualizar el usuario
+    const response = await axios.put('http://localhost:8080/v1/user', newData, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      }
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error al actualizar los datos del usuario:', error);
+    throw new Error('Error al actualizar los datos del usuario');
+  }
+}

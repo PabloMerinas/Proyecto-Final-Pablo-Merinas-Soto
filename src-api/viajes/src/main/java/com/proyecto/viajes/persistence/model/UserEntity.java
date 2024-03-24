@@ -2,6 +2,7 @@ package com.proyecto.viajes.persistence.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.proyecto.viajes.security.UserRoleEntity;
 
 import jakarta.persistence.Column;
@@ -29,7 +30,7 @@ public class UserEntity {
 	@Column(length = 50)
 	private String email;
 
-	@Column(length = 12)
+	@Column(length = 50)
 	private String phone;
 
 	@Column(length = 256)
@@ -38,6 +39,7 @@ public class UserEntity {
 	@Column(nullable = false, columnDefinition = "TINYINT")
 	private Boolean active;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<UserRoleEntity> roles;
 

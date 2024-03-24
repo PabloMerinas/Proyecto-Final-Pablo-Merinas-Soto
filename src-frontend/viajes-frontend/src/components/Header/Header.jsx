@@ -76,7 +76,7 @@ export const Header = () => {
             </div>
           </div>
           {/* <a href="/account"><div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
-          <a href="/account">
+          <a href="/personal">
             <div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
           </a>
         </div>

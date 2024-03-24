@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./style.css";
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserInfo } from '../../service/getUserInfo';
+import { getUserInfo } from '../../service/userService';
 
 export const Login = () => {
   // Elimino la cookie para garantizar que este eliminado el token de acceso cada vez que accedo al login

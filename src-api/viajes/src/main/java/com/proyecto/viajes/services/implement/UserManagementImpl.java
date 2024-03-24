@@ -1,5 +1,6 @@
 package com.proyecto.viajes.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class UserManagementImpl implements UserManagementI {
 
 	private UserRepositoryI userRepository;
-	
+
 	@Override
 	public Optional<UserEntity> findUserByUsername(String username) {
 		return userRepository.findByUsername(username);
@@ -24,6 +25,10 @@ public class UserManagementImpl implements UserManagementI {
 	@Override
 	public void save(UserEntity u) {
 		userRepository.save(u);
+	}
+
+	public List<UserEntity> findAll() {
+		return userRepository.findAll();
 	}
 
 }
