@@ -27,23 +27,22 @@ public class DataInitializer {
 		insertarRol("admin", "ADMIN");
 		insertarRol("admin", "CUSTOMER");
 		insertarRol("user", "CUSTOMER");
-		
+
 		// Paises de prueba
-		executeSqlStatement("INSERT INTO t_country (img_Url, capital, population, country, country_Code, currency_Code, currency_Symbol, language_Code, info) \n"
-				+ "VALUES \n"
-				+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 1', 1000000, 'País 1', 'P1', 'C1', '$', 'LC1', 'Información sobre el pais 1'),\n"
-				+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 2', 2000000, 'País 2', 'P2', 'C2', '€', 'LC2', 'Información sobre el pais 2'),\n"
-				+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 3', 1500000, 'País 3', 'P3', 'C3', '¥', 'LC3', 'Información sobre el pais 3');\n"
-				+ "");
-		
+		executeSqlStatement(
+				"INSERT INTO t_country (img_Url, capital, population, country, country_Code, currency_Code, currency_Symbol, language_Code, info) \n"
+						+ "VALUES \n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 1', 1000000, 'País 1', 'P1', 'C1', '$', 'LC1', 'Información sobre el pais 1'),\n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 2', 2000000, 'País 2', 'P2', 'C2', '€', 'LC2', 'Información sobre el pais 2'),\n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Ciudad 3', 1500000, 'País 3', 'P3', 'C3', '¥', 'LC3', 'Información sobre el pais 3');\n"
+						+ "");
+
 		// Ciudades de prueba
-		executeSqlStatement("INSERT INTO T_CITY (city, airport_code, country_id, info) \n"
-				+ "VALUES \n"
-				+ "('Estado 1', 'COD1', 1, 'Información sobre la Ciudad 1'),\n"
-				+ "('Estado 4', 'COD4', 1, 'Información sobre la Ciudad 4'),\n"
-				+ "('Estado 2', 'COD2', 2, 'Información sobre la Ciudad 2'),\n"
-				+ "('Estado 3', 'COD3', 3, 'Información sobre la Ciudad 3');\n"
-				+ "");
+		executeSqlStatement("INSERT INTO T_CITY (population, state ,city, airport_code, country_id, info) \n"
+				+ "VALUES \n" + "(20000, 'Estate','Estado 1', 'COD1', 1, 'Información sobre la Ciudad 1'),\n"
+				+ "(20000,'Estate','Estado 4', 'COD4', 1, 'Información sobre la Ciudad 4'),\n"
+				+ "(20000,'Estate','Estado 2', 'COD2', 2, 'Información sobre la Ciudad 2'),\n"
+				+ "(20000,'Estate','Estado 3', 'COD3', 3, 'Información sobre la Ciudad 3');\n" + "");
 	}
 
 	private void executeSqlStatement(String sqlStatement) {

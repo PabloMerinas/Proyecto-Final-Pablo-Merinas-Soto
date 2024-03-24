@@ -42,10 +42,10 @@ export const Cities = () => {
     };
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-    function generateCity(city, country, state, airportCode, languageCode) {
+    function generateCity(city, country, state, airportCode, population) {
 
-        // Logica para renderizar la tarjeta del pais
-        const handleInfoClick = (clickedCountry) => {
+        // Logica para mostrar las atracciones
+        const handleInfoClick = (clickedShowAttractions) => {
 
 
         };
@@ -81,7 +81,7 @@ export const Cities = () => {
                 <div className="countries-p-rincipal-depth9-frame41">
                     <div className="countries-p-rincipal-depth10-frame010">
                         <span className="countries-p-rincipal-text23">
-                            <span>{languageCode}</span>
+                            <span>{population}</span>
                         </span>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ export const Cities = () => {
                         <div className="countries-p-rincipal-depth11-frame0">
                             <div className="countries-p-rincipal-depth12-frame0">
                                 <span className="countries-p-rincipal-text25">
-                                    <span>Info</span>
+                                    <span>Show</span>
                                 </span>
                             </div>
                         </div>
@@ -101,8 +101,6 @@ export const Cities = () => {
 
         )
     }
-
-    console.log(filteredCities);
 
     return (
         <div className="cities-p-rincipal-container">
