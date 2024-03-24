@@ -1,27 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import './cities.css';
+import { getCities } from '../../../service/getCities';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
-    const [filteredCities, setFilteredCities] = useState([]);
+    const [filteredCities, setfilteredCities] = useState([]);
     const [searchText, setSearchText] = useState('');
 
-    // Recupero el token
-    const token = localStorage.getItem("authToken");
 
     // Recupero las ciudades
     useEffect(() => {
-        async function fetchCountries() {
+        async function fetchCities() {
             try {
-                const citiesData = await getCountries(token);
+                // Recupero el token
+                const token = localStorage.getItem("authToken");
+                const citiesData = await getCities(token);
                 setCities(citiesData);
-                setFilteredCities(citiesData);
+                setfilteredCities(citiesData);
             } catch (error) {
                 console.error('Error al obtener los países:', error);
             }
         }
 
-        fetchCountries();
+        fetchCities();
     }, []);
 
 
@@ -34,11 +35,74 @@ export const Cities = () => {
 
     // Metodo para filtrar ciudades
     const filterCities = (text) => {
-        const filtered = countries.filter(country =>
-            country.country.toLowerCase().includes(text.toLowerCase())
+        const filtered = cities.filter(city =>
+            city.city.toLowerCase().includes(text.toLowerCase())
         );
-        setFilteredCountries(filtered);
+        setfilteredCities(filtered);
     };
+
+    // Metodo para generar la linea del pais y llamar a su tarjeta con la información
+    function generateCity(city, country, state, airportCode, languageCode) {
+
+        // Logica para renderizar la tarjeta del pais
+        const handleInfoClick = (clickedCountry) => {
+
+
+        };
+
+        return (
+            <div className="countries-p-rincipal-depth8-frame01">
+                <div className="countries-p-rincipal-depth9-frame01">
+                    <div className="countries-p-rincipal-depth10-frame006">
+                        <span className="countries-p-rincipal-text16">
+                            <span>{city}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame11">
+                    <div className="countries-p-rincipal-depth10-frame007">
+                        <span className="countries-p-rincipal-text18">
+                            <span>{country}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame21">
+                    <div className="countries-p-rincipal-depth10-frame008">
+                        <span className="countries-p-rincipal-text20">
+                            <span>{state}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame31">
+                    <div className="countries-p-rincipal-depth10-frame009">
+                        <span className="countries-p-rincipal-text22">{airportCode}</span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame41">
+                    <div className="countries-p-rincipal-depth10-frame010">
+                        <span className="countries-p-rincipal-text23">
+                            <span>{languageCode}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="countries-p-rincipal-depth9-frame51">
+                    <div onClick={() => handleInfoClick(city)} className="countries-p-rincipal-depth10-frame011">
+                        <div className="countries-p-rincipal-depth11-frame0">
+                            <div className="countries-p-rincipal-depth12-frame0">
+                                <span className="countries-p-rincipal-text25">
+                                    <span>Info</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        )
+    }
+
+    console.log(filteredCities);
 
     return (
         <div className="cities-p-rincipal-container">
@@ -47,7 +111,7 @@ export const Cities = () => {
                     <div className="cities-p-rincipal-depth5-frame0">
                         <div className="cities-p-rincipal-depth6-frame0">
                             <span className="cities-p-rincipal-text">
-                                <span>cities</span>
+                                <span>Cities</span>
                             </span>
                         </div>
                     </div>
@@ -64,7 +128,7 @@ export const Cities = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
-                                        placeholder="Buscar países" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        placeholder="Buscar ciudades" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
                         </div>
@@ -78,51 +142,51 @@ export const Cities = () => {
                                     <div className="cities-p-rincipal-depth9-frame0">
                                         <div className="cities-p-rincipal-depth10-frame0">
                                             <span className="cities-p-rincipal-text04">
-                                                <span>Country</span>
+                                                <span>City</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="cities-p-rincipal-depth9-frame1">
                                         <div className="cities-p-rincipal-depth10-frame001">
                                             <span className="cities-p-rincipal-text06">
-                                                <span>Capital</span>
+                                                <span>Country</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="cities-p-rincipal-depth9-frame2">
                                         <div className="cities-p-rincipal-depth10-frame002">
                                             <span className="cities-p-rincipal-text08">
-                                                <span>Currency code</span>
+                                                <span>State</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="cities-p-rincipal-depth9-frame3">
                                         <div className="cities-p-rincipal-depth10-frame003">
                                             <span className="cities-p-rincipal-text10">
-                                                <span>Currency symbol</span>
+                                                <span>AirportCode</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="cities-p-rincipal-depth9-frame4">
                                         <div className="cities-p-rincipal-depth10-frame004">
                                             <span className="cities-p-rincipal-text12">
-                                                <span>Language code</span>
+                                                <span>Population</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="cities-p-rincipal-depth9-frame5">
                                         <div className="cities-p-rincipal-depth10-frame005">
                                             <span className="cities-p-rincipal-text14">
-                                                <span>Info</span>
+                                                <span>Attractions</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="cities-p-rincipal-depth7-frame1">
-                                {filteredcities.map(country => (
-                                    <div key={country.id}>
-                                        {/* {generateCountry(country.country, country.capital, country.currencyCode, country.currencySymbol, country.languageCode)} */}
+                                {filteredCities.map(city => (
+                                    <div key={city.id}>
+                                        {generateCity(city.city, city.country, city.state, city.airportCode, city.population)}
                                     </div>
                                 ))}
                             </div>

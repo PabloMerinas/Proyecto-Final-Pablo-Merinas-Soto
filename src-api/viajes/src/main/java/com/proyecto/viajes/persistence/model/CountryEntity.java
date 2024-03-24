@@ -2,6 +2,8 @@ package com.proyecto.viajes.persistence.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,15 +21,15 @@ public class CountryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String imgUrl;
-	
+
 	private String capital;
 
 	private Integer population;
-	
+
 	private String country;
-	
+
 	private String countryCode;
 
 	private String currencyCode;
@@ -38,6 +40,7 @@ public class CountryEntity {
 
 	private String info;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<CityEntity> cities;
 

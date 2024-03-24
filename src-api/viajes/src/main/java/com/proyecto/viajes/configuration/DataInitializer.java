@@ -37,7 +37,7 @@ public class DataInitializer {
 				+ "");
 		
 		// Ciudades de prueba
-		executeSqlStatement("INSERT INTO T_CITY (state, airport_code, country_id, info) \n"
+		executeSqlStatement("INSERT INTO T_CITY (city, airport_code, country_id, info) \n"
 				+ "VALUES \n"
 				+ "('Estado 1', 'COD1', 1, 'Información sobre la Ciudad 1'),\n"
 				+ "('Estado 4', 'COD4', 1, 'Información sobre la Ciudad 4'),\n"

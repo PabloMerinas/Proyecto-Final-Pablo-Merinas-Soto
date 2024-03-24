@@ -11,13 +11,13 @@ export const Countries = () => {
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [searchText, setSearchText] = useState('');
 
-    // Recupero el token
-    const token = localStorage.getItem("authToken");
 
     // Recupero los paises
     useEffect(() => {
         async function fetchCountries() {
             try {
+                // Recupero el token
+                const token = localStorage.getItem("authToken");
                 const countriesData = await getCountries(token);
                 setCountries(countriesData);
                 setFilteredCountries(countriesData);
@@ -59,16 +59,16 @@ export const Countries = () => {
 
             // Crear el componente CountryInfoCard con los datos del country seleccionado
             const actualCountry = filteredCountries.find(country => country.country === clickedCountry);
-            const countryInfoCardComponent = <CountryInfoCard 
-            capital={actualCountry.capital}
-            country={actualCountry.country}
-            countryCode={actualCountry.countryCode}
-            currencyCode={actualCountry.currencyCode}
-            currencySymbol={actualCountry.currencySymbol}
-            imgUrl={actualCountry.imgUrl}
-            info={actualCountry.info}
-            population={actualCountry.population}
-            languageCode={actualCountry.languageCode}
+            const countryInfoCardComponent = <CountryInfoCard
+                capital={actualCountry.capital}
+                country={actualCountry.country}
+                countryCode={actualCountry.countryCode}
+                currencyCode={actualCountry.currencyCode}
+                currencySymbol={actualCountry.currencySymbol}
+                imgUrl={actualCountry.imgUrl}
+                info={actualCountry.info}
+                population={actualCountry.population}
+                languageCode={actualCountry.languageCode}
             />
 
             // Incorporo el componente
