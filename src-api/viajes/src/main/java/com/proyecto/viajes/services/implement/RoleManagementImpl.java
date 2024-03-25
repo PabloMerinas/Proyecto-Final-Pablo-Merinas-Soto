@@ -39,7 +39,14 @@ public class RoleManagementImpl implements RoleManagementI {
 	public void save(UserRoleEntity r) {
 		roleRepository.save(r);
 	}
-	
-	
+
+	/**
+	 * Metodo para eliminar todos los roles de un usuario
+	 */
+	@Override
+	public void deleteRolesFromUsername(String username) {
+		List<UserRoleEntity> userRolesToDelete = roleRepository.findByUsername(username);
+		roleRepository.deleteAll(userRolesToDelete);
+	}
 
 }

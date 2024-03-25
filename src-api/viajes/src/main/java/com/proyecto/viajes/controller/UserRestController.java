@@ -144,13 +144,12 @@ public class UserRestController {
 			existingUser.setPhone(updatedUser.getPhone());
 			existingUser.setBio(updatedUser.getBio());
 
-	        // Verificar si se proporcionó una nueva contraseña
-	        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-	            // Codificar y guardar la nueva contraseña
-	            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-	        }
-			
-			
+			// Verificar si se proporcionó una nueva contraseña
+			if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+				// Codificar y guardar la nueva contraseña
+				existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+			}
+
 			// Guardar los cambios
 			userRepository.save(existingUser);
 
@@ -175,11 +174,11 @@ public class UserRestController {
 			existingUser.setPhone(updatedUser.getPhone());
 			existingUser.setBio(updatedUser.getBio());
 
-	        // Verificar si se proporcionó una nueva contraseña
-	        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-	            // Codificar y guardar la nueva contraseña
-	            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-	        }
+			// Verificar si se proporcionó una nueva contraseña
+			if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+				// Codificar y guardar la nueva contraseña
+				existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+			}
 
 			// Guardar los cambios
 			userRepository.save(existingUser);
@@ -190,40 +189,44 @@ public class UserRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-	@Secured({"ROLE_ADMIN" })
+
+	@Secured({ "ROLE_ADMIN" })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
-	    Optional<UserEntity> userOptional = userRepository.findById(id);
+		Optional<UserEntity> userOptional = userRepository.findById(id);
 
-	    if (userOptional.isPresent()) {
-	        // Si el usuario existe, eliminarlo
-	        userRepository.deleteById(id);
-	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
-	    } else {
-	        // Si el usuario no existe, devolver la respuesta
-	        return ResponseEntity.notFound().build();
-	    }
+		if (userOptional.isPresent()) {
+			// Si el usuario existe, eliminarlo
+			userRepository.deleteById(id);
+			return ResponseEntity.ok().body("Usuario eliminado correctamente");
+		} else {
+			// Si el usuario no existe, devolver la respuesta
+			return ResponseEntity.notFound().build();
+		}
 	}
-	
+
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@DeleteMapping("/deleteMyUser")
 	public ResponseEntity<String> deleteMyUser(@RequestParam String username) {
-	    // Buscar al usuario por su nombre de usuario en la base de datos
-	    Optional<UserEntity> userOptional = userRepository.findUserByUsername(username);
-	    if (userOptional.isPresent()) {
-	        
-	    	// Si el usuario existe, eliminarlo
-	        userRepository.delete(userOptional.get());
-	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
-	    } else {
-	        // Si el usuario no existe, devolver la respuesta
-	        return ResponseEntity.notFound().build();
+	    try {
+	        // Buscar al usuario por su nombre de usuario en la base de datos
+	        Optional<UserEntity> userOptional = userRepository.findUserByUsername(username);
+	        if (userOptional.isPresent()) {
+	            // Elimino primero los roles asociados a ese usuario
+	            roleRepository.deleteRolesFromUsername(username);
+
+	            // Si el usuario existe, eliminarlo
+	            userRepository.delete(userOptional.get());
+	            return ResponseEntity.ok().body("Usuario eliminado correctamente");
+	        } else {
+	            // Si el usuario no existe, devolver la respuesta
+	            return ResponseEntity.notFound().build();
+	        }
+	    } catch (Exception e) {
+	        // Maneor la excepción
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Se produjo un error al eliminar el usuario");
 	    }
 	}
-	
-	
-	
-	
 
 }
