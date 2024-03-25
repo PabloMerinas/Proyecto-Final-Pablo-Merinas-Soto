@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import './style.css'
 import { getUserInfo, updateUser } from "../../service/userService";
+import { deleteMyUser } from "../../service/userService";
+import { useNavigate } from 'react-router-dom';
 
 export const PersonalInfo = () => {
+    const navigate = useNavigate();
     // Traigo al usuario actual
     let activeUser = JSON.parse(localStorage.getItem("activeUser"));
     const token = localStorage.getItem("authToken");
@@ -26,9 +29,6 @@ export const PersonalInfo = () => {
                 let username = activeUser.username;
                 // Actualizo la cookie con el nuevo valor y actualizo el user
                 await updateUser(token, { username, password, email, phone, photo, bio });
-
-                // Vuelvo a guardar los datos del usuario actualizado y a actualizar activeUser
-                // TODO TERMINAR METODO DE GUARDADO PARA CONTRASEÑA Y DEMAS
 
             } catch (error) {
                 console.error('Error actualizando el usuario: ', error);
@@ -71,10 +71,10 @@ export const PersonalInfo = () => {
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             // Llamar a la función que guarda los cambios
-            changeMode(); 
+            changeMode();
         }
     }
-    
+
     // TODO procesar imagen
 
 
@@ -149,6 +149,29 @@ export const PersonalInfo = () => {
         }
     }
 
+    // Función para manejar el clic en Delete account
+    const handleDeleteAccount = async () => {
+        // Muestro el popup
+        const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.");
+
+        // Si el usuario confirma la eliminación
+        if (confirmDelete) {
+            try {
+                // Elimino el usuario actual
+                await deleteMyUser(activeUser.username, token);
+                // Elimino las cookies y redirecciono al login
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('activeUser');
+                navigate('/');
+                // Muestro un mensaje de confirmación
+                window.confirm('Usuario ' + activeUser.username + ' eliminado');
+            } catch (error) {
+                console.error('Error al eliminar la cuenta:', error);
+            }
+        }
+    };
+
+
     return (
         <div className="personal-info-p-rincipal-container">
             <div className="personal-info-p-rincipal-my-profile">
@@ -176,7 +199,7 @@ export const PersonalInfo = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="personal-info-p-rincipal-depth7-frame7">
+                                <div className="personal-info-p-rincipal-depth7-frame7" onClick={handleDeleteAccount}>
                                     <div className="personal-info-p-rincipal-depth8-frame002">
                                         <div className="personal-info-p-rincipal-depth9-frame02">
                                             <span className="personal-info-p-rincipal-text04">

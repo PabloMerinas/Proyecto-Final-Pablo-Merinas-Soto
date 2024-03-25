@@ -156,6 +156,11 @@
     align-items: center;
     flex-shrink: 0;
 }
+.personal-info-p-rincipal-depth7-frame7:hover{
+    background-color: rgba(232, 234, 242, 1);
+    border-radius: 12px;
+    cursor: pointer;
+}
 
 .personal-info-p-rincipal-depth8-frame002 {
     width: 101.515625px;

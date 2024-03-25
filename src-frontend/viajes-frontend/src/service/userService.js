@@ -33,7 +33,7 @@ export const getUserInfo = async (token) => {
   }
 };
 
-
+// Funcion para actualizar un usuario
 export const updateUser = async (token, newData) => {
   try {
     // Realizar la solicitud para actualizar el usuario
@@ -49,3 +49,22 @@ export const updateUser = async (token, newData) => {
     throw new Error('Error al actualizar los datos del usuario');
   }
 }
+
+// Función para eliminar un usuario
+export const deleteMyUser = async (username, token) => {
+  try {
+    const response = await axios.delete('http://localhost:8080/v1/user/deleteMyUser', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      },
+      params: {
+        username: username // Paso el username que se va a eliminar
+      }
+    });
+
+    return response.data; // Devolvo la respuesta
+  } catch (error) {
+    console.error('Error al eliminar el usuario:', error);
+    throw new Error('Error al eliminar el usuario');
+  }
+};
