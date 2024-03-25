@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
+import { Notification } from '../../components/Notification/Notification';
 
 function NotificationsPage() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function NotificationsPage() {
         return (
             <div>
                 <Header />
-                NotificationsPage
+                <Notification />
             </div>
         );
     }

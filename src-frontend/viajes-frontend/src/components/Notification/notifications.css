@@ -1,0 +1,241 @@
+.notifications-container {
+    width: 800px;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.notifications-depth3-frame0 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 20px 0;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notifications-depth4-frame0 {
+    gap: 12px;
+    width: 512px;
+    height: 72px;
+    display: flex;
+    padding: 16px;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.notifications-depth5-frame0 {
+    gap: 12px;
+    top: 16px;
+    left: 16px;
+    width: 288px;
+    height: 40px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.notifications-depth6-frame0 {
+    width: 288px;
+    height: 40px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.notifications-depth7-frame0 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.notifications-text {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 32px;
+    font-style: Bold;
+    text-align: left;
+    font-weight: 700;
+    line-height: 40px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.notifications-depth4-frame1 {
+    gap: 16px;
+    width: 512px;
+    height: 72px;
+    display: flex;
+    padding: 8px 16px;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    background-color: rgba(247, 249, 252, 1);
+}
+
+.notifications-depth5-frame01 {
+    gap: 16px;
+    top: 12px;
+    left: 16px;
+    width: 339px;
+    height: 48px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.notifications-depth6-frame001 {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    justify-content: center;
+    background-color: rgba(232, 234, 242, 1);
+}
+
+.notifications-depth7-frame001 {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+}
+
+.notifications-depth6-frame1 {
+    width: 234.109375px;
+    height: 45px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.notifications-depth7-frame002 {
+    width: 234.109375px;
+    height: 24px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.notifications-depth8-frame001 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.notifications-text02 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: Medium;
+    text-align: left;
+    font-weight: 500;
+    line-height: 24px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.notifications-depth7-frame1 {
+    width: 234.109375px;
+    height: 21px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.notifications-depth8-frame002 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.notifications-text04 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.notifications-depth5-frame1 {
+    top: 20px;
+    left: 412px;
+    width: 84px;
+    height: 32px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.notifications-depth6-frame002 {
+    width: 84px;
+    height: 32px;
+    display: flex;
+    padding: 0 16px;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    justify-content: center;
+    background-color: rgba(232, 234, 242, 1);
+}
+
+.notifications-depth7-frame003 {
+    width: 50.09375px;
+    height: 21px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    background-color: rgba(232, 234, 242, 1);
+}
+
+.notifications-depth8-frame003 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.notifications-text06 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Medium;
+    text-align: left;
+    font-weight: 500;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
