@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -70,5 +71,12 @@ public class UserEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserRoleEntity> roles;
+	
+	
+    /**
+     * Notificaciones del usuario.
+     */
+    @ManyToMany(mappedBy = "users")
+    private List<NotificationEntity> notifications;	
 
 }
