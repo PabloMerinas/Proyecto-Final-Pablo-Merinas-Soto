@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './cities.css';
-import { getCities } from '../../../service/getCities';
+import { getCities } from '../../../service/cityService';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
@@ -18,7 +18,7 @@ export const Cities = () => {
                 setCities(citiesData);
                 setfilteredCities(citiesData);
             } catch (error) {
-                console.error('Error al obtener los países:', error);
+                console.error('Error al obtener las ciudades:', error);
             }
         }
 

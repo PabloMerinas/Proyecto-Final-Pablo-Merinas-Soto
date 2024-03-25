@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
+import { Attractions } from '../../components/Options/Attraction/Attractions';
 
 function CitiesPage() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function CitiesPage() {
         return (
             <div>
                 <Header />
-                Attraction
+                <Attractions />
             </div>
         );
     }

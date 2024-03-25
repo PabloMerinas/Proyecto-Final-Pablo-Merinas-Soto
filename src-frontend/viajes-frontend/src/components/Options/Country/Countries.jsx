@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import './countries.css';
-import { getCountries } from "../../../service/getCountries";
+import { getCountries } from '../../../service/countryService';
 import { CountryInfoCard } from './CountryInfoCard';
 
 

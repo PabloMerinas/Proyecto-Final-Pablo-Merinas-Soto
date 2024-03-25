@@ -43,6 +43,10 @@ public class DataInitializer {
 				+ "(20000,'Estate','Estado 4', 'COD4', 1, 'Información sobre la Ciudad 4'),\n"
 				+ "(20000,'Estate','Estado 2', 'COD2', 2, 'Información sobre la Ciudad 2'),\n"
 				+ "(20000,'Estate','Estado 3', 'COD3', 3, 'Información sobre la Ciudad 3');\n" + "");
+
+		executeSqlStatement("INSERT INTO t_attraction (attraction, info, city_id, category) VALUES \n"
+				+ "('Torre eifel', 'infoo', 1, 'LANDMARK'),\n" + "('Casa roma', 'infoo', 2, 'LANDMARK'),\n"
+				+ "('POepita', 'infoo', 3, 'MUSEUM'),\n" + "('heheh', 'infoo', 4, 'NATIONAL_PARK');\n" + "");
 	}
 
 	private void executeSqlStatement(String sqlStatement) {
