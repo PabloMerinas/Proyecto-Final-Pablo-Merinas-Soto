@@ -36,33 +36,42 @@ public class DataInitializer {
 
 		// Insertar países de prueba
 		executeSqlStatement(
-		    "INSERT INTO t_country (img_Url, capital, population, country, country_Code, currency_Code, currency_Symbol, language_Code, info) \n"
-		    + "VALUES \n"
-		    + "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Madrid', 4700000, 'España', 'ES', 'EUR', '€', 'es', 'España es un país ubicado en Europa occidental'),\n"
-		    + "('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png', 'Washington D.C.', 7000000, 'Estados Unidos', 'US', 'USD', '$', 'en', 'Estados Unidos es una república federal constitucional en América del Norte'),\n"
-		    + "('https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/800px-Flag_of_Colombia.svg.png', 'Bogotá', 8600000, 'Colombia', 'CO', 'COP', '$', 'es', 'Colombia es una república en América del Sur');\n"
-		    + "");
+				"INSERT INTO t_country (img_Url, capital, population, country, country_Code, currency_Code, currency_Symbol, language_Code, info) \n"
+						+ "VALUES \n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/800px-Bandera_de_Espa%C3%B1a.svg.png', 'Madrid', 4700000, 'España', 'ES', 'EUR', '€', 'es', 'España es un país ubicado en Europa occidental'),\n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png', 'Washington D.C.', 7000000, 'Estados Unidos', 'US', 'USD', '$', 'en', 'Estados Unidos es una república federal constitucional en América del Norte'),\n"
+						+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/800px-Flag_of_Colombia.svg.png', 'Bogotá', 8600000, 'Colombia', 'CO', 'COP', '$', 'es', 'Colombia es una república en América del Sur');\n"
+						+ "");
 
 		// Insertar ciudades de prueba
 		executeSqlStatement("INSERT INTO T_CITY (population, state ,city, airport_code, country_id, info) \n"
-		    + "VALUES \n"
-		    + "(3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
-		    + "(8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
-		    + "(7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
-		    + "");
+				+ "VALUES \n"
+				+ "(3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
+				+ "(8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
+				+ "(7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
+				+ "");
 
 		// Insertar atracciones de prueba
 		executeSqlStatement("INSERT INTO t_attraction (attraction, info, city_id, category) VALUES \n"
-		    + "('Museo del Prado', 'Museos de arte más importantes del mundo', 1, 'MUSEUM'),\n"
-		    + "('Monumento a Lincoln', 'Monumento conmemorativo.', 2, 'LANDMARK'),\n"
-		    + "('Museo del Oro', 'Museo ubicado en Bogotá', 3, 'MUSEUM');\n"
-		    + "");
+				+ "('Museo del Prado', 'Museos de arte más importantes del mundo', 1, 'MUSEUM'),\n"
+				+ "('Monumento a Lincoln', 'Monumento conmemorativo.', 2, 'LANDMARK'),\n"
+				+ "('Museo del Oro', 'Museo ubicado en Bogotá', 3, 'MUSEUM');\n" + "");
 
 		executeSqlStatement("INSERT INTO t_attraction (attraction, info, city_id, category) VALUES \n"
-			    + "('Catedral de Sevilla', 'Catedral gótica más grande del mundo', 1, 'CHURCH'),\n"
-			    + "('Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');\n"
-			    + "");
+				+ "('Catedral de Sevilla', 'Catedral gótica más grande del mundo', 1, 'CHURCH'),\n"
+				+ "('Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');\n" + "");
 
+		// Insertar notificaciones
+		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, info)\n" + "VALUES \n"
+				+ "(1, 'Nueva aventura en España', '¡Descubre nuevos destinos en España este verano!'),\n"
+				+ "(2, 'Oferta especial en viajes a Estados Unidos', '¡Aprovecha nuestras ofertas especiales en viajes a Estados Unidos!'),\n"
+				+ "(3, 'Explora la belleza de Colombia', 'Descubre la rica cultura y la impresionante naturaleza de Colombia.'),\n"
+				+ "(4, 'Eventos en Madrid esta semana', 'Descubre los eventos culturales y actividades emocionantes que se llevarán a cabo en Madrid esta semana.');\n"
+				+ "");
+
+		executeSqlStatement(
+				"INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES ('admin', 1), ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);\n"
+						+ "");
 
 	}
 

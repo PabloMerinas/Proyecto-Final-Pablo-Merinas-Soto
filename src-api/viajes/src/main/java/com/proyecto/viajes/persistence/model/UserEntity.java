@@ -76,7 +76,8 @@ public class UserEntity {
     /**
      * Notificaciones del usuario.
      */
-    @ManyToMany(mappedBy = "users")
-    private List<NotificationEntity> notifications;	
+	@JsonIgnore
+    @ManyToMany(mappedBy = "userNotified")
+    private List<NotificationEntity> notification;	
 
 }
