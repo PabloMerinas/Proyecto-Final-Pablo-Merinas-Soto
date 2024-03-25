@@ -6,6 +6,7 @@ import { Cities } from '../../components/Options/City/Cities';
 function CitiesPage() {
     const navigate = useNavigate();
     const activeUser = localStorage.getItem("activeUser");
+    sessionStorage.removeItem('activeCity');
 
     useEffect(() => {
         if (!activeUser) {

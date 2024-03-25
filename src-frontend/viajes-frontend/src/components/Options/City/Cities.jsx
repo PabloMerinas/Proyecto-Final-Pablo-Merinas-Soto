@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './cities.css';
 import { getCities } from '../../../service/cityService';
+import { useNavigate } from 'react-router-dom';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
     const [filteredCities, setfilteredCities] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const navigate = useNavigate();
+
 
 
     // Recupero las ciudades
@@ -41,13 +44,16 @@ export const Cities = () => {
         setfilteredCities(filtered);
     };
 
+
+
+
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateCity(city, country, state, airportCode, population) {
-
+        
         // Logica para mostrar las atracciones
-        const handleInfoClick = (clickedShowAttractions) => {
-
-
+        const handleInfoClick = (city) => {
+            sessionStorage.setItem('activeCity', city);
+            navigate('/attractions');
         };
 
         return (

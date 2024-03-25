@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function ItinerariesPage() {
     const navigate = useNavigate();
     const activeUser = localStorage.getItem("activeUser");
+    sessionStorage.removeItem('activeCity');
 
     useEffect(() => {
         if (!activeUser) {

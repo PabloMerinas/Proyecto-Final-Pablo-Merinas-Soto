@@ -27,12 +27,13 @@
 }
 
 .attractions-p-rincipal-depth5-frame0 {
-    width: 103.515625px;
+    width: 203.515625px;
     height: 27.5px;
     display: flex;
     align-items: flex-start;
     flex-shrink: 0;
     flex-direction: column;
+    width: 960px;
 }
 
 .attractions-p-rincipal-depth6-frame0 {
@@ -40,6 +41,8 @@
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
+    width: 960px;
+
 }
 
 .attractions-p-rincipal-text {
@@ -52,6 +55,7 @@
     line-height: 27.5px;
     font-stretch: normal;
     text-decoration: none;
+    width: 960px;
 }
 
 .attractions-p-rincipal-depth4-frame1 {

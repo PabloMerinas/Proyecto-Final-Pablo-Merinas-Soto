@@ -4,8 +4,25 @@ import { getAttractions } from '../../../service/attractionService';
 
 export const Attractions = () => {
     const [attractions, setAttractions] = useState([]);
-    const [filteredAttractions, setfilteredAttractions] = useState([]);
+    const [filteredAttractions, setFilteredAttractions] = useState([]);
     const [searchText, setSearchText] = useState('');
+
+    // Compruebo si se le ha pasado el valor de la ciudad y si es asi filtro primero
+    const activeCity = sessionStorage.getItem('activeCity');
+    console.log(activeCity)
+
+    // Filtro las atracciones basadas en la ciudad activa
+    useEffect(() => {
+        if (activeCity) {
+            const filtered = attractions.filter(attraction =>
+                attraction.city.toLowerCase() === activeCity.toLowerCase()
+            );
+            setFilteredAttractions(filtered);
+        } else {
+            setFilteredAttractions(attractions);
+
+        }
+    }, [attractions, activeCity]);
 
 
     // Recupero las atracciones
@@ -16,7 +33,7 @@ export const Attractions = () => {
                 const token = localStorage.getItem("authToken");
                 const AttractionsData = await getAttractions(token);
                 setAttractions(AttractionsData);
-                setfilteredAttractions(AttractionsData);
+                setFilteredAttractions(AttractionsData);
             } catch (error) {
                 console.error('Error al obtener las atracciones:', error);
             }
@@ -33,20 +50,29 @@ export const Attractions = () => {
 
     };
 
-    // Metodo para filtrar attraciones
     const filterAttractions = (text) => {
-        const filtered = attractions.filter(attraction =>
-            attraction.attraction.toLowerCase().includes(text.toLowerCase())
-        );
-        setfilteredAttractions(filtered);
+        let filtered;
+        if (!activeCity) {
+            filtered = attractions.filter(attraction =>
+                attraction.attraction.toLowerCase().includes(text.toLowerCase())
+            );
+        } else {
+            filtered = attractions.filter(attraction =>
+                attraction.city.toLowerCase() === activeCity.toLowerCase()
+            );
+        }
+        setFilteredAttractions(filtered);
     };
+
+
+
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateAttraction(attraction, country, city, category, info) {
 
         // Logica para mostrar las atracciones
         const handleInfoClick = (clickedShowAttractions) => {
-
+            // TODO
 
         };
 
@@ -109,7 +135,7 @@ export const Attractions = () => {
                     <div className="attractions-p-rincipal-depth5-frame0">
                         <div className="attractions-p-rincipal-depth6-frame0">
                             <span className="attractions-p-rincipal-text">
-                                <span>Attractions</span>
+                                <span> {activeCity ? 'Attractions from ' + activeCity : 'Attractions'}</span>
                             </span>
                         </div>
                     </div>

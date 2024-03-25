@@ -50,7 +50,7 @@ export const Header = () => {
             </div>
             <div className="depth-frame-9">
               <div className="depth-frame-8">
-                <a className="header-a" href="/attractions"> <div className="text-wrapper-2">Attractions</div></a>
+                <a className="header-a" href="/attractions"> <div className="text-wrapper-2" onClick={deleteActiveUser}>Attractions</div></a>
               </div>
             </div>
             <div className="depth-frame-10">
@@ -85,3 +85,7 @@ export const Header = () => {
   );
 };
 
+// Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado
+function deleteActiveUser(){
+  sessionStorage.removeItem('activeCity');
+}
