@@ -52,7 +52,7 @@ public class UserRestController {
 
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
-		Optional<UserEntity> existingUser = userRepository.findUserByUsername(u.getUsername());
+		Optional<UserEntity> existingUser = userRepository.findByUsername(u.getUsername());
 
 		if (existingUser.isPresent()) {
 			// El usuario ya existe en la base de datos
@@ -85,7 +85,7 @@ public class UserRestController {
 	@GetMapping("/getUserByToken")
 	public UserEntity getUserByToken(@RequestParam String token) {
 		String username = jwtUtils.getUsername(token);
-		Optional<UserEntity> userOptional = userRepository.findUserByUsername(username);
+		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 		UserEntity finalUser = new UserEntity();
 		if (userOptional.isPresent()) {
 			finalUser.setUsername(username);
@@ -114,7 +114,7 @@ public class UserRestController {
 		List<String> roles = new ArrayList<>();
 
 		// Buscar el usuario por el nombre de usuario
-		Optional<UserEntity> userOptional = userRepository.findUserByUsername(jwtUtils.getUsername(token));
+		Optional<UserEntity> userOptional = userRepository.findByUsername(jwtUtils.getUsername(token));
 
 		if (userOptional.isPresent()) {
 			UserEntity user = userOptional.get();
@@ -134,7 +134,7 @@ public class UserRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PutMapping
 	public ResponseEntity<String> updateUser(@RequestBody UserEntity updatedUser) {
-		Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(updatedUser.getUsername());
+		Optional<UserEntity> existingUserOptional = userRepository.findByUsername(updatedUser.getUsername());
 
 		if (existingUserOptional.isPresent()) {
 			UserEntity existingUser = existingUserOptional.get();
@@ -164,7 +164,7 @@ public class UserRestController {
 	@PutMapping("/updateByUsername")
 	public ResponseEntity<String> updateUserByUsername(@RequestParam String username,
 			@RequestBody UserEntity updatedUser) {
-		Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(username);
+		Optional<UserEntity> existingUserOptional = userRepository.findByUsername(username);
 
 		if (existingUserOptional.isPresent()) {
 			UserEntity existingUser = existingUserOptional.get();
@@ -210,7 +210,7 @@ public class UserRestController {
 	public ResponseEntity<String> deleteMyUser(@RequestParam String username) {
 	    try {
 	        // Buscar al usuario por su nombre de usuario en la base de datos
-	        Optional<UserEntity> userOptional = userRepository.findUserByUsername(username);
+	        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 	        if (userOptional.isPresent()) {
 	            // Elimino primero los roles asociados a ese usuario
 	            roleRepository.deleteRolesFromUsername(username);

@@ -62,15 +62,15 @@ public class DataInitializer {
 				+ "('Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');\n" + "");
 
 		// Insertar notificaciones
-		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, info)\n" + "VALUES \n"
-				+ "(1, 'Nueva aventura en España', '¡Descubre nuevos destinos en España este verano!'),\n"
-				+ "(2, 'Oferta especial en viajes a Estados Unidos', '¡Aprovecha nuestras ofertas especiales en viajes a Estados Unidos!'),\n"
-				+ "(3, 'Explora la belleza de Colombia', 'Descubre la rica cultura y la impresionante naturaleza de Colombia.'),\n"
-				+ "(4, 'Eventos en Madrid esta semana', 'Descubre los eventos culturales y actividades emocionantes que se llevarán a cabo en Madrid esta semana.');\n"
+		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, time_ago)\n" + "VALUES \n"
+				+ "(1, 'Nueva aventura en España', '6h ago'),\n"
+				+ "(2, 'Oferta especial en viajes a Estados Unidos', '2h ago'),\n"
+				+ "(3, 'Explora la belleza de Colombia', '2 days ago'),\n"
+				+ "(4, 'Eventos en Madrid esta semana', '1 day ago');\n"
 				+ "");
 
 		executeSqlStatement(
-				"INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES ('admin', 1), ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);\n"
+				"INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);\n"
 						+ "");
 
 	}

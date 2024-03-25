@@ -18,7 +18,7 @@ public class UserManagementImpl implements UserManagementI {
 	private UserRepositoryI userRepository;
 
 	@Override
-	public Optional<UserEntity> findUserByUsername(String username) {
+	public Optional<UserEntity> findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 

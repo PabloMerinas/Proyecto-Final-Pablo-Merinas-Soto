@@ -6,7 +6,7 @@ import com.proyecto.viajes.persistence.model.UserEntity;
 
 public interface UserManagementI {
 
-	Optional<UserEntity> findUserByUsername(String username);
+	Optional<UserEntity> findByUsername(String username);
 	
 	void save(UserEntity u);
 }

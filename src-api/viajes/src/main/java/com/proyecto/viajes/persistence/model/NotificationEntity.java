@@ -32,7 +32,7 @@ public class NotificationEntity {
 	/**
 	 * Información del a notificación.
 	 */
-	private String info;
+	private String timeAgo;
 
 	/**
 	 * Usuarios a los que se les ha enviado la notificación.

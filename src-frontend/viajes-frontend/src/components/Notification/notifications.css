@@ -210,6 +210,12 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
+.notifications-depth6-frame002:hover{
+    border: 1px solid rgba(255, 0, 0, 0.267);
+    cursor: pointer;
+}
+
+
 .notifications-depth7-frame003 {
     width: 50.09375px;
     height: 21px;
@@ -224,7 +230,7 @@
 .notifications-depth8-frame003 {
     display: flex;
     align-self: stretch;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -233,7 +239,7 @@
     height: auto;
     font-size: 14px;
     font-style: Medium;
-    text-align: left;
+    text-align: center;
     font-weight: 500;
     line-height: 21px;
     font-stretch: normal;
