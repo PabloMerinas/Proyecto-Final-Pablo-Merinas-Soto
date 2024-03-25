@@ -14,29 +14,50 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * Entidad Attraction, represetan las atracciones de la base de datos.
+ */
 @Data
 @Table(name = "T_ATTRACTION")
 @Entity
 public class AttractionEntity {
 
+	/**
+	 * Enumerado de las categorias de atracciones que hay.
+	 */
 	public enum CATEGORY {
 		LANDMARK, MUSEUM, CHURH, NATIONAL_PARK;
 	}
 
+	/**
+	 * ID de la atraccion.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	/**
+	 * Nombre de la atracción.
+	 */
 	private String attraction;
 
+	/**
+	 * Categoria de la atracción.
+	 */
 	@Enumerated(EnumType.STRING)
 	private CATEGORY category;
 
+	/**
+	 * Ciudad a la que pertenece la atracción.
+	 */
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	@JsonIgnore
 	private CityEntity city;
 
+	/**
+	 * Información de la atracción.
+	 */
 	private String info;
 
 	/**
