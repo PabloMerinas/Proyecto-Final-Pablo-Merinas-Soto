@@ -8,6 +8,7 @@ function AccountPage() {
     // Recupero el usuario activo
     const activeUser = JSON.parse(localStorage.getItem("activeUser"));
     // console.log(activeUser);
+    sessionStorage.removeItem('activeCity');
 
 
     useEffect(() => {

@@ -9,7 +9,6 @@ export const Attractions = () => {
 
     // Compruebo si se le ha pasado el valor de la ciudad y si es asi filtro primero
     const activeCity = sessionStorage.getItem('activeCity');
-    console.log(activeCity)
 
     // Filtro las atracciones basadas en la ciudad activa
     useEffect(() => {
@@ -50,19 +49,25 @@ export const Attractions = () => {
 
     };
 
+    // Filtro para las atracciones, en caso de haber una ciudad ya filtrada se filtrara sobre esa
     const filterAttractions = (text) => {
         let filtered;
-        if (!activeCity) {
+        if (activeCity) {
+            // Filtrar atracciones por ciudad activa y texto de búsqueda
             filtered = attractions.filter(attraction =>
+                attraction.city.toLowerCase() === activeCity.toLowerCase() &&
                 attraction.attraction.toLowerCase().includes(text.toLowerCase())
             );
         } else {
+            // Filtrar atracciones solo por texto de búsqueda
             filtered = attractions.filter(attraction =>
-                attraction.city.toLowerCase() === activeCity.toLowerCase()
+                attraction.attraction.toLowerCase().includes(text.toLowerCase())
             );
         }
+        // Actualizar atracciones filtradas
         setFilteredAttractions(filtered);
     };
+    
 
 
 

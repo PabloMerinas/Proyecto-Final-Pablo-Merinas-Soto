@@ -3,6 +3,8 @@ import HeaderBasic from '../../components/HeaderBasic/HeaderBasic';
 import { Login } from '../../components/Login/Login';
 
 function LoginPage(){
+    sessionStorage.removeItem('activeCity');
+
     return (
         <div>
             <HeaderBasic></HeaderBasic>
