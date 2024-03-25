@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Component
+/**
+ * Clase para inicializar datos en la base de datos.
+ */
 public class DataInitializer {
 
 	private final JdbcTemplate jdbcTemplate;
@@ -20,6 +23,9 @@ public class DataInitializer {
 	private UserRepositoryI usuarioRepository;
 	private PasswordEncoder passwordEncoder;
 
+	/**
+	 * Metodo para inicializar los datos.
+	 */
 	@PostConstruct
 	public void initializeData() {
 		insertarUsuario("admin", "admin", "admin@admin.com", false, false, "adminImg.png");
@@ -49,10 +55,23 @@ public class DataInitializer {
 				+ "('POepita', 'infoo', 3, 'MUSEUM'),\n" + "('heheh', 'infoo', 4, 'NATIONAL_PARK');\n" + "");
 	}
 
+	/**
+	 * Metodo para ejecutar una sentencia SQL.
+	 * 
+	 * @param sqlStatement Sentancia SQL.
+	 */
 	private void executeSqlStatement(String sqlStatement) {
 		jdbcTemplate.execute(sqlStatement);
 	}
 
+	/**
+	 * Metodo para crear o buscar un usuario en la base de datos.
+	 * 
+	 * @param username Usuario a buscar.
+	 * @param email    Email a buscar.
+	 * @param password Contraseña a buscar.
+	 * @return Usuario encontrado.
+	 */
 	@Transactional
 	private UserEntity crearOBuscarUsuario(String username, String email, String password) {
 		return usuarioRepository.findByUsername(username).orElseGet(() -> {
@@ -66,6 +85,17 @@ public class DataInitializer {
 		});
 	}
 
+	/**
+	 * Metodo para insertar un usuario en la base de datos.
+	 * 
+	 * @param username Usuario.
+	 * @param password Contraseña.
+	 * @param email    Correo electrónico.
+	 * @param locked   Estado de bloqueo.
+	 * @param disabled Estado del usuario.
+	 * @param imgUrl   Url a la imagen del perfil.
+	 * @return Usuario insertado.
+	 */
 	@Transactional
 	private UserEntity insertarUsuario(String username, String password, String email, Boolean locked, Boolean disabled,
 			String imgUrl) {
@@ -81,6 +111,12 @@ public class DataInitializer {
 		});
 	}
 
+	/**
+	 * Método para insertar un rol en la base de datos.
+	 * 
+	 * @param username Usuario al que se le agrega el ROL.
+	 * @param rol      ROL que se agrega.
+	 */
 	private void insertarRol(String username, String rol) {
 		executeSqlStatement("INSERT INTO t_user_role (username, role) VALUES ('" + username + "', '" + rol + "')");
 	}
