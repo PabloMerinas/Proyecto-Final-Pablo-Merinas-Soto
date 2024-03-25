@@ -277,3 +277,292 @@
 .header-a{
   text-decoration: none;
 }
+
+.popup-container {
+  width: 230px;
+  height: 205px;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  right: 0; 
+  z-index: 999;
+  border: 1px solid rgb(209, 214, 232, 1);
+  background-color: rgba(247, 249, 252, 1);
+  border-radius: 12px;
+
+}
+
+
+.popup-my-account {
+  width: 227px;
+  height: 185px;
+  display: flex;
+  padding: 8px 0 20px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 700;
+}
+.popup-depth4-frame0 {
+  gap: 16px;
+  width: 226px;
+  height: 72px;
+  display: flex;
+  padding: 8px 16px;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(247, 249, 252, 1);
+  
+}
+.popup-depth5-frame0 {
+  gap: 16px;
+  top: 8px;
+  left: 16px;
+  width: 210px;
+  height: 56px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+}
+.popup-depth6-frame0 {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background-image: url('./profileImgs/adminImg.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.depth-frame-14:hover{
+  cursor: pointer;
+}
+.popup-depth6-frame2 {
+  width: 86.140625px;
+  height: 45px;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.popup-depth7-frame0 {
+  width: 86.140625px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.popup-depth8-frame0 {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.popup-text {
+  color: rgba(12, 17, 28, 1);
+  height: auto;
+  font-size: 16px;
+  font-style: Medium;
+  text-align: left;
+  font-weight: 500;
+  line-height: 24px;
+  font-stretch: normal;
+  text-decoration: none;
+  font-weight: 700;
+}
+.popup-depth7-frame1 {
+  width: 86.140625px;
+  height: 21px;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  width: 120px;
+
+}
+.popup-depth8-frame01 {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.popup-text2 {
+  color: rgba(79, 102, 150, 1);
+  height: auto;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 21px;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.popup-depth4-frame1 {
+  gap: 16px;
+  width: 226px;
+  height: 56px;
+  display: flex;
+  padding: 0 16px;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(247, 249, 252, 1);
+}
+.popup-depth5-frame01 {
+  gap: 16px;
+  top: 8px;
+  left: 16px;
+  width: 210px;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+}
+.popup-depth6-frame01 {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(232, 234, 242, 1);
+}
+.popup-depth7-frame01 {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.popup-depth8-frame02 {
+  width: 24px;
+  height: 24px;
+}
+.popup-depth6-frame1 {
+  width: 154px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.popup-depth7-frame02 {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.popup-text4 {
+  color: rgba(12, 17, 28, 1);
+  height: auto;
+  font-size: 16px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+.popup-my-account1 {
+  gap: 16px;
+  width: 226px;
+  height: 56px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(247, 249, 252, 1);
+}
+.popup-depth5-frame02 {
+  gap: 16px;
+  top: 8px;
+  left: 16px;
+  width: 210px;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+}
+.popup-depth6-frame02 {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(232, 234, 242, 1);
+}
+.popup-depth7-frame03 {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-direction: column;
+
+}
+
+.popup-depth6-frame11 {
+  width: 154px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.popup-depth7-frame04 {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.popup-text6 {
+  color: rgba(12, 17, 28, 1);
+  height: auto;
+  font-size: 16px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 24px;
+  font-stretch: normal;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.popup-depth4-frame1:hover, .popup-my-account1:hover{
+  background-color: rgba(232, 234, 242, 0.692);
+  cursor: pointer;
+}
+
+.a-no-style{
+  color: inherit;
+  text-decoration: none;
+}
+
+.a-no-style:hover{
+  color: black
+
+}

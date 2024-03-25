@@ -26,7 +26,7 @@ public class AttractionEntity {
 	 * Enumerado de las categorias de atracciones que hay.
 	 */
 	public enum CATEGORY {
-		LANDMARK, MUSEUM, CHURH, NATIONAL_PARK;
+		LANDMARK, MUSEUM, CHURCH, NATIONAL_PARK;
 	}
 
 	/**

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import defaultImg from "./profileImgs/default.png";
 
+
 // Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
 
   // Logica para cargar la imagen del usuario, se guarda una por defecto
+  const [showPopup, setShowPopup] = useState(false);
   const [imgUrl, setImgUrl] = useState(defaultImg);
 
   useEffect(() => {
@@ -17,6 +19,11 @@ export const Header = () => {
         })
     }
   }, []);
+
+  // Función para mostrar el popup
+  const handlePopupToggle = () => {
+    setShowPopup(!showPopup);
+  };
 
 
   return (
@@ -76,16 +83,83 @@ export const Header = () => {
             </div>
           </div>
           {/* <a href="/account"><div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
-          <a href="/personal">
-            <div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
-          </a>
+          <div onClick={handlePopupToggle} className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
         </div>
+        {showPopup && <Popup />}
       </div>
     </div>
   );
 };
 
 // Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado
-function deleteActiveUser(){
+function deleteActiveUser() {
   sessionStorage.removeItem('activeCity');
+}
+
+const Popup = () => {
+  // Recupero los datos del username
+  const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+  return (
+    <div className="popup-container">
+      <div className="popup-my-account">
+        <div className="popup-depth4-frame0">
+          <div className="popup-depth5-frame0">
+            <div className="popup-depth6-frame0" ></div>
+            <div className="popup-depth6-frame2">
+              <div className="popup-depth7-frame0">
+                <div className="popup-depth8-frame0">
+                  <span className="popup-text">
+                    <span>{activeUser.username}</span>
+                  </span>
+                </div>
+              </div>
+              <div className="popup-depth7-frame1">
+                <div className="popup-depth8-frame01">
+                  <span className="popup-text2">
+                    {activeUser.roles.join(',')}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="/personal" className="a-no-style">
+          <div className="popup-depth4-frame1">
+            <div className="popup-depth5-frame01">
+              <div className="popup-depth6-frame01">
+                <div className="popup-depth7-frame01">
+                  <i className="fa-solid fa-user"></i>
+                </div>
+              </div>
+              <div className="popup-depth6-frame1">
+                <div className="popup-depth7-frame02">
+                  <span className="popup-text4">
+                    <span>Go to My Account</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="/" className="a-no-style">
+          <div className="popup-my-account1">
+            <div className="popup-depth5-frame02">
+              <div className="popup-depth6-frame02">
+                <div className="popup-depth7-frame03">
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                </div>
+              </div>
+              <div className="popup-depth6-frame11">
+                <div className="popup-depth7-frame04">
+                  <span className="popup-text6">
+                    <span>Sign Out</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  )
 }
