@@ -10,7 +10,7 @@ export const getAttractions = async (token) => {
             }
         });
 
-        //Guardo las ciudades
+        //Guardo las attracciones
         const attractions = response.data;
         return attractions;
     } catch (error) {

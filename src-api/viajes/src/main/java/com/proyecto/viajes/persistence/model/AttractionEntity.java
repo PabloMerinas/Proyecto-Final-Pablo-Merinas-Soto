@@ -1,5 +1,6 @@
 package com.proyecto.viajes.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -25,7 +26,7 @@ public class AttractionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String attraction;
 
 	@Enumerated(EnumType.STRING)
@@ -37,5 +38,25 @@ public class AttractionEntity {
 	private CityEntity city;
 
 	private String info;
+
+	/**
+	 * Metodo para devolver el valor de su ciudad asociada
+	 * 
+	 * @return Nombre de la ciudad asociada
+	 */
+	@JsonGetter("city")
+	public String getCityName() {
+		return city != null ? city.getCity() : null;
+	}
+
+	/**
+	 * Metodo para devolver el valor de su pais asociado
+	 * 
+	 * @return Nombre del pais asociado
+	 */
+	@JsonGetter("country")
+	public String getCountryName() {
+		return city != null ? city.getCountryName() : null;
+	}
 
 }
