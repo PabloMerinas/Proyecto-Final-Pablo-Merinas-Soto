@@ -10,6 +10,8 @@ import CitiesPage from './pages/options/CitiesPage';
 import AttractionsPage from './pages/options/AttractionsPage';
 import IttinerariesPage from './pages/options/ItinerariesPage';
 import AdminPage from './pages/admin/AdminPage';
+import NotificationsPage from './pages/options/NotificationsPage';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path='/cities' element={<CitiesPage />} />
         <Route path='/attractions' element={<AttractionsPage />} />
         <Route path='/itineraries' element={<IttinerariesPage />} />
+        <Route path='/notifications' element={<NotificationsPage />} />
       </Routes>
     </Router>
   );

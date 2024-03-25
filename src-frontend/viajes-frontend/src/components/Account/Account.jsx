@@ -63,7 +63,7 @@ export const Account = () => {
                     {generateItem("fa-solid fa-city", "Cities", "View all the cities", "/cities")}
                     {generateItem("fa-solid fa-compass", "Attractions", "View all the attractions", "/attractions")}
                     {generateItem("fa-solid fa-clipboard-list", "Itineraries", "View all the itineraries", "/itineraries")}
-                    {generateItem("fa-solid fa-envelope", "Notifications", "View my notifications")}
+                    {generateItem("fa-solid fa-envelope", "Notifications", "View my notifications", "/notifications")}
                     {generateItem("fa-solid fa-right-from-bracket", "Log out", "Log out my session", "/")}
                 </div>
                 <div className="account-p-rincipal-depth4-frame1">
