@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import defaultImg from "./profileImgs/default.png";
-
+import { generateSimpleNotificacion } from "../Notification/Notification";
 
 // Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
@@ -23,6 +23,10 @@ export const Header = () => {
   // Función para mostrar el popup
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);
+  };
+
+  const handlePopupSimpleNotification = () => {
+    
   };
 
 
@@ -66,7 +70,7 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div className="depth-frame-11">
+          <div className="depth-frame-11" onClick={handlePopupSimpleNotification}> 
             <div className="depth-frame-12">
               <div className="depth-frame-13">
                 <div className="vector-wrapper">

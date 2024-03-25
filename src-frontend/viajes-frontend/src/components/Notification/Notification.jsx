@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import './notifications.css';
 import { getNotificationsByUsername } from "../../service/notificationService";
 
-function generateNormalNotification(awesomeIco, title, timeAgo) {
+function generateNormalNotification(id, awesomeIco, title, timeAgo) {
     return (
-        <div className="notifications-depth4-frame1">
+        <div key={id} className="notifications-depth4-frame1">
             <div className="notifications-depth5-frame01">
                 <div className="notifications-depth6-frame001">
                     <div className="notifications-depth7-frame001">
@@ -44,6 +44,81 @@ function generateNormalNotification(awesomeIco, title, timeAgo) {
 
 }
 
+export function generateSimpleNotificacion(id, awesomeIco, title){
+    return (
+        <div className="simple-notification-container">
+          <div className="simple-notification-simple-notification">
+            <div className="simple-notification-depth4-frame5">
+              <div className="simple-notification-depth5-frame0">
+                <div className="simple-notification-depth6-frame0">
+                  <div className="simple-notification-depth7-frame0">
+                    <img
+                      src="/external/depth8frame05213-ruv8.svg"
+                      alt="Depth8Frame05213"
+                      className="simple-notification-depth8-frame0"
+                    />
+                  </div>
+                </div>
+                <div className="simple-notification-depth6-frame1">
+                  <div className="simple-notification-depth7-frame01">
+                    <div className="simple-notification-depth8-frame01">
+                      <span className="simple-notification-text">
+                        <span>Local Event: Oia Sunset</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="simple-notification-depth4-frame6">
+              <div className="simple-notification-depth5-frame01">
+                <div className="simple-notification-depth6-frame01">
+                  <div className="simple-notification-depth7-frame02">
+                    <img
+                      src="/external/depth8frame05213-jbdv.svg"
+                      alt="Depth8Frame05213"
+                      className="simple-notification-depth8-frame02"
+                    />
+                  </div>
+                </div>
+                <div className="simple-notification-depth6-frame11">
+                  <div className="simple-notification-depth7-frame03">
+                    <div className="simple-notification-depth8-frame03">
+                      <span className="simple-notification-text2">
+                        <span>Local Event: Oia Sunset</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="simple-notification-depth4-frame7">
+              <div className="simple-notification-depth5-frame02">
+                <div className="simple-notification-depth6-frame02">
+                  <div className="simple-notification-depth7-frame04">
+                    <img
+                      src="/external/depth8frame05213-stw.svg"
+                      alt="Depth8Frame05213"
+                      className="simple-notification-depth8-frame04"
+                    />
+                  </div>
+                </div>
+                <div className="simple-notification-depth6-frame12">
+                  <div className="simple-notification-depth7-frame05">
+                    <div className="simple-notification-depth8-frame05">
+                      <span className="simple-notification-text4">
+                        <span>Local Event: Oia Sunset</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+}
+
 export const Notification = () => {
     const [notifications, setNotifications] = useState([]);
 
@@ -79,7 +154,7 @@ export const Notification = () => {
                 </div>
 
                 {notifications.map(notification => (
-                    generateNormalNotification("fa-solid fa-plane", notification.title, notification.timeAgo)
+                    generateNormalNotification(notification.id, "fa-solid fa-plane", notification.title, notification.timeAgo)
                 ))}
             </div>
         </div>

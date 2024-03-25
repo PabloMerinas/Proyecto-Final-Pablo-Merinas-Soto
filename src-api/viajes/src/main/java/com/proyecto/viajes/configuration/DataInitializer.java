@@ -63,10 +63,10 @@ public class DataInitializer {
 
 		// Insertar notificaciones
 		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, time_ago)\n" + "VALUES \n"
-				+ "(1, 'Nueva aventura en España', '6h ago'),\n"
-				+ "(2, 'Oferta especial en viajes a Estados Unidos', '2h ago'),\n"
-				+ "(3, 'Explora la belleza de Colombia', '2 days ago'),\n"
-				+ "(4, 'Eventos en Madrid esta semana', '1 day ago');\n"
+				+ "(1, 'New Destination: Kyoto, Japan', '6h ago'),\n"
+				+ "(2, 'New Attraction: Golden Pavilion', '2h ago'),\n"
+				+ "(3, 'Local Event: Oia Sunset', '2 days ago'),\n"
+				+ "(4, 'New Attraction: Amoudi Bay', '1 day ago');\n"
 				+ "");
 
 		executeSqlStatement(

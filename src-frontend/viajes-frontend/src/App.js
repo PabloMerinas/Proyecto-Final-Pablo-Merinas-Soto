@@ -11,9 +11,13 @@ import AttractionsPage from './pages/options/AttractionsPage';
 import IttinerariesPage from './pages/options/ItinerariesPage';
 import AdminPage from './pages/admin/AdminPage';
 import NotificationsPage from './pages/options/NotificationsPage';
+import React, { useEffect } from 'react';
 
 
 function App() {
+  useEffect(() => {
+    document.title = 'EasyTravels'; // Establecer el nuevo título al montar el componente
+  }, []);
   return (
     <Router>
       <Routes>
