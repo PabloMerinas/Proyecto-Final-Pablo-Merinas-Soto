@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -188,5 +190,40 @@ public class UserRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@Secured({"ROLE_ADMIN" })
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
+	    Optional<UserEntity> userOptional = userRepository.findById(id);
+
+	    if (userOptional.isPresent()) {
+	        // Si el usuario existe, eliminarlo
+	        userRepository.deleteById(id);
+	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
+	    } else {
+	        // Si el usuario no existe, devolver la respuesta
+	        return ResponseEntity.notFound().build();
+	    }
+	}
+	
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@DeleteMapping("/deleteMyUser")
+	public ResponseEntity<String> deleteMyUser(@RequestParam String username) {
+	    // Buscar al usuario por su nombre de usuario en la base de datos
+	    Optional<UserEntity> userOptional = userRepository.findUserByUsername(username);
+	    if (userOptional.isPresent()) {
+	        
+	    	// Si el usuario existe, eliminarlo
+	        userRepository.delete(userOptional.get());
+	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
+	    } else {
+	        // Si el usuario no existe, devolver la respuesta
+	        return ResponseEntity.notFound().build();
+	    }
+	}
+	
+	
+	
+	
 
 }

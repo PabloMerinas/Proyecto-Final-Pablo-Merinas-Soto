@@ -74,44 +74,79 @@ export const PersonalInfo = () => {
             changeMode(); 
         }
     }
+    
+    // TODO procesar imagen
 
 
     // Funcion para generar la opcion
     function generateOption(awesomeIco, inputType, title, value, handleChange, placeholder) {
         const inputClass = editMode ? 'input-edit-mode' : 'input-view-mode';
-        return (
-            <div className="personal-info-p-rincipal-depth5-frame06">
-                <div className="personal-info-p-rincipal-depth6-frame06">
-                    <div className="personal-info-p-rincipal-depth7-frame012">
-                        <i className={awesomeIco}></i>
-                    </div>
-                </div>
-                <div className="personal-info-p-rincipal-depth6-frame16">
-                    <div className="personal-info-p-rincipal-depth7-frame013">
-                        <div className="personal-info-p-rincipal-depth8-frame017">
-                            <span className="personal-info-p-rincipal-text28">
-                                <span>{title}</span>
-                            </span>
+        if (inputType === "file") {
+            return (
+                <div className="personal-info-p-rincipal-depth5-frame06">
+                    <div className="personal-info-p-rincipal-depth6-frame06">
+                        <div className="personal-info-p-rincipal-depth7-frame012">
+                            <i className={awesomeIco}></i>
                         </div>
                     </div>
-                    <div className="personal-info-p-rincipal-depth7-frame14">
-                        <div className="personal-info-p-rincipal-depth8-frame018">
-                            <span className="personal-info-p-rincipal-text30">
-                                <input
-                                    type={inputType}
-                                    className={`personal-info-p-rincipal-input ${inputClass}`}
-                                    value={value ? value : ""}
-                                    onChange={handleChange}
-                                    onKeyDown={handleKeyDown} // Manejar el evento onKeyDown para poder pulsar enter
-                                    readOnly={!editMode}
-                                    placeholder={placeholder} // Solo se podra editar si esta en modo editar
-                                />
-                            </span>
+                    <div className="personal-info-p-rincipal-depth6-frame16">
+                        <div className="personal-info-p-rincipal-depth7-frame013">
+                            <div className="personal-info-p-rincipal-depth8-frame017">
+                                <span className="personal-info-p-rincipal-text28">
+                                    <span>{title}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="personal-info-p-rincipal-depth7-frame14">
+                            <div className="personal-info-p-rincipal-depth8-frame018">
+                                <span className="personal-info-p-rincipal-text30">
+                                    <input
+                                        type={inputType}
+                                        className={`personal-info-p-rincipal-input ${inputClass}`}
+                                        onChange={handleChange}
+                                        accept="image/*" // Acepta cualquier tipo de imagen
+                                    />
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="personal-info-p-rincipal-depth5-frame06">
+                    <div className="personal-info-p-rincipal-depth6-frame06">
+                        <div className="personal-info-p-rincipal-depth7-frame012">
+                            <i className={awesomeIco}></i>
+                        </div>
+                    </div>
+                    <div className="personal-info-p-rincipal-depth6-frame16">
+                        <div className="personal-info-p-rincipal-depth7-frame013">
+                            <div className="personal-info-p-rincipal-depth8-frame017">
+                                <span className="personal-info-p-rincipal-text28">
+                                    <span>{title}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="personal-info-p-rincipal-depth7-frame14">
+                            <div className="personal-info-p-rincipal-depth8-frame018">
+                                <span className="personal-info-p-rincipal-text30">
+                                    <input
+                                        type={inputType}
+                                        className={`personal-info-p-rincipal-input ${inputClass}`}
+                                        value={value ? value : ""}
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyDown}
+                                        readOnly={!editMode}
+                                        placeholder={placeholder}
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
     }
 
     return (
@@ -185,7 +220,7 @@ export const PersonalInfo = () => {
                         {generateOption("fa-solid fa-phone", "text", "Phone number", phone, handlePhoneChange, 'Add your phone number')}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame4">
-                        {generateOption("fa-solid fa-user", "text", "Profile photo", photo, handlePhotoChange, 'Add a profile photo.')}
+                        {generateOption("fa-solid fa-user", "file", "Profile photo", photo, handlePhotoChange, 'Add a profile photo.')}
                     </div>
                     <div className="personal-info-p-rincipal-depth4-frame5">
                         {generateOption("fa-solid fa-info", "text", "Bio", bio, handleBioChange, 'Complete your profile for a better experience.')}

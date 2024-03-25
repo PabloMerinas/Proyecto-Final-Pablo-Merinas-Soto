@@ -31,4 +31,16 @@ public class UserManagementImpl implements UserManagementI {
 		return userRepository.findAll();
 	}
 
+	public Optional<UserEntity> findById(Long id) {
+		return userRepository.findById(id.toString());
+	}
+
+	public void deleteById(Long id) {
+		userRepository.deleteById(id.toString());
+	}
+
+	public void delete(UserEntity userEntity) {
+		userRepository.delete(userEntity);
+	}
+
 }
