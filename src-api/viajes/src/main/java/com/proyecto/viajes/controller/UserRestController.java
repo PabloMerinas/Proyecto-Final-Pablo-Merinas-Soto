@@ -141,7 +141,43 @@ public class UserRestController {
 			existingUser.setEmail(updatedUser.getEmail());
 			existingUser.setPhone(updatedUser.getPhone());
 			existingUser.setBio(updatedUser.getBio());
-			existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+
+	        // Verificar si se proporcionó una nueva contraseña
+	        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+	            // Codificar y guardar la nueva contraseña
+	            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+	        }
+			
+			
+			// Guardar los cambios
+			userRepository.save(existingUser);
+
+			return ResponseEntity.ok().body("Usuario actualizado correctamente");
+		} else {
+			// Usuario no encontrado
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@PutMapping("/updateByUsername")
+	public ResponseEntity<String> updateUserByUsername(@RequestParam String username,
+			@RequestBody UserEntity updatedUser) {
+		Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(username);
+
+		if (existingUserOptional.isPresent()) {
+			UserEntity existingUser = existingUserOptional.get();
+
+			// Actualizar la información del usuario
+			existingUser.setEmail(updatedUser.getEmail());
+			existingUser.setPhone(updatedUser.getPhone());
+			existingUser.setBio(updatedUser.getBio());
+
+	        // Verificar si se proporcionó una nueva contraseña
+	        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+	            // Codificar y guardar la nueva contraseña
+	            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+	        }
 
 			// Guardar los cambios
 			userRepository.save(existingUser);
@@ -152,29 +188,5 @@ public class UserRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-    @Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
-    @PutMapping("/updateByUsername")
-    public ResponseEntity<String> updateUserByUsername(@RequestParam String username, @RequestBody UserEntity updatedUser) {
-        Optional<UserEntity> existingUserOptional = userRepository.findUserByUsername(username);
-
-        if (existingUserOptional.isPresent()) {
-            UserEntity existingUser = existingUserOptional.get();
-
-            // Actualizar la información del usuario
-            existingUser.setEmail(updatedUser.getEmail());
-            existingUser.setPhone(updatedUser.getPhone());
-            existingUser.setBio(updatedUser.getBio());
-            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-
-            // Guardar los cambios
-            userRepository.save(existingUser);
-
-            return ResponseEntity.ok().body("Usuario actualizado correctamente");
-        } else {
-            // Usuario no encontrado
-            return ResponseEntity.notFound().build();
-        }
-    }
 
 }
