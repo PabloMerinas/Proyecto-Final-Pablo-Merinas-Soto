@@ -220,6 +220,10 @@
   width: 40px;
 }
 
+.nivel-frame-12:hover {
+  cursor: pointer;
+}
+
 .header .nivel-frame-13 {
   align-items: flex-start;
   display: flex;

@@ -44,32 +44,36 @@ function generateNormalNotification(id, awesomeIco, title, timeAgo) {
 
 }
 
-export function generateSimpleNotificacion(id, awesomeIco, title) {
+// Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
+export function generateSimpleNotification(notifications) {
   return (
-    <div key={id} className="simple-notification-container">
-      <div className="simple-notification-simple-notification">
-        <div className="simple-notification-nivel4-frame5">
-          <div className="simple-notification-nivel5-frame0">
-            <div className="simple-notification-nivel6-frame0">
-              <div className="simple-notification-nivel7-frame0">
-                <i className={awesomeIco ? awesomeIco : "fa-solid fa-plane"}></i>
+    <div className="simple-notification-container">
+      {notifications.map(notification => (
+        <div key={notification.id} className="simple-notification-simple-notification">
+          <div className="simple-notification-nivel4-frame5">
+            <div className="simple-notification-nivel5-frame0">
+              <div className="simple-notification-nivel6-frame0">
+                <div className="simple-notification-nivel7-frame0">
+                  <i className={notification.awesomeIco ? notification.awesomeIco : "fa-solid fa-plane"}></i>
+                </div>
               </div>
-            </div>
-            <div className="simple-notification-nivel6-frame1">
-              <div className="simple-notification-nivel7-frame01">
-                <div className="simple-notification-nivel8-frame01">
-                  <span className="simple-notification-text">
-                    <span>{title ? title : "Default"}</span>
-                  </span>
+              <div className="simple-notification-nivel6-frame1">
+                <div className="simple-notification-nivel7-frame01">
+                  <div className="simple-notification-nivel8-frame01">
+                    <span className="simple-notification-text">
+                      <span>{notification.title ? notification.title : "Default"}</span>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
-  )
+  );
 }
+
 
 export const Notification = () => {
   const [notifications, setNotifications] = useState([]);

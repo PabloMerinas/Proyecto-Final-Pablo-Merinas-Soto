@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./header.css";
 import defaultImg from "./profileImgs/default.png";
-import { generateSimpleNotificacion } from "../Notification/Notification";
+import { generateSimpleNotification } from "../Notification/Notification";
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { useClickOutside } from "react-click-outside-hook";
 
@@ -131,34 +131,30 @@ function deleteActiveUser() {
 const PopupNotification = () => {
   const [notifications, setNotifications] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
-        const authToken = localStorage.getItem('authToken');
-        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+  const fetchData = async () => {
+    try {
+      const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+      const authToken = localStorage.getItem('authToken');
+      const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
 
-        // Verificar si notificationsData es un array no vacío antes de actualizar el estado
-        if (Array.isArray(notificationsData) && notificationsData.length > 0) {
-          setNotifications(notificationsData);
-        } else {
-          console.log('No se encontraron notificaciones.');
-        }
-      } catch (error) {
-        console.error('Error al recuperar las notificaciones:', error);
+      // Verificar si notificationsData es un array no vacío antes de actualizar el estado
+      if (Array.isArray(notificationsData) && notificationsData.length > 0) {
+        setNotifications(notificationsData);
+        console.log('No se encontraron notificacsiones.');
       }
-    };
+    } catch (error) {
+      console.error('Error al recuperar las notificaciones:', error);
+    }
+  };
+
+  // Llamar a fetchData cuando se monta el componente para obtener las notificaciones iniciales
+  useEffect(() => {
     fetchData();
   }, []);
 
+
   return (
-    <>
-      {notifications.map(notification => (
-        <div key={notification.id}>
-          {generateSimpleNotificacion(notification.id, 'fa-solid fa-plane', notification.title)}
-        </div>
-      ))}
-    </>
+    <>{generateSimpleNotification(notifications)}</>
   );
 };
 
