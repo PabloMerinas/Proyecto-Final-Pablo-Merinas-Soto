@@ -1,4 +1,4 @@
-.account-p-rincipal-container {
+.account-principal-container {
     width: 100%;
     display: flex;
     overflow: auto;
@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-account {
+.account-principal-account {
     width: 100%;
     height: auto;
     display: flex;
@@ -16,7 +16,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth4-frame0 {
+.account-principal-nivel4-frame0 {
     gap: 12px;
     width: 960px;
     height: 72px;
@@ -27,7 +27,7 @@
     flex-shrink: 0;
 }
 
-.account-p-rincipal-depth5-frame0 {
+.account-principal-nivel5-frame0 {
     gap: 12px;
     top: 16px;
     left: 16px;
@@ -40,7 +40,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth6-frame0 {
+.account-principal-nivel6-frame0 {
     width: 288px;
     height: 40px;
     display: flex;
@@ -49,14 +49,14 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth7-frame0 {
+.account-principal-nivel7-frame0 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.account-p-rincipal-text {
+.account-principal-text {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 32px;
@@ -68,7 +68,7 @@
     text-decoration: none;
 }
 
-.account-p-rincipal-depth4-frame2 {
+.account-principal-nivel4-frame2 {
     gap: 12px;
     width: 960px;
     height: 421px;
@@ -80,7 +80,7 @@
     flex-shrink: 0;
 }
 
-.account-p-rincipal-depth5-frame01 {
+.account-principal-nivel5-frame01 {
     gap: 12px;
     top: 16px;
     left: 16px;
@@ -98,7 +98,7 @@
     background-color: rgba(247, 249, 252, 1);
 }
 
-.account-p-rincipal-depth6-frame01 {
+.account-principal-nivel6-frame01 {
     width: 142px;
     height: 24px;
     display: flex;
@@ -107,7 +107,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth6-frame1 {
+.account-principal-nivel6-frame1 {
     gap: 4px;
     width: 142px;
     height: 87px;
@@ -117,7 +117,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth7-frame002 {
+.account-principal-nivel7-frame002 {
     width: 142px;
     height: 20px;
     display: flex;
@@ -126,7 +126,7 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth8-frame0 {
+.account-principal-nivel8-frame0 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
@@ -137,7 +137,7 @@
 
 }
 
-.account-p-rincipal-text02 {
+.account-principal-text02 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 16px;
@@ -149,7 +149,7 @@
     text-decoration: none;
 }
 
-.account-p-rincipal-depth7-frame1 {
+.account-principal-nivel7-frame1 {
     width: 142px;
     height: 63px;
     display: flex;
@@ -158,14 +158,14 @@
     flex-direction: column;
 }
 
-.account-p-rincipal-depth8-frame001 {
+.account-principal-nivel8-frame001 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.account-p-rincipal-text04 {
+.account-principal-text04 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -178,12 +178,12 @@
     text-decoration: none;
 }
 
-.account-p-rincipal-depth4-frame1 {
+.account-principal-nivel4-frame1 {
     position: relative;
     left: -320px;
 }
 
-.account-p-rincipal-depth4-frame1 {
+.account-principal-nivel4-frame1 {
     position: relative;
     left: 0px;
 }

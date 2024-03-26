@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './style.css'
+import './personalInfo.css'
 import { getUserInfo, updateUser } from "../../service/userService";
 import { deleteMyUser } from "../../service/userService";
 import { useNavigate } from 'react-router-dom';
@@ -83,26 +83,26 @@ export const PersonalInfo = () => {
         const inputClass = editMode ? 'input-edit-mode' : 'input-view-mode';
         if (inputType === "file") {
             return (
-                <div className="personal-info-p-rincipal-depth5-frame06">
-                    <div className="personal-info-p-rincipal-depth6-frame06">
-                        <div className="personal-info-p-rincipal-depth7-frame012">
+                <div className="personal-info-principal-nivel5-frame06">
+                    <div className="personal-info-principal-nivel6-frame06">
+                        <div className="personal-info-principal-nivel7-frame012">
                             <i className={awesomeIco}></i>
                         </div>
                     </div>
-                    <div className="personal-info-p-rincipal-depth6-frame16">
-                        <div className="personal-info-p-rincipal-depth7-frame013">
-                            <div className="personal-info-p-rincipal-depth8-frame017">
-                                <span className="personal-info-p-rincipal-text28">
+                    <div className="personal-info-principal-nivel6-frame16">
+                        <div className="personal-info-principal-nivel7-frame013">
+                            <div className="personal-info-principal-nivel8-frame017">
+                                <span className="personal-info-principal-text28">
                                     <span>{title}</span>
                                 </span>
                             </div>
                         </div>
-                        <div className="personal-info-p-rincipal-depth7-frame14">
-                            <div className="personal-info-p-rincipal-depth8-frame018">
-                                <span className="personal-info-p-rincipal-text30">
+                        <div className="personal-info-principal-nivel7-frame14">
+                            <div className="personal-info-principal-nivel8-frame018">
+                                <span className="personal-info-principal-text30">
                                     <input
                                         type={inputType}
-                                        className={`personal-info-p-rincipal-input ${inputClass}`}
+                                        className={`personal-info-principal-input ${inputClass}`}
                                         onChange={handleChange}
                                         accept="image/*" // Acepta cualquier tipo de imagen
                                     />
@@ -114,26 +114,26 @@ export const PersonalInfo = () => {
             )
         } else {
             return (
-                <div className="personal-info-p-rincipal-depth5-frame06">
-                    <div className="personal-info-p-rincipal-depth6-frame06">
-                        <div className="personal-info-p-rincipal-depth7-frame012">
+                <div className="personal-info-principal-nivel5-frame06">
+                    <div className="personal-info-principal-nivel6-frame06">
+                        <div className="personal-info-principal-nivel7-frame012">
                             <i className={awesomeIco}></i>
                         </div>
                     </div>
-                    <div className="personal-info-p-rincipal-depth6-frame16">
-                        <div className="personal-info-p-rincipal-depth7-frame013">
-                            <div className="personal-info-p-rincipal-depth8-frame017">
-                                <span className="personal-info-p-rincipal-text28">
+                    <div className="personal-info-principal-nivel6-frame16">
+                        <div className="personal-info-principal-nivel7-frame013">
+                            <div className="personal-info-principal-nivel8-frame017">
+                                <span className="personal-info-principal-text28">
                                     <span>{title}</span>
                                 </span>
                             </div>
                         </div>
-                        <div className="personal-info-p-rincipal-depth7-frame14">
-                            <div className="personal-info-p-rincipal-depth8-frame018">
-                                <span className="personal-info-p-rincipal-text30">
+                        <div className="personal-info-principal-nivel7-frame14">
+                            <div className="personal-info-principal-nivel8-frame018">
+                                <span className="personal-info-principal-text30">
                                     <input
                                         type={inputType}
-                                        className={`personal-info-p-rincipal-input ${inputClass}`}
+                                        className={`personal-info-principal-input ${inputClass}`}
                                         value={value ? value : ""}
                                         onChange={handleChange}
                                         onKeyDown={handleKeyDown}
@@ -173,36 +173,36 @@ export const PersonalInfo = () => {
 
 
     return (
-        <div className="personal-info-p-rincipal-container">
-            <div className="personal-info-p-rincipal-my-profile">
-                <div className="personal-info-p-rincipal-depth3-frame0">
-                    <div className="personal-info-p-rincipal-depth4-frame0">
-                        <div className="personal-info-p-rincipal-depth5-frame0">
-                            <div className="personal-info-p-rincipal-depth6-frame0">
-                                <div className="personal-info-p-rincipal-depth7-frame0">
-                                    <div className="personal-info-p-rincipal-depth8-frame0">
-                                        <div className="personal-info-p-rincipal-depth9-frame0">
-                                            <span className="personal-info-p-rincipal-text">
+        <div className="personal-info-principal-container">
+            <div className="personal-info-principal-my-profile">
+                <div className="personal-info-principal-nivel3-frame0">
+                    <div className="personal-info-principal-nivel4-frame0">
+                        <div className="personal-info-principal-nivel5-frame0">
+                            <div className="personal-info-principal-nivel6-frame0">
+                                <div className="personal-info-principal-nivel7-frame0">
+                                    <div className="personal-info-principal-nivel8-frame0">
+                                        <div className="personal-info-principal-nivel9-frame0">
+                                            <span className="personal-info-principal-text">
                                                 <span>Profile</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="personal-info-p-rincipal-depth6-frame1">
-                                <div className="personal-info-p-rincipal-depth7-frame001">
-                                    <div className="personal-info-p-rincipal-depth8-frame001">
-                                        <div className="personal-info-p-rincipal-depth9-frame01">
-                                            <span className="personal-info-p-rincipal-text02">
+                            <div className="personal-info-principal-nivel6-frame1">
+                                <div className="personal-info-principal-nivel7-frame001">
+                                    <div className="personal-info-principal-nivel8-frame001">
+                                        <div className="personal-info-principal-nivel9-frame01">
+                                            <span className="personal-info-principal-text02">
                                                 <span>Your profile</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="personal-info-p-rincipal-depth7-frame7" onClick={handleDeleteAccount}>
-                                    <div className="personal-info-p-rincipal-depth8-frame002">
-                                        <div className="personal-info-p-rincipal-depth9-frame02">
-                                            <span className="personal-info-p-rincipal-text04">
+                                <div className="personal-info-principal-nivel7-frame7" onClick={handleDeleteAccount}>
+                                    <div className="personal-info-principal-nivel8-frame002">
+                                        <div className="personal-info-principal-nivel9-frame02">
+                                            <span className="personal-info-principal-text04">
                                                 <span>Delete account</span>
                                             </span>
                                         </div>
@@ -212,19 +212,19 @@ export const PersonalInfo = () => {
                         </div>
                     </div>
                 </div>
-                <div className="personal-info-p-rincipal-depth3-frame1">
-                    <div className="personal-info-p-rincipal-depth4-frame01">
-                        <div className="personal-info-p-rincipal-depth5-frame01">
-                            <div className="personal-info-p-rincipal-depth6-frame01">
-                                <div className="personal-info-p-rincipal-depth7-frame002">
-                                    <span className="personal-info-p-rincipal-text06">
+                <div className="personal-info-principal-nivel3-frame1">
+                    <div className="personal-info-principal-nivel4-frame01">
+                        <div className="personal-info-principal-nivel5-frame01">
+                            <div className="personal-info-principal-nivel6-frame01">
+                                <div className="personal-info-principal-nivel7-frame002">
+                                    <span className="personal-info-principal-text06">
                                         <span>Your profile</span>
                                     </span>
                                 </div>
                             </div>
-                            <div className="personal-info-p-rincipal-depth6-frame11">
-                                <div className="personal-info-p-rincipal-depth7-frame003">
-                                    <span className="personal-info-p-rincipal-text08">
+                            <div className="personal-info-principal-nivel6-frame11">
+                                <div className="personal-info-principal-nivel7-frame003">
+                                    <span className="personal-info-principal-text08">
                                         <span>
                                             Explore Your User Management Options: Navigate Through Your User Settings.
                                         </span>
@@ -233,27 +233,27 @@ export const PersonalInfo = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame1">
+                    <div className="personal-info-principal-nivel4-frame1">
                         {generateOption("fa-solid fa-envelope", "email", `Email address`, email, handleEmailChange, 'Add your email')}
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame2">
+                    <div className="personal-info-principal-nivel4-frame2">
                         {generateOption("fa-solid fa-key", "password", "Password", password, handlePasswordChange, 'Enter your new password')}
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame3">
+                    <div className="personal-info-principal-nivel4-frame3">
                         {generateOption("fa-solid fa-phone", "text", "Phone number", phone, handlePhoneChange, 'Add your phone number')}
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame4">
+                    <div className="personal-info-principal-nivel4-frame4">
                         {generateOption("fa-solid fa-user", "file", "Profile photo", photo, handlePhotoChange, 'Add a profile photo.')}
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame5">
+                    <div className="personal-info-principal-nivel4-frame5">
                         {generateOption("fa-solid fa-info", "text", "Bio", bio, handleBioChange, 'Complete your profile for a better experience.')}
                     </div>
-                    <div className="personal-info-p-rincipal-depth4-frame7">
+                    <div className="personal-info-principal-nivel4-frame7">
                         <button onClick={changeMode} id="personal-info-button">
-                            <div className="personal-info-p-rincipal-depth5-frame07">
-                                <div className="personal-info-p-rincipal-depth6-frame07">
-                                    <div className="personal-info-p-rincipal-depth7-frame014">
-                                        <span className="personal-info-p-rincipal-text32">
+                            <div className="personal-info-principal-nivel5-frame07">
+                                <div className="personal-info-principal-nivel6-frame07">
+                                    <div className="personal-info-principal-nivel7-frame014">
+                                        <span className="personal-info-principal-text32">
                                             <span>{editMode ? 'Save' : 'Edit'}</span>
                                         </span>
                                     </div>

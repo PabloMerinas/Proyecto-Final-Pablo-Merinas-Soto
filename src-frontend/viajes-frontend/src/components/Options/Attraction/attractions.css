@@ -1,4 +1,4 @@
-.attractions-p-rincipal-container {
+.attractions-principal-container {
     width: 100%;
     display: flex;
     overflow: auto;
@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-attractions {
+.attractions-principal-attractions {
     width: 956px;
     height: auto;
     display: flex;
@@ -17,7 +17,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth4-frame0 {
+.attractions-principal-nivel4-frame0 {
     width: 960px;
     height: 59.5px;
     display: flex;
@@ -26,7 +26,7 @@
     flex-shrink: 0;
 }
 
-.attractions-p-rincipal-depth5-frame0 {
+.attractions-principal-nivel5-frame0 {
     width: 203.515625px;
     height: 27.5px;
     display: flex;
@@ -36,7 +36,7 @@
     width: 960px;
 }
 
-.attractions-p-rincipal-depth6-frame0 {
+.attractions-principal-nivel6-frame0 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
@@ -45,7 +45,7 @@
 
 }
 
-.attractions-p-rincipal-text {
+.attractions-principal-text {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 32px;
@@ -58,7 +58,7 @@
     width: 960px;
 }
 
-.attractions-p-rincipal-depth4-frame1 {
+.attractions-principal-nivel4-frame1 {
     width: 960px;
     height: 72px;
     display: flex;
@@ -67,7 +67,7 @@
     flex-shrink: 0;
 }
 
-.attractions-p-rincipal-depth5-frame01 {
+.attractions-principal-nivel5-frame01 {
     gap: 12px;
     width: 928px;
     height: 48px;
@@ -79,7 +79,7 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.attractions-p-rincipal-depth6-frame01 {
+.attractions-principal-nivel6-frame01 {
     width: 24px;
     height: 24px;
     display: flex;
@@ -89,7 +89,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth6-frame1 {
+.attractions-principal-nivel6-frame1 {
     width: 860px;
     height: 24px;
     display: flex;
@@ -98,14 +98,14 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth7-frame01 {
+.attractions-principal-nivel7-frame01 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text02 {
+.attractions-principal-text02 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 16px;
@@ -117,7 +117,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth4-frame2 {
+.attractions-principal-nivel4-frame2 {
     width: 960px;
     height: 431.5px;
     display: flex;
@@ -127,7 +127,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth5-frame02 {
+.attractions-principal-nivel5-frame02 {
     width: 928px;
     display: flex;
     overflow: hidden;
@@ -141,7 +141,7 @@
     background-color: rgba(247, 249, 252, 1);
 }
 
-.attractions-p-rincipal-depth6-frame02 {
+.attractions-principal-nivel6-frame02 {
     width: 926px;
     display: flex;
     align-items: flex-start;
@@ -149,7 +149,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth7-frame02 {
+.attractions-principal-nivel7-frame02 {
     width: 926px;
     height: 45.5px;
     display: flex;
@@ -158,7 +158,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth8-frame0 {
+.attractions-principal-nivel8-frame0 {
     width: 926px;
     height: 45.5px;
     display: flex;
@@ -167,7 +167,7 @@
     background-color: rgba(247, 249, 252, 1);
 }
 
-.attractions-p-rincipal-depth9-frame0 {
+.attractions-principal-nivel9-frame0 {
     width: 151.546875px;
     height: 45.5px;
     display: flex;
@@ -177,7 +177,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame0 {
+.attractions-principal-nivel10-frame0 {
     width: 119.546875px;
     height: 21px;
     display: flex;
@@ -186,7 +186,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text04 {
+.attractions-principal-text04 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -199,7 +199,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame1 {
+.attractions-principal-nivel9-frame1 {
     width: 147.234375px;
     height: 45.5px;
     display: flex;
@@ -209,7 +209,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame001 {
+.attractions-principal-nivel10-frame001 {
     width: 115.234375px;
     height: 21px;
     display: flex;
@@ -218,7 +218,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text06 {
+.attractions-principal-text06 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -231,7 +231,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame2 {
+.attractions-principal-nivel9-frame2 {
     width: 153.203125px;
     height: 45.5px;
     display: flex;
@@ -241,7 +241,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame002 {
+.attractions-principal-nivel10-frame002 {
     width: 121.203125px;
     height: 21px;
     display: flex;
@@ -250,7 +250,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text08 {
+.attractions-principal-text08 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -263,7 +263,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame3 {
+.attractions-principal-nivel9-frame3 {
     width: 153.203125px;
     height: 45.5px;
     display: flex;
@@ -273,7 +273,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame003 {
+.attractions-principal-nivel10-frame003 {
     width: 121.203125px;
     height: 21px;
     display: flex;
@@ -282,7 +282,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text10 {
+.attractions-principal-text10 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -295,7 +295,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame4 {
+.attractions-principal-nivel9-frame4 {
     width: 156.796875px;
     height: 45.5px;
     display: flex;
@@ -305,7 +305,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame004 {
+.attractions-principal-nivel10-frame004 {
     width: 124.796875px;
     height: 21px;
     display: flex;
@@ -314,7 +314,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text12 {
+.attractions-principal-text12 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -327,7 +327,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame5 {
+.attractions-principal-nivel9-frame5 {
     width: 164.015625px;
     height: 45.5px;
     display: flex;
@@ -337,7 +337,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth10-frame005 {
+.attractions-principal-nivel10-frame005 {
     width: 132.015625px;
     height: 21px;
     display: flex;
@@ -346,7 +346,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text14 {
+.attractions-principal-text14 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -359,7 +359,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth7-frame1 {
+.attractions-principal-nivel7-frame1 {
     width: 926px;
     display: flex;
     align-items: flex-start;
@@ -367,7 +367,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-depth8-frame01 {
+.attractions-principal-nivel8-frame01 {
     width: 926px;
     height: 72px;
     display: flex;
@@ -378,7 +378,7 @@
     border-width: 1px 0 0;
 }
 
-.attractions-p-rincipal-depth9-frame01 {
+.attractions-principal-nivel9-frame01 {
     width: 151.546875px;
     height: 72px;
     display: flex;
@@ -389,7 +389,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame006 {
+.attractions-principal-nivel10-frame006 {
     width: 119.546875px;
     height: 21px;
     display: flex;
@@ -399,7 +399,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text16 {
+.attractions-principal-text16 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -412,7 +412,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame11 {
+.attractions-principal-nivel9-frame11 {
     width: 147.234375px;
     height: 72px;
     display: flex;
@@ -423,7 +423,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame007 {
+.attractions-principal-nivel10-frame007 {
     width: 115.234375px;
     height: 21px;
     display: flex;
@@ -432,7 +432,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text18 {
+.attractions-principal-text18 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -445,7 +445,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame21 {
+.attractions-principal-nivel9-frame21 {
     width: 153.203125px;
     height: 72px;
     display: flex;
@@ -456,7 +456,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame008 {
+.attractions-principal-nivel10-frame008 {
     width: 121.203125px;
     height: 21px;
     display: flex;
@@ -465,7 +465,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text20 {
+.attractions-principal-text20 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -478,7 +478,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame31 {
+.attractions-principal-nivel9-frame31 {
     width: 153.203125px;
     height: 72px;
     display: flex;
@@ -489,7 +489,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame009 {
+.attractions-principal-nivel10-frame009 {
     width: 121.203125px;
     height: 21px;
     display: flex;
@@ -498,7 +498,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text22 {
+.attractions-principal-text22 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -511,7 +511,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame41 {
+.attractions-principal-nivel9-frame41 {
     width: 156.796875px;
     height: 72px;
     display: flex;
@@ -522,7 +522,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame010 {
+.attractions-principal-nivel10-frame010 {
     width: 124.796875px;
     height: 21px;
     display: flex;
@@ -532,7 +532,7 @@
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text23 {
+.attractions-principal-text23 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -545,7 +545,7 @@
     text-decoration: none;
 }
 
-.attractions-p-rincipal-depth9-frame51 {
+.attractions-principal-nivel9-frame51 {
     width: 164.984375px;
     height: 72px;
     display: flex;
@@ -556,7 +556,7 @@
     justify-content: center;
 }
 
-.attractions-p-rincipal-depth10-frame011 {
+.attractions-principal-nivel10-frame011 {
     width: 132.984375px;
     height: 32px;
     display: flex;
@@ -569,7 +569,7 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.attractions-p-rincipal-depth11-frame0 {
+.attractions-principal-nivel11-frame0 {
     width: 66px;
     height: 21px;
     display: flex;
@@ -580,14 +580,14 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.attractions-p-rincipal-depth12-frame0 {
+.attractions-principal-nivel12-frame0 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.attractions-p-rincipal-text25 {
+.attractions-principal-text25 {
     color: rgba(12, 17, 28, 1);
     width: 66px;
     height: auto;
@@ -601,12 +601,12 @@
 }
 
 /* Efecto sobre esos div */
-.attractions-p-rincipal-depth10-frame011 {
+.attractions-principal-nivel10-frame011 {
     transition: border-color 0.3s, cursor 0.3s;
     cursor: default;
 }
 
-.attractions-p-rincipal-depth10-frame011:hover {
+.attractions-principal-nivel10-frame011:hover {
     border: 1px solid rgb(167, 167, 167);
     cursor: pointer;
 }

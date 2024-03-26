@@ -15,7 +15,7 @@
 
 }
 
-.header .depth-frame {
+.header .nivel-frame {
   align-items: center;
   display: flex;
   gap: 32px;
@@ -24,7 +24,7 @@
   width: 1250px;
 }
 
-.header .depth-frame-wrapper {
+.header .nivel-frame-wrapper {
   align-items: center;
   display: flex;
   gap: 32px;
@@ -70,7 +70,7 @@
   width: 129.88px;
 }
 
-.header .depth-frame-2 {
+.header .nivel-frame-2 {
   align-items: flex-start;
   align-self: stretch;
   display: flex;
@@ -94,7 +94,7 @@
   width: fit-content;
 }
 
-.header .depth-frame-3 {
+.header .nivel-frame-3 {
   align-items: flex-start;
   display: flex;
   gap: 32px;
@@ -107,7 +107,7 @@
   width: 1055.11px;
 }
 
-.header .depth-frame-4 {
+.header .nivel-frame-4 {
   align-items: center;
   display: flex;
   gap: 14px;
@@ -116,7 +116,7 @@
   width: 286.94px;
 }
 
-.header .depth-frame-5 {
+.header .nivel-frame-5 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -125,7 +125,7 @@
   width: 65px;
 }
 
-.header .depth-frame-6 {
+.header .nivel-frame-6 {
   align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
@@ -148,7 +148,7 @@
   width: fit-content;
 }
 
-.header .depth-frame-7 {
+.header .nivel-frame-7 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -157,7 +157,7 @@
   width: 39px;
 }
 
-.header .depth-frame-8 {
+.header .nivel-frame-8 {
   align-items: flex-start;
   align-self: stretch;
   display: flex;
@@ -167,7 +167,7 @@
   width: 100%;
 }
 
-.header .depth-frame-9 {
+.header .nivel-frame-9 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -176,7 +176,7 @@
   width: 74px;
 }
 
-.header .depth-frame-10 {
+.header .nivel-frame-10 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -199,7 +199,7 @@
   width: fit-content;
 }
 
-.header .depth-frame-11 {
+.header .nivel-frame-11 {
   align-items: flex-start;
   display: flex;
   gap: 8px;
@@ -208,7 +208,7 @@
   width: 88px;
 }
 
-.header .depth-frame-12 {
+.header .nivel-frame-12 {
   align-items: center;
   background-color: #e8eaf2;
   border-radius: 12px;
@@ -220,7 +220,7 @@
   width: 40px;
 }
 
-.header .depth-frame-13 {
+.header .nivel-frame-13 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -251,7 +251,7 @@
   width: 15px;
 }
 
-.header .depth-frame-14 {
+.header .nivel-frame-14 {
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 20px;
@@ -307,7 +307,7 @@
   font-weight: 700;
 }
 
-.popup-depth4-frame0 {
+.popup-nivel4-frame0 {
   gap: 16px;
   width: 226px;
   height: 72px;
@@ -320,7 +320,7 @@
 
 }
 
-.popup-depth5-frame0 {
+.popup-nivel5-frame0 {
   gap: 16px;
   top: 8px;
   left: 16px;
@@ -332,7 +332,7 @@
   flex-shrink: 0;
 }
 
-.popup-depth6-frame0 {
+.popup-nivel6-frame0 {
   width: 56px;
   height: 56px;
   display: flex;
@@ -347,11 +347,11 @@
   border-radius: 20px;
 }
 
-.depth-frame-14:hover {
+.nivel-frame-14:hover {
   cursor: pointer;
 }
 
-.popup-depth6-frame2 {
+.popup-nivel6-frame2 {
   width: 130px;
   height: 45px;
   display: flex;
@@ -362,7 +362,7 @@
 
 }
 
-.popup-depth7-frame0 {
+.popup-nivel7-frame0 {
   width: 130px;
   height: 24px;
   display: flex;
@@ -372,7 +372,7 @@
   flex-direction: column;
 }
 
-.popup-depth8-frame0 {
+.popup-nivel8-frame0 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
@@ -392,7 +392,7 @@
   font-weight: 700;
 }
 
-.popup-depth7-frame1 {
+.popup-nivel7-frame1 {
   width: 86.140625px;
   height: 21px;
   display: flex;
@@ -404,7 +404,7 @@
 
 }
 
-.popup-depth8-frame01 {
+.popup-nivel8-frame01 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
@@ -422,7 +422,7 @@
   text-decoration: none;
 }
 
-.popup-depth4-frame1 {
+.popup-nivel4-frame1 {
   gap: 16px;
   width: 226px;
   height: 56px;
@@ -434,7 +434,7 @@
   background-color: rgba(247, 249, 252, 1);
 }
 
-.popup-depth5-frame01 {
+.popup-nivel5-frame01 {
   gap: 16px;
   top: 8px;
   left: 16px;
@@ -446,7 +446,7 @@
   flex-shrink: 0;
 }
 
-.popup-depth6-frame01 {
+.popup-nivel6-frame01 {
   width: 40px;
   height: 40px;
   display: flex;
@@ -459,7 +459,7 @@
 
 }
 
-.popup-depth7-frame01 {
+.popup-nivel7-frame01 {
   width: 24px;
   height: 24px;
   display: flex;
@@ -469,12 +469,12 @@
   flex-direction: column;
 }
 
-.popup-depth8-frame02 {
+.popup-nivel8-frame02 {
   width: 24px;
   height: 24px;
 }
 
-.popup-depth6-frame1 {
+.popup-nivel6-frame1 {
   width: 154px;
   height: 24px;
   display: flex;
@@ -484,7 +484,7 @@
   flex-direction: column;
 }
 
-.popup-depth7-frame02 {
+.popup-nivel7-frame02 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
@@ -514,7 +514,7 @@
   background-color: rgba(247, 249, 252, 1);
 }
 
-.popup-depth5-frame02 {
+.popup-nivel5-frame02 {
   gap: 16px;
   top: 8px;
   left: 16px;
@@ -526,7 +526,7 @@
   flex-shrink: 0;
 }
 
-.popup-depth6-frame02 {
+.popup-nivel6-frame02 {
   width: 40px;
   height: 40px;
   display: flex;
@@ -539,7 +539,7 @@
 
 }
 
-.popup-depth7-frame03 {
+.popup-nivel7-frame03 {
   width: 24px;
   height: 24px;
   display: flex;
@@ -550,7 +550,7 @@
 
 }
 
-.popup-depth6-frame11 {
+.popup-nivel6-frame11 {
   width: 154px;
   height: 24px;
   display: flex;
@@ -560,7 +560,7 @@
   flex-direction: column;
 }
 
-.popup-depth7-frame04 {
+.popup-nivel7-frame04 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
@@ -580,7 +580,7 @@
   font-weight: 700;
 }
 
-.popup-depth4-frame1:hover,
+.popup-nivel4-frame1:hover,
 .popup-my-account1:hover {
   background-color: rgba(232, 234, 242, 0.692);
   cursor: pointer;

@@ -82,45 +82,45 @@ export const Attractions = () => {
         };
 
         return (
-            <div className="attractions-p-rincipal-depth8-frame01">
-                <div className="attractions-p-rincipal-depth9-frame01">
-                    <div className="attractions-p-rincipal-depth10-frame006">
-                        <span className="attractions-p-rincipal-text16">
+            <div className="attractions-principal-nivel8-frame01">
+                <div className="attractions-principal-nivel9-frame01">
+                    <div className="attractions-principal-nivel10-frame006">
+                        <span className="attractions-principal-text16">
                             <span>{attraction}</span>
                         </span>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth9-frame11">
-                    <div className="attractions-p-rincipal-depth10-frame007">
-                        <span className="attractions-p-rincipal-text18">
+                <div className="attractions-principal-nivel9-frame11">
+                    <div className="attractions-principal-nivel10-frame007">
+                        <span className="attractions-principal-text18">
                             <span>{country}</span>
                         </span>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth9-frame21">
-                    <div className="attractions-p-rincipal-depth10-frame008">
-                        <span className="attractions-p-rincipal-text20">
+                <div className="attractions-principal-nivel9-frame21">
+                    <div className="attractions-principal-nivel10-frame008">
+                        <span className="attractions-principal-text20">
                             <span>{city}</span>
                         </span>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth9-frame31">
-                    <div className="attractions-p-rincipal-depth10-frame009">
-                        <span className="attractions-p-rincipal-text22">{category}</span>
+                <div className="attractions-principal-nivel9-frame31">
+                    <div className="attractions-principal-nivel10-frame009">
+                        <span className="attractions-principal-text22">{category}</span>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth9-frame41">
-                    <div className="attractions-p-rincipal-depth10-frame010">
-                        <span className="attractions-p-rincipal-text23">
+                <div className="attractions-principal-nivel9-frame41">
+                    <div className="attractions-principal-nivel10-frame010">
+                        <span className="attractions-principal-text23">
                             <span>{info}</span>
                         </span>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth9-frame51">
-                    <div onClick={() => handleInfoClick(attraction)} className="attractions-p-rincipal-depth10-frame011">
-                        <div className="attractions-p-rincipal-depth11-frame0">
-                            <div className="attractions-p-rincipal-depth12-frame0">
-                                <span className="attractions-p-rincipal-text25">
+                <div className="attractions-principal-nivel9-frame51">
+                    <div onClick={() => handleInfoClick(attraction)} className="attractions-principal-nivel10-frame011">
+                        <div className="attractions-principal-nivel11-frame0">
+                            <div className="attractions-principal-nivel12-frame0">
+                                <span className="attractions-principal-text25">
                                     <span>Show</span>
                                 </span>
                             </div>
@@ -134,25 +134,25 @@ export const Attractions = () => {
     }
 
     return (
-        <div className="attractions-p-rincipal-container">
-            <div className="attractions-p-rincipal-attractions">
-                <div className="attractions-p-rincipal-depth4-frame0">
-                    <div className="attractions-p-rincipal-depth5-frame0">
-                        <div className="attractions-p-rincipal-depth6-frame0">
-                            <span className="attractions-p-rincipal-text">
+        <div className="attractions-principal-container">
+            <div className="attractions-principal-attractions">
+                <div className="attractions-principal-nivel4-frame0">
+                    <div className="attractions-principal-nivel5-frame0">
+                        <div className="attractions-principal-nivel6-frame0">
+                            <span className="attractions-principal-text">
                                 <span> {activeCity ? 'Attractions from ' + activeCity : 'Attractions'}</span>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth4-frame1">
-                    <div className="attractions-p-rincipal-depth5-frame01">
-                        <div className="attractions-p-rincipal-depth6-frame01">
+                <div className="attractions-principal-nivel4-frame1">
+                    <div className="attractions-principal-nivel5-frame01">
+                        <div className="attractions-principal-nivel6-frame01">
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <div className="attractions-p-rincipal-depth6-frame1">
-                            <div className="attractions-p-rincipal-depth7-frame01">
-                                <span className="attractions-p-rincipal-text02">
+                        <div className="attractions-principal-nivel6-frame1">
+                            <div className="attractions-principal-nivel7-frame01">
+                                <span className="attractions-principal-text02">
                                     <input
                                         type="text"
                                         value={searchText}
@@ -163,56 +163,56 @@ export const Attractions = () => {
                         </div>
                     </div>
                 </div>
-                <div className="attractions-p-rincipal-depth4-frame2">
-                    <div className="attractions-p-rincipal-depth5-frame02">
-                        <div className="attractions-p-rincipal-depth6-frame02">
-                            <div className="attractions-p-rincipal-depth7-frame02">
-                                <div className="attractions-p-rincipal-depth8-frame0">
-                                    <div className="attractions-p-rincipal-depth9-frame0">
-                                        <div className="attractions-p-rincipal-depth10-frame0">
-                                            <span className="attractions-p-rincipal-text04">
+                <div className="attractions-principal-nivel4-frame2">
+                    <div className="attractions-principal-nivel5-frame02">
+                        <div className="attractions-principal-nivel6-frame02">
+                            <div className="attractions-principal-nivel7-frame02">
+                                <div className="attractions-principal-nivel8-frame0">
+                                    <div className="attractions-principal-nivel9-frame0">
+                                        <div className="attractions-principal-nivel10-frame0">
+                                            <span className="attractions-principal-text04">
                                                 <span>Attraction</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="attractions-p-rincipal-depth9-frame1">
-                                        <div className="attractions-p-rincipal-depth10-frame001">
-                                            <span className="attractions-p-rincipal-text06">
+                                    <div className="attractions-principal-nivel9-frame1">
+                                        <div className="attractions-principal-nivel10-frame001">
+                                            <span className="attractions-principal-text06">
                                                 <span>Country</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="attractions-p-rincipal-depth9-frame2">
-                                        <div className="attractions-p-rincipal-depth10-frame002">
-                                            <span className="attractions-p-rincipal-text08">
+                                    <div className="attractions-principal-nivel9-frame2">
+                                        <div className="attractions-principal-nivel10-frame002">
+                                            <span className="attractions-principal-text08">
                                                 <span>City</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="attractions-p-rincipal-depth9-frame3">
-                                        <div className="attractions-p-rincipal-depth10-frame003">
-                                            <span className="attractions-p-rincipal-text10">
+                                    <div className="attractions-principal-nivel9-frame3">
+                                        <div className="attractions-principal-nivel10-frame003">
+                                            <span className="attractions-principal-text10">
                                                 <span>Category</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="attractions-p-rincipal-depth9-frame4">
-                                        <div className="attractions-p-rincipal-depth10-frame004">
-                                            <span className="attractions-p-rincipal-text12">
+                                    <div className="attractions-principal-nivel9-frame4">
+                                        <div className="attractions-principal-nivel10-frame004">
+                                            <span className="attractions-principal-text12">
                                                 <span>Info</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="attractions-p-rincipal-depth9-frame5">
-                                        <div className="attractions-p-rincipal-depth10-frame005">
-                                            <span className="attractions-p-rincipal-text14">
+                                    <div className="attractions-principal-nivel9-frame5">
+                                        <div className="attractions-principal-nivel10-frame005">
+                                            <span className="attractions-principal-text14">
                                                 <span>Checked</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="attractions-p-rincipal-depth7-frame1">
+                            <div className="attractions-principal-nivel7-frame1">
                                 {filteredAttractions.map(attraction => (
                                     <div key={attraction.id}>
                                         {generateAttraction(attraction.attraction, attraction.country, attraction.city, attraction.category, attraction.info)}

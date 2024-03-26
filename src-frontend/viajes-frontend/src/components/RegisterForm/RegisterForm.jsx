@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../../service/userService";
 
-import './style.css';
+import './registerForm.css';
 
 export const RegisterForm = () => {
 
@@ -69,30 +69,30 @@ export const RegisterForm = () => {
   }
 
   return (
-    <div className="p-rincipal-container">
+    <div className="principal-container">
 
-      <div className="p-rincipal-register">
-        <div className="p-rincipal-depth4-frame0">
-          <div className="p-rincipal-depth5-frame0">
-            <span className="p-rincipal-text">
+      <div className="principal-register">
+        <div className="principal-nivel4-frame0">
+          <div className="principal-nivel5-frame0">
+            <span className="principal-text">
               <span>Create an account</span>
             </span>
           </div>
         </div>
         <form onSubmit={handleLogin}>
-          <div className="p-rincipal-depth4-frame1">
-            <div className="p-rincipal-depth5-frame01">
-              <div className="p-rincipal-depth6-frame0">
-                <div className="p-rincipal-depth7-frame0">
-                  <span className="p-rincipal-text02">
+          <div className="principal-nivel4-frame1">
+            <div className="principal-nivel5-frame01">
+              <div className="principal-nivel6-frame0">
+                <div className="principal-nivel7-frame0">
+                  <span className="principal-text02">
                     <span>Email</span>
                   </span>
                 </div>
-                <div className="p-rincipal-depth7-frame1">
-                  <div className="p-rincipal-depth8-frame0">
-                    <div className="p-rincipal-depth9-frame0 custom-width">
-                      <div className="p-rincipal-depth10-frame0">
-                        <label htmlFor="email" className="p-rincipal-text04">
+                <div className="principal-nivel7-frame1">
+                  <div className="principal-nivel8-frame0">
+                    <div className="principal-nivel9-frame0 custom-width">
+                      <div className="principal-nivel10-frame0">
+                        <label htmlFor="email" className="principal-text04">
                           <input type="email" id="email" placeholder="you@example.com" required
                             onChange={handleEmailChange} value={email} />
                         </label>
@@ -103,19 +103,19 @@ export const RegisterForm = () => {
               </div>
             </div>
           </div>
-          <div className="p-rincipal-depth4-frame2">
-            <div className="p-rincipal-depth5-frame02">
-              <div className="p-rincipal-depth6-frame01">
-                <div className="p-rincipal-depth7-frame01">
-                  <span className="p-rincipal-text06">
+          <div className="principal-nivel4-frame2">
+            <div className="principal-nivel5-frame02">
+              <div className="principal-nivel6-frame01">
+                <div className="principal-nivel7-frame01">
+                  <span className="principal-text06">
                     <span>Username</span>
                   </span>
                 </div>
-                <div className="p-rincipal-depth7-frame11">
-                  <div className="p-rincipal-depth8-frame01">
-                    <div className="p-rincipal-depth9-frame01 custom-width">
-                      <div className="p-rincipal-depth10-frame01">
-                        <label htmlFor="username" className="p-rincipal-text08">
+                <div className="principal-nivel7-frame11">
+                  <div className="principal-nivel8-frame01">
+                    <div className="principal-nivel9-frame01 custom-width">
+                      <div className="principal-nivel10-frame01">
+                        <label htmlFor="username" className="principal-text08">
                           <input type="text" id="username" placeholder="Enter your username"
                             onChange={handleUsernameChange} value={username}
                             required />
@@ -128,19 +128,19 @@ export const RegisterForm = () => {
               </div>
             </div>
           </div>
-          <div className="p-rincipal-depth4-frame3">
-            <div className="p-rincipal-depth5-frame03">
-              <div className="p-rincipal-depth6-frame02">
-                <div className="p-rincipal-depth7-frame02">
-                  <span className="p-rincipal-text10">
+          <div className="principal-nivel4-frame3">
+            <div className="principal-nivel5-frame03">
+              <div className="principal-nivel6-frame02">
+                <div className="principal-nivel7-frame02">
+                  <span className="principal-text10">
                     <span>Password</span>
                   </span>
                 </div>
-                <div className="p-rincipal-depth7-frame12">
-                  <div className="p-rincipal-depth8-frame02">
-                    <div className="p-rincipal-depth9-frame02 custom-width">
-                      <div className="p-rincipal-depth10-frame02">
-                        <label htmlFor="password" className="p-rincipal-text12">
+                <div className="principal-nivel7-frame12">
+                  <div className="principal-nivel8-frame02">
+                    <div className="principal-nivel9-frame02 custom-width">
+                      <div className="principal-nivel10-frame02">
+                        <label htmlFor="password" className="principal-text12">
                           <input type="password" id="password" placeholder="Enter your password" required value={password}
                             onChange={handlePasswordChange} />
                         </label>
@@ -152,10 +152,10 @@ export const RegisterForm = () => {
               </div>
             </div>
           </div>
-          <div className="p-rincipal-depth4-frame4">
-            <div className="p-rincipal-depth6-frame1">
-              <div className="p-rincipal-depth7-frame04">
-                <label htmlFor="terms" className="p-rincipal-text14">
+          <div className="principal-nivel4-frame4">
+            <div className="principal-nivel6-frame1">
+              <div className="principal-nivel7-frame04">
+                <label htmlFor="terms" className="principal-text14">
                   <input type="checkbox" id="terms" className="mr-2" required />
                   <span> I agree to the terms and conditions.</span>
                 </label>
@@ -163,7 +163,7 @@ export const RegisterForm = () => {
             </div>
           </div>
           <div className="p-principal">
-            <button type="submit" className="p-rincipal-text16">
+            <button type="submit" className="principal-text16">
               Create account
             </button>
           </div>

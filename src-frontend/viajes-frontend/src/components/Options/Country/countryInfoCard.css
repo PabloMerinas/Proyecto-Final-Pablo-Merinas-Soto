@@ -1,4 +1,4 @@
-.country-info-card-p-rincipal-container {
+.country-info-card-principal-container {
     width: 100%;
     display: flex;
     overflow: auto;
@@ -8,7 +8,7 @@
     margin-top: 50px;
 }
 
-.country-info-card-p-rincipal-country-card {
+.country-info-card-principal-country-card {
     width: 580px;
     height: auto;
     display: flex;
@@ -19,7 +19,7 @@
 
 }
 
-.country-info-card-p-rincipal-depth0-frame0 {
+.country-info-card-principal-nivel0-frame0 {
     width: 575px;
     height: 939px;
     display: flex;
@@ -33,7 +33,7 @@
 
 }
 
-.country-info-card-p-rincipal-depth1-frame0 {
+.country-info-card-principal-nivel1-frame0 {
     width: 575px;
     height: 867px;
     display: flex;
@@ -42,7 +42,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth2-frame1 {
+.country-info-card-principal-nivel2-frame1 {
     width: 575px;
     height: 867px;
     display: flex;
@@ -52,7 +52,7 @@
     justify-content: center;
 }
 
-.country-info-card-p-rincipal-depth3-frame0 {
+.country-info-card-principal-nivel3-frame0 {
     width: 512px;
     height: 815px;
     display: flex;
@@ -62,7 +62,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth4-frame0 {
+.country-info-card-principal-nivel4-frame0 {
     width: 512px;
     height: 512px;
     border-radius: 12px;
@@ -74,7 +74,7 @@
     background-position: center;
 }
 
-.country-info-card-p-rincipal-depth5-frame0 {
+.country-info-card-principal-nivel5-frame0 {
     width: 512px;
     height: 512px;
     display: flex;
@@ -84,7 +84,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame0 {
+.country-info-card-principal-nivel6-frame0 {
     width: 480px;
     height: 480px;
     display: flex;
@@ -96,7 +96,7 @@
     justify-content: center;
 }
 
-.country-info-card-p-rincipal-depth7-frame0 {
+.country-info-card-principal-nivel7-frame0 {
     gap: 32px;
     top: 16px;
     left: 16px;
@@ -111,7 +111,7 @@
     justify-content: center;
 }
 
-.country-info-card-p-rincipal-depth8-frame0 {
+.country-info-card-principal-nivel8-frame0 {
     width: 448px;
     height: 164px;
     display: flex;
@@ -120,7 +120,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth9-frame0 {
+.country-info-card-principal-nivel9-frame0 {
     gap: 8px;
     width: 448px;
     height: 164px;
@@ -130,7 +130,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth10-frame0 {
+.country-info-card-principal-nivel10-frame0 {
     width: 448px;
     height: 60px;
     display: flex;
@@ -139,14 +139,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth11-frame0 {
+.country-info-card-principal-nivel11-frame0 {
     display: flex;
     align-self: stretch;
     align-items: center;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text {
+.country-info-card-principal-text {
     height: auto;
     color: white;
     text-align: center;
@@ -162,7 +162,7 @@
         1px 1px 0 #000;
 }
 
-.country-info-card-p-rincipal-depth10-frame1 {
+.country-info-card-principal-nivel10-frame1 {
     width: 448px;
     height: 96px;
     display: flex;
@@ -171,14 +171,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth11-frame01 {
+.country-info-card-principal-nivel11-frame01 {
     display: flex;
     align-self: stretch;
     align-items: center;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text02 {
+.country-info-card-principal-text02 {
     height: auto;
     font-size: 16px;
     text-align: center;
@@ -193,7 +193,7 @@
         1px 1px 0 #000;
 }
 
-.country-info-card-p-rincipal-depth4-frame1 {
+.country-info-card-principal-nivel4-frame1 {
     width: 512px;
     height: 46.5px;
     display: flex;
@@ -202,7 +202,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth5-frame01 {
+.country-info-card-principal-nivel5-frame01 {
     width: 97.09375px;
     height: 22.5px;
     display: flex;
@@ -211,7 +211,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame01 {
+.country-info-card-principal-nivel6-frame01 {
     width: 234px;
     display: flex;
     align-self: stretch;
@@ -221,7 +221,7 @@
 }
 
 
-.country-info-card-p-rincipal-text04 {
+.country-info-card-principal-text04 {
     color: rgb(12, 17, 28);
     height: auto;
     font-size: 18px;
@@ -233,7 +233,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth4-frame2 {
+.country-info-card-principal-nivel4-frame2 {
     width: 512px;
     height: 269px;
     display: flex;
@@ -243,7 +243,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth5-frame02 {
+.country-info-card-principal-nivel5-frame02 {
     gap: 4px;
     top: 16px;
     left: 16px;
@@ -260,7 +260,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame02 {
+.country-info-card-principal-nivel6-frame02 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -268,7 +268,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame001 {
+.country-info-card-principal-nivel7-frame001 {
     width: 46.28125px;
     height: 21px;
     display: flex;
@@ -277,14 +277,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame001 {
+.country-info-card-principal-nivel8-frame001 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text05 {
+.country-info-card-principal-text05 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -295,7 +295,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame1 {
+.country-info-card-principal-nivel6-frame1 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -303,7 +303,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame002 {
+.country-info-card-principal-nivel7-frame002 {
     width: 100%;
     height: 21px;
     display: flex;
@@ -312,7 +312,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame002 {
+.country-info-card-principal-nivel8-frame002 {
     width: 204px;
     display: flex;
     align-self: stretch;
@@ -320,7 +320,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text07 {
+.country-info-card-principal-text07 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -331,7 +331,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth5-frame1 {
+.country-info-card-principal-nivel5-frame1 {
     gap: 4px;
     top: 16px;
     left: 256px;
@@ -348,7 +348,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame03 {
+.country-info-card-principal-nivel6-frame03 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -356,7 +356,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame003 {
+.country-info-card-principal-nivel7-frame003 {
     width: 70.0625px;
     height: 21px;
     display: flex;
@@ -365,14 +365,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame003 {
+.country-info-card-principal-nivel8-frame003 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text09 {
+.country-info-card-principal-text09 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -383,7 +383,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame11 {
+.country-info-card-principal-nivel6-frame11 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -391,7 +391,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame004 {
+.country-info-card-principal-nivel7-frame004 {
     width: 172px;
     height: 21px;
     display: flex;
@@ -400,7 +400,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame004 {
+.country-info-card-principal-nivel8-frame004 {
     width: 193px;
     display: flex;
     align-self: stretch;
@@ -408,7 +408,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text11 {
+.country-info-card-principal-text11 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -419,7 +419,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth5-frame2 {
+.country-info-card-principal-nivel5-frame2 {
     gap: 4px;
     top: 95px;
     left: 16px;
@@ -436,7 +436,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame04 {
+.country-info-card-principal-nivel6-frame04 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -444,7 +444,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame005 {
+.country-info-card-principal-nivel7-frame005 {
     width: 60.515625px;
     height: 21px;
     display: flex;
@@ -453,14 +453,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame005 {
+.country-info-card-principal-nivel8-frame005 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text13 {
+.country-info-card-principal-text13 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -471,7 +471,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame12 {
+.country-info-card-principal-nivel6-frame12 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -479,7 +479,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame006 {
+.country-info-card-principal-nivel7-frame006 {
     width: 50%;
     height: 21px;
     display: flex;
@@ -488,7 +488,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame006 {
+.country-info-card-principal-nivel8-frame006 {
     width: 120px;
     display: flex;
     align-self: stretch;
@@ -496,7 +496,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text15 {
+.country-info-card-principal-text15 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -507,7 +507,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth5-frame3 {
+.country-info-card-principal-nivel5-frame3 {
     gap: 4px;
     top: 95px;
     left: 256px;
@@ -524,7 +524,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame05 {
+.country-info-card-principal-nivel6-frame05 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -532,7 +532,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame007 {
+.country-info-card-principal-nivel7-frame007 {
     width: 65.25px;
     height: 21px;
     display: flex;
@@ -541,14 +541,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame007 {
+.country-info-card-principal-nivel8-frame007 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text17 {
+.country-info-card-principal-text17 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -559,7 +559,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame13 {
+.country-info-card-principal-nivel6-frame13 {
     width: 232px;
     height: 21px;
     display: flex;
@@ -567,7 +567,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame008 {
+.country-info-card-principal-nivel7-frame008 {
     width: 50%;
     height: 21px;
     display: flex;
@@ -576,7 +576,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame008 {
+.country-info-card-principal-nivel8-frame008 {
     width: 106px;
     display: flex;
     align-self: stretch;
@@ -584,7 +584,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text19 {
+.country-info-card-principal-text19 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -594,7 +594,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth5-frame5 {
+.country-info-card-principal-nivel5-frame5 {
     gap: 4px;
     top: 174.5px;
     left: 263.5px;
@@ -611,7 +611,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame06 {
+.country-info-card-principal-nivel6-frame06 {
     width: 240px;
     height: 21px;
     display: flex;
@@ -619,7 +619,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame009 {
+.country-info-card-principal-nivel7-frame009 {
     width: 28.03125px;
     height: 21px;
     display: flex;
@@ -628,14 +628,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame009 {
+.country-info-card-principal-nivel8-frame009 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text21 {
+.country-info-card-principal-text21 {
     color: rgba(79, 102, 150, 1);
     height: auto;
     font-size: 14px;
@@ -646,7 +646,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame14 {
+.country-info-card-principal-nivel6-frame14 {
     width: 240px;
     height: 21px;
     display: flex;
@@ -654,7 +654,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame010 {
+.country-info-card-principal-nivel7-frame010 {
     width: 50%;
     height: 21px;
     display: flex;
@@ -663,7 +663,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame010 {
+.country-info-card-principal-nivel8-frame010 {
     width: 156px;
     display: flex;
     align-self: stretch;
@@ -671,7 +671,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text23 {
+.country-info-card-principal-text23 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -682,7 +682,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth5-frame4 {
+.country-info-card-principal-nivel5-frame4 {
     gap: 4px;
     top: 174.5px;
     left: 15.5px;
@@ -699,7 +699,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth6-frame07 {
+.country-info-card-principal-nivel6-frame07 {
     width: 240px;
     height: 21px;
     display: flex;
@@ -707,7 +707,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame011 {
+.country-info-card-principal-nivel7-frame011 {
     width: 131px;
     height: 21px;
     display: flex;
@@ -716,14 +716,14 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame011 {
+.country-info-card-principal-nivel8-frame011 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text25 {
+.country-info-card-principal-text25 {
     color: rgb(79, 102, 150);
     height: auto;
     font-size: 14px;
@@ -734,7 +734,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth6-frame15 {
+.country-info-card-principal-nivel6-frame15 {
     width: 240px;
     height: 21px;
     display: flex;
@@ -742,7 +742,7 @@
     flex-shrink: 0;
 }
 
-.country-info-card-p-rincipal-depth7-frame012 {
+.country-info-card-principal-nivel7-frame012 {
     width: 183px;
     height: 21px;
     display: flex;
@@ -751,7 +751,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-depth8-frame012 {
+.country-info-card-principal-nivel8-frame012 {
     width: 169px;
     display: flex;
     align-self: stretch;
@@ -759,7 +759,7 @@
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text26 {
+.country-info-card-principal-text26 {
     color: rgba(12, 17, 28, 1);
     height: auto;
     font-size: 14px;
@@ -770,7 +770,7 @@
     text-decoration: none;
 }
 
-.country-info-card-p-rincipal-depth8-frame1 {
+.country-info-card-principal-nivel8-frame1 {
     width: 575px;
     height: 48px;
     display: flex;
@@ -779,7 +779,7 @@
     justify-content: center;
 }
 
-.country-info-card-p-rincipal-depth9-frame01 {
+.country-info-card-principal-nivel9-frame01 {
     width: 120.578125px;
     height: 48px;
     display: flex;
@@ -792,7 +792,7 @@
     background-color: rgba(25, 91, 229, 1);
 }
 
-.country-info-card-p-rincipal-depth10-frame01 {
+.country-info-card-principal-nivel10-frame01 {
     width: 80.578125px;
     height: 24px;
     display: flex;
@@ -803,14 +803,14 @@
     background-color: rgba(25, 91, 229, 1);
 }
 
-.country-info-card-p-rincipal-depth11-frame02 {
+.country-info-card-principal-nivel11-frame02 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
     flex-direction: column;
 }
 
-.country-info-card-p-rincipal-text28 {
+.country-info-card-principal-text28 {
     color: rgba(247, 249, 252, 1);
     width: 81px;
     height: auto;

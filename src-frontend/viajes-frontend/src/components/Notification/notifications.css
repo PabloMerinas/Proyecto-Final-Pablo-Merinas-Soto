@@ -8,7 +8,7 @@
     margin: 0 auto;
 }
 
-.notifications-depth3-frame0 {
+.notifications-nivel3-frame0 {
     width: 100%;
     height: auto;
     display: flex;
@@ -21,7 +21,7 @@
 
 }
 
-.notifications-depth4-frame0 {
+.notifications-nivel4-frame0 {
     gap: 12px;
     width: 512px;
     height: 72px;
@@ -32,7 +32,7 @@
     flex-shrink: 0;
 }
 
-.notifications-depth5-frame0 {
+.notifications-nivel5-frame0 {
     gap: 12px;
     top: 16px;
     left: 16px;
@@ -45,7 +45,7 @@
     flex-direction: column;
 }
 
-.notifications-depth6-frame0 {
+.notifications-nivel6-frame0 {
     width: 288px;
     height: 40px;
     display: flex;
@@ -54,7 +54,7 @@
     flex-direction: column;
 }
 
-.notifications-depth7-frame0 {
+.notifications-nivel7-frame0 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
@@ -73,7 +73,7 @@
     text-decoration: none;
 }
 
-.notifications-depth4-frame1 {
+.notifications-nivel4-frame1 {
     gap: 16px;
     width: 512px;
     height: 72px;
@@ -87,7 +87,7 @@
     border: 1px solid rgba(209, 214, 232, 1);
 }
 
-.notifications-depth5-frame01 {
+.notifications-nivel5-frame01 {
     gap: 16px;
     top: 12px;
     left: 16px;
@@ -99,7 +99,7 @@
     flex-shrink: 0;
 }
 
-.notifications-depth6-frame001 {
+.notifications-nivel6-frame001 {
     width: 48px;
     height: 48px;
     display: flex;
@@ -113,7 +113,7 @@
 
 }
 
-.notifications-depth7-frame001 {
+.notifications-nivel7-frame001 {
     width: 24px;
     height: 24px;
     display: flex;
@@ -125,7 +125,7 @@
 
 }
 
-.notifications-depth6-frame1 {
+.notifications-nivel6-frame1 {
     width: 234.109375px;
     height: 45px;
     display: flex;
@@ -135,7 +135,7 @@
     justify-content: center;
 }
 
-.notifications-depth7-frame002 {
+.notifications-nivel7-frame002 {
     width: 234.109375px;
     height: 24px;
     display: flex;
@@ -145,7 +145,7 @@
     flex-direction: column;
 }
 
-.notifications-depth8-frame001 {
+.notifications-nivel8-frame001 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
@@ -164,7 +164,7 @@
     text-decoration: none;
 }
 
-.notifications-depth7-frame1 {
+.notifications-nivel7-frame1 {
     width: 234.109375px;
     height: 21px;
     display: flex;
@@ -174,7 +174,7 @@
     flex-direction: column;
 }
 
-.notifications-depth8-frame002 {
+.notifications-nivel8-frame002 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;
@@ -192,7 +192,7 @@
     text-decoration: none;
 }
 
-.notifications-depth5-frame1 {
+.notifications-nivel5-frame1 {
     top: 20px;
     left: 412px;
     width: 84px;
@@ -204,7 +204,7 @@
     flex-direction: column;
 }
 
-.notifications-depth6-frame002 {
+.notifications-nivel6-frame002 {
     width: 84px;
     height: 32px;
     display: flex;
@@ -217,13 +217,13 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.notifications-depth6-frame002:hover {
+.notifications-nivel6-frame002:hover {
     border: 1px solid rgba(255, 0, 0, 0.267);
     cursor: pointer;
 }
 
 
-.notifications-depth7-frame003 {
+.notifications-nivel7-frame003 {
     width: 50.09375px;
     height: 21px;
     display: flex;
@@ -234,7 +234,7 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.notifications-depth8-frame003 {
+.notifications-nivel8-frame003 {
     display: flex;
     align-self: stretch;
     align-items: center;
@@ -281,7 +281,7 @@
     flex-direction: column;
 }
 
-.simple-notification-depth4-frame5 {
+.simple-notification-nivel4-frame5 {
     gap: 16px;
     width: 393px;
     height: 72px;
@@ -293,7 +293,7 @@
     background-color: rgba(247, 249, 252, 1);
 }
 
-.simple-notification-depth5-frame0 {
+.simple-notification-nivel5-frame0 {
     gap: 16px;
     top: 12px;
     left: 16px;
@@ -305,7 +305,7 @@
     flex-shrink: 0;
 }
 
-.simple-notification-depth6-frame0 {
+.simple-notification-nivel6-frame0 {
     width: 48px;
     height: 48px;
     display: flex;
@@ -316,7 +316,7 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.simple-notification-depth7-frame0 {
+.simple-notification-nivel7-frame0 {
     width: 24px;
     height: 24px;
     display: flex;
@@ -325,12 +325,12 @@
     flex-direction: column;
 }
 
-.simple-notification-depth8-frame0 {
+.simple-notification-nivel8-frame0 {
     width: 24px;
     height: 24px;
 }
 
-.simple-notification-depth6-frame1 {
+.simple-notification-nivel6-frame1 {
     width: 286px;
     height: 45px;
     display: flex;
@@ -340,7 +340,7 @@
     justify-content: center;
 }
 
-.simple-notification-depth7-frame01 {
+.simple-notification-nivel7-frame01 {
     width: 286px;
     height: 24px;
     display: flex;
@@ -350,7 +350,7 @@
     flex-direction: column;
 }
 
-.simple-notification-depth8-frame01 {
+.simple-notification-nivel8-frame01 {
     display: flex;
     align-self: stretch;
     align-items: flex-start;

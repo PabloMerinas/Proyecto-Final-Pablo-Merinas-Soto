@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.login .depth-frame {
+.login .nivel-frame {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
   width: fit-content;
 }
 
-.login .depth-frame-wrapper {
+.login .nivel-frame-wrapper {
   align-items: center;
   display: flex;
   height: 112px;
@@ -60,7 +60,7 @@
   width: 480px;
 }
 
-.login .depth-frame-2 {
+.login .nivel-frame-2 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -69,7 +69,7 @@
   width: 480px;
 }
 
-.login .depth-frame-3 {
+.login .nivel-frame-3 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@
   position: relative;
 }
 
-.login .depth-frame-4 {
+.login .nivel-frame-4 {
   align-items: center;
   display: flex;
   height: 56px;
@@ -99,7 +99,7 @@
   width: 480px;
 }
 
-.login .depth-frame-5 {
+.login .nivel-frame-5 {
   align-items: flex-start;
   background-color: #f7f9fc;
   border: 1px solid;
@@ -114,7 +114,7 @@
   width: 480px;
 }
 
-.login .depth-frame-6 {
+.login .nivel-frame-6 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -123,7 +123,7 @@
   width: 157.02px;
 }
 
-.login .depth-frame-7 {
+.login .nivel-frame-7 {
   align-items: flex-start;
   align-self: stretch;
   display: flex;
@@ -146,7 +146,7 @@
   width: fit-content;
 }
 
-.login .depth-frame-8 {
+.login .nivel-frame-8 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -155,7 +155,7 @@
   width: 155.81px;
 }
 
-.login .depth-frame-9 {
+.login .nivel-frame-9 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -165,7 +165,7 @@
   width: 512px;
 }
 
-.login .depth-frame-10 {
+.login .nivel-frame-10 {
   align-items: flex-start;
   display: flex;
   gap: 12px;
@@ -175,7 +175,7 @@
   width: 480px;
 }
 
-.login .depth-frame-11 {
+.login .nivel-frame-11 {
   align-items: center;
   display: flex;
   height: 24px;
@@ -184,7 +184,7 @@
   width: 24px;
 }
 
-.login .depth-frame-12 {
+.login .nivel-frame-12 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -207,7 +207,7 @@
   width: 18px;
 }
 
-.login .depth-frame-13 {
+.login .nivel-frame-13 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -229,7 +229,7 @@
   width: fit-content;
 }
 
-.login .depth-frame-14 {
+.login .nivel-frame-14 {
   align-items: flex-start;
   display: flex;
   height: 64px;
@@ -238,7 +238,7 @@
   width: 512px;
 }
 
-.login .depth-frame-15 {
+.login .nivel-frame-15 {
   align-items: center;
   background-color: #195be5;
   border-radius: 12px;
@@ -251,7 +251,7 @@
   width: 480px;
 }
 
-.login .depth-frame-16 {
+.login .nivel-frame-16 {
   align-items: flex-start;
   background-color: #195be5;
   display: flex;
@@ -274,7 +274,7 @@
   width: fit-content;
 }
 
-.login .depth-frame-17 {
+.login .nivel-frame-17 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;

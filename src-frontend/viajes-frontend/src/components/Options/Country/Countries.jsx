@@ -49,7 +49,7 @@ export const Countries = () => {
         // Logica para renderizar la tarjeta del pais
         const handleInfoClick = (clickedCountry) => {
             // Elimino la lista
-            const parentElement = document.querySelector('.countries-p-rincipal-countries');
+            const parentElement = document.querySelector('.countries-principal-countries');
             while (parentElement.firstChild) {
                 parentElement.removeChild(parentElement.firstChild);
             }
@@ -78,45 +78,45 @@ export const Countries = () => {
         };
 
         return (
-            <div className="countries-p-rincipal-depth8-frame01">
-                <div className="countries-p-rincipal-depth9-frame01">
-                    <div className="countries-p-rincipal-depth10-frame006">
-                        <span className="countries-p-rincipal-text16">
+            <div className="countries-principal-nivel8-frame01">
+                <div className="countries-principal-nivel9-frame01">
+                    <div className="countries-principal-nivel10-frame006">
+                        <span className="countries-principal-text16">
                             <span>{country}</span>
                         </span>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth9-frame11">
-                    <div className="countries-p-rincipal-depth10-frame007">
-                        <span className="countries-p-rincipal-text18">
+                <div className="countries-principal-nivel9-frame11">
+                    <div className="countries-principal-nivel10-frame007">
+                        <span className="countries-principal-text18">
                             <span>{capital}</span>
                         </span>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth9-frame21">
-                    <div className="countries-p-rincipal-depth10-frame008">
-                        <span className="countries-p-rincipal-text20">
+                <div className="countries-principal-nivel9-frame21">
+                    <div className="countries-principal-nivel10-frame008">
+                        <span className="countries-principal-text20">
                             <span>{currencyCode}</span>
                         </span>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth9-frame31">
-                    <div className="countries-p-rincipal-depth10-frame009">
-                        <span className="countries-p-rincipal-text22">{currencySymbol}</span>
+                <div className="countries-principal-nivel9-frame31">
+                    <div className="countries-principal-nivel10-frame009">
+                        <span className="countries-principal-text22">{currencySymbol}</span>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth9-frame41">
-                    <div className="countries-p-rincipal-depth10-frame010">
-                        <span className="countries-p-rincipal-text23">
+                <div className="countries-principal-nivel9-frame41">
+                    <div className="countries-principal-nivel10-frame010">
+                        <span className="countries-principal-text23">
                             <span>{languageCode}</span>
                         </span>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth9-frame51">
-                    <div onClick={() => handleInfoClick(country)} className="countries-p-rincipal-depth10-frame011">
-                        <div className="countries-p-rincipal-depth11-frame0">
-                            <div className="countries-p-rincipal-depth12-frame0">
-                                <span className="countries-p-rincipal-text25">
+                <div className="countries-principal-nivel9-frame51">
+                    <div onClick={() => handleInfoClick(country)} className="countries-principal-nivel10-frame011">
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
                                     <span>Info</span>
                                 </span>
                             </div>
@@ -130,25 +130,25 @@ export const Countries = () => {
     }
 
     return (
-        <div className="countries-p-rincipal-container">
-            <div className="countries-p-rincipal-countries">
-                <div className="countries-p-rincipal-depth4-frame0">
-                    <div className="countries-p-rincipal-depth5-frame0">
-                        <div className="countries-p-rincipal-depth6-frame0">
-                            <span className="countries-p-rincipal-text">
+        <div className="countries-principal-container">
+            <div className="countries-principal-countries">
+                <div className="countries-principal-nivel4-frame0">
+                    <div className="countries-principal-nivel5-frame0">
+                        <div className="countries-principal-nivel6-frame0">
+                            <span className="countries-principal-text">
                                 <span>Countries</span>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth4-frame1">
-                    <div className="countries-p-rincipal-depth5-frame01">
-                        <div className="countries-p-rincipal-depth6-frame01">
+                <div className="countries-principal-nivel4-frame1">
+                    <div className="countries-principal-nivel5-frame01">
+                        <div className="countries-principal-nivel6-frame01">
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <div className="countries-p-rincipal-depth6-frame1">
-                            <div className="countries-p-rincipal-depth7-frame01">
-                                <span className="countries-p-rincipal-text02">
+                        <div className="countries-principal-nivel6-frame1">
+                            <div className="countries-principal-nivel7-frame01">
+                                <span className="countries-principal-text02">
                                     <input
                                         type="text"
                                         value={searchText}
@@ -159,56 +159,56 @@ export const Countries = () => {
                         </div>
                     </div>
                 </div>
-                <div className="countries-p-rincipal-depth4-frame2">
-                    <div className="countries-p-rincipal-depth5-frame02">
-                        <div className="countries-p-rincipal-depth6-frame02">
-                            <div className="countries-p-rincipal-depth7-frame02">
-                                <div className="countries-p-rincipal-depth8-frame0">
-                                    <div className="countries-p-rincipal-depth9-frame0">
-                                        <div className="countries-p-rincipal-depth10-frame0">
-                                            <span className="countries-p-rincipal-text04">
+                <div className="countries-principal-nivel4-frame2">
+                    <div className="countries-principal-nivel5-frame02">
+                        <div className="countries-principal-nivel6-frame02">
+                            <div className="countries-principal-nivel7-frame02">
+                                <div className="countries-principal-nivel8-frame0">
+                                    <div className="countries-principal-nivel9-frame0">
+                                        <div className="countries-principal-nivel10-frame0">
+                                            <span className="countries-principal-text04">
                                                 <span>Country</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="countries-p-rincipal-depth9-frame1">
-                                        <div className="countries-p-rincipal-depth10-frame001">
-                                            <span className="countries-p-rincipal-text06">
+                                    <div className="countries-principal-nivel9-frame1">
+                                        <div className="countries-principal-nivel10-frame001">
+                                            <span className="countries-principal-text06">
                                                 <span>Capital</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="countries-p-rincipal-depth9-frame2">
-                                        <div className="countries-p-rincipal-depth10-frame002">
-                                            <span className="countries-p-rincipal-text08">
+                                    <div className="countries-principal-nivel9-frame2">
+                                        <div className="countries-principal-nivel10-frame002">
+                                            <span className="countries-principal-text08">
                                                 <span>Currency code</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="countries-p-rincipal-depth9-frame3">
-                                        <div className="countries-p-rincipal-depth10-frame003">
-                                            <span className="countries-p-rincipal-text10">
+                                    <div className="countries-principal-nivel9-frame3">
+                                        <div className="countries-principal-nivel10-frame003">
+                                            <span className="countries-principal-text10">
                                                 <span>Currency symbol</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="countries-p-rincipal-depth9-frame4">
-                                        <div className="countries-p-rincipal-depth10-frame004">
-                                            <span className="countries-p-rincipal-text12">
+                                    <div className="countries-principal-nivel9-frame4">
+                                        <div className="countries-principal-nivel10-frame004">
+                                            <span className="countries-principal-text12">
                                                 <span>Language code</span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="countries-p-rincipal-depth9-frame5">
-                                        <div className="countries-p-rincipal-depth10-frame005">
-                                            <span className="countries-p-rincipal-text14">
+                                    <div className="countries-principal-nivel9-frame5">
+                                        <div className="countries-principal-nivel10-frame005">
+                                            <span className="countries-principal-text14">
                                                 <span>Info</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="countries-p-rincipal-depth7-frame1">
+                            <div className="countries-principal-nivel7-frame1">
                                 {filteredCountries.map(country => (
                                     <div key={country.id}>
                                         {generateCountry(country.country, country.capital, country.currencyCode, country.currencySymbol, country.languageCode)}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./style.css";
+import "./login.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../service/userService';
 
@@ -66,22 +66,22 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <div className="depth-frame">
+      <div className="nivel-frame">
         <div className="div-wrapper">
           <p className="text-wrapper">Sign in to your account</p>
         </div>
       </div>
       <form onSubmit={handleLogin}>
-        <div className="depth-frame-wrapper">
+        <div className="nivel-frame-wrapper">
           <div className="div">
-            <div className="depth-frame-2">
-              <div className="depth-frame-3">
+            <div className="nivel-frame-2">
+              <div className="nivel-frame-3">
                 <div className="text-wrapper-2">Username</div>
               </div>
-              <div className="depth-frame-4">
-                <div className="depth-frame-5">
-                  <div className="depth-frame-6">
-                    <div className="depth-frame-7">
+              <div className="nivel-frame-4">
+                <div className="nivel-frame-5">
+                  <div className="nivel-frame-6">
+                    <div className="nivel-frame-7">
                       <div className="text-wrapper-3">
                         <input className='custom-input'
                           type="text"
@@ -98,16 +98,16 @@ export const Login = () => {
             </div>
           </div>
         </div>
-        <div className="depth-frame-wrapper">
+        <div className="nivel-frame-wrapper">
           <div className="div">
-            <div className="depth-frame-2">
-              <div className="depth-frame-3">
+            <div className="nivel-frame-2">
+              <div className="nivel-frame-3">
                 <div className="text-wrapper-2">Password</div>
               </div>
-              <div className="depth-frame-4">
-                <div className="depth-frame-5">
-                  <div className="depth-frame-8">
-                    <div className="depth-frame-7">
+              <div className="nivel-frame-4">
+                <div className="nivel-frame-5">
+                  <div className="nivel-frame-8">
+                    <div className="nivel-frame-7">
                       <div className="text-wrapper-3">
                         <input className='custom-input'
                           type="password"
@@ -123,16 +123,16 @@ export const Login = () => {
             </div>
           </div>
         </div>
-        <div className="depth-frame-9">
-          <div className="depth-frame-10">
+        <div className="nivel-frame-9">
+          <div className="nivel-frame-10">
             <input type="checkbox" id="remember-me-checkbox" />
             <label htmlFor="remember-me-checkbox">Remember me</label>
           </div>
         </div>
-        <div className="depth-frame-14">
-          <div className="depth-frame-15">
-            <div className="depth-frame-16">
-              <div className="depth-frame-7">
+        <div className="nivel-frame-14">
+          <div className="nivel-frame-15">
+            <div className="nivel-frame-16">
+              <div className="nivel-frame-7">
                 <div className="text-wrapper-5">
                   <button type="submit">Log in</button>
                 </div>
@@ -141,8 +141,8 @@ export const Login = () => {
           </div>
         </div>
       </form>
-      <div className="depth-frame-17">
-        <Link to="/register" className="depth-frame-7">
+      <div className="nivel-frame-17">
+        <Link to="/register" className="nivel-frame-7">
           <div className="text-wrapper-6">Create an account</div>
         </Link>
       </div>
