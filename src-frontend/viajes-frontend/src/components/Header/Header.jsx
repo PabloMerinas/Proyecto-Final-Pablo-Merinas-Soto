@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./style.css";
 import defaultImg from "./profileImgs/default.png";
 import { generateSimpleNotificacion } from "../Notification/Notification";
@@ -9,6 +9,8 @@ export const Header = () => {
   // Logica para cargar la imagen del usuario, se guarda una por defecto
   const [showPopup, setShowPopup] = useState(false);
   const [imgUrl, setImgUrl] = useState(defaultImg);
+  const popupRef = useRef(null); // Referencia al elemento del popup
+
 
   useEffect(() => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"));
@@ -25,8 +27,28 @@ export const Header = () => {
     setShowPopup(!showPopup);
   };
 
+  const handleClickOutside = (event) => {
+    // Si clico fuera del popup, lo cierro
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      setShowPopup(false);
+    }
+  };
+
+  // Lógica para gestionar el clicar fuera y cerrar el popup
+  useEffect(() => {
+    if (showPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPopup]);
+
   const handlePopupSimpleNotification = () => {
-    
+    alert("H")
   };
 
 
@@ -70,7 +92,7 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div className="depth-frame-11" onClick={handlePopupSimpleNotification}> 
+          <div className="depth-frame-11" onClick={handlePopupSimpleNotification}>
             <div className="depth-frame-12">
               <div className="depth-frame-13">
                 <div className="vector-wrapper">
@@ -89,7 +111,7 @@ export const Header = () => {
           {/* <a href="/account"><div className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
           <div onClick={handlePopupToggle} className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
         </div>
-        {showPopup && <Popup />}
+        {showPopup && <Popup ref={popupRef} />}
       </div>
     </div>
   );
@@ -100,11 +122,12 @@ function deleteActiveUser() {
   sessionStorage.removeItem('activeCity');
 }
 
-const Popup = () => {
+// Pop up del desplegable del usuario, agrego que se cierre al clicar fuera
+const Popup = React.forwardRef((props, ref) => {
   // Recupero los datos del username
   const activeUser = JSON.parse(localStorage.getItem('activeUser'));
   return (
-    <div className="popup-container">
+    <div ref={ref} className="popup-container">
       <div className="popup-my-account">
         <div className="popup-depth4-frame0">
           <div className="popup-depth5-frame0">
@@ -165,5 +188,6 @@ const Popup = () => {
         </a>
       </div>
     </div>
-  )
-}
+  );
+});
+

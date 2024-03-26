@@ -348,7 +348,7 @@
   cursor: pointer;
 }
 .popup-depth6-frame2 {
-  width: 86.140625px;
+  width: 130px;
   height: 45px;
   display: flex;
   align-items: flex-start;
@@ -358,7 +358,7 @@
   
 }
 .popup-depth7-frame0 {
-  width: 86.140625px;
+  width: 130px;
   height: 24px;
   display: flex;
   overflow: hidden;
@@ -442,6 +442,8 @@
   border-radius: 8px;
   justify-content: center;
   background-color: rgba(232, 234, 242, 1);
+  border: 1px solid rgba(209, 214, 232, 1);
+
 }
 .popup-depth7-frame01 {
   width: 24px;
@@ -512,6 +514,8 @@
   border-radius: 8px;
   justify-content: center;
   background-color: rgba(232, 234, 242, 1);
+  border: 1px solid rgba(209, 214, 232, 1);
+
 }
 .popup-depth7-frame03 {
   width: 24px;
@@ -563,6 +567,5 @@
 }
 
 .a-no-style:hover{
-  color: black
-
+  color: black;
 }
