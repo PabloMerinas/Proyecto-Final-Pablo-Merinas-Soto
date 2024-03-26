@@ -18,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    
+
 }
 
 .notifications-depth4-frame0 {
@@ -217,7 +217,7 @@
     background-color: rgba(232, 234, 242, 1);
 }
 
-.notifications-depth6-frame002:hover{
+.notifications-depth6-frame002:hover {
     border: 1px solid rgba(255, 0, 0, 0.267);
     cursor: pointer;
 }
@@ -249,6 +249,122 @@
     text-align: center;
     font-weight: 500;
     line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+/** Estilos para la notifacion simple */
+
+.simple-notification-container {
+    width: 393px;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    z-index: 999;
+    border: 1px solid rgb(209, 214, 232, 1);
+    border-radius: 12px;
+
+}
+
+.simple-notification-simple-notification {
+    width: 100%;
+    height: auto;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    flex-direction: column;
+}
+
+.simple-notification-depth4-frame5 {
+    gap: 16px;
+    width: 393px;
+    height: 72px;
+    display: flex;
+    padding: 8px 16px;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    background-color: rgba(247, 249, 252, 1);
+}
+
+.simple-notification-depth5-frame0 {
+    gap: 16px;
+    top: 12px;
+    left: 16px;
+    width: 351px;
+    height: 48px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.simple-notification-depth6-frame0 {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    justify-content: center;
+    background-color: rgba(232, 234, 242, 1);
+}
+
+.simple-notification-depth7-frame0 {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.simple-notification-depth8-frame0 {
+    width: 24px;
+    height: 24px;
+}
+
+.simple-notification-depth6-frame1 {
+    width: 286px;
+    height: 45px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.simple-notification-depth7-frame01 {
+    width: 286px;
+    height: 24px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.simple-notification-depth8-frame01 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.simple-notification-text {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: Medium;
+    text-align: left;
+    font-weight: 500;
+    line-height: 24px;
     font-stretch: normal;
     text-decoration: none;
 }

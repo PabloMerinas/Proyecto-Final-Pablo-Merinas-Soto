@@ -260,13 +260,13 @@
   width: 40px;
 }
 
-.header-links{
+.header-links {
   text-decoration: none;
   color: inherit;
 }
 
 /* Alinear los iconos al centro */
-.vector-wrapper{
+.vector-wrapper {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -274,7 +274,7 @@
 }
 
 /* Quitar estilos a los enlaces */
-.header-a{
+.header-a {
   text-decoration: none;
 }
 
@@ -286,7 +286,7 @@
   flex-direction: column;
   position: absolute;
   top: 50px;
-  right: 0; 
+  right: 0;
   z-index: 999;
   border: 1px solid rgb(209, 214, 232, 1);
   background-color: rgba(247, 249, 252, 1);
@@ -306,6 +306,7 @@
   font-size: 14px;
   font-weight: 700;
 }
+
 .popup-depth4-frame0 {
   gap: 16px;
   width: 226px;
@@ -316,8 +317,9 @@
   align-items: flex-start;
   flex-shrink: 0;
   background-color: rgba(247, 249, 252, 1);
-  
+
 }
+
 .popup-depth5-frame0 {
   gap: 16px;
   top: 8px;
@@ -329,6 +331,7 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .popup-depth6-frame0 {
   width: 56px;
   height: 56px;
@@ -344,9 +347,10 @@
   border-radius: 20px;
 }
 
-.depth-frame-14:hover{
+.depth-frame-14:hover {
   cursor: pointer;
 }
+
 .popup-depth6-frame2 {
   width: 130px;
   height: 45px;
@@ -355,8 +359,9 @@
   flex-shrink: 0;
   flex-direction: column;
   justify-content: center;
-  
+
 }
+
 .popup-depth7-frame0 {
   width: 130px;
   height: 24px;
@@ -366,12 +371,14 @@
   flex-shrink: 0;
   flex-direction: column;
 }
+
 .popup-depth8-frame0 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .popup-text {
   color: rgba(12, 17, 28, 1);
   height: auto;
@@ -384,6 +391,7 @@
   text-decoration: none;
   font-weight: 700;
 }
+
 .popup-depth7-frame1 {
   width: 86.140625px;
   height: 21px;
@@ -395,12 +403,14 @@
   width: 120px;
 
 }
+
 .popup-depth8-frame01 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .popup-text2 {
   color: rgba(79, 102, 150, 1);
   height: auto;
@@ -411,6 +421,7 @@
   font-stretch: normal;
   text-decoration: none;
 }
+
 .popup-depth4-frame1 {
   gap: 16px;
   width: 226px;
@@ -422,6 +433,7 @@
   flex-shrink: 0;
   background-color: rgba(247, 249, 252, 1);
 }
+
 .popup-depth5-frame01 {
   gap: 16px;
   top: 8px;
@@ -433,6 +445,7 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .popup-depth6-frame01 {
   width: 40px;
   height: 40px;
@@ -445,6 +458,7 @@
   border: 1px solid rgba(209, 214, 232, 1);
 
 }
+
 .popup-depth7-frame01 {
   width: 24px;
   height: 24px;
@@ -454,10 +468,12 @@
   flex-shrink: 0;
   flex-direction: column;
 }
+
 .popup-depth8-frame02 {
   width: 24px;
   height: 24px;
 }
+
 .popup-depth6-frame1 {
   width: 154px;
   height: 24px;
@@ -467,12 +483,14 @@
   flex-shrink: 0;
   flex-direction: column;
 }
+
 .popup-depth7-frame02 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .popup-text4 {
   color: rgba(12, 17, 28, 1);
   height: auto;
@@ -484,6 +502,7 @@
   font-size: 14px;
   font-weight: 700;
 }
+
 .popup-my-account1 {
   gap: 16px;
   width: 226px;
@@ -494,6 +513,7 @@
   flex-shrink: 0;
   background-color: rgba(247, 249, 252, 1);
 }
+
 .popup-depth5-frame02 {
   gap: 16px;
   top: 8px;
@@ -505,6 +525,7 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .popup-depth6-frame02 {
   width: 40px;
   height: 40px;
@@ -517,6 +538,7 @@
   border: 1px solid rgba(209, 214, 232, 1);
 
 }
+
 .popup-depth7-frame03 {
   width: 24px;
   height: 24px;
@@ -537,12 +559,14 @@
   flex-shrink: 0;
   flex-direction: column;
 }
+
 .popup-depth7-frame04 {
   display: flex;
   align-self: stretch;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .popup-text6 {
   color: rgba(12, 17, 28, 1);
   height: auto;
@@ -556,16 +580,38 @@
   font-weight: 700;
 }
 
-.popup-depth4-frame1:hover, .popup-my-account1:hover{
+.popup-depth4-frame1:hover,
+.popup-my-account1:hover {
   background-color: rgba(232, 234, 242, 0.692);
   cursor: pointer;
 }
 
-.a-no-style{
+.a-no-style {
   color: inherit;
   text-decoration: none;
 }
 
-.a-no-style:hover{
+.a-no-style:hover {
   color: black;
 }
+
+
+
+
+
+
+
+
+/* .notification-overlay{
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  z-index: 999;
+  border: 1px solid rgb(209, 214, 232, 1);
+  background-color: rgba(247, 249, 252, 1);
+  border-radius: 12px;
+  gap: 10px;
+} */

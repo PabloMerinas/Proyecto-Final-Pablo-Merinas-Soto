@@ -48,7 +48,7 @@ export const Header = () => {
   }, [showPopup]);
 
   const handlePopupSimpleNotification = () => {
-    alert("H")
+    generateSimpleNotificacion();
   };
 
 
@@ -92,8 +92,8 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div className="depth-frame-11" onClick={handlePopupSimpleNotification}>
-            <div className="depth-frame-12">
+          <div className="depth-frame-11">
+            <div className="depth-frame-12" onClick={handlePopupSimpleNotification}>
               <div className="depth-frame-13">
                 <div className="vector-wrapper">
                   <i className="fa-solid fa-envelope"></i>
@@ -112,6 +112,7 @@ export const Header = () => {
           <div onClick={handlePopupToggle} className="depth-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
         </div>
         {showPopup && <Popup ref={popupRef} />}
+        {/* { <PopupNotification /> } */}
       </div>
     </div>
   );
@@ -121,6 +122,13 @@ export const Header = () => {
 function deleteActiveUser() {
   sessionStorage.removeItem('activeCity');
 }
+
+// Pop up de la notificacion
+const PopupNotification = () => {
+  return (
+    <>{generateSimpleNotificacion("fa-solid fa-plane", "prueba")}</>
+  );
+};
 
 // Pop up del desplegable del usuario, agrego que se cierre al clicar fuera
 const Popup = React.forwardRef((props, ref) => {
