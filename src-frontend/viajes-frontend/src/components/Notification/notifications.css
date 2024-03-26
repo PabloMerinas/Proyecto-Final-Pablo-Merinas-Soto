@@ -369,3 +369,12 @@
     font-stretch: normal;
     text-decoration: none;
 }
+
+/** Estilos para cuando no hay notificaciones, para el cuadro */
+.no-notifications{
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    font-size: large;
+    font-weight: 600;
+}

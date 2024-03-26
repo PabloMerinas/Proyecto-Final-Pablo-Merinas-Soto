@@ -74,6 +74,18 @@ export function generateSimpleNotification(notifications) {
   );
 }
 
+// Funcion solo para mostrar si no hay notificaciones
+export function NoNotifications() {
+  return (
+    <div className="notifications-nivel4-frame1">
+      <div className="notifications-nivel5-frame01 no-notifications">
+        <span>You have no notifications at the moment.</span>
+      </div>
+    </div>
+  );
+}
+
+
 
 export const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -108,10 +120,13 @@ export const Notification = () => {
             </div>
           </div>
         </div>
-
-        {notifications.map(notification => (
-          generateNormalNotification(notification.id, "fa-solid fa-plane", notification.title, notification.timeAgo)
-        ))}
+        {notifications.length === 0 ? (
+          <NoNotifications />
+        ) : (
+          notifications.map(notification => (
+            generateNormalNotification(notification.id, "fa-solid fa-plane", notification.title, notification.timeAgo)
+          ))
+        )}
       </div>
     </div>
   )
