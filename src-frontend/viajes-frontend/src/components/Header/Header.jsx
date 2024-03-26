@@ -2,12 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import "./header.css";
 import defaultImg from "./profileImgs/default.png";
 import { generateSimpleNotificacion } from "../Notification/Notification";
+import { getNotificationsByUsername } from "../../service/notificationService";
+import { useClickOutside } from "react-click-outside-hook";
 
 // Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
 
   // Logica para cargar la imagen del usuario, se guarda una por defecto
   const [showPopup, setShowPopup] = useState(false);
+  const [showNotificationPopup, setShowNotificationPopup] = useState(false);
   const [imgUrl, setImgUrl] = useState(defaultImg);
   const popupRef = useRef(null); // Referencia al elemento del popup
 
@@ -22,21 +25,26 @@ export const Header = () => {
     }
   }, []);
 
-  // Función para mostrar el popup
+  // Función para mostrar los popup
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);
   };
 
-  const handleClickOutside = (event) => {
-    // Si clico fuera del popup, lo cierro
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setShowPopup(false);
-    }
+  const handlePopupSimpleNotification = () => {
+    setShowNotificationPopup(!showNotificationPopup);
   };
+
+  const handleClickOutside = () => {
+    setShowPopup(false);
+    setShowNotificationPopup(false);
+  };
+
+  useClickOutside(popupRef, handleClickOutside);
+
 
   // Lógica para gestionar el clicar fuera y cerrar el popup
   useEffect(() => {
-    if (showPopup) {
+    if (showPopup || showNotificationPopup) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -45,11 +53,7 @@ export const Header = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showPopup]);
-
-  const handlePopupSimpleNotification = () => {
-    generateSimpleNotificacion();
-  };
+  }, [showPopup, showNotificationPopup]);
 
 
   return (
@@ -111,8 +115,8 @@ export const Header = () => {
           {/* <a href="/account"><div className="nivel-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
           <div onClick={handlePopupToggle} className="nivel-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
         </div>
-        {showPopup && <Popup ref={popupRef} />}
-        {/* { <PopupNotification /> } */}
+        {showPopup && <Popup />}
+        {showNotificationPopup && <PopupNotification />}
       </div>
     </div>
   );
@@ -125,17 +129,46 @@ function deleteActiveUser() {
 
 // Pop up de la notificacion
 const PopupNotification = () => {
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+        const authToken = localStorage.getItem('authToken');
+        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+
+        // Verificar si notificationsData es un array no vacío antes de actualizar el estado
+        if (Array.isArray(notificationsData) && notificationsData.length > 0) {
+          setNotifications(notificationsData);
+        } else {
+          console.log('No se encontraron notificaciones.');
+        }
+      } catch (error) {
+        console.error('Error al recuperar las notificaciones:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <>{generateSimpleNotificacion("fa-solid fa-plane", "prueba")}</>
+    <>
+      {notifications.map(notification => (
+        <div key={notification.id}>
+          {generateSimpleNotificacion(notification.id, 'fa-solid fa-plane', notification.title)}
+        </div>
+      ))}
+    </>
   );
 };
 
+
 // Pop up del desplegable del usuario, agrego que se cierre al clicar fuera
-const Popup = React.forwardRef((props, ref) => {
+const Popup = () => {
   // Recupero los datos del username
   const activeUser = JSON.parse(localStorage.getItem('activeUser'));
   return (
-    <div ref={ref} className="popup-container">
+    <div className="popup-container">
       <div className="popup-my-account">
         <div className="popup-nivel4-frame0">
           <div className="popup-nivel5-frame0">
@@ -197,5 +230,5 @@ const Popup = React.forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
+};
 

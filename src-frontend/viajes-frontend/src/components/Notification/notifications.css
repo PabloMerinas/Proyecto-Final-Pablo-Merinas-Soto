@@ -320,7 +320,8 @@
     width: 24px;
     height: 24px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     flex-direction: column;
 }
