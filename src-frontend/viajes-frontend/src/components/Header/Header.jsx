@@ -133,6 +133,7 @@ function deleteActiveUser() {
 // Pop up de la notificacion
 const PopupNotification = () => {
   const [notifications, setNotifications] = useState([]);
+  const [isVisible, setIsVisible] = useState(false); // Estado para manejar la visibilidad del popup
 
   const fetchData = async () => {
     try {
@@ -143,21 +144,27 @@ const PopupNotification = () => {
       // Verificar si notificationsData es un array no vacío antes de actualizar el estado
       if (Array.isArray(notificationsData) && notificationsData.length > 0) {
         setNotifications(notificationsData);
+        setIsVisible(true); // Mostrar el popup cuando hay notificaciones
+
+      } else{
+        setIsVisible(false); // Ocultar el popup cuando no hay notificaciones
+
       }
     } catch (error) {
       console.error('Error al recuperar las notificaciones:', error);
     }
   };
 
-  // Llamar a fetchData cuando se monta el componente para obtener las notificaciones iniciales
+  // Llamar a fetchData cuando se monta el componente para obtener las notificaciones
   useEffect(() => {
     fetchData();
   }, []);
 
 
   return (
-    <>{generateSimpleNotification(notifications)}</>
-  );
+    <div className={`popup-notification ${isVisible ? 'show' : ''}`}> {/* Aplicar la clase 'show' si isVisible es true */}
+      {generateSimpleNotification(notifications)}
+    </div>  );
 };
 
 

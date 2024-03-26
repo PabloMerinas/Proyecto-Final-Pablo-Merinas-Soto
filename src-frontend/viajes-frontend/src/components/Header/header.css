@@ -619,3 +619,27 @@
   border-radius: 12px;
   gap: 10px;
 } */
+
+/** Efectos para la animacion */
+
+.popup-notification {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.popup-notification.show {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
