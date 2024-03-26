@@ -29,18 +29,21 @@ export const Header = () => {
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);
   };
-
+  
   const handlePopupSimpleNotification = () => {
     setShowNotificationPopup(!showNotificationPopup);
   };
 
-  const handleClickOutside = () => {
-    setShowPopup(false);
-    setShowNotificationPopup(false);
+  const handleClickOutside = (event) => {
+    // Aqui hago que se pueda cerrar clicando fuera pero no dentro de esos contenedores
+    if(!event.target.closest('.simple-notification-container') && !event.target.closest('.popup-container')){
+      setShowPopup(false);
+      setShowNotificationPopup(false);
+    }
+
   };
 
   useClickOutside(popupRef, handleClickOutside);
-
 
   // Lógica para gestionar el clicar fuera y cerrar el popup
   useEffect(() => {
@@ -140,7 +143,6 @@ const PopupNotification = () => {
       // Verificar si notificationsData es un array no vacío antes de actualizar el estado
       if (Array.isArray(notificationsData) && notificationsData.length > 0) {
         setNotifications(notificationsData);
-        console.log('No se encontraron notificacsiones.');
       }
     } catch (error) {
       console.error('Error al recuperar las notificaciones:', error);
