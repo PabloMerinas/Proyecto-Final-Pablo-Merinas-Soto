@@ -643,3 +643,10 @@
     transform: translateY(0);
   }
 }
+
+/** Estilos para el popup de no notification */
+.popup-no-notification {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+}

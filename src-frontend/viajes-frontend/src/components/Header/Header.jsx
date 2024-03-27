@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./header.css";
 import defaultImg from "./profileImgs/default.png";
-import { generateSimpleNotification } from "../Notification/Notification";
+import { generateSimpleNotification, NoNotifications } from "../Notification/Notification";
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { useClickOutside } from "react-click-outside-hook";
 
@@ -29,14 +29,14 @@ export const Header = () => {
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);
   };
-  
+
   const handlePopupSimpleNotification = () => {
     setShowNotificationPopup(!showNotificationPopup);
   };
 
   const handleClickOutside = (event) => {
     // Aqui hago que se pueda cerrar clicando fuera pero no dentro de esos contenedores
-    if(!event.target.closest('.simple-notification-container') && !event.target.closest('.popup-container')){
+    if (!event.target.closest('.simple-notification-container') && !event.target.closest('.popup-container') && !event.target.closest('.popup-no-notification')) {
       setShowPopup(false);
       setShowNotificationPopup(false);
     }
@@ -134,6 +134,8 @@ function deleteActiveUser() {
 const PopupNotification = () => {
   const [notifications, setNotifications] = useState([]);
   const [isVisible, setIsVisible] = useState(false); // Estado para manejar la visibilidad del popup
+  const [isLoading, setIsLoading] = useState(true); // Estado para controlar que se haya cargado el fetch
+
 
   const fetchData = async () => {
     try {
@@ -145,9 +147,10 @@ const PopupNotification = () => {
       if (Array.isArray(notificationsData) && notificationsData.length > 0) {
         setNotifications(notificationsData);
         setIsVisible(true); // Mostrar el popup cuando hay notificaciones
-
-      } else{
+        setIsLoading(false);
+      } else {
         setIsVisible(false); // Ocultar el popup cuando no hay notificaciones
+        setIsLoading(false);
 
       }
     } catch (error) {
@@ -160,11 +163,18 @@ const PopupNotification = () => {
     fetchData();
   }, []);
 
+  if (notifications.length === 0 && !isLoading) {
+    return (
+      <div className='popup-no-notification'>
+        {NoNotifications('393px')}
+      </div>
+    );
+  }
 
   return (
-    <div className={`popup-notification ${isVisible ? 'show' : ''}`}> {/* Aplicar la clase 'show' si isVisible es true */}
+    <div className={`popup-notification ${isVisible ? 'show' : ''}`}>
       {generateSimpleNotification(notifications)}
-    </div>  );
+    </div>);
 };
 
 
