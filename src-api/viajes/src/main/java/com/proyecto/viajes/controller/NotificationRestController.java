@@ -4,9 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.NotificationEntity;
@@ -43,5 +47,23 @@ public class NotificationRestController {
 			return Collections.emptyList();
 		}
 	}
+	
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@DeleteMapping("/deleteNotificationById")
+	public ResponseEntity<String> deleteNotificationById(@RequestParam Long id) {
+	    try {
+	        Optional<NotificationEntity> notification = notificationRepository.findById(id);
+	        if (notification.isPresent()) {
+	            notificationRepository.delete(notification.get());
+	            return ResponseEntity.ok("Notification deleted successfully");
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting the notificacion: " + e.getMessage());
+	    }
+	}
+
+	
 
 }

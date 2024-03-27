@@ -13,7 +13,25 @@ export const getNotificationsByUsername = async (token, username) => {
         return response.data;
     } catch (error) {
         // errores
-        console.error('Error al recuperar las notificaciones:', error);
+        console.error('Error retrieving notificaciones:', error);
         throw error; 
     }
 };
+
+// Método para eliminar una notificación pasandole el id de esta
+export const deleteNotificationById = async (token, id) => {
+    try {
+        const response = await axios.delete(`http://localhost:8080/v1/notification/deleteNotificationById?id=${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        // Devuelve la respuesta
+        return response.data;
+
+    } catch (error) {
+        console.error('Error deleting the notification: ' + error);
+        throw error;
+    }
+}
