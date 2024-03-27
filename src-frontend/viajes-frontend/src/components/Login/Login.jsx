@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./login.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../service/userService';
+import { useAuth } from '../../authContext/autContext';
 
 export const Login = () => {
-  // Elimino la cookie para garantizar que este eliminado el token de acceso cada vez que accedo al login
-  localStorage.removeItem('authToken');
-  localStorage.removeItem('activeUser');
-  
+  const { login, logout } = useAuth();
   // Estado para almacenar los valores de los campos del formulario
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Desloguear al montar el componente
+    logout();
+  }, [logout]);
 
   // Función para manejar el envío del formulario
   const handleLogin = async (e) => {
@@ -34,13 +37,10 @@ export const Login = () => {
 
       const data = await response.text();
       const userData = await getUserInfo(data);
-      localStorage.setItem('activeUser', JSON.stringify(userData));
-      //console.log(JSON.stringify(userData));
-      //console.log('Respuesta del servidor:', data);
 
       // Guardo el token en sesion
       localStorage.setItem('authToken', data);
-
+      login(userData);
       navigate('/account');
 
       // Aquí podrías manejar la respuesta del servidor según tus necesidades

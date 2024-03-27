@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import './personalInfo.css'
-import { getUserInfo, updateUser } from "../../service/userService";
+import { updateUser } from "../../service/userService";
 import { deleteMyUser } from "../../service/userService";
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../authContext/autContext';
+import { Navigate } from 'react-router-dom';
+
 
 export const PersonalInfo = () => {
-    const navigate = useNavigate();
+    const { activeUser, logout } = useAuth();
+    const [editMode, setEditMode] = useState(false);
+    const [email, setEmail] = useState(activeUser ? activeUser.email : '');
+    const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState(activeUser ? activeUser.phone : '');
+    const [photo, setPhoto] = useState();
+    const [bio, setBio] = useState(activeUser ? activeUser.bio : '');
+
+    if (!activeUser) {
+        return <Navigate to="/" />;
+
+    }
     // Traigo al usuario actual
-    let activeUser = JSON.parse(localStorage.getItem("activeUser"));
     const token = localStorage.getItem("authToken");
     // Defino las variables y sus valores por defecto
-    const [editMode, setEditMode] = useState(false);
-    const [email, setEmail] = useState(activeUser.email);
-    const [password, setPassword] = useState();
-    const [phone, setPhone] = useState(activeUser.phone);
-    const [photo, setPhoto] = useState();
-    const [bio, setBio] = useState(activeUser.bio);
 
-
-
-
-    //console.log(JSON.parse(activeUser).username);
 
     // Metodo para cambiar el modo entre guardar y editar, sirve para guardar los ajustes tambien
     const changeMode = async () => {
@@ -34,9 +36,7 @@ export const PersonalInfo = () => {
                 console.error('Error actualizando el usuario: ', error);
             }
         }
-        const newActiveUser = await getUserInfo(token);
-        localStorage.setItem('activeUser', JSON.stringify(newActiveUser));
-        activeUser = JSON.parse(localStorage.getItem("activeUser"));
+        // const newActiveUser = await getUserInfo(token);
         setEditMode(!editMode);
 
     }
@@ -151,6 +151,7 @@ export const PersonalInfo = () => {
 
     // Función para manejar el clic en Delete account
     const handleDeleteAccount = async () => {
+        
         // Muestro el popup
         const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.");
 
@@ -159,14 +160,11 @@ export const PersonalInfo = () => {
             try {
                 // Elimino el usuario actual
                 await deleteMyUser(activeUser.username, token);
-                // Elimino las cookies y redirecciono al login
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('activeUser');
-                navigate('/');
                 // Muestro un mensaje de confirmación
+                logout(); // Desconecto al usuario, por ende se redirecciona al inicio '/'
                 window.confirm('Usuario ' + activeUser.username + ' eliminado');
             } catch (error) {
-                console.error('Error al eliminar la cuenta:', error);
+                console.error('Error deleting account:', error);
             }
         }
     };

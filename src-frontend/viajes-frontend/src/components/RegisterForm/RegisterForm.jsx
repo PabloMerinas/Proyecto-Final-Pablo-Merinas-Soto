@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../../service/userService";
-
+import { useAuth } from '../../authContext/autContext';
 import './registerForm.css';
 
 export const RegisterForm = () => {
-
-  // Borro la cookie del usuario y el token al cargar el registro
-  localStorage.removeItem("activeUser");
-  localStorage.removeItem("authToken");
-
+  const { login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -39,8 +35,7 @@ export const RegisterForm = () => {
 
       // Guardo el token en sesion y el usuario
       localStorage.setItem('authToken', data);
-      localStorage.setItem('activeUser',JSON.stringify(activeUser));
-      
+      login(activeUser);
       navigate('/account');
 
 

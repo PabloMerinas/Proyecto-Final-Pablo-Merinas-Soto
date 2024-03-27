@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import './notifications.css';
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { deleteNotificationById } from "../../service/notificationService";
+import { useAuth } from "../../authContext/autContext";
+import { Link } from "react-router-dom";
 
 // Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
 export function generateSimpleNotification(notifications) {
   return (
-    <a href="/notifications" className="a-no-style">
+    <Link to="/notifications" className="a-no-style">
       <div className="simple-notification-container">
         {notifications.map(notification => (
           <div key={notification.id} className="simple-notification-simple-notification">
@@ -31,7 +33,7 @@ export function generateSimpleNotification(notifications) {
           </div>
         ))}
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -56,12 +58,12 @@ export function NoNotifications(width) {
 
 export const Notification = () => {
   const [notifications, setNotifications] = useState([]);
+  const { activeUser } = useAuth();
 
   // Recupero las notificaciones
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
         const authToken = localStorage.getItem('authToken');
         const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
         setNotifications(notificationsData);
@@ -71,7 +73,7 @@ export const Notification = () => {
     };
 
     fetchData();
-  }, []);
+  }, [activeUser.username]);
 
   return (
     <div className="notifications-container">
@@ -168,5 +170,4 @@ export const Notification = () => {
 
   }
 }
-
 

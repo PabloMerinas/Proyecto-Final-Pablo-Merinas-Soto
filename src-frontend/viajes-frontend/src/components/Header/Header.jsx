@@ -4,6 +4,8 @@ import defaultImg from "./profileImgs/default.png";
 import { generateSimpleNotification, NoNotifications } from "../Notification/Notification";
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { useClickOutside } from "react-click-outside-hook";
+import { useAuth } from '../../authContext/autContext';
+import { Link } from 'react-router-dom';
 
 // Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
@@ -14,10 +16,10 @@ export const Header = () => {
   const [imgUrl, setImgUrl] = useState(defaultImg);
   const popupRef = useRef(null); // Referencia al elemento del popup
   const [notificationCount, setNotificationCount] = useState(0);
+  const { activeUser } = useAuth();
 
 
   useEffect(() => {
-    const activeUser = JSON.parse(localStorage.getItem("activeUser"));
     if (activeUser && activeUser.imgUrl) {
       import(`./profileImgs/${activeUser.imgUrl}`)
         .then((module) => {
@@ -28,7 +30,6 @@ export const Header = () => {
     // Metodo para contar las notificaciones y asi mostrarlas
     const countNotifications = async () => {
       try {
-        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
         const authToken = localStorage.getItem('authToken');
         const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
         const count = Array.isArray(notificationsData) ? notificationsData.length : 0;
@@ -39,7 +40,7 @@ export const Header = () => {
     };
 
     countNotifications();
-  }, []);
+  }, [activeUser]);
 
   // Función para mostrar los popup
   const handlePopupToggle = () => {
@@ -74,12 +75,126 @@ export const Header = () => {
     };
   }, [showPopup, showNotificationPopup]);
 
+  // Pop up del desplegable del usuario, agrego que se cierre al clicar fuera
+  const Popup = () => {
+    return (
+      <div className="popup-container">
+        <div className="popup-my-account">
+          <div className="popup-nivel4-frame0">
+            <div className="popup-nivel5-frame0">
+              <div className="popup-nivel6-frame0" ></div>
+              <div className="popup-nivel6-frame2">
+                <div className="popup-nivel7-frame0">
+                  <div className="popup-nivel8-frame0">
+                    <span className="popup-text">
+                      <span>{activeUser.username}</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="popup-nivel7-frame1">
+                  <div className="popup-nivel8-frame01">
+                    <span className="popup-text2">
+                      {activeUser.roles.join(',')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Link to="/personal" className="a-no-style">
+            <div className="popup-nivel4-frame1">
+              <div className="popup-nivel5-frame01">
+                <div className="popup-nivel6-frame01">
+                  <div className="popup-nivel7-frame01">
+                    <i className="fa-solid fa-user"></i>
+                  </div>
+                </div>
+                <div className="popup-nivel6-frame1">
+                  <div className="popup-nivel7-frame02">
+                    <span className="popup-text4">
+                      <span>Go to My Account</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+          <Link to="/" className="a-no-style">
+            <div className="popup-my-account1">
+              <div className="popup-nivel5-frame02">
+                <div className="popup-nivel6-frame02">
+                  <div className="popup-nivel7-frame03">
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                  </div>
+                </div>
+                <div className="popup-nivel6-frame11">
+                  <div className="popup-nivel7-frame04">
+                    <span className="popup-text6">
+                      <span>Sign Out</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    );
+  };
+
+
+  // Pop up de la notificacion
+  const PopupNotification = () => {
+    const [notifications, setNotifications] = useState([]);
+    const [isVisible, setIsVisible] = useState(false); // Estado para manejar la visibilidad del popup
+    const [isLoading, setIsLoading] = useState(true); // Estado para controlar que se haya cargado el fetch
+
+
+    const fetchData = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+
+        // Verificar si notificationsData es un array no vacío antes de actualizar el estado
+        if (Array.isArray(notificationsData) && notificationsData.length > 0) {
+          setNotifications(notificationsData);
+          setIsVisible(true); // Mostrar el popup cuando hay notificaciones
+          setIsLoading(false);
+        } else {
+          setIsVisible(false); // Ocultar el popup cuando no hay notificaciones
+          setIsLoading(false);
+
+        }
+      } catch (error) {
+        console.error('Error al recuperar las notificaciones:', error);
+      }
+    };
+
+    // Llamar a fetchData cuando se monta el componente para obtener las notificaciones
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+    if (notifications.length === 0 && !isLoading) {
+      return (
+        <div className='popup-no-notification'>
+          {NoNotifications('393px')}
+        </div>
+      );
+    }
+
+    return (
+      <div className={`popup-notification ${isVisible ? 'show' : ''}`}>
+        {generateSimpleNotification(notifications)}
+      </div>);
+  };
+
 
   return (
     <div className="header">
       <div className="nivel-frame">
         <div className="nivel-frame-wrapper">
-          <a href="/account" className="header-links">
+          <Link to="/account" className="header-links">
             <div className="header-div">
               <div className="png-transparent-wrapper">
                 <i className="fa-solid fa-plane-departure"></i>
@@ -90,28 +205,28 @@ export const Header = () => {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="nivel-frame-3">
           <div className="nivel-frame-4">
             <div className="nivel-frame-5">
               <div className="nivel-frame-6">
-                <a className="header-a" href="/countries"><div className="text-wrapper-2">Countries</div></a>
+                <Link className="header-a" to="/countries"><div className="text-wrapper-2">Countries</div></Link>
               </div>
             </div>
             <div className="nivel-frame-7">
               <div className="nivel-frame-8">
-                <a className="header-a" href="/cities"> <div className="text-wrapper-2">Cities</div></a>
+                <Link className="header-a" to="/cities"> <div className="text-wrapper-2">Cities</div></Link>
               </div>
             </div>
             <div className="nivel-frame-9">
               <div className="nivel-frame-8">
-                <a className="header-a" href="/attractions"> <div className="text-wrapper-2" onClick={deleteActiveUser}>Attractions</div></a>
+                <Link className="header-a" to="/attractions"> <div className="text-wrapper-2" onClick={deleteActiveUser}>Attractions</div></Link>
               </div>
             </div>
             <div className="nivel-frame-10">
               <div className="nivel-frame-8">
-                <a className="header-a" href="/itineraries"> <div className="text-wrapper-3">Itineraries</div></a>
+                <Link className="header-a" to="/itineraries"> <div className="text-wrapper-3">Itineraries</div></Link>
               </div>
             </div>
           </div>
@@ -134,7 +249,6 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          {/* <a href="/account"><div className="nivel-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} /> */}
           <div onClick={handlePopupToggle} className="nivel-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
         </div>
         {showPopup && <Popup />}
@@ -142,6 +256,7 @@ export const Header = () => {
       </div>
     </div>
   );
+
 };
 
 // Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado
@@ -149,120 +264,5 @@ function deleteActiveUser() {
   sessionStorage.removeItem('activeCity');
 }
 
-// Pop up de la notificacion
-const PopupNotification = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [isVisible, setIsVisible] = useState(false); // Estado para manejar la visibilidad del popup
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar que se haya cargado el fetch
 
-
-  const fetchData = async () => {
-    try {
-      const activeUser = JSON.parse(localStorage.getItem('activeUser'));
-      const authToken = localStorage.getItem('authToken');
-      const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
-
-      // Verificar si notificationsData es un array no vacío antes de actualizar el estado
-      if (Array.isArray(notificationsData) && notificationsData.length > 0) {
-        setNotifications(notificationsData);
-        setIsVisible(true); // Mostrar el popup cuando hay notificaciones
-        setIsLoading(false);
-      } else {
-        setIsVisible(false); // Ocultar el popup cuando no hay notificaciones
-        setIsLoading(false);
-
-      }
-    } catch (error) {
-      console.error('Error al recuperar las notificaciones:', error);
-    }
-  };
-
-  // Llamar a fetchData cuando se monta el componente para obtener las notificaciones
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  if (notifications.length === 0 && !isLoading) {
-    return (
-      <div className='popup-no-notification'>
-        {NoNotifications('393px')}
-      </div>
-    );
-  }
-
-  return (
-    <div className={`popup-notification ${isVisible ? 'show' : ''}`}>
-      {generateSimpleNotification(notifications)}
-    </div>);
-};
-
-
-// Pop up del desplegable del usuario, agrego que se cierre al clicar fuera
-const Popup = () => {
-  // Recupero los datos del username
-  const activeUser = JSON.parse(localStorage.getItem('activeUser'));
-  return (
-    <div className="popup-container">
-      <div className="popup-my-account">
-        <div className="popup-nivel4-frame0">
-          <div className="popup-nivel5-frame0">
-            <div className="popup-nivel6-frame0" ></div>
-            <div className="popup-nivel6-frame2">
-              <div className="popup-nivel7-frame0">
-                <div className="popup-nivel8-frame0">
-                  <span className="popup-text">
-                    <span>{activeUser.username}</span>
-                  </span>
-                </div>
-              </div>
-              <div className="popup-nivel7-frame1">
-                <div className="popup-nivel8-frame01">
-                  <span className="popup-text2">
-                    {activeUser.roles.join(',')}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a href="/personal" className="a-no-style">
-          <div className="popup-nivel4-frame1">
-            <div className="popup-nivel5-frame01">
-              <div className="popup-nivel6-frame01">
-                <div className="popup-nivel7-frame01">
-                  <i className="fa-solid fa-user"></i>
-                </div>
-              </div>
-              <div className="popup-nivel6-frame1">
-                <div className="popup-nivel7-frame02">
-                  <span className="popup-text4">
-                    <span>Go to My Account</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="/" className="a-no-style">
-          <div className="popup-my-account1">
-            <div className="popup-nivel5-frame02">
-              <div className="popup-nivel6-frame02">
-                <div className="popup-nivel7-frame03">
-                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                </div>
-              </div>
-              <div className="popup-nivel6-frame11">
-                <div className="popup-nivel7-frame04">
-                  <span className="popup-text6">
-                    <span>Sign Out</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  );
-};
 

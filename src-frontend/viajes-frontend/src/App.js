@@ -1,39 +1,46 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import RegisterPage from './pages/register/RegisterPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AccountPage from './pages/account/AccountPage';
-import LoginPage from './pages/login/LoginPage';
-import PersonalInfoPage from './pages/personalInfo/PersonalInfo';
-import CountriesPage from './pages/options/CountriesPage'
-import CitiesPage from './pages/options/CitiesPage';
-import AttractionsPage from './pages/options/AttractionsPage';
-import IttinerariesPage from './pages/options/ItinerariesPage';
-import AdminPage from './pages/admin/AdminPage';
-import NotificationsPage from './pages/options/NotificationsPage';
-import React, { useEffect } from 'react';
-
+import React from 'react';
+import { useAuth } from './authContext/autContext';
+import { Header } from './components/Header/Header';
+import HeaderBasic from './components/HeaderBasic/HeaderBasic';
+import { Account } from './components/Account/Account';
+import { RegisterForm } from './components/RegisterForm/RegisterForm';
+import { PersonalInfo } from './components/PersonalInfo/PersonalInfo';
+import { Countries } from './components/Options/Country/Countries';
+import { Cities } from './components/Options/City/Cities';
+import { Attractions } from './components/Options/Attraction/Attractions';
+import { Notification } from './components/Notification/Notification';
+import { Login } from './components/Login/Login';
+import { AuthProvider } from './authContext/autContext';
 
 function App() {
-  useEffect(() => {
-    document.title = 'EasyTravels'; // Establecer el nuevo título al montar el componente
-  }, []);
+  const { activeUser } = useAuth();
+
   return (
     <Router>
+      {activeUser ? <Header /> : <HeaderBasic />}
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/personal" element={<PersonalInfoPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path='/countries' element={<CountriesPage />} />
-        <Route path='/cities' element={<CitiesPage />} />
-        <Route path='/attractions' element={<AttractionsPage />} />
-        <Route path='/itineraries' element={<IttinerariesPage />} />
-        <Route path='/notifications' element={<NotificationsPage />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/personal" element={<PersonalInfo />} />
+        <Route path="/countries" element={<Countries />} />
+        <Route path="/cities" element={<Cities />} />
+        <Route path="/attractions" element={<Attractions />} />
+        <Route path="/notifications" element={<Notification />} />
       </Routes>
+      {/*Aqui deberia ir el footer*/}
     </Router>
+
   );
 }
 
-export default App;
+const DefaultExport = () => (
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
+
+export default DefaultExport;

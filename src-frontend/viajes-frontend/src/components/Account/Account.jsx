@@ -1,45 +1,52 @@
 import React from 'react';
 import './account.css';
+import { useAuth } from '../../authContext/autContext';
+import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Account = () => {
+    const { activeUser } = useAuth();
 
-    // Cada vez que cargue el menu principal ( Account ) se va a guardar en las cookies el usuario, asi ya estaria para todas las demas ventanas
-    const activeUser = localStorage.getItem("activeUser");
+    if (!activeUser) {
+        return <Navigate to="/" />;
 
+    }
     // Compruebo si es admin
     let isAdmin = false; // Por defecto, el usuario no es administrador
 
     if (activeUser) {
-        const activeUserRoles = JSON.parse(activeUser).roles;
+        const activeUserRoles = activeUser.roles;
         isAdmin = activeUserRoles.includes('ADMIN');
     }
 
     function generateItem(awesomeIco, title, description, link) {
         return (
-            <a href={link} className='account-links'>
-                <div className="account-principal-nivel5-frame01">
-                    <div className="account-principal-nivel6-frame01">
-                        <i className={awesomeIco}></i>
-                    </div>
-                    <div className="account-principal-nivel6-frame1">
-                        <div className="account-principal-nivel7-frame002">
-                            <div className="account-principal-nivel8-frame0">
-                                <span className="account-principal-text02">
-                                    <span>{title}</span>
-                                </span>
-                            </div>
+            <Link to={link} className='account-links'>
+                <div className='account-links'>
+                    <div className="account-principal-nivel5-frame01">
+                        <div className="account-principal-nivel6-frame01">
+                            <i className={awesomeIco}></i>
                         </div>
-                        <div className="account-principal-nivel7-frame1">
-                            <div className="account-principal-nivel8-frame001">
-                                <span className="account-principal-text04">
-                                    <span>{description}</span>
-                                </span>
+                        <div className="account-principal-nivel6-frame1">
+                            <div className="account-principal-nivel7-frame002">
+                                <div className="account-principal-nivel8-frame0">
+                                    <span className="account-principal-text02">
+                                        <span>{title}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="account-principal-nivel7-frame1">
+                                <div className="account-principal-nivel8-frame001">
+                                    <span className="account-principal-text04">
+                                        <span>{description}</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </a>
-        )
+            </Link>
+        );
     }
 
     return (
@@ -69,7 +76,7 @@ export const Account = () => {
                 <div className="account-principal-nivel4-frame1">
                     <div className="account-principal-nivel5-frame02">
                         <span className="account-principal-text34">
-                            {JSON.parse(activeUser).username}, {JSON.parse(activeUser).email}
+                            {activeUser.username}, {activeUser.email}
                         </span>
                     </div>
                 </div>
