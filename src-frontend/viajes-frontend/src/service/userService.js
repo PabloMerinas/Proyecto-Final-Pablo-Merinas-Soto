@@ -67,3 +67,19 @@ export const deleteMyUser = async (username, token) => {
     throw new Error('Error al eliminar el usuario');
   }
 };
+
+// Funcion para recuperar todos los usuarios.
+export const getAllUsers = async (token) => {
+  try {
+    const response = await axios.get('http://localhost:8080/v1/user', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      }
+    });
+
+    return response.data; // Devuelvo la respuesta
+  } catch (error) {
+    console.error('Error recuperando los usuarios:', error);
+    throw new Error('Error recuperando los usuarios');
+  }
+};

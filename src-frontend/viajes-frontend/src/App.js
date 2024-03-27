@@ -14,6 +14,7 @@ import { Attractions } from './components/Options/Attraction/Attractions';
 import { Notification } from './components/Notification/Notification';
 import { Login } from './components/Login/Login';
 import { AuthProvider } from './authContext/autContext';
+import { AdminUsers } from './components/AdminUsers/AdminUsers';
 
 function App() {
   const { activeUser } = useAuth();
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/adminUsers" element={<AdminUsers />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/personal" element={<PersonalInfo />} />
         <Route path="/countries" element={<Countries />} />
