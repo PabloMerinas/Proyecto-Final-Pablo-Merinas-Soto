@@ -1,48 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './notifications.css';
 import { getNotificationsByUsername } from "../../service/notificationService";
-
-function generateNormalNotification(id, awesomeIco, title, timeAgo) {
-  return (
-    <div key={id} className="notifications-nivel4-frame1">
-      <div className="notifications-nivel5-frame01">
-        <div className="notifications-nivel6-frame001">
-          <div className="notifications-nivel7-frame001">
-            <i className={awesomeIco}></i>
-          </div>
-        </div>
-        <div className="notifications-nivel6-frame1">
-          <div className="notifications-nivel7-frame002">
-            <div className="notifications-nivel8-frame001">
-              <span className="notifications-text02">
-                <span>{title}</span>
-              </span>
-            </div>
-          </div>
-          <div className="notifications-nivel7-frame1">
-            <div className="notifications-nivel8-frame002">
-              <span className="notifications-text04">
-                <span>{timeAgo}</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="notifications-nivel5-frame1" onClick={onClickDeleteNotification}>
-        <div className="notifications-nivel6-frame002">
-          <div className="notifications-nivel7-frame003">
-            <div className="notifications-nivel8-frame003">
-              <span className="notifications-text06">
-                <span>Delete</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-
-}
+import { deleteNotificationById } from "../../service/notificationService";
 
 // Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
 export function generateSimpleNotification(notifications) {
@@ -132,9 +91,65 @@ export const Notification = () => {
       </div>
     </div>
   )
+
+
+  
+// Método para generar una notificación
+function generateNormalNotification(id, awesomeIco, title, timeAgo) {
+  const token = localStorage.getItem('authToken');
+
+  // Metodo para gestionar la eliminacion de la notificación, le paso el id para seleccionarla
+  async function onClickDeleteNotification(id) {
+    try {
+      await deleteNotificationById(token, id);
+      // Eliminar la notificación de la variable local después de eliminarla del servidor
+      const updatedNotifications = notifications.filter(notification => notification.id !== id);
+      setNotifications(updatedNotifications);
+    } catch (error) {
+      console.error('Error deleting the notification:', error);
+    }
+  }
+
+  return (
+    <div key={id} className="notifications-nivel4-frame1">
+      <div className="notifications-nivel5-frame01">
+        <div className="notifications-nivel6-frame001">
+          <div className="notifications-nivel7-frame001">
+            <i className={awesomeIco}></i>
+          </div>
+        </div>
+        <div className="notifications-nivel6-frame1">
+          <div className="notifications-nivel7-frame002">
+            <div className="notifications-nivel8-frame001">
+              <span className="notifications-text02">
+                <span>{title}</span>
+              </span>
+            </div>
+          </div>
+          <div className="notifications-nivel7-frame1">
+            <div className="notifications-nivel8-frame002">
+              <span className="notifications-text04">
+                <span>{timeAgo}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="notifications-nivel5-frame1" onClick={() => onClickDeleteNotification(id)}>
+        <div className="notifications-nivel6-frame002">
+          <div className="notifications-nivel7-frame003">
+            <div className="notifications-nivel8-frame003">
+              <span className="notifications-text06">
+                <span>Delete</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+}
 }
 
-function onClickDeleteNotification() {
-  alert("ELIMINA!")
-  // TODO
-}
+
