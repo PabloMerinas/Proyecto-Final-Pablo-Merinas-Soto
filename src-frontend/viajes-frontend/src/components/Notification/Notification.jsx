@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import './notifications.css';
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { deleteNotificationById } from "../../service/notificationService";
-import { left } from "@popperjs/core";
 
 // Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
 export function generateSimpleNotification(notifications) {
@@ -37,12 +36,12 @@ export function generateSimpleNotification(notifications) {
 }
 
 // Funcion solo para mostrar si no hay notificaciones, le paso el ancho por el popup
-export function NoNotifications( width ) {
+export function NoNotifications(width) {
   const containerStyle = {
     width: width || '100%',
   };
   const notificationStyle = {
-    left: '0px', 
+    left: '0px',
   };
   return (
     <div className="notifications-nivel4-frame1" style={containerStyle}>
@@ -107,14 +106,25 @@ export const Notification = () => {
 
     // Metodo para gestionar la eliminacion de la notificación, le paso el id para seleccionarla
     async function onClickDeleteNotification(id) {
+      // Recupero el div con el contador
+      const notificationCounter = document.getElementsByClassName('notification-counter')[0];
       try {
         await deleteNotificationById(token, id);
         // Eliminar la notificación de la variable local después de eliminarla del servidor
         const updatedNotifications = notifications.filter(notification => notification.id !== id);
         setNotifications(updatedNotifications);
+
+        // Actualizo el contador
+        if (updatedNotifications.length !== 0) {
+          notificationCounter.innerHTML = updatedNotifications.length
+        } else {
+          notificationCounter.innerHTML = '';
+          notificationCounter.style.border = 'none';
+        }
       } catch (error) {
         console.error('Error deleting the notification:', error);
       }
+
     }
 
     return (

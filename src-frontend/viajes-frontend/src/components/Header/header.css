@@ -650,3 +650,22 @@
   top: 50px;
   right: 0px;
 }
+/** Estilos para el contador de notificaciones */
+.notification-counter {
+  position: absolute;
+  left: 30px;
+  top: 25px;
+  background-color: rgba(247, 249, 252, 1);;
+  border: 1px solid black;
+  color: black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+  z-index: 999;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}

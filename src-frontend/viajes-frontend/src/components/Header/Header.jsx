@@ -13,6 +13,7 @@ export const Header = () => {
   const [showNotificationPopup, setShowNotificationPopup] = useState(false);
   const [imgUrl, setImgUrl] = useState(defaultImg);
   const popupRef = useRef(null); // Referencia al elemento del popup
+  const [notificationCount, setNotificationCount] = useState(0);
 
 
   useEffect(() => {
@@ -23,6 +24,21 @@ export const Header = () => {
           setImgUrl(module.default);
         })
     }
+
+    // Metodo para contar las notificaciones y asi mostrarlas
+    const countNotifications = async () => {
+      try {
+        const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+        const authToken = localStorage.getItem('authToken');
+        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+        const count = Array.isArray(notificationsData) ? notificationsData.length : 0;
+        setNotificationCount(count);
+      } catch (error) {
+        console.error('Error counting notifications:', error);
+      }
+    };
+
+    countNotifications();
   }, []);
 
   // Función para mostrar los popup
@@ -101,6 +117,9 @@ export const Header = () => {
           </div>
           <div className="nivel-frame-11">
             <div className="nivel-frame-12" onClick={handlePopupSimpleNotification}>
+              {notificationCount > 0 && (
+                <div className="notification-counter">{notificationCount}</div>
+              )}
               <div className="nivel-frame-13">
                 <div className="vector-wrapper">
                   <i className="fa-solid fa-envelope"></i>
