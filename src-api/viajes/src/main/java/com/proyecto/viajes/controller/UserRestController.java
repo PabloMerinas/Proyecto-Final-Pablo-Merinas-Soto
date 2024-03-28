@@ -208,25 +208,26 @@ public class UserRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@DeleteMapping("/deleteMyUser")
 	public ResponseEntity<String> deleteMyUser(@RequestParam String username) {
-	    try {
-	        // Buscar al usuario por su nombre de usuario en la base de datos
-	        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-	        if (userOptional.isPresent()) {
-	            // Elimino primero los roles asociados a ese usuario
-	            roleRepository.deleteRolesFromUsername(username);
+		try {
+			// Buscar al usuario por su nombre de usuario en la base de datos
+			Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+			if (userOptional.isPresent()) {
+				// Elimino primero los roles asociados a ese usuario
+				roleRepository.deleteRolesFromUsername(username);
 
-	            // Si el usuario existe, eliminarlo
-	            userRepository.delete(userOptional.get());
-	            return ResponseEntity.ok().body("Usuario eliminado correctamente");
-	        } else {
-	            // Si el usuario no existe, devolver la respuesta
-	            return ResponseEntity.notFound().build();
-	        }
-	    } catch (Exception e) {
-	        // Maneor la excepción
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Se produjo un error al eliminar el usuario");
-	    }
+				// Si el usuario existe, eliminarlo
+				userRepository.delete(userOptional.get());
+				return ResponseEntity.ok().body("Usuario eliminado correctamente");
+			} else {
+				// Si el usuario no existe, devolver la respuesta
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
+			// Maneor la excepción
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Se produjo un error al eliminar el usuario");
+		}
 	}
 
 }

@@ -13,6 +13,23 @@ export const getUserInfo = async (token) => {
       }
     });
 
+    // Obtengo la URL de la imagen de perfil del usuario
+    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      },
+      params: {
+        username: response.data.username
+      },
+      responseType: 'blob'
+    });
+    
+    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+    const imageData = profileImageResponse.data;
+    const imageUrl = URL.createObjectURL(imageData);
+    response.data.imgUrl = imageUrl;
+
+    
     // Obtengo sus roles
     const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByToken', {
       headers: {

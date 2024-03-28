@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./header.css";
-import defaultImg from "./profileImgs/default.png";
 import { generateSimpleNotification, NoNotifications } from "../Notification/Notification";
 import { getNotificationsByUsername } from "../../service/notificationService";
 import { useClickOutside } from "react-click-outside-hook";
@@ -9,24 +8,14 @@ import { Link } from 'react-router-dom';
 
 // Defino el componente header, y le asigno por defecto la imagen de perfil defaultImg
 export const Header = () => {
-
   // Logica para cargar la imagen del usuario, se guarda una por defecto
   const [showPopup, setShowPopup] = useState(false);
   const [showNotificationPopup, setShowNotificationPopup] = useState(false);
-  const [imgUrl, setImgUrl] = useState(defaultImg);
   const popupRef = useRef(null); // Referencia al elemento del popup
   const [notificationCount, setNotificationCount] = useState(0);
   const { activeUser } = useAuth();
 
-
   useEffect(() => {
-    if (activeUser && activeUser.imgUrl) {
-      import(`./profileImgs/${activeUser.imgUrl}`)
-        .then((module) => {
-          setImgUrl(module.default);
-        })
-    }
-
     // Metodo para contar las notificaciones y asi mostrarlas
     const countNotifications = async () => {
       try {
@@ -82,7 +71,9 @@ export const Header = () => {
         <div className="popup-my-account">
           <div className="popup-nivel4-frame0">
             <div className="popup-nivel5-frame0">
-              <div className="popup-nivel6-frame0" ></div>
+              <div className="popup-nivel6-frame0" >
+              <img src={activeUser.imgUrl} alt="Imagen de perfil del usuario activo" />
+              </div>
               <div className="popup-nivel6-frame2">
                 <div className="popup-nivel7-frame0">
                   <div className="popup-nivel8-frame0">
@@ -249,7 +240,10 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div onClick={handlePopupToggle} className="nivel-frame-14" style={{ backgroundImage: `url(${imgUrl})` }} />
+          <div onClick={handlePopupToggle} className="nivel-frame-14">
+            <img src={activeUser.imgUrl} alt="Imagen de perfil del usuario activo" />
+          </div>
+
         </div>
         {showPopup && <Popup />}
         {showNotificationPopup && <PopupNotification />}
