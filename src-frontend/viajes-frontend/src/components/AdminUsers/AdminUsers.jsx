@@ -33,9 +33,6 @@ export const AdminUsers = () => {
 
     }
 
-
-
-
     const handleInputChange = (event) => {
         setSearchText(event.target.value || '');
         filterUsers(event.target.value || ''); // Llamo al metodo para filtrar ( Lo dejo aqui para que se vaya actualizando solo)
@@ -48,9 +45,6 @@ export const AdminUsers = () => {
         );
         setFilteredUsers(filtered);
     };
-
-
-
 
     return (
         <div className="users-principal-container">
@@ -87,6 +81,13 @@ export const AdminUsers = () => {
                         <div className="users-principal-nivel6-frame02">
                             <div className="users-principal-nivel7-frame02">
                                 <div className="users-principal-nivel8-frame0">
+                                    <div className="users-principal-nivel9-frame0">
+                                        <div className="users-principal-nivel10-frame0">
+                                            <span className="users-principal-text04">
+                                                <span>Image</span>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div className="users-principal-nivel9-frame0">
                                         <div className="users-principal-nivel10-frame0">
                                             <span className="users-principal-text04">
@@ -134,7 +135,7 @@ export const AdminUsers = () => {
                             <div className="users-principal-nivel7-frame1">
                                 {filteredUsers.map(user => (
                                     <form key={user.username}>
-                                        {generateUser(user.email, user.username, 'pass', user.roles, user.phone)}
+                                        {generateUser(user.imgUrl ,user.email, user.username, 'pass', user.roles, user.phone)}
                                     </form>
                                 ))}
                             </div>
@@ -146,10 +147,18 @@ export const AdminUsers = () => {
 }
 
 // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-function generateUser(email, username, password, roles, phone) {
+function generateUser(image, email, username, password, roles, phone) {
 
     return (
         <div className="users-principal-nivel8-frame01">
+            <div className="users-principal-nivel9-frame01 ">
+                <div className="users-principal-text199">
+                    <span className="users-principal-text199">
+                        <span>
+                            <img className='admin-user-profile-img' src={image} alt='Profile'></img></span>
+                    </span>
+                </div>
+            </div>
             <div className="users-principal-nivel9-frame01">
                 <div className="users-principal-nivel10-frame006">
                     <span className="users-principal-text16">
@@ -173,7 +182,7 @@ function generateUser(email, username, password, roles, phone) {
             </div>
             <div className="users-principal-nivel9-frame31">
                 <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{roles ? roles : 'default'}</span>
+                    <span className="users-principal-text22">{roles ? roles.join(', ') : 'default'}</span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame41">

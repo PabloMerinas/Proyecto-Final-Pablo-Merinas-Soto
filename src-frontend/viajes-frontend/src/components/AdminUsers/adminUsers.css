@@ -490,6 +490,7 @@
     height: 21px;
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     flex-shrink: 0;
     flex-direction: column;
 }
@@ -610,4 +611,10 @@
     color: black;
     justify-content: center;
 
+}
+.admin-user-profile-img{
+    width: 50px; /** Tamaño de la imagen */
+}
+.users-principal-text199{
+    text-align: center;
 }

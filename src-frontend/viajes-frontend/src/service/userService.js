@@ -86,7 +86,7 @@ export const deleteMyUser = async (username, token) => {
   }
 };
 
-// Funcion para recuperar todos los usuarios.
+// Funcion para recuperar todos los usuarios con sus imágenes de perfil y roles
 export const getAllUsers = async (token) => {
   try {
     const response = await axios.get('http://localhost:8080/v1/user', {
@@ -95,7 +95,46 @@ export const getAllUsers = async (token) => {
       }
     });
 
-    return response.data; // Devuelvo la respuesta
+    // Obtener los datos de los usuarios
+    const users = response.data;
+
+    // Para cada usuario, obtener la imagen de perfil y los roles
+    const usersWithImagesAndRoles = await Promise.all(users.map(async (user) => {
+      // Obtener la imagen de perfil
+      const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+        },
+        params: {
+          username: user.username
+        },
+        responseType: 'blob'
+      });
+
+      // Para obtener la imagen del perfil
+      const imageData = profileImageResponse.data;
+      const imageUrl = URL.createObjectURL(imageData);
+
+      // Obtener los roles del usuario específico
+      const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByUsername', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+        },
+        params: {
+          username: user.username
+        }
+      });
+      const roles = rolesResponse.data;
+
+      // Devolver el usuario con la imagen de perfil y los roles adjuntos
+      return {
+        ...user,
+        imgUrl: imageUrl,
+        roles: roles
+      };
+    }));
+
+    return usersWithImagesAndRoles; // Devolver los usuarios con sus imágenes de perfil y roles
   } catch (error) {
     console.error('Error recovering users:', error);
     throw new Error('Error recovering users');
@@ -103,34 +142,36 @@ export const getAllUsers = async (token) => {
 };
 
 
-// Actualiza la imagen de perfil de un usuario
-export const uploadProfileImageByUsername = async (formData, username) => {
-  const token = localStorage.getItem("authToken");
-  try {
-    await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
-      }
-    });
 
-    // Obtengo la URL de la imagen de perfil del usuario
-    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
-      headers: {
-        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
-      },
-      params: {
-        username: username
-      },
-      responseType: 'blob'
-    });
 
-    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
-    const imageData = profileImageResponse.data;
-    const imageUrl = URL.createObjectURL(imageData);
-    return imageUrl;
-  } catch (error) {
-    console.error('Error updating user profile image: ', error);
-    throw new Error('Error updating user profile image: ' + error.response.data);
+  // Actualiza la imagen de perfil de un usuario
+  export const uploadProfileImageByUsername = async (formData, username) => {
+    const token = localStorage.getItem("authToken");
+    try {
+      await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      // Obtengo la URL de la imagen de perfil del usuario
+      const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+        },
+        params: {
+          username: username
+        },
+        responseType: 'blob'
+      });
+
+      // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+      const imageData = profileImageResponse.data;
+      const imageUrl = URL.createObjectURL(imageData);
+      return imageUrl;
+    } catch (error) {
+      console.error('Error updating user profile image: ', error);
+      throw new Error('Error updating user profile image: ' + error.response.data);
+    }
   }
-}

@@ -130,6 +130,30 @@ public class UserRestController {
 
 		return roles;
 	}
+	
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@GetMapping("/getRolesByUsername")
+	public List<String> getRolesByUsername(@RequestParam String username) {
+	    List<String> roles = new ArrayList<>();
+
+	    // Buscar el usuario por el nombre de usuario
+	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+
+	    if (userOptional.isPresent()) {
+	        UserEntity user = userOptional.get();
+
+	        // Obtener los roles del usuario
+	        List<UserRoleEntity> userRoles = roleRepository.getRolesOfUsername(user.getUsername());
+
+	        // Agregar los roles a la lista
+	        for (UserRoleEntity userRole : userRoles) {
+	            roles.add(userRole.getRole());
+	        }
+	    }
+
+	    return roles;
+	}
+
 
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PutMapping
