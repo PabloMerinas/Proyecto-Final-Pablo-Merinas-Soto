@@ -4,39 +4,49 @@ import { updateUser } from "../../service/userService";
 import { deleteMyUser } from "../../service/userService";
 import { useAuth } from '../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
-
+import { uploadProfileImageByUsername } from "../../service/userService";
 
 export const PersonalInfo = () => {
+    // Defino las variables y sus valores por defecto
     const { activeUser, logout } = useAuth();
     const [editMode, setEditMode] = useState(false);
     const [email, setEmail] = useState(activeUser ? activeUser.email : '');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState(activeUser ? activeUser.phone : '');
-    const [photo, setPhoto] = useState();
     const [bio, setBio] = useState(activeUser ? activeUser.bio : '');
-
+    const [file, setFile] = useState();
     if (!activeUser) {
         return <Navigate to="/" />;
 
     }
-    // Traigo al usuario actual
     const token = localStorage.getItem("authToken");
-    // Defino las variables y sus valores por defecto
-
-
     // Metodo para cambiar el modo entre guardar y editar, sirve para guardar los ajustes tambien
     const changeMode = async () => {
         if (editMode) {
             try {
                 let username = activeUser.username;
                 // Actualizo la cookie con el nuevo valor y actualizo el user
-                await updateUser(token, { username, password, email, phone, photo, bio });
+                await updateUser(token, { username, password, email, phone, bio });
+
+                // FormData para la imagen
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('username', activeUser.username);
+
+                const newImage = await uploadProfileImageByUsername(formData, username);
+                activeUser.imgUrl = newImage;
+
+                // La imagen se aplica correctamente, pero como no se actualiza hasta que clica algo del header, 
+                // agrego esto para que esteticamente se haga al momento
+                const imageElement = document.querySelector('img');
+                if (imageElement) {
+                    imageElement.src = newImage;
+                }
 
             } catch (error) {
-                console.error('Error actualizando el usuario: ', error);
+                console.error('Error updating the user: ', error);
             }
         }
-        // const newActiveUser = await getUserInfo(token);
         setEditMode(!editMode);
 
     }
@@ -57,15 +67,16 @@ export const PersonalInfo = () => {
         setPhone(event.target.value);
     };
 
-    // Manejador de cambio de foto
-    const handlePhotoChange = (event) => {
-        setPhoto(event.target.value);
-    };
-
     // Manejador de cambio de bio
     const handleBioChange = (event) => {
         setBio(event.target.value);
     };
+
+    // Maneja el evento para cambiar la imagen
+    const handlePhotoChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+    }
 
     // Manejar boton de pulsar enter para guardar
     const handleKeyDown = (event) => {
@@ -75,83 +86,48 @@ export const PersonalInfo = () => {
         }
     }
 
-    // TODO procesar imagen
-
-
     // Funcion para generar la opcion
     function generateOption(awesomeIco, inputType, title, value, handleChange, placeholder) {
         const inputClass = editMode ? 'input-edit-mode' : 'input-view-mode';
-        if (inputType === "file") {
-            return (
-                <div className="personal-info-principal-nivel5-frame06">
-                    <div className="personal-info-principal-nivel6-frame06">
-                        <div className="personal-info-principal-nivel7-frame012">
-                            <i className={awesomeIco}></i>
+        return (
+            <div className="personal-info-principal-nivel5-frame06">
+                <div className="personal-info-principal-nivel6-frame06">
+                    <div className="personal-info-principal-nivel7-frame012">
+                        <i className={awesomeIco}></i>
+                    </div>
+                </div>
+                <div className="personal-info-principal-nivel6-frame16">
+                    <div className="personal-info-principal-nivel7-frame013">
+                        <div className="personal-info-principal-nivel8-frame017">
+                            <span className="personal-info-principal-text28">
+                                <span>{title}</span>
+                            </span>
                         </div>
                     </div>
-                    <div className="personal-info-principal-nivel6-frame16">
-                        <div className="personal-info-principal-nivel7-frame013">
-                            <div className="personal-info-principal-nivel8-frame017">
-                                <span className="personal-info-principal-text28">
-                                    <span>{title}</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div className="personal-info-principal-nivel7-frame14">
-                            <div className="personal-info-principal-nivel8-frame018">
-                                <span className="personal-info-principal-text30">
-                                    <input
-                                        type={inputType}
-                                        className={`personal-info-principal-input ${inputClass}`}
-                                        onChange={handleChange}
-                                        accept="image/*" // Acepta cualquier tipo de imagen
-                                    />
-                                </span>
-                            </div>
+                    <div className="personal-info-principal-nivel7-frame14">
+                        <div className="personal-info-principal-nivel8-frame018">
+                            <span className="personal-info-principal-text30">
+                                <input
+                                    type={inputType}
+                                    className={`personal-info-principal-input ${inputClass}`}
+                                    value={value ? value : ""}
+                                    onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
+                                    readOnly={!editMode}
+                                    placeholder={placeholder}
+                                />
+                            </span>
                         </div>
                     </div>
                 </div>
-            )
-        } else {
-            return (
-                <div className="personal-info-principal-nivel5-frame06">
-                    <div className="personal-info-principal-nivel6-frame06">
-                        <div className="personal-info-principal-nivel7-frame012">
-                            <i className={awesomeIco}></i>
-                        </div>
-                    </div>
-                    <div className="personal-info-principal-nivel6-frame16">
-                        <div className="personal-info-principal-nivel7-frame013">
-                            <div className="personal-info-principal-nivel8-frame017">
-                                <span className="personal-info-principal-text28">
-                                    <span>{title}</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div className="personal-info-principal-nivel7-frame14">
-                            <div className="personal-info-principal-nivel8-frame018">
-                                <span className="personal-info-principal-text30">
-                                    <input
-                                        type={inputType}
-                                        className={`personal-info-principal-input ${inputClass}`}
-                                        value={value ? value : ""}
-                                        onChange={handleChange}
-                                        onKeyDown={handleKeyDown}
-                                        readOnly={!editMode}
-                                        placeholder={placeholder}
-                                    />
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
+            </div>
+        )
     }
+
 
     // Función para manejar el clic en Delete account
     const handleDeleteAccount = async () => {
-        
+
         // Muestro el popup
         const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.");
 
@@ -241,7 +217,7 @@ export const PersonalInfo = () => {
                         {generateOption("fa-solid fa-phone", "text", "Phone number", phone, handlePhoneChange, 'Add your phone number')}
                     </div>
                     <div className="personal-info-principal-nivel4-frame4">
-                        {generateOption("fa-solid fa-user", "file", "Profile photo", photo, handlePhotoChange, 'Add a profile photo.')}
+                        {generateOption("fa-solid fa-user", editMode ? "file" : 'text', "Profile photo", editMode ? "" : 'Change your profile image ( PNG )', handlePhotoChange, activeUser.imgUrl ? activeUser.imgUrl.name : 'Add a profile photo.')}
                     </div>
                     <div className="personal-info-principal-nivel4-frame5">
                         {generateOption("fa-solid fa-info", "text", "Bio", bio, handleBioChange, 'Complete your profile for a better experience.')}

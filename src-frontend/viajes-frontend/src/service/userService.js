@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // Función para recuperar la información del usuario utilizando el token
 export const getUserInfo = async (token) => {
+
   try {
     // Obtengo el usuario
     const response = await axios.get('http://localhost:8080/v1/user/getUserByToken', {
@@ -23,13 +24,13 @@ export const getUserInfo = async (token) => {
       },
       responseType: 'blob'
     });
-    
+
     // Para obtener la imagen del perfil ( Esto me ha costado la vida )
     const imageData = profileImageResponse.data;
     const imageUrl = URL.createObjectURL(imageData);
     response.data.imgUrl = imageUrl;
 
-    
+
     // Obtengo sus roles
     const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByToken', {
       headers: {
@@ -44,8 +45,8 @@ export const getUserInfo = async (token) => {
 
     return response.data; // Devolver los datos del usuario obtenidos del backend
   } catch (error) {
-    console.error('Error al recuperar los datos del usuario:', error);
-    throw new Error('Error al recuperar los datos del usuario');
+    console.error('Error recovering user data:', error);
+    throw new Error('Error recovering user data');
   }
 };
 
@@ -61,8 +62,8 @@ export const updateUser = async (token, newData) => {
 
     return response.data;
   } catch (error) {
-    console.error('Error al actualizar los datos del usuario:', error);
-    throw new Error('Error al actualizar los datos del usuario');
+    console.error('Error updating user data:', error);
+    throw new Error('Error updating user data');
   }
 }
 
@@ -80,8 +81,8 @@ export const deleteMyUser = async (username, token) => {
 
     return response.data; // Devolvo la respuesta
   } catch (error) {
-    console.error('Error al eliminar el usuario:', error);
-    throw new Error('Error al eliminar el usuario');
+    console.error('Error deleting the user:', error);
+    throw new Error('Error deleting the user');
   }
 };
 
@@ -96,7 +97,40 @@ export const getAllUsers = async (token) => {
 
     return response.data; // Devuelvo la respuesta
   } catch (error) {
-    console.error('Error recuperando los usuarios:', error);
-    throw new Error('Error recuperando los usuarios');
+    console.error('Error recovering users:', error);
+    throw new Error('Error recovering users');
   }
 };
+
+
+// Actualiza la imagen de perfil de un usuario
+export const uploadProfileImageByUsername = async (formData, username) => {
+  const token = localStorage.getItem("authToken");
+  try {
+    await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    // Obtengo la URL de la imagen de perfil del usuario
+    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      },
+      params: {
+        username: username
+      },
+      responseType: 'blob'
+    });
+
+    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+    const imageData = profileImageResponse.data;
+    const imageUrl = URL.createObjectURL(imageData);
+    return imageUrl;
+  } catch (error) {
+    console.error('Error updating user profile image: ', error);
+    throw new Error('Error updating user profile image: ' + error.response.data);
+  }
+}
