@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import './countries.css';
 import { getCountries } from '../../../service/countryService';
-import { CountryInfoCard } from './CountryInfoCard';
-
-
+import { useAuth } from '../../../authContext/autContext';
+import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [searchText, setSearchText] = useState('');
-
+    const { activeUser } = useAuth();
 
     // Recupero los paises
     useEffect(() => {
@@ -29,6 +28,12 @@ export const Countries = () => {
         fetchCountries();
     }, []);
 
+    // Compruebo que haya un usuario activo o devuelvo a login
+    if (!activeUser) {
+        return <Navigate to="/" />;
+
+    }
+
 
     const handleInputChange = (event) => {
         setSearchText(event.target.value || '');
@@ -45,38 +50,6 @@ export const Countries = () => {
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
-
-        // Logica para renderizar la tarjeta del pais
-        const handleInfoClick = (clickedCountry) => {
-            // Elimino la lista
-            const parentElement = document.querySelector('.countries-principal-countries');
-            while (parentElement.firstChild) {
-                parentElement.removeChild(parentElement.firstChild);
-            }
-
-            const newCountryInfoCard = document.createElement('div');
-            newCountryInfoCard.className = 'country-info-card';
-
-            // Crear el componente CountryInfoCard con los datos del country seleccionado
-            const actualCountry = filteredCountries.find(country => country.country === clickedCountry);
-            const countryInfoCardComponent = <CountryInfoCard
-                capital={actualCountry.capital}
-                country={actualCountry.country}
-                countryCode={actualCountry.countryCode}
-                currencyCode={actualCountry.currencyCode}
-                currencySymbol={actualCountry.currencySymbol}
-                imgUrl={actualCountry.imgUrl}
-                info={actualCountry.info}
-                population={actualCountry.population}
-                languageCode={actualCountry.languageCode}
-            />
-
-            // Incorporo el componente
-            newCountryInfoCard.innerHTML = ReactDOMServer.renderToStaticMarkup(countryInfoCardComponent);
-            parentElement.appendChild(newCountryInfoCard);
-
-        };
-
         return (
             <div className="countries-principal-nivel8-frame01">
                 <div className="countries-principal-nivel9-frame01">
@@ -113,15 +86,17 @@ export const Countries = () => {
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame51">
-                    <div onClick={() => handleInfoClick(country)} className="countries-principal-nivel10-frame011">
-                        <div className="countries-principal-nivel11-frame0">
-                            <div className="countries-principal-nivel12-frame0">
-                                <span className="countries-principal-text25">
-                                    <span>Info</span>
-                                </span>
+                    <Link to={`/countries/${country}`}>
+                        <div className="countries-principal-nivel10-frame011">
+                            <div className="countries-principal-nivel11-frame0">
+                                <div className="countries-principal-nivel12-frame0">
+                                    <span className="countries-principal-text25">
+                                        <span>Info</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
             </div>

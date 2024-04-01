@@ -1,9 +1,14 @@
 import React from "react";
 import './countryInfoCard.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
 export const CountryInfoCard = ({ imgUrl = 'https://us.123rf.com/450wm/pytyczech/pytyczech1904/pytyczech190400437/121432188-globo-terr%C3%A1queo-natural-mapa-del-mundo-3d-con-tierras-verdes-que-dejan-caer-sombras-sobre-mares-y.jpg', capital = 'Unknown', population = 'Unknown', country = 'Unknown', countryCode = 'Unknown', currencyCode = 'Unknown', currencySymbol = 'Unknown', languageCode = 'Unknown', info = 'Unknown' }) => {
+
+  // Recupero el pais
+  const { country: countryParam } = useParams();
+  console.log(countryParam);
+
   return (
     <div className="country-info-card-principal-container">
       <div className="country-info-card-principal-country-card">

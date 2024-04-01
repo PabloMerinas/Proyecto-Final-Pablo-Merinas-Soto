@@ -15,6 +15,7 @@ import { Notification } from './components/Notification/Notification';
 import { Login } from './components/Login/Login';
 import { AuthProvider } from './authContext/autContext';
 import { AdminUsers } from './components/AdminUsers/AdminUsers';
+import {CountryInfoCard} from './components/Options/Country/CountryInfoCard';
 
 function App() {
   const { activeUser } = useAuth();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/personal" element={<PersonalInfo />} />
         <Route path="/countries" element={<Countries />} />
+        <Route path="/countries/:country" element={<CountryInfoCard />} />
         <Route path="/cities" element={<Cities />} />
         <Route path="/attractions" element={<Attractions />} />
         <Route path="/notifications" element={<Notification />} />
