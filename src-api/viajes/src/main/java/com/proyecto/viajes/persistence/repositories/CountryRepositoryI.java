@@ -8,4 +8,7 @@ import com.proyecto.viajes.persistence.model.CountryEntity;
 @Repository
 public interface CountryRepositoryI extends JpaRepository<CountryEntity, Long> {
 
+	CountryEntity findByCountry(String country);
+
+	
 }
