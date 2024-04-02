@@ -28,78 +28,96 @@ import com.proyecto.viajes.services.implement.UserManagementImpl;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Clase controladora de la API para manejar las operaciones relacionadas con
+ * los archivos.
+ */
 @RestController
 @RequestMapping("/v1/file")
 @AllArgsConstructor
 public class FileRestController {
 
+	/**
+	 * Inyección de dependencia de UserManagementImpl.
+	 */
 	private UserManagementImpl userRepository;
 
+	/**
+	 * Endpoint para obtener la imagen de perfil de un usuario por su nombre de
+	 * usuario. Se requiere que el usuario tenga el rol "ROLE_CUSTOMER" o
+	 * "ROLE_ADMIN".
+	 * 
+	 * @return la imagen de perfil del usuario como un recurso ByteArrayResource.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping(value = "/getProfileImageByUsername", produces = MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<Resource> getProfileImageByUsername(@RequestParam String username) {
-	    try {
-	        String imgUrl = userRepository.findByUsername(username)
-	                .map(UserEntity::getImgUrl)
-	                .orElse("default.png");
-	        if(imgUrl.equals("")) imgUrl = "default.png";
-	        
-	        InputStream imageStream = getClass().getResourceAsStream("/profile-images/" + imgUrl);
+		try {
+			String imgUrl = userRepository.findByUsername(username).map(UserEntity::getImgUrl).orElse("default.png");
+			if (imgUrl.equals(""))
+				imgUrl = "default.png";
 
-	        if (imageStream != null) {
-	            byte[] imageBytes = IOUtils.toByteArray(imageStream);
-	            ByteArrayResource resource = new ByteArrayResource(imageBytes);
+			InputStream imageStream = getClass().getResourceAsStream("/profile-images/" + imgUrl);
 
-	            HttpHeaders headers = new HttpHeaders();
-	            headers.setContentType(MediaType.IMAGE_PNG);
-	            return ResponseEntity.ok()
-	                    .headers(headers)
-	                    .contentLength(imageBytes.length)
-	                    .body(resource);
-	        } else {
-	            return ResponseEntity.notFound().build();
-	        }
-	    } catch (IOException e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	    }
+			if (imageStream != null) {
+				byte[] imageBytes = IOUtils.toByteArray(imageStream);
+				ByteArrayResource resource = new ByteArrayResource(imageBytes);
+
+				HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.IMAGE_PNG);
+				return ResponseEntity.ok().headers(headers).contentLength(imageBytes.length).body(resource);
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (IOException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
-	
+
+	/**
+	 * Endpoint para cargar una imagen de perfil a un usuario por su nombre de
+	 * usuario. Se requiere que el usuario tenga el rol "ROLE_CUSTOMER" o
+	 * "ROLE_ADMIN".
+	 * 
+	 * @return Mensaje indicando el resultado.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PostMapping(value = "/uploadProfileImageToUseraname")
-	public ResponseEntity<String> uploadProfileImageToUseraname(@RequestParam("file") MultipartFile file, @RequestParam String username) {
-	    try {
-	        // Verifica si el archivo es nulo o vacío
-	        if (file.isEmpty()) {
-	            return ResponseEntity.badRequest().body("Archivo vacío");
-	        }
+	public ResponseEntity<String> uploadProfileImageToUseraname(@RequestParam("file") MultipartFile file,
+			@RequestParam String username) {
+		try {
+			// Verifica si el archivo es nulo o vacío
+			if (file.isEmpty()) {
+				return ResponseEntity.badRequest().body("Archivo vacío");
+			}
 
-	        // Guarda el archivo en el servidor
-	        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-	        String uploadDir = "./src/main/resources/profile-images";
-	        Path uploadPath = Paths.get(uploadDir);
+			// Guarda el archivo en el servidor
+			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+			String uploadDir = "./src/main/resources/profile-images";
+			Path uploadPath = Paths.get(uploadDir);
 
-	        if (!Files.exists(uploadPath)) {
-	            Files.createDirectories(uploadPath);
-	        }
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
 
-	        try (InputStream inputStream = file.getInputStream()) {
-	            Path filePath = uploadPath.resolve(fileName);
-	            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-	        } catch (IOException ex) {
-	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-	        }
+			try (InputStream inputStream = file.getInputStream()) {
+				Path filePath = uploadPath.resolve(fileName);
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException ex) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+			}
 
-	        // Actualiza la URL de la imagen en la base de datos
-	        UserEntity user = userRepository.findByUsername(username)
-	                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+			// Actualiza la URL de la imagen en la base de datos
+			UserEntity user = userRepository.findByUsername(username)
+					.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-	        user.setImgUrl(fileName);
-	        userRepository.save(user);
+			user.setImgUrl(fileName);
+			userRepository.save(user);
 
-	        return ResponseEntity.ok().body("Imagen subida exitosamente");
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
-	    }
+			return ResponseEntity.ok().body("Imagen subida exitosamente");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
+		}
 	}
 
 }

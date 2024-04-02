@@ -15,13 +15,36 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
+/**
+ * Filtro de autorización para validar y cargar la autenticación del usuario a
+ * partir del token JWT.
+ */
 @Component
 @AllArgsConstructor
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
+	/**
+	 * Utilidad para la generación y validaciones de tokens JWT.
+	 */
 	private final JwtUtils jwtUtil;
+
+	/**
+	 * 
+	 */
 	private final UserDetailsService userDetailsService;
 
+	/**
+	 * Método para realizar el filtrado de la solicitud HTTP y cargar la
+	 * autenticación del usuario desde el token JWT.
+	 *
+	 * @param request     HttpServletRequest de la solicitud.
+	 * @param response    HttpServletResponse de la respuesta.
+	 * @param filterChain FilterChain para continuar con el siguiente filtro en la
+	 *                    cadena.
+	 * @throws ServletException Si se produce un error durante el procesamiento de
+	 *                          la solicitud.
+	 * @throws IOException      Si se produce un error de lectura o escritura.
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException, java.io.IOException {

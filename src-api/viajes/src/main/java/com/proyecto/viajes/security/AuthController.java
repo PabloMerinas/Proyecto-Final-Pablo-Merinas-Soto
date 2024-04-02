@@ -14,14 +14,32 @@ import com.proyecto.viajes.persistence.dto.LoginDto;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Controlador que maneja las operaciones de autenticación, como el inicio de
+ * sesión.
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
 
+	/**
+	 * Administrador de autenticación.
+	 */
 	private final AuthenticationManager authenticationManager;
+
+	/**
+	 * Utilidad para la generación y validación de tokens JWT.
+	 */
 	private final JwtUtils jwtUtil;
 
+	/**
+	 * Endpoint para iniciar sesión.
+	 *
+	 * @param loginDto Objeto que contiene el nombre de usuario y la contraseña
+	 *                 proporcionados por el usuario.
+	 * @return ResponseEntity con un token JWT en el header de autorización.
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(),
@@ -33,7 +51,6 @@ public class AuthController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + jwt);
 
-//		return ResponseEntity.ok().headers(headers).body("Bearer token: " + jwt);
 		return ResponseEntity.ok().headers(headers).body(jwt);
 	}
 }

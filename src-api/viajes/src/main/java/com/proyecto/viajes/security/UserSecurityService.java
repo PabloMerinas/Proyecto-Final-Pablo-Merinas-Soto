@@ -16,11 +16,11 @@ import com.proyecto.viajes.persistence.repositories.UserRepositoryI;
 
 import lombok.AllArgsConstructor;
 
-@Service
-@AllArgsConstructor
 /**
  * Servicio para cargar los detalles de usuario para la autenticacion.
  */
+@Service
+@AllArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
 	/**

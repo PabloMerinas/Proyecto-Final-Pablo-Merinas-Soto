@@ -16,13 +16,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Configuración de seguridad de la aplicación.
+ */
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 @AllArgsConstructor
 public class SecurityConfig {
 
+	/**
+	 * Filtro de autenticación posterior personalizado.
+	 */
 	private final JWTAuthorizationFilter jwtFilter;
 
+	/**
+	 * Configura la cadena de filtros de seguridad HTTP.
+	 * 
+	 * @param http Objeto HttpSecurity para configurar la seguridad HTTP.
+	 * @return La cadena de filtros de seguridad.
+	 * @throws Exception Si hay un error al configurar la seguridad HTTP.
+	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -37,11 +50,24 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	/**
+	 * Configura el codificador de contraseñas.
+	 * 
+	 * @return Un bean del codificador de contraseñas.
+	 */
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * Configura el administrador de autenticación.
+	 * 
+	 * @param configuration Configuración de autenticación.
+	 * @return El administrador de autenticación.
+	 * @throws Exception Si hay un error al obtener el administrador de
+	 *                   autenticación.
+	 */
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();

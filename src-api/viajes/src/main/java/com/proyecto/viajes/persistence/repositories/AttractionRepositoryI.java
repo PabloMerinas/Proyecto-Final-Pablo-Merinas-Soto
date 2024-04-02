@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
 
+/**
+ * Interfaz que define un repositorio para la entidad AttractionEntity. Extiende
+ */
 @Repository
-public interface AttractionRepositoryI extends JpaRepository<AttractionEntity, Long>{
+public interface AttractionRepositoryI extends JpaRepository<AttractionEntity, Long> {
 
 }

@@ -21,7 +21,7 @@ export const AdminUsers = () => {
                 setUsers(usersData);
                 setFilteredUsers(usersData);
             } catch (error) {
-                console.error('Error al obtener los usuarios:', error);
+                console.error('Error fetching users:', error);
             }
         }
         fetchUsers();
@@ -188,7 +188,7 @@ function generateUser(image, email, username, password, roles, phone) {
             <div className="users-principal-nivel9-frame41">
                 <div className="users-principal-nivel10-frame010">
                     <span className="users-principal-text23">
-                        <span>{phone ? phone : 'default'}</span>
+                        <span>{phone ? phone : 'No added'}</span>
                     </span>
                 </div>
             </div>

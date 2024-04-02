@@ -4,8 +4,23 @@ import java.util.List;
 
 import com.proyecto.viajes.persistence.model.CountryEntity;
 
+/**
+ * Interfaz que define las operaciones de gestión de países.
+ */
 public interface CountryManagementI {
 
-	public List<CountryEntity> findAll();
-	public CountryEntity findByCountry(String country);
+	/**
+	 * Obtiene todos los países.
+	 * 
+	 * @return Una lista de todos los países.
+	 */
+	List<CountryEntity> findAll();
+
+	/**
+	 * Busca un país por su nombre.
+	 * 
+	 * @param country El nombre del país a buscar.
+	 * @return El país si se encuentra, o null si no.
+	 */
+	CountryEntity findByCountry(String country);
 }

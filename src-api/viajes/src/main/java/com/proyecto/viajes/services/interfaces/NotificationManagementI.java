@@ -5,12 +5,32 @@ import java.util.Optional;
 
 import com.proyecto.viajes.persistence.model.NotificationEntity;
 
+/**
+ * Interfaz que define las operaciones de gestión de notificaciones.
+ */
 public interface NotificationManagementI {
-	
-	public List<NotificationEntity> findAll();
-	
-	public void delete(NotificationEntity n);
-	
-	public Optional<NotificationEntity> findById(Long id);
+
+	/**
+	 * Obtiene todas las notificaciones.
+	 * 
+	 * @return Una lista de todas las notificaciones.
+	 */
+	List<NotificationEntity> findAll();
+
+	/**
+	 * Elimina una notificación.
+	 * 
+	 * @param n La notificación a eliminar.
+	 */
+	void delete(NotificationEntity n);
+
+	/**
+	 * Busca una notificación por su ID.
+	 * 
+	 * @param id El ID de la notificación a buscar.
+	 * @return Un Optional que contiene la notificación si se encuentra, o vacío si
+	 *         no.
+	 */
+	Optional<NotificationEntity> findById(Long id);
 
 }

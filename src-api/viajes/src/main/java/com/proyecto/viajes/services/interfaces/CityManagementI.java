@@ -4,7 +4,15 @@ import java.util.List;
 
 import com.proyecto.viajes.persistence.model.CityEntity;
 
+/**
+ * Interfaz que define las operaciones de gestión de ciudades.
+ */
 public interface CityManagementI {
 
-	public List<CityEntity> findAll();
+	/**
+	 * Obtiene todas las ciudades.
+	 * 
+	 * @return Una lista de todas las ciudades.
+	 */
+	List<CityEntity> findAll();
 }

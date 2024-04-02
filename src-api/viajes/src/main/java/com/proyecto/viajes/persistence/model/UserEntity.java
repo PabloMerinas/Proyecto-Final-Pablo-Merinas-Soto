@@ -71,14 +71,14 @@ public class UserEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UserRoleEntity> roles;
-	
-	
-    /**
-     * Notificaciones del usuario.
-     */
+
+	/**
+	 * Notificaciones del usuario.
+	 */
 	@JsonIgnore
-    @ManyToMany(mappedBy = "userNotified",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<NotificationEntity> notification;	
-	// TODO arreglar relacion para que no se borren las notificaciones de otro usuario
+	@ManyToMany(mappedBy = "userNotified", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<NotificationEntity> notification;
+	// TODO arreglar relacion para que no se borren las notificaciones de otro
+	// usuario
 
 }

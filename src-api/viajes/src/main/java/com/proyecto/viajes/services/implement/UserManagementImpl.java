@@ -27,18 +27,22 @@ public class UserManagementImpl implements UserManagementI {
 		userRepository.save(u);
 	}
 
+	@Override
 	public List<UserEntity> findAll() {
 		return userRepository.findAll();
 	}
 
+	@Override
 	public Optional<UserEntity> findById(Long id) {
 		return userRepository.findById(id.toString());
 	}
 
+	@Override
 	public void deleteById(Long id) {
 		userRepository.deleteById(id.toString());
 	}
 
+	@Override
 	public void delete(UserEntity userEntity) {
 		userRepository.delete(userEntity);
 	}

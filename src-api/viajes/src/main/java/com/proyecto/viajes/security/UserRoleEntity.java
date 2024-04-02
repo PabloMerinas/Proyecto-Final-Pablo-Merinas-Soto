@@ -12,23 +12,38 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * Entidad que representa el rol de un usuario.
+ */
 @Entity
 @Table(name = "T_USER_ROLE")
 @Data
 public class UserRoleEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+	/**
+	 * ID del ROL.
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	/**
+	 * Nombre de usuario al que pertenece el rol.
+	 */
 	@Column(nullable = false, length = 20)
 	private String username;
 
+	/**
+	 * Nombre del rol.
+	 */
 	@Column(nullable = false, length = 20)
 	private String role;
 
+	/**
+	 * Usuario al que pertenece el ROL.
+	 */
 	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
 	private UserEntity user;
-	
+
 }

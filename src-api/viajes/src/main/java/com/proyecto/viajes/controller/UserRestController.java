@@ -28,15 +28,33 @@ import com.proyecto.viajes.services.implement.UserManagementImpl;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Clase controladora de la API para manejar las operaciones relacionadas con
+ * los usuarios.
+ */
 @RestController
 @RequestMapping("/v1/user")
 @AllArgsConstructor
 public class UserRestController {
 
+	/**
+	 * Inyección de dependencia de UserManagementImpl.
+	 */
 	private UserManagementImpl userRepository;
+
+	/**
+	 * Inyección de dependencia de RoleManagementImpl.
+	 */
 	private RoleManagementImpl roleRepository;
 
+	/**
+	 * Inyección de dependencia de PasswordEncoder.
+	 */
 	private PasswordEncoder passwordEncoder;
+
+	/**
+	 * Inyección de dependencia de JwtUtils.
+	 */
 	private JwtUtils jwtUtils;
 
 	/**
@@ -50,6 +68,13 @@ public class UserRestController {
 		return userRepository.findAll();
 	}
 
+	/**
+	 * Endpoint para agregar un nuevo usuario. Se requiere el rol de:
+	 * "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * 
+	 * @return ResponseEntity con un mensaje indicando el resultado de la operación.
+	 */
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
 		Optional<UserEntity> existingUser = userRepository.findByUsername(u.getUsername());
@@ -81,6 +106,13 @@ public class UserRestController {
 		}
 	}
 
+	/**
+	 * Endpoint para recuperar un usuario pasandole un token. Se requiere el rol de:
+	 * "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * 
+	 * @param token Token del usuario.
+	 * @return Usuario recuperado.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping("/getUserByToken")
 	public UserEntity getUserByToken(@RequestParam String token) {
@@ -96,11 +128,6 @@ public class UserRestController {
 			finalUser.setBio(userOptional.get().getBio());
 			finalUser.setActive(userOptional.get().getActive());
 
-//			List<UserRoleEntity> rol = roleRepository.getRolesOfUsername(username);
-//			for (UserRoleEntity userRoleEntity : rol) {
-//				System.err.println("ROL " + userRoleEntity.getRole());
-//			}
-
 		} else {
 			throw new NoSuchElementException("Usuario no encontrado para el token proporcionado");
 		}
@@ -108,6 +135,13 @@ public class UserRestController {
 		return finalUser;
 	}
 
+	/**
+	 * Endpoint para recuperar los roles de un usuario por su token. Se requiere el
+	 * rol de: "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * 
+	 * @param token Token del usuario.
+	 * @return Lista de roles del usuario.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping("/getRolesByToken")
 	public List<String> getRolesByToken(@RequestParam String token) {
@@ -130,31 +164,44 @@ public class UserRestController {
 
 		return roles;
 	}
-	
+
+	/**
+	 * Endpoint para recuperar los roles de un usuario por su usuario. Se requiere
+	 * el rol de: "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * 
+	 * @param username Usuario del usuario.
+	 * @return Lista de los roles del usuario.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping("/getRolesByUsername")
 	public List<String> getRolesByUsername(@RequestParam String username) {
-	    List<String> roles = new ArrayList<>();
+		List<String> roles = new ArrayList<>();
 
-	    // Buscar el usuario por el nombre de usuario
-	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+		// Buscar el usuario por el nombre de usuario
+		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 
-	    if (userOptional.isPresent()) {
-	        UserEntity user = userOptional.get();
+		if (userOptional.isPresent()) {
+			UserEntity user = userOptional.get();
 
-	        // Obtener los roles del usuario
-	        List<UserRoleEntity> userRoles = roleRepository.getRolesOfUsername(user.getUsername());
+			// Obtener los roles del usuario
+			List<UserRoleEntity> userRoles = roleRepository.getRolesOfUsername(user.getUsername());
 
-	        // Agregar los roles a la lista
-	        for (UserRoleEntity userRole : userRoles) {
-	            roles.add(userRole.getRole());
-	        }
-	    }
+			// Agregar los roles a la lista
+			for (UserRoleEntity userRole : userRoles) {
+				roles.add(userRole.getRole());
+			}
+		}
 
-	    return roles;
+		return roles;
 	}
 
-
+	/**
+	 * Endpoint para actualizar un usuario. Se requiere el rol de: "ROLE_CUSTOMER",
+	 * "ROLE_ADMIN"
+	 * 
+	 * @param updatedUser Usuario con los datos actualizados.
+	 * @return RespondeEntity con la respuesta de la operación.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PutMapping
 	public ResponseEntity<String> updateUser(@RequestBody UserEntity updatedUser) {
@@ -184,6 +231,14 @@ public class UserRestController {
 		}
 	}
 
+	/**
+	 * Endpoint para actualizar un usuario por su username. Se requiere el rol de:
+	 * "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * 
+	 * @param username    Usuario del usuario.
+	 * @param updatedUser Usuario con los datos actualizados.
+	 * @return ResponseEntity con la respuesta de la oparación.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PutMapping("/updateByUsername")
 	public ResponseEntity<String> updateUserByUsername(@RequestParam String username,
@@ -214,6 +269,13 @@ public class UserRestController {
 		}
 	}
 
+	/**
+	 * Endpoint para eliminar un usuario por su id. Se requiere el rol de:
+	 * "ROLE_ADMIN"
+	 * 
+	 * @param id Id del usuario.
+	 * @return ResponseEntity con la respuesta del servidor.
+	 */
 	@Secured({ "ROLE_ADMIN" })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
@@ -229,6 +291,13 @@ public class UserRestController {
 		}
 	}
 
+	/**
+	 * Endpoint para eliminar un usuario Se requiere el rol de: "ROLE_CUSTOMER",
+	 * "ROLE_ADMIN"
+	 * 
+	 * @param username Username del usuario a eliminar.
+	 * @return RespondeEntity con la respuesta del servidor.
+	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@DeleteMapping("/deleteMyUser")
 	public ResponseEntity<String> deleteMyUser(@RequestParam String username) {
