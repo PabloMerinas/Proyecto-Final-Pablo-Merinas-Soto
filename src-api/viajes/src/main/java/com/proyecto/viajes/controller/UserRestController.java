@@ -69,12 +69,10 @@ public class UserRestController {
 	}
 
 	/**
-	 * Endpoint para agregar un nuevo usuario. Se requiere el rol de:
-	 * "ROLE_CUSTOMER", "ROLE_ADMIN"
+	 * Endpoint para agregar un nuevo usuario.
 	 * 
 	 * @return ResponseEntity con un mensaje indicando el resultado de la operación.
 	 */
-	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
 		Optional<UserEntity> existingUser = userRepository.findByUsername(u.getUsername());
