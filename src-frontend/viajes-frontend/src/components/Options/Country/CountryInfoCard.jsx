@@ -29,7 +29,7 @@ export const CountryInfoCard = ({ imgUrl = 'https://us.123rf.com/450wm/pytyczech
             <div className="country-info-card-principal-nivel1-frame0">
               <div className="country-info-card-principal-nivel2-frame1">
                 <div className="country-info-card-principal-nivel3-frame0">
-                  <div className="country-info-card-principal-nivel4-frame0" style={{ backgroundImage: `url(${imgUrl})` }}>
+                  <div className="country-info-card-principal-nivel4-frame0" style={{ backgroundImage: `url(${actualCountry.imgUrl})` }}>
                     <div className="country-info-card-principal-nivel5-frame0">
                       <div className="country-info-card-principal-nivel6-frame0">
                         <div className="country-info-card-principal-nivel7-frame0">

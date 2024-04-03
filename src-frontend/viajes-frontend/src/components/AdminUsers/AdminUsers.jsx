@@ -58,6 +58,7 @@ export const AdminUsers = () => {
                         </div>
                     </div>
                 </div>
+                < Modules />
                 <div className="users-principal-nivel4-frame1">
                     <div className="users-principal-nivel5-frame01">
                         <div className="users-principal-nivel6-frame01">
@@ -75,6 +76,9 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="users-principal-nivel6-frame20">
+                        <span>Add</span>
+                    </div>
                 </div>
                 <div className="users-principal-nivel4-frame2">
                     <div className="users-principal-nivel5-frame02">
@@ -84,7 +88,7 @@ export const AdminUsers = () => {
                                     <div className="users-principal-nivel9-frame0">
                                         <div className="users-principal-nivel10-frame0">
                                             <span className="users-principal-text04">
-                                                <span>Image</span>
+                                                <span>User</span>
                                             </span>
                                         </div>
                                     </div>
@@ -105,28 +109,21 @@ export const AdminUsers = () => {
                                     <div className="users-principal-nivel9-frame2">
                                         <div className="users-principal-nivel10-frame002">
                                             <span className="users-principal-text08">
-                                                <span>Password</span>
+                                                <span>Rol</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="users-principal-nivel9-frame3">
                                         <div className="users-principal-nivel10-frame003">
                                             <span className="users-principal-text10">
-                                                <span>Roles</span>
+                                                <span>Phone</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="users-principal-nivel9-frame4">
                                         <div className="users-principal-nivel10-frame004">
                                             <span className="users-principal-text12">
-                                                <span>Phone</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="users-principal-nivel9-frame5">
-                                        <div className="users-principal-nivel10-frame005">
-                                            <span className="users-principal-text14">
-                                                <span>Info</span>
+                                                <span>Actions</span>
                                             </span>
                                         </div>
                                     </div>
@@ -135,7 +132,7 @@ export const AdminUsers = () => {
                             <div className="users-principal-nivel7-frame1">
                                 {filteredUsers.map(user => (
                                     <form key={user.username}>
-                                        {generateUser(user.imgUrl ,user.email, user.username, 'pass', user.roles, user.phone)}
+                                        {generateUser(user)}
                                     </form>
                                 ))}
                             </div>
@@ -147,64 +144,128 @@ export const AdminUsers = () => {
 }
 
 // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-function generateUser(image, email, username, password, roles, phone) {
-
+function generateUser(user) {
     return (
         <div className="users-principal-nivel8-frame01">
             <div className="users-principal-nivel9-frame01 ">
                 <div className="users-principal-text199">
                     <span className="users-principal-text199">
                         <span>
-                            <img className='admin-user-profile-img' src={image} alt='Profile'></img></span>
+                            <img className='admin-user-profile-img' src={user.imgUrl} alt='Profile'></img></span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame01">
                 <div className="users-principal-nivel10-frame006">
                     <span className="users-principal-text16">
-                        <span>{email ? email : 'default'}</span>
+                        <span>{user.email ? user.email : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame11">
                 <div className="users-principal-nivel10-frame007">
                     <span className="users-principal-text18">
-                        <span>{username ? username : 'default'}</span>
+                        <span>{user.username ? user.username : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame21">
                 <div className="users-principal-nivel10-frame008">
                     <span className="users-principal-text20">
-                        <span>{password ? password : 'default'}</span>
+                        <span>{user.roles ? user.roles.join(', ') : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame31">
                 <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{roles ? roles.join(', ') : 'default'}</span>
+                    <span className="users-principal-text22">{user.phone ? user.phone : 'No added'}</span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame41">
                 <div className="users-principal-nivel10-frame010">
                     <span className="users-principal-text23">
-                        <span>{phone ? phone : 'No added'}</span>
+                        <span></span>
                     </span>
                 </div>
             </div>
-            <div className="users-principal-nivel9-frame51">
-                <div className="users-principal-nivel10-frame011">
-                    <div className="users-principal-nivel11-frame0">
-                        <div className="users-principal-nivel12-frame0">
-                            <span className="users-principal-text25">
-                                <span>Show</span>
-                            </span>
+        </div>
+
+    )
+}
+
+
+// Partes HTML
+const Modules = () => {
+    return (
+        <div className="modules-container">
+            <div className="modules-depth4-frame2">
+                <div className="modules-depth5-frame0">
+                    <div className="modules-depth6-frame0">
+                        <span className="modules-text">
+                            <span>Modules</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div className="modules-depth4-frame3">
+                <div className="modules-depth5-frame01">
+                    <div className="modules-depth6-frame01">
+                        <div className="modules-depth7-frame0">
+                            <div className="modules-depth8-frame0">
+                                <div className="modules-depth9-frame0">
+                                    <span className="modules-text02">
+                                        <span>Users</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modules-depth7-frame1">
+                            <div className="modules-depth8-frame01">
+                                <div className="modules-depth9-frame01">
+                                    <span className="modules-text04">
+                                        <span>Countries</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modules-depth7-frame2">
+                            <div className="modules-depth8-frame02">
+                                <div className="modules-depth9-frame02">
+                                    <span className="modules-text06">
+                                        <span>Cities</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modules-depth7-frame3">
+                            <div className="modules-depth8-frame03">
+                                <div className="modules-depth9-frame03">
+                                    <span className="modules-text08">
+                                        <span>Attractions</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modules-depth7-frame4">
+                            <div className="modules-depth8-frame04">
+                                <div className="modules-depth9-frame04">
+                                    <span className="modules-text10">
+                                        <span>Itineraries</span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     )
+}
+
+// HTML para usuarios
+
+const AdminUser = () => {
+    return (
+        <></>
+    );
 }
