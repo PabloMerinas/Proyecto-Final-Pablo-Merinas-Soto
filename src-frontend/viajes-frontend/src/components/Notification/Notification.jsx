@@ -122,6 +122,7 @@ export const Notification = () => {
         } else {
           notificationCounter.innerHTML = '';
           notificationCounter.style.border = 'none';
+          notificationCounter.style.backgroundColor = 'transparent';
         }
       } catch (error) {
         console.error('Error deleting the notification:', error);
