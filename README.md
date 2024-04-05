@@ -1,4 +1,4 @@
-# Título del Proyecto
+# Viajes EasyTravels 
 #### Curso Escolar 2023-2024
 #### Autor: Pablo Merinas Soto
 #### Tutor: [Antonio Gabriel González Casado(Enlace a su cuenta de GitHub)](https://github.com/antonio-gabriel-gonzalez-casado)
