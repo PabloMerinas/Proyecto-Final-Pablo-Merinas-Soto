@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from "../../authContext/autContext";
 import { Navigate } from "react-router-dom";
 import { getAllUsers } from '../../service/userService';
+import { getCountries } from '../../service/countryService';
+import { getCities } from '../../service/cityService';
+import { getAttractions } from '../../service/attractionService';
+
 import './adminUsers.css';
 
 export const AdminUsers = () => {
-    const [users, setUsers] = useState([]);
+    const [optionData, setOptionData] = useState([]);
     const [filteredItem, setFilteredItem] = useState([]);
     const [searchText, setSearchText] = useState('');
     // Comprobamos que este logeado
@@ -13,21 +17,62 @@ export const AdminUsers = () => {
     // Dependiendo de la opcion seleccionada mostrara un menu u otro.
     const [selectedOption, setSelectedOption] = useState(1);
 
+    // Métodos para recuperar los datos dependiendo de la opcion seleccionada.
     useEffect(() => {
+        // Recupero el token
+        const token = localStorage.getItem("authToken");
         async function fetchUsers() {
             try {
-                // Recupero el token
-                const token = localStorage.getItem("authToken");
                 const usersData = await getAllUsers(token);
-                setUsers(usersData);
+                setOptionData(usersData);
                 setFilteredItem(usersData);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         }
+        async function fetchCountries() {
+            try {
+                const countriesData = await getCountries(token);
+                setOptionData(countriesData);
+                setFilteredItem(countriesData);
+            } catch (error) {
+                console.error('Error fetching countries: ', error);
+            }
+        }
+        async function fetchCities() {
+            try {
+                const citiesData = await getCities(token);
+                setOptionData(citiesData);
+                setFilteredItem(citiesData);
+            } catch (error) {
+                console.error('Error fetching cities: ', error);
+            }
+        }
+        async function fetchAttractions() {
+            try {
+                const attractionsData = await getAttractions(token);
+                setOptionData(attractionsData);
+                setFilteredItem(attractionsData);
+            } catch (error) {
+                console.error('Error fetching attractions: ', error);
+            }
+        }
 
-        if (selectedOption === 1) {
-            fetchUsers();
+        switch (selectedOption) {
+            case 1:
+                fetchUsers();
+                break;
+            case 2:
+                fetchCountries();
+                break;
+            case 3:
+                fetchCities();
+                break;
+            case 4:
+                fetchAttractions();
+                break;
+            default:
+                fetchUsers();
         }
     }, [selectedOption]);
 
@@ -46,7 +91,7 @@ export const AdminUsers = () => {
     // Metodo para filtrar usuarios
     const filterItem = (text) => {
         if (selectedOption === 1) {
-            const filtered = users.filter(user =>
+            const filtered = optionData.filter(user =>
                 user.username.toLowerCase().includes(text.toLowerCase())
             );
             setFilteredItem(filtered);
@@ -59,7 +104,7 @@ export const AdminUsers = () => {
     const Modules = () => {
         const handleModuleClick = (option) => {
             setSelectedOption(option);
-            console.log(option);
+            // console.log(option);
         };
         return (
             <div className="modules-container">
@@ -127,6 +172,19 @@ export const AdminUsers = () => {
         )
     }
 
+    // Dependiendo de la opcion seleccionada mostrara un componente u otro.
+    let ComponentToRender;
+    switch (selectedOption) {
+        case 1:
+            ComponentToRender = AdminUser;
+            break;
+        case 2:
+            ComponentToRender = AdminCountries;
+            break;
+        default:
+            ComponentToRender = AdminUser;
+    }
+
     return (
         <div className="users-principal-container">
             <div className="users-principal-users">
@@ -162,67 +220,14 @@ export const AdminUsers = () => {
                     </div>
                 </div>
             </div>
-            <AdminUser filteredUsers={filteredItem} />
+            <ComponentToRender filteredData={filteredItem} />
         </div>
     )
 }
-
-// Metodo para generar la linea del pais y llamar a su tarjeta con la información
-function generateUser(user) {
-    return (
-        <div className="users-principal-nivel8-frame01">
-            <div className="users-principal-nivel9-frame01 ">
-                <div className="users-principal-text199">
-                    <span className="users-principal-text199">
-                        <span>
-                            <img className='admin-user-profile-img' src={user.imgUrl} alt='Profile'></img></span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame01">
-                <div className="users-principal-nivel10-frame006">
-                    <span className="users-principal-text16">
-                        <span>{user.email ? user.email : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame11">
-                <div className="users-principal-nivel10-frame007">
-                    <span className="users-principal-text18">
-                        <span>{user.username ? user.username : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame21">
-                <div className="users-principal-nivel10-frame008">
-                    <span className="users-principal-text20">
-                        <span>{user.roles ? user.roles.join(', ') : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame31">
-                <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{user.phone ? user.phone : 'No added'}</span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame41">
-                <div className="users-principal-nivel10-frame010">
-                    <span className="users-principal-text23">
-                        <span></span>
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
-
 
 
 // HTML para usuarios
-
-const AdminUser = ({ filteredUsers }) => {
+const AdminUser = ({ filteredData }) => {
     return (
         <div className="users-principal-nivel4-frame2">
             <div className="users-principal-nivel5-frame02">
@@ -274,7 +279,7 @@ const AdminUser = ({ filteredUsers }) => {
                         </div>
                     </div>
                     <div className="users-principal-nivel7-frame1">
-                        {filteredUsers.map(user => (
+                        {filteredData.map(user => (
                             <form key={user.username}>
                                 {generateUser(user)}
                             </form>
@@ -284,4 +289,169 @@ const AdminUser = ({ filteredUsers }) => {
             </div>
         </div>
     );
+}
+// Metodo para generar la linea del usuario
+function generateUser(user) {
+    return (
+        <div className="users-principal-nivel8-frame01">
+            <div className="users-principal-nivel9-frame01 ">
+                <div className="users-principal-text199">
+                    <span className="users-principal-text199">
+                        <span>
+                            <img className='admin-user-profile-img' src={user.imgUrl} alt='Profile'></img></span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame01">
+                <div className="users-principal-nivel10-frame006">
+                    <span className="users-principal-text16">
+                        <span>{user.email ? user.email : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame11">
+                <div className="users-principal-nivel10-frame007">
+                    <span className="users-principal-text18">
+                        <span>{user.username ? user.username : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame21">
+                <div className="users-principal-nivel10-frame008">
+                    <span className="users-principal-text20">
+                        <span>{user.roles ? user.roles.join(', ') : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame31">
+                <div className="users-principal-nivel10-frame009">
+                    <span className="users-principal-text22">{user.phone ? user.phone : 'No added'}</span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame41">
+                <div className="users-principal-nivel10-frame010">
+                    <span className="users-principal-text23">
+                        <span></span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    )
+}
+
+// HTML para paises
+const AdminCountries = ({ filteredData }) => {
+    return (
+        <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel5-frame02">
+                <div className="users-principal-nivel6-frame02">
+                    <div className="users-principal-nivel7-frame02">
+                        <div className="users-principal-nivel8-frame0">
+                            <div className="users-principal-nivel9-frame0">
+                                <div className="users-principal-nivel10-frame0">
+                                    <span className="users-principal-text04">
+                                        <span>Country</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="users-principal-nivel9-frame0">
+                                <div className="users-principal-nivel10-frame0">
+                                    <span className="users-principal-text04">
+                                        <span>Population</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="users-principal-nivel9-frame1">
+                                <div className="users-principal-nivel10-frame001">
+                                    <span className="users-principal-text06">
+                                        <span>Capital</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="users-principal-nivel9-frame2">
+                                <div className="users-principal-nivel10-frame002">
+                                    <span className="users-principal-text08">
+                                        <span>Country Code</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="users-principal-nivel9-frame3">
+                                <div className="users-principal-nivel10-frame003">
+                                    <span className="users-principal-text10">
+                                        <span>Currency</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="users-principal-nivel9-frame4">
+                                <div className="users-principal-nivel10-frame004">
+                                    <span className="users-principal-text12">
+                                        <span>Actions</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="users-principal-nivel7-frame1">
+                        {filteredData.map(country => (
+                            <form key={country.country}>
+                                {generateCountry(country)}
+                            </form>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+// Metodo para generar la linea del usuario
+function generateCountry(country) {
+    console.log(country)
+    return (
+        <div className="users-principal-nivel8-frame01">
+            <div className="users-principal-nivel9-frame01 ">
+                <div className="users-principal-text199">
+                    <span className="users-principal-text199">
+                        <span>{country.country ? country.country : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame01">
+                <div className="users-principal-nivel10-frame006">
+                    <span className="users-principal-text16">
+                        <span>{country.email ? country.email : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame11">
+                <div className="users-principal-nivel10-frame007">
+                    <span className="users-principal-text18">
+                        <span>{country.username ? country.username : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame21">
+                <div className="users-principal-nivel10-frame008">
+                    <span className="users-principal-text20">
+                        <span>{country.roles ? country.roles.join(', ') : 'default'}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame31">
+                <div className="users-principal-nivel10-frame009">
+                    <span className="users-principal-text22">{country.phone ? country.phone : 'No added'}</span>
+                </div>
+            </div>
+            <div className="users-principal-nivel9-frame41">
+                <div className="users-principal-nivel10-frame010">
+                    <span className="users-principal-text23">
+                        <span></span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    )
 }
