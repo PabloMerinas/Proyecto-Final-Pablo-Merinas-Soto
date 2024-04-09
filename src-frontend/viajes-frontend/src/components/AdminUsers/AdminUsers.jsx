@@ -90,13 +90,35 @@ export const AdminUsers = () => {
     };
     // Metodo para filtrar usuarios
     const filterItem = (text) => {
-        if (selectedOption === 1) {
-            const filtered = optionData.filter(user =>
-                user.username.toLowerCase().includes(text.toLowerCase())
-            );
-            setFilteredItem(filtered);
+        // Dependiendo de que opcion este renderizada se filtrara por una opcion u otra.
+        let filtered;
+        switch (selectedOption) {
+            case 1:
+                filtered = optionData.filter(user =>
+                    user.username.toLowerCase().includes(text.toLowerCase())
+                );
+                break;
+            case 2:
+                filtered = optionData.filter(country =>
+                    country.country.toLowerCase().includes(text.toLowerCase())
+                );
+                break;
+            case 3:
+                filtered = optionData.filter(city =>
+                    city.city.toLowerCase().includes(text.toLowerCase())
+                );
+                break;
+            case 4:
+                filtered = optionData.filter(attraction =>
+                    attraction.attraction.toLowerCase().includes(text.toLowerCase())
+                );
+                break;
+            default:
+                filtered = optionData.filter(user =>
+                    user.username.toLowerCase().includes(text.toLowerCase())
+                );
         }
-
+        setFilteredItem(filtered);
     };
 
 
@@ -104,8 +126,9 @@ export const AdminUsers = () => {
     const Modules = () => {
         const handleModuleClick = (option) => {
             setSelectedOption(option);
-            // console.log(option);
+            setSearchText(''); // Si cambio de opcion se borra lo que tenga en la barra de busqueda.
         };
+
         return (
             <div className="modules-container">
                 <div className="modules-depth4-frame2">
@@ -124,7 +147,7 @@ export const AdminUsers = () => {
                                 <div className="modules-depth8-frame0">
                                     <div className="modules-depth9-frame0">
                                         <span className="modules-text02" onClick={() => handleModuleClick(1)}>
-                                            <span>Users</span>
+                                            <span className={selectedOption === 1 ? 'selected-option' : ''}>Users</span>
                                         </span>
                                     </div>
                                 </div>
@@ -133,7 +156,7 @@ export const AdminUsers = () => {
                                 <div className="modules-depth8-frame01">
                                     <div className="modules-depth9-frame01">
                                         <span className="modules-text04" onClick={() => handleModuleClick(2)}>
-                                            <span>Countries</span>
+                                            <span className={selectedOption === 2 ? 'selected-option' : ''}>Countries</span>
                                         </span>
                                     </div>
                                 </div>
@@ -142,7 +165,7 @@ export const AdminUsers = () => {
                                 <div className="modules-depth8-frame02">
                                     <div className="modules-depth9-frame02">
                                         <span className="modules-text06" onClick={() => handleModuleClick(3)}>
-                                            <span>Cities</span>
+                                            <span className={selectedOption === 3 ? 'selected-option' : ''}>Cities</span>
                                         </span>
                                     </div>
                                 </div>
@@ -151,7 +174,7 @@ export const AdminUsers = () => {
                                 <div className="modules-depth8-frame03">
                                     <div className="modules-depth9-frame03">
                                         <span className="modules-text08" onClick={() => handleModuleClick(4)}>
-                                            <span>Attractions</span>
+                                            <span className={selectedOption === 4 ? 'selected-option' : ''}>Attractions</span>
                                         </span>
                                     </div>
                                 </div>
@@ -173,16 +196,28 @@ export const AdminUsers = () => {
     }
 
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
-    let ComponentToRender;
+    let ComponentToRender; // Este sera el componente que se va a renderizar.
+    let textToFind; // Este es el texto para el la barra de busqueda.
     switch (selectedOption) {
         case 1:
             ComponentToRender = AdminUser;
+            textToFind = 'users';
             break;
         case 2:
             ComponentToRender = AdminCountries;
+            textToFind = 'countries';
+            break;
+        case 3:
+            ComponentToRender = AdminCities;
+            textToFind = 'cities';
+            break;
+        case 4:
+            ComponentToRender = AdminAttractions;
+            textToFind = 'attractions';
             break;
         default:
             ComponentToRender = AdminUser;
+            textToFind = 'users';
     }
 
     return (
@@ -210,7 +245,7 @@ export const AdminUsers = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
-                                        placeholder="Buscar usuarios" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        placeholder={`Find ${textToFind}`} style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
                         </div>
@@ -405,7 +440,7 @@ const AdminCountries = ({ filteredData }) => {
         </div>
     );
 }
-// Metodo para generar la linea del usuario
+// Metodo para generar la linea del pais
 function generateCountry(country) {
     console.log(country)
     return (
@@ -420,27 +455,27 @@ function generateCountry(country) {
             <div className="users-principal-nivel9-frame01">
                 <div className="users-principal-nivel10-frame006">
                     <span className="users-principal-text16">
-                        <span>{country.email ? country.email : 'default'}</span>
+                        <span>{country.population ? country.population : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame11">
                 <div className="users-principal-nivel10-frame007">
                     <span className="users-principal-text18">
-                        <span>{country.username ? country.username : 'default'}</span>
+                        <span>{country.capital ? country.capital : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame21">
                 <div className="users-principal-nivel10-frame008">
                     <span className="users-principal-text20">
-                        <span>{country.roles ? country.roles.join(', ') : 'default'}</span>
+                        <span>{country.countryCode ? country.countryCode : 'default'}</span>
                     </span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame31">
                 <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{country.phone ? country.phone : 'No added'}</span>
+                    <span className="users-principal-text22">{country.currencySymbol ? country.currencySymbol : 'No added'}</span>
                 </div>
             </div>
             <div className="users-principal-nivel9-frame41">
@@ -454,4 +489,22 @@ function generateCountry(country) {
         </div>
 
     )
+}
+
+// HTML para ciudades
+const AdminCities = ({ filteredData }) => {
+
+}
+// Metodo para generar la linea de la ciudad
+function generateCity(city) {
+
+}
+
+// HTML para las atracciones
+const AdminAttractions = ({ filteredData }) => {
+
+}
+// Metodo para generar la linea de la attracion
+function generateAttraction(attracion) {
+
 }
