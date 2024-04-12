@@ -27,8 +27,6 @@
 }
 
 .users-principal-nivel5-frame0 {
-    width: 103.515625px;
-    height: 27.5px;
     display: flex;
     align-items: flex-start;
     flex-shrink: 0;
@@ -566,73 +564,6 @@
     font-stretch: normal;
     text-decoration: none;
 }
-
-.users-principal-nivel9-frame51 {
-    width: 164.984375px;
-    height: 72px;
-    display: flex;
-    padding: 8px 16px;
-    align-items: center;
-    flex-shrink: 0;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.users-principal-nivel10-frame011 {
-    width: 132.984375px;
-    height: 32px;
-    display: flex;
-    padding: 0 16px;
-    overflow: hidden;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 12px;
-    justify-content: center;
-    background-color: rgba(232, 234, 242, 1);
-}
-
-.users-principal-nivel11-frame0 {
-    width: 66px;
-    height: 21px;
-    display: flex;
-    overflow: hidden;
-    align-items: flex-start;
-    flex-shrink: 0;
-    flex-direction: column;
-    background-color: rgba(232, 234, 242, 1);
-}
-
-.users-principal-nivel12-frame0 {
-    display: flex;
-    align-self: stretch;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.users-principal-text25 {
-    color: rgba(12, 17, 28, 1);
-    width: 66px;
-    height: auto;
-    font-size: 14px;
-    font-style: Medium;
-    text-align: center;
-    font-weight: 500;
-    line-height: 21px;
-    font-stretch: normal;
-    text-decoration: none;
-}
-
-/* Efecto sobre esos div */
-.users-principal-nivel10-frame011 {
-    transition: border-color 0.3s, cursor 0.3s;
-    cursor: default;
-}
-
-.users-principal-nivel10-frame011:hover {
-    border: 1px solid rgb(167, 167, 167);
-    cursor: pointer;
-}
-
 /* Efectos para el boton de vuelta */
 .country-back-button {
     color: black;
@@ -956,4 +887,17 @@
 
 .selected-option{
     color: black;
+}
+
+.admin-principal-options-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -40px;
+    gap: 10px;
+    scale: 1.5;
+}
+.admin-principal-options-icons:hover{
+    cursor: pointer;
 }
