@@ -600,8 +600,9 @@ function generateCity(city) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash"></i>
-                        </span>                    </span>
+                            <i className="fa-solid fa-trash"  onClick={() => deleteDataItem(city, 'city', '')}></i>
+                        </span>
+                    </span>
                 </div>
             </div>
 

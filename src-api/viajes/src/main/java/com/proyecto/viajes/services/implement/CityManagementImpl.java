@@ -21,4 +21,17 @@ public class CityManagementImpl implements CityManagementI {
 		return cityRepository.findAll();
 	}
 
+	@Override
+	public CityEntity findByCity(String city) {
+		return cityRepository.findByCity(city);
+	}
+
+	@Override
+	public void delete(CityEntity cityToDelete) {
+		cityRepository.delete(cityToDelete);
+	}
+
+	
+
+
 }

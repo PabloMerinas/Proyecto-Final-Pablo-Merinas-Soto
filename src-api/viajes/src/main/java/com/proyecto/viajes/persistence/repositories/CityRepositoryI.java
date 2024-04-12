@@ -11,4 +11,6 @@ import com.proyecto.viajes.persistence.model.CityEntity;
 @Repository
 public interface CityRepositoryI extends JpaRepository<CityEntity, Long> {
 
+	CityEntity findByCity(String city);
+
 }
