@@ -15,4 +15,19 @@ public interface AttractionManagementI {
 	 * @return Una lista de todas las atracciones turísticas.
 	 */
 	List<AttractionEntity> findAll();
+
+	/**
+	 * Obtiene una atracción pasandole su nombre.
+	 * 
+	 * @param attraction Nombre de la attraccion.
+	 * @return Optional con la atracción.
+	 */
+	AttractionEntity findByAttraction(String attraction);
+
+	/**
+	 * Elimina una atracción.
+	 * 
+	 * @param attraction Attracción a eliminar.
+	 */
+	void delete(AttractionEntity attraction);
 }

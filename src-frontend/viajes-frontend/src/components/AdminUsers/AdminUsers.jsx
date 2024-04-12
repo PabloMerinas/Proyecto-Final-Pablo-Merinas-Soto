@@ -6,6 +6,7 @@ import { getCountries } from '../../service/countryService';
 import { getCities } from '../../service/cityService';
 import { getAttractions } from '../../service/attractionService';
 import { deleteUserByUsername } from '../../service/userService';
+import { deleteAttractionByAttraction } from '../../service/attractionService';
 
 import './adminUsers.css';
 
@@ -258,8 +259,8 @@ function deleteDataItem(item, typeData, actualUsername){
     }else{
         if(typeData === 'user'){
             deleteUserByUsername(item.username);
-            //window.location.reload();
-    
+        } else if(typeData === 'attraction'){
+            deleteAttractionByAttraction(item.attraction);
         }
     }
 
@@ -728,7 +729,7 @@ function generateAttraction(attraction) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash"></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction,'attraction', '')}></i>
                         </span>
                     </span>
                 </div>

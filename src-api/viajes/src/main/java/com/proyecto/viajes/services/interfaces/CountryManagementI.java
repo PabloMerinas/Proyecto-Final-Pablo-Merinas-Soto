@@ -23,4 +23,10 @@ public interface CountryManagementI {
 	 * @return El país si se encuentra, o null si no.
 	 */
 	CountryEntity findByCountry(String country);
+	
+	/**
+	 * Elimina un pais.
+	 * @param country Pais que se va a eliminar.
+	 */
+	void delete(CountryEntity country);
 }

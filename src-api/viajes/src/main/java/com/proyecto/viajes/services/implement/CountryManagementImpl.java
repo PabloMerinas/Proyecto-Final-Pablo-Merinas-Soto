@@ -25,6 +25,11 @@ public class CountryManagementImpl implements CountryManagementI{
 	public CountryEntity findByCountry(String country) {
 	    return countryRepository.findByCountry(country);
 	}
+
+	@Override
+	public void delete(CountryEntity country) {
+		countryRepository.delete(country);
+	}
 	
 	
 }

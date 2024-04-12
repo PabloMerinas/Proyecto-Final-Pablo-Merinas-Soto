@@ -18,3 +18,25 @@ export const getAttractions = async (token) => {
         throw new Error('Error al recuperar las atracciones');
     }
 };
+
+// Método para aliminar una attraccion
+export const deleteAttractionByAttraction = async (attraction) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        // Llamar a la API
+        const response = await axios.delete('http://localhost:8080/v1/attraction/deleteAttractionByAttraction', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                attraction: attraction
+            }
+        });
+
+
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting the attraction:", error);
+        throw new Error('Error deleting the attraction');
+    }
+};

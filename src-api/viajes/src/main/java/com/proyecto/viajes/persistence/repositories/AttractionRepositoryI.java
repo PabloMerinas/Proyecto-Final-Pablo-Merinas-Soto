@@ -11,4 +11,6 @@ import com.proyecto.viajes.persistence.model.AttractionEntity;
 @Repository
 public interface AttractionRepositoryI extends JpaRepository<AttractionEntity, Long> {
 
+	AttractionEntity findByAttraction(String attraction);
+
 }

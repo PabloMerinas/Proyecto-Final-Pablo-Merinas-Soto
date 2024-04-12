@@ -2,9 +2,12 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
@@ -37,4 +40,25 @@ public class AttractionRestController {
 		return attractionRepository.findAll();
 	}
 
+	/**
+	 * Endpoint para eliminar una atracción por su nombre. Se requiere el rol de: "ROLE_ADMIN"
+	 * 
+	 * @param attraction Nombre de la atracción a eliminar.
+	 * @return ResponseEntity con la respuesta del servidor.
+	 */
+	@Secured("ROLE_ADMIN")
+	@DeleteMapping("/deleteAttractionByAttraction")
+	public ResponseEntity<String> deleteAttractionByAttraction(@RequestParam String attraction) {
+	    // Buscar la atracción por su nombre
+	    AttractionEntity attractionToDelete = attractionRepository.findByAttraction(attraction);
+	    
+	    if (attractionToDelete != null) {
+	        // Eliminar la atracción
+	        attractionRepository.delete(attractionToDelete);
+	        return ResponseEntity.ok().body("Atracción eliminada correctamente");
+	    } else {
+	        // Si la atracción no existe, devolver la respuesta
+	        return ResponseEntity.notFound().build();
+	    }
+	}
 }

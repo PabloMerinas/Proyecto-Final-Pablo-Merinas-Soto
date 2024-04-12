@@ -12,15 +12,23 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AttractionManagementImpl implements AttractionManagementI{
-	
+public class AttractionManagementImpl implements AttractionManagementI {
+
 	private AttractionRepositoryI attractionRepository;
-	
+
 	@Override
 	public List<AttractionEntity> findAll() {
 		return attractionRepository.findAll();
 	}
 
-	
-	
+	@Override
+	public AttractionEntity findByAttraction(String attraction) {
+		return attractionRepository.findByAttraction(attraction);
+	}
+
+	@Override
+	public void delete(AttractionEntity attraction) {
+		attractionRepository.delete(attraction);
+	}
+
 }

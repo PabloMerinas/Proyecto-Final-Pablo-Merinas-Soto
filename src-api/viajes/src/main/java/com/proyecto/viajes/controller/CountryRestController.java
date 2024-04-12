@@ -2,7 +2,9 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,4 +53,24 @@ public class CountryRestController {
 		return countryRepository.findByCountry(country);
 	}
 
+	/**
+	 * Endpoint para eliminar un país por su nombre. Se requiere el rol de:
+	 * "ROLE_ADMIN"
+	 * 
+	 * @param country Nombre del país a eliminar.
+	 * @return ResponseEntity con la respuesta del servidor.
+	 */
+	@Secured("ROLE_ADMIN")
+	@DeleteMapping("/deleteCountryByCountry")
+	public ResponseEntity<String> deleteCountryByCountry(@RequestParam String country) {
+		CountryEntity countryToDelete = countryRepository.findByCountry(country);
+
+		if (countryToDelete != null) {
+			// Eliminar el país
+			countryRepository.delete(countryToDelete);
+			return ResponseEntity.ok().body("País eliminado correctamente");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 }
