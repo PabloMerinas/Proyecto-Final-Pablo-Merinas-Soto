@@ -175,3 +175,20 @@ export const getAllUsers = async (token) => {
       throw new Error('Error updating user profile image: ' + error.response.data);
     }
   }
+
+  // Elimina un usuario pasandole el usuario
+  export const deleteUserByUsername = async (username) => {
+    console.log(username)
+    const token = localStorage.getItem("authToken");
+    try {
+      await axios.delete(`http://localhost:8080/v1/user/deleteUserByUsername/${username}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting user: ', error);
+      throw new Error('Error deleting user: ' + error.response.data);
+    }
+  }

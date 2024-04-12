@@ -5,6 +5,7 @@ import { getAllUsers } from '../../service/userService';
 import { getCountries } from '../../service/countryService';
 import { getCities } from '../../service/cityService';
 import { getAttractions } from '../../service/attractionService';
+import { deleteUserByUsername } from '../../service/userService';
 
 import './adminUsers.css';
 
@@ -359,7 +360,7 @@ function generateUser(user) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user)}></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user,'user')}></i>
                         </span>
                     </span>
                 </div>
@@ -720,8 +721,10 @@ function generateAttraction(attraction) {
 }
 
 // Metodo para eliminar una fila sea del modulo que sea
-function deleteDataItem(item){
-    alert(JSON.stringify(item))
+function deleteDataItem(item, typeData){
+    if(typeData === 'user'){
+        deleteUserByUsername(item.username);
+    }
 }
 // Metodo para editar una fila sea del modulo que sea
 function editDataItem(){

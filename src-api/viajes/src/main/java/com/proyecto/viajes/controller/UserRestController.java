@@ -268,26 +268,30 @@ public class UserRestController {
 	}
 
 	/**
-	 * Endpoint para eliminar un usuario por su id. Se requiere el rol de:
-	 * "ROLE_ADMIN"
+	 * Endpoint para eliminar un usuario por su nombre de usuario. Se requiere el rol de: "ROLE_ADMIN"
 	 * 
-	 * @param id Id del usuario.
+	 * @param username Nombre de usuario del usuario a eliminar.
 	 * @return ResponseEntity con la respuesta del servidor.
 	 */
-	@Secured({ "ROLE_ADMIN" })
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
-		Optional<UserEntity> userOptional = userRepository.findById(id);
-
-		if (userOptional.isPresent()) {
-			// Si el usuario existe, eliminarlo
-			userRepository.deleteById(id);
-			return ResponseEntity.ok().body("Usuario eliminado correctamente");
-		} else {
-			// Si el usuario no existe, devolver la respuesta
-			return ResponseEntity.notFound().build();
-		}
+	@Secured("ROLE_ADMIN")
+	@DeleteMapping("/deleteUserByUsername/{username}")
+	public ResponseEntity<String> deleteUserByUsername(@PathVariable String username) {
+	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+	    
+	    if (userOptional.isPresent()) {
+	        // Eliminar los roles asociados a ese usuario
+	        roleRepository.deleteRolesFromUsername(username);
+	        
+	        // Eliminar al usuario
+	        userRepository.delete(userOptional.get());
+	        
+	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
+	    } else {
+	        // Si el usuario no existe, devolver la respuesta
+	        return ResponseEntity.notFound().build();
+	    }
 	}
+
 
 	/**
 	 * Endpoint para eliminar un usuario Se requiere el rol de: "ROLE_CUSTOMER",
