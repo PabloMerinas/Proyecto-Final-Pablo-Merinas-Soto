@@ -320,5 +320,35 @@ public class UserRestController {
 					.body("Se produjo un error al eliminar el usuario");
 		}
 	}
+	
+	/**
+	 * Endpoint para eliminar un usuario. Se requiere el rol de: "ROLE_ADMIN"
+	 * 
+	 * @param user Usuario a eliminar en formato JSON.
+	 * @return ResponseEntity con la respuesta del servidor.
+	 */
+	@Secured("ROLE_ADMIN")
+	@DeleteMapping("/deleteUser")
+	public ResponseEntity<String> deleteUser(@RequestBody UserEntity user) {
+	    try {
+	        Optional<UserEntity> existingUser = userRepository.findByUsername(user.getUsername());
+	        
+	        if (existingUser.isPresent()) {
+	            // Eliminar los roles asociados a ese usuario
+	            roleRepository.deleteRolesFromUsername(user.getUsername());
+	            
+	            // Eliminar al usuario
+	            userRepository.delete(existingUser.get());
+	            
+	            return ResponseEntity.ok().body("Usuario eliminado correctamente");
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Se produjo un error al eliminar el usuario");
+	    }
+	}
 
 }
