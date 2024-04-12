@@ -247,14 +247,33 @@ export const AdminUsers = () => {
                     </div>
                 </div>
             </div>
-            <ComponentToRender filteredData={filteredItem} />
+            <ComponentToRender filteredData={filteredItem}  actualUsername={activeUser.username}  />
         </div>
     )
 }
+// Metodo para eliminar una fila sea del modulo que sea
+function deleteDataItem(item, typeData, actualUsername){
+    if(item.username === actualUsername){
+        alert('You cannot delete yourself!');
+    }else{
+        if(typeData === 'user'){
+            deleteUserByUsername(item.username);
+            //window.location.reload();
+    
+        }
+    }
+
+}
+// Metodo para editar una fila sea del modulo que sea
+function editDataItem(){
+    alert("edita ")
+}
+
+
 
 
 // HTML para usuarios
-const AdminUser = ({ filteredData }) => {
+const AdminUser = ({ filteredData, actualUsername }) => {
     return (
         <div className="users-principal-nivel4-frame2">
             <div className="users-principal-nivel5-frame02">
@@ -308,7 +327,7 @@ const AdminUser = ({ filteredData }) => {
                     <div className="users-principal-nivel7-frame1">
                         {filteredData.map(user => (
                             <form key={user.username}>
-                                {generateUser(user)}
+                                {generateUser(user, actualUsername)}
                             </form>
                         ))}
                     </div>
@@ -318,9 +337,9 @@ const AdminUser = ({ filteredData }) => {
     );
 }
 // Metodo para generar la linea del usuario
-function generateUser(user) {
+function generateUser(user, actualUsername) {
     return (
-        <div className="users-principal-nivel8-frame01">
+        <div className="users-principal-nivel8-frame01" key={user.username}>
             <div className="users-principal-nivel9-frame01 ">
                 <div className="users-principal-text199">
                     <span className="users-principal-text199">
@@ -360,7 +379,7 @@ function generateUser(user) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user,'user')}></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user,'user', actualUsername)}></i>
                         </span>
                     </span>
                 </div>
@@ -720,13 +739,3 @@ function generateAttraction(attraction) {
     )
 }
 
-// Metodo para eliminar una fila sea del modulo que sea
-function deleteDataItem(item, typeData){
-    if(typeData === 'user'){
-        deleteUserByUsername(item.username);
-    }
-}
-// Metodo para editar una fila sea del modulo que sea
-function editDataItem(){
-    alert("edita ")
-}
