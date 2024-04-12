@@ -23,59 +23,32 @@ export const AdminUsers = () => {
     useEffect(() => {
         // Recupero el token
         const token = localStorage.getItem("authToken");
-        async function fetchUsers() {
+        async function fetchData() {
             try {
-                const usersData = await getAllUsers(token);
-                setOptionData(usersData);
-                setFilteredItem(usersData);
+                let data;
+                switch (selectedOption) {
+                    case 1:
+                        data = await getAllUsers(token);
+                        break;
+                    case 2:
+                        data = await getCountries(token);
+                        break;
+                    case 3:
+                        data = await getCities(token);
+                        break;
+                    case 4:
+                        data = await getAttractions(token);
+                        break;
+                    default:
+                        data = await getAllUsers(token);
+                }
+                setOptionData(data);
+                setFilteredItem(data);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching data:', error);
             }
         }
-        async function fetchCountries() {
-            try {
-                const countriesData = await getCountries(token);
-                setOptionData(countriesData);
-                setFilteredItem(countriesData);
-            } catch (error) {
-                console.error('Error fetching countries: ', error);
-            }
-        }
-        async function fetchCities() {
-            try {
-                const citiesData = await getCities(token);
-                setOptionData(citiesData);
-                setFilteredItem(citiesData);
-            } catch (error) {
-                console.error('Error fetching cities: ', error);
-            }
-        }
-        async function fetchAttractions() {
-            try {
-                const attractionsData = await getAttractions(token);
-                setOptionData(attractionsData);
-                setFilteredItem(attractionsData);
-            } catch (error) {
-                console.error('Error fetching attractions: ', error);
-            }
-        }
-
-        switch (selectedOption) {
-            case 1:
-                fetchUsers();
-                break;
-            case 2:
-                fetchCountries();
-                break;
-            case 3:
-                fetchCities();
-                break;
-            case 4:
-                fetchAttractions();
-                break;
-            default:
-                fetchUsers();
-        }
+        fetchData();
     }, [selectedOption]);
 
     // Regresa al login si se accede sin logearse antes
@@ -248,25 +221,39 @@ export const AdminUsers = () => {
                     </div>
                 </div>
             </div>
-            <ComponentToRender filteredData={filteredItem}  actualUsername={activeUser.username}  />
+            <ComponentToRender filteredData={filteredItem} actualUsername={activeUser.username} />
         </div>
     )
 }
 // Metodo para eliminar una fila sea del modulo que sea
-function deleteDataItem(item, typeData, actualUsername){
-    if(item.username === actualUsername){
+function deleteDataItem(item, typeData, actualUsername) {
+    if (typeData === 'user' && item.username === actualUsername) {
         alert('You cannot delete yourself!');
-    }else{
-        if(typeData === 'user'){
-            deleteUserByUsername(item.username);
-        } else if(typeData === 'attraction'){
-            deleteAttractionByAttraction(item.attraction);
+    } else {
+        let elementToDelete;
+        switch (typeData) {
+            case 'user':
+                deleteUserByUsername(item.username);
+                elementToDelete = document.getElementById(item.username);
+                break;
+            case 'country':
+                break;
+            case 'city':
+                break;
+            case 'attraction':
+                deleteAttractionByAttraction(item.attraction);
+                elementToDelete = document.getElementById(item.attraction);
+                break;
+            default:
+                break;
+        }
+        if (elementToDelete) {
+            elementToDelete.remove();
         }
     }
-
 }
 // Metodo para editar una fila sea del modulo que sea
-function editDataItem(){
+function editDataItem() {
     alert("edita ")
 }
 
@@ -327,9 +314,9 @@ const AdminUser = ({ filteredData, actualUsername }) => {
                     </div>
                     <div className="users-principal-nivel7-frame1">
                         {filteredData.map(user => (
-                            <form key={user.username}>
+                            <div key={user.username} id={user.username}>
                                 {generateUser(user, actualUsername)}
-                            </form>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -380,7 +367,7 @@ function generateUser(user, actualUsername) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user,'user', actualUsername)}></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user', actualUsername)}></i>
                         </span>
                     </span>
                 </div>
@@ -445,9 +432,9 @@ const AdminCountries = ({ filteredData }) => {
                     </div>
                     <div className="users-principal-nivel7-frame1">
                         {filteredData.map(country => (
-                            <form key={country.country}>
+                            <div key={country.country}>
                                 {generateCountry(country)}
-                            </form>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -561,9 +548,9 @@ const AdminCities = ({ filteredData }) => {
                     </div>
                     <div className="users-principal-nivel7-frame1">
                         {filteredData.map(city => (
-                            <form key={city.city}>
+                            <div key={city.city}>
                                 {generateCity(city)}
-                            </form>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -677,9 +664,9 @@ const AdminAttractions = ({ filteredData }) => {
                     </div>
                     <div className="users-principal-nivel7-frame1">
                         {filteredData.map(attracion => (
-                            <form key={attracion.attracion}>
+                            <div key={attracion.attracion}>
                                 {generateAttraction(attracion)}
-                            </form>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -690,7 +677,7 @@ const AdminAttractions = ({ filteredData }) => {
 // Metodo para generar la linea de la attracion
 function generateAttraction(attraction) {
     return (
-        <div className="users-principal-nivel8-frame01">
+        <div className="users-principal-nivel8-frame01" id={attraction.attraction}>
             <div className="users-principal-nivel9-frame01 ">
                 <div className="users-principal-text199">
                     <span className="users-principal-text199">
@@ -729,7 +716,7 @@ function generateAttraction(attraction) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction,'attraction', '')}></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction', '')}></i>
                         </span>
                     </span>
                 </div>
