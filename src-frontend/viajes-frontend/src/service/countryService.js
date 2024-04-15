@@ -39,3 +39,22 @@ export const getCountryByCountry = async (countryName) => {
         throw new Error('Error recovering the countries');
     }
 };
+
+// Método para eliminar un pais por su nombre
+export const deleteCountryByCountry = async (country) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        // Llamo a la API para eliminar el pais por su nombre
+        const response = await axios.delete(`http://localhost:8080/v1/country/deleteCountryByCountry?country=${country}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error deleting the country:", error);
+        throw new Error('Error deleting the country');
+    }
+}

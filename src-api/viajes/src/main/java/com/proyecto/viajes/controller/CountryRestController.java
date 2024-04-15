@@ -66,7 +66,6 @@ public class CountryRestController {
 		CountryEntity countryToDelete = countryRepository.findByCountry(country);
 
 		if (countryToDelete != null) {
-
 			// Eliminar el país
 			countryRepository.delete(countryToDelete);
 			return ResponseEntity.ok().body("País eliminado correctamente");

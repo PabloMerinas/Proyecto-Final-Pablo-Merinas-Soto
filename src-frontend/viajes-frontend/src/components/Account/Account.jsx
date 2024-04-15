@@ -65,7 +65,7 @@ export const Account = () => {
                 </div>
                 <div className="account-principal-nivel4-frame2">
                     {generateItem("fa-solid fa-user", "Personal info", "View my profile", "/personal")}
-                    {isAdmin ? generateItem("fa-solid fa-user-tie", "Admin users", "View and manage all the users", "/adminUsers") : null}
+                    {isAdmin ? generateItem("fa-solid fa-user-tie", "Admin Dashboard", "View and manage all the modules", "/adminUsers") : null}
                     {generateItem("fa-solid fa-mountain-sun", "Countries", "View all the countries", "/countries")}
                     {generateItem("fa-solid fa-city", "Cities", "View all the cities", "/cities")}
                     {generateItem("fa-solid fa-compass", "Attractions", "View all the attractions", "/attractions")}

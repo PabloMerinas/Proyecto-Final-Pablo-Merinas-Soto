@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from "../../authContext/autContext";
 import { Navigate } from "react-router-dom";
 import { getAllUsers } from '../../service/userService';
-import { getCountries } from '../../service/countryService';
+import { deleteCountryByCountry, getCountries } from '../../service/countryService';
 import { getCities } from '../../service/cityService';
 import { getAttractions } from '../../service/attractionService';
 import { deleteUserByUsername } from '../../service/userService';
@@ -222,10 +222,24 @@ export const AdminUsers = () => {
                     </div>
                 </div>
             </div>
-            <ComponentToRender filteredData={filteredItem} actualUsername={activeUser.username} />
+            {filteredItem.length === 0 ? ( // Si no hay objetos mostrare un div avisandolo
+                <div>
+                    <div className="users-principal-nivel4-frame2" >
+                        <div className="users-principal-nivel5-frame02" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '72px' }}>
+                            <span>No {textToFind} available.</span>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    <ComponentToRender filteredData={filteredItem} actualUsername={activeUser.username} />
+                </div>
+            )}
         </div>
     )
 }
+
+
 // Metodo para eliminar una fila sea del modulo que sea
 function deleteDataItem(item, typeData, actualUsername) {
     if (typeData === 'user' && item.username === actualUsername) {
@@ -238,6 +252,8 @@ function deleteDataItem(item, typeData, actualUsername) {
                 elementToDelete = document.getElementById(item.username);
                 break;
             case 'country':
+                deleteCountryByCountry(item.country);
+                elementToDelete = document.getElementById(item.country);
                 break;
             case 'city':
                 deleteCityByCity(item.city);
@@ -487,8 +503,9 @@ function generateCountry(country) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash"></i>
-                        </span>                    </span>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(country, 'country', '')}></i>
+                        </span>
+                    </span>
                 </div>
             </div>
 
@@ -603,7 +620,7 @@ function generateCity(city) {
                     <span className="users-principal-text23">
                         <span className='admin-principal-options-icons'>
                             <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash"  onClick={() => deleteDataItem(city, 'city', '')}></i>
+                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city', '')}></i>
                         </span>
                     </span>
                 </div>
