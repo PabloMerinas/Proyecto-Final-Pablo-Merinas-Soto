@@ -34,7 +34,7 @@ export const Attractions = () => {
                 setAttractions(AttractionsData);
                 setFilteredAttractions(AttractionsData);
             } catch (error) {
-                console.error('Error al obtener las atracciones:', error);
+                console.error('Error retrieving attractions:', error);
             }
         }
 

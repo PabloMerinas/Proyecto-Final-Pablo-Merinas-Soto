@@ -202,17 +202,17 @@ export const Header = () => {
           <div className="nivel-frame-4">
             <div className="nivel-frame-5">
               <div className="nivel-frame-6">
-                <Link className="header-a" to="/countries"><div className="text-wrapper-2">Countries</div></Link>
+                <Link className="header-a" to="/countries"><div className="text-wrapper-2" onClick={deleteSessionCookies}>Countries</div></Link>
               </div>
             </div>
             <div className="nivel-frame-7">
               <div className="nivel-frame-8">
-                <Link className="header-a" to="/cities"> <div className="text-wrapper-2">Cities</div></Link>
+                <Link className="header-a" to="/cities"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Cities</div></Link>
               </div>
             </div>
             <div className="nivel-frame-9">
               <div className="nivel-frame-8">
-                <Link className="header-a" to="/attractions"> <div className="text-wrapper-2" onClick={deleteActiveUser}>Attractions</div></Link>
+                <Link className="header-a" to="/attractions"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Attractions</div></Link>
               </div>
             </div>
             <div className="nivel-frame-10">
@@ -254,8 +254,9 @@ export const Header = () => {
 };
 
 // Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado
-function deleteActiveUser() {
+function deleteSessionCookies() {
   sessionStorage.removeItem('activeCity');
+  sessionStorage.removeItem('activeCountry');
 }
 
 

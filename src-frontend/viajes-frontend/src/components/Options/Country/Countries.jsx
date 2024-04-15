@@ -3,6 +3,7 @@ import './countries.css';
 import { getCountries } from '../../../service/countryService';
 import { useAuth } from '../../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export const Countries = () => {
@@ -10,6 +11,7 @@ export const Countries = () => {
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [searchText, setSearchText] = useState('');
     const { activeUser } = useAuth();
+    const navigate = useNavigate();
 
     // Recupero los paises
     useEffect(() => {
@@ -50,6 +52,11 @@ export const Countries = () => {
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
+        // Logica para mostrar las atracciones
+        const handleCitiesClick = (country) => {
+            sessionStorage.setItem('activeCountry', country);
+            navigate('/cities');
+        };
         return (
             <div className="countries-principal-nivel8-frame01">
                 <div className="countries-principal-nivel9-frame01">
@@ -91,12 +98,30 @@ export const Countries = () => {
                             <div className="countries-principal-nivel11-frame0">
                                 <div className="countries-principal-nivel12-frame0">
                                     <span className="countries-principal-text25">
-                                        <span>Info</span>
+                                        <span><i className="fa-solid fa-eye"></i></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </Link>
+                    <div className="countries-principal-nivel10-frame011" onClick={() => handleCitiesClick(country)} >
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span>Cities</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="countries-principal-nivel10-frame011">
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span><i className="fa-solid fa-check"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -177,7 +202,7 @@ export const Countries = () => {
                                     <div className="countries-principal-nivel9-frame5">
                                         <div className="countries-principal-nivel10-frame005">
                                             <span className="countries-principal-text14">
-                                                <span>Info</span>
+                                                <span>Actions</span>
                                             </span>
                                         </div>
                                     </div>

@@ -9,7 +9,21 @@ export const Cities = () => {
     const [searchText, setSearchText] = useState('');
     const navigate = useNavigate();
 
+    // Compruebo si se le ha pasado el valor del pais y si es asi filtro primero
+    const activeCountry = sessionStorage.getItem('activeCountry');
 
+    // Filtro las ciudades basadas en el pais activo
+    useEffect(() => {
+        if (activeCountry) {
+            const filtered = cities.filter(city =>
+                city.country.toLowerCase() === activeCountry.toLowerCase()
+            );
+            setfilteredCities(filtered);
+        } else {
+            setfilteredCities(cities);
+
+        }
+    }, [cities, activeCountry]);
 
     // Recupero las ciudades
     useEffect(() => {
@@ -21,7 +35,7 @@ export const Cities = () => {
                 setCities(citiesData);
                 setfilteredCities(citiesData);
             } catch (error) {
-                console.error('Error al obtener las ciudades:', error);
+                console.error('Error retrieving cities:', error);
             }
         }
 
@@ -49,7 +63,7 @@ export const Cities = () => {
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateCity(city, country, state, airportCode, population) {
-        
+
         // Logica para mostrar las atracciones
         const handleInfoClick = (city) => {
             sessionStorage.setItem('activeCity', city);
@@ -115,7 +129,7 @@ export const Cities = () => {
                     <div className="cities-principal-nivel5-frame0">
                         <div className="cities-principal-nivel6-frame0">
                             <span className="cities-principal-text">
-                                <span>Cities</span>
+                                <span>{activeCountry ? 'Cities from '+ activeCountry : 'Cities'}</span>
                             </span>
                         </div>
                     </div>
