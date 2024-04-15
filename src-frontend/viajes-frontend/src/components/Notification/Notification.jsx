@@ -4,6 +4,7 @@ import { getNotificationsByUsername } from "../../service/notificationService";
 import { deleteNotificationById } from "../../service/notificationService";
 import { useAuth } from "../../authContext/autContext";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 // Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
 export function generateSimpleNotification(notifications) {
@@ -65,15 +66,28 @@ export const Notification = () => {
     const fetchData = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
+        // Regresa al login si se accede sin logearse antes
+        if (!activeUser) {
+          return <Navigate to="/" />;
+
+        }
         const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
         setNotifications(notificationsData);
       } catch (error) {
         console.error('Error recuperando las notifications:', error);
       }
     };
-
     fetchData();
-  }, [activeUser.username]);
+
+  }, [activeUser]);
+
+
+
+  const popupNotifications = document.getElementsByClassName('simple-notification-container');
+  // Itera sobre los elementos y los elimina uno por uno
+  while (popupNotifications.length > 0) {
+    popupNotifications[0].remove();
+  }
 
   return (
     <div className="notifications-container">

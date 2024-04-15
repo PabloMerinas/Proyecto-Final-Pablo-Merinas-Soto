@@ -324,11 +324,6 @@
     flex-direction: column;
 }
 
-.simple-notification-nivel8-frame0 {
-    width: 24px;
-    height: 24px;
-}
-
 .simple-notification-nivel6-frame1 {
     width: 286px;
     height: 45px;
@@ -377,3 +372,7 @@
     font-weight: 600;
 }
 
+
+.simple-notification-nivel4-frame5:hover {
+    color: black;
+}

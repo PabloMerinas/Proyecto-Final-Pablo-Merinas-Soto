@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './attractions.css';
 import { getAttractions } from '../../../service/attractionService';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../../authContext/autContext';
 
 export const Attractions = () => {
     const [attractions, setAttractions] = useState([]);
     const [filteredAttractions, setFilteredAttractions] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const { activeUser } = useAuth();
 
     // Compruebo si se le ha pasado el valor de la ciudad y si es asi filtro primero
     const activeCity = sessionStorage.getItem('activeCity');
@@ -41,6 +44,11 @@ export const Attractions = () => {
         fetchAttractions();
     }, []);
 
+        // Compruebo que haya un usuario activo o devuelvo a login
+        if (!activeUser) {
+            return <Navigate to="/" />;
+    
+        }
 
 
     const handleInputChange = (event) => {
@@ -67,19 +75,13 @@ export const Attractions = () => {
         // Actualizar atracciones filtradas
         setFilteredAttractions(filtered);
     };
-    
+
 
 
 
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateAttraction(attraction, country, city, category, info) {
-
-        // Logica para mostrar las atracciones
-        const handleInfoClick = (clickedShowAttractions) => {
-            // TODO
-
-        };
 
         return (
             <div className="attractions-principal-nivel8-frame01">
@@ -116,12 +118,21 @@ export const Attractions = () => {
                         </span>
                     </div>
                 </div>
-                <div className="attractions-principal-nivel9-frame51">
-                    <div onClick={() => handleInfoClick(attraction)} className="attractions-principal-nivel10-frame011">
-                        <div className="attractions-principal-nivel11-frame0">
-                            <div className="attractions-principal-nivel12-frame0">
-                                <span className="attractions-principal-text25">
-                                    <span>Show</span>
+                <div className="countries-principal-nivel9-frame51" style={{ marginLeft: '35px' }}>
+                    <div className="countries-principal-nivel10-frame011">
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span><i className="fa-solid fa-eye"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="countries-principal-nivel10-frame011">
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span><i className="fa-solid fa-check"></i></span>
                                 </span>
                             </div>
                         </div>
@@ -206,7 +217,7 @@ export const Attractions = () => {
                                     <div className="attractions-principal-nivel9-frame5">
                                         <div className="attractions-principal-nivel10-frame005">
                                             <span className="attractions-principal-text14">
-                                                <span>Checked</span>
+                                                <span>Actions</span>
                                             </span>
                                         </div>
                                     </div>

@@ -65,7 +65,7 @@ export const Cities = () => {
     function generateCity(city, country, state, airportCode, population) {
 
         // Logica para mostrar las atracciones
-        const handleInfoClick = (city) => {
+        const handleAttractionsClick = (city) => {
             sessionStorage.setItem('activeCity', city);
             navigate('/attractions');
         };
@@ -105,12 +105,30 @@ export const Cities = () => {
                         </span>
                     </div>
                 </div>
-                <div className="countries-principal-nivel9-frame51">
-                    <div onClick={() => handleInfoClick(city)} className="countries-principal-nivel10-frame011">
+                <div className="countries-principal-nivel9-frame51" style={{ marginLeft: '-35px' }}>
+                    <div className="countries-principal-nivel10-frame011">
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
-                                    <span>Show</span>
+                                    <span><i className="fa-solid fa-eye"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="countries-principal-nivel10-frame011" onClick={() => handleAttractionsClick(city)} >
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span>Attractions!</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="countries-principal-nivel10-frame011">
+                        <div className="countries-principal-nivel11-frame0">
+                            <div className="countries-principal-nivel12-frame0">
+                                <span className="countries-principal-text25">
+                                    <span><i className="fa-solid fa-check"></i></span>
                                 </span>
                             </div>
                         </div>
@@ -129,7 +147,7 @@ export const Cities = () => {
                     <div className="cities-principal-nivel5-frame0">
                         <div className="cities-principal-nivel6-frame0">
                             <span className="cities-principal-text">
-                                <span>{activeCountry ? 'Cities from '+ activeCountry : 'Cities'}</span>
+                                <span>{activeCountry ? 'Cities from ' + activeCountry : 'Cities'}</span>
                             </span>
                         </div>
                     </div>
@@ -195,7 +213,7 @@ export const Cities = () => {
                                     <div className="cities-principal-nivel9-frame5">
                                         <div className="cities-principal-nivel10-frame005">
                                             <span className="cities-principal-text14">
-                                                <span>Attractions</span>
+                                                <span>Actions</span>
                                             </span>
                                         </div>
                                     </div>

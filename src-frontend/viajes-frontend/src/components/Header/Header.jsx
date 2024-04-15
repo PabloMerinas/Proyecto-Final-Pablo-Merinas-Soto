@@ -228,13 +228,6 @@ export const Header = () => {
               )}
               <div className="nivel-frame-13">
                 <div className="vector-wrapper">
-                  <i className="fa-solid fa-envelope"></i>
-                </div>
-              </div>
-            </div>
-            <div className="nivel-frame-12">
-              <div className="nivel-frame-13">
-                <div className="vector-wrapper">
                   <i className="fa-solid fa-bell"></i>
                 </div>
               </div>
