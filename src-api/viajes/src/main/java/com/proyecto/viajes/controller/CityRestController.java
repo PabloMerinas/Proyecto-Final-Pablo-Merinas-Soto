@@ -33,11 +33,6 @@ public class CityRestController {
 	private CityManagementImpl cityRepository;
 
 	/**
-	 * Inyeccion de dependencia de AttractionManagementImpl
-	 */
-	private AttractionManagementImpl attractionRepository;
-
-	/**
 	 * Endpoint para obtener todas las ciudades. Se requiere que el usuario tenga el
 	 * rol "ROLE_CUSTOMER" o "ROLE_ADMIN".
 	 * 
@@ -63,10 +58,7 @@ public class CityRestController {
 		CityEntity cityToDelete = cityRepository.findByCity(city);
 
 		if (cityToDelete != null) {
-			List<AttractionEntity> attractionsToDelete = cityToDelete.getAttractions();
-			for (AttractionEntity attraction : attractionsToDelete) {
-				attractionRepository.delete(attraction);
-			}
+
 			// Eliminar la ciudad
 			cityRepository.delete(cityToDelete);
 			return ResponseEntity.ok().body("Ciudad eliminada correctamente");

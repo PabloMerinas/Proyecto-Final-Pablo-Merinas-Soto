@@ -61,7 +61,7 @@ public class CityEntity {
 	/**
 	 * Lista de las atracciones que tiene la ciudad.
 	 */
-	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AttractionEntity> attractions;
 
 	/**

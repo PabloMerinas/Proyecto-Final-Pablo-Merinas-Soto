@@ -2,8 +2,7 @@ package com.proyecto.viajes.persistence.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -76,8 +75,7 @@ public class CountryEntity {
 	/**
 	 * Lista de ciudades del pais.
 	 */
-	@JsonIgnore
-	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CityEntity> cities;
 
 }

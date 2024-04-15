@@ -21,14 +21,18 @@ public class AttractionManagementImpl implements AttractionManagementI {
 		return attractionRepository.findAll();
 	}
 
-	@Override
-	public AttractionEntity findByAttraction(String attraction) {
-		return attractionRepository.findByAttraction(attraction);
-	}
+
 
 	@Override
 	public void delete(AttractionEntity attraction) {
 		attractionRepository.delete(attraction);
+	}
+
+
+
+	@Override
+	public AttractionEntity findByAttraction(String attraction) {
+		return attractionRepository.findByAttraction(attraction);
 	}
 
 }

@@ -7,6 +7,7 @@ import { getCities } from '../../service/cityService';
 import { getAttractions } from '../../service/attractionService';
 import { deleteUserByUsername } from '../../service/userService';
 import { deleteAttractionByAttraction } from '../../service/attractionService';
+import { deleteCityByCity } from '../../service/cityService';
 
 import './adminUsers.css';
 
@@ -239,6 +240,8 @@ function deleteDataItem(item, typeData, actualUsername) {
             case 'country':
                 break;
             case 'city':
+                deleteCityByCity(item.city);
+                elementToDelete = document.getElementById(item.city);
                 break;
             case 'attraction':
                 deleteAttractionByAttraction(item.attraction);
@@ -445,7 +448,7 @@ const AdminCountries = ({ filteredData }) => {
 // Metodo para generar la linea del pais
 function generateCountry(country) {
     return (
-        <div className="users-principal-nivel8-frame01">
+        <div className="users-principal-nivel8-frame01" id={country.country}>
             <div className="users-principal-nivel9-frame01 ">
                 <div className="users-principal-text199">
                     <span className="users-principal-text199">
@@ -561,7 +564,7 @@ const AdminCities = ({ filteredData }) => {
 // Metodo para generar la linea de la ciudad
 function generateCity(city) {
     return (
-        <div className="users-principal-nivel8-frame01">
+        <div className="users-principal-nivel8-frame01" id={city.city}>
             <div className="users-principal-nivel9-frame01 ">
                 <div className="users-principal-text199">
                     <span className="users-principal-text199">
