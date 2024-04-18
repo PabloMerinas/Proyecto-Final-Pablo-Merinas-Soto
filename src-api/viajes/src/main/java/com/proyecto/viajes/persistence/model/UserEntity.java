@@ -78,7 +78,5 @@ public class UserEntity {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "userNotified", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<NotificationEntity> notification;
-	// TODO arreglar relacion para que no se borren las notificaciones de otro
-	// usuario
 
 }

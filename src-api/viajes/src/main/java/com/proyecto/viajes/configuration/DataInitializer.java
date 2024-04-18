@@ -69,9 +69,21 @@ public class DataInitializer {
 				+ "(4, 'New Attraction: Amoudi Bay', '1 day ago');\n"
 				+ "");
 
+		// Insertar notificaciones
 		executeSqlStatement(
 				"INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);\n"
 						+ "");
+		// Insertar lugares visitados
+		// Insertar visitas de ejemplo para el usuario 'admin'
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('admin', 1);");
+
+		// Insertar visitas de ejemplo para el usuario 'user'
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('user', 2);");
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('user', 2);");
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('user', 2);");
+
 
 	}
 
