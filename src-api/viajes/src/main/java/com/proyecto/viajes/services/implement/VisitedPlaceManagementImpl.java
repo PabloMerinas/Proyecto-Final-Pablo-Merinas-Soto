@@ -1,6 +1,7 @@
 package com.proyecto.viajes.services.implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,31 @@ public class VisitedPlaceManagementImpl implements VisitedPlaceManagementI {
 	public boolean existsByUserAndCountryAndCityAndAttraction(UserEntity user, CountryEntity country, CityEntity city,
 			AttractionEntity attraction) {
 		return visitedPlaceRepository.existsByUserAndCountryAndCityAndAttraction(user, country, city, attraction);
+	}
+
+	@Override
+	public void deleteByUserAndCountry(UserEntity user, CountryEntity country) {
+		visitedPlaceRepository.deleteByUserAndCountry(user, country);
+	}
+
+	@Override
+	public void deleteByUserAndCity(UserEntity user, CityEntity city) {
+		visitedPlaceRepository.deleteByUserAndCity(user, city);
+	}
+
+	@Override
+	public void deleteByUserAndAttraction(UserEntity user, AttractionEntity attraction) {
+		visitedPlaceRepository.deleteByUserAndAttraction(user, attraction);
+	}
+
+	@Override
+	public Optional<VisitedPlaceEntity> findById(Long placeId) {
+		return visitedPlaceRepository.findById(placeId);
+	}
+
+	@Override
+	public void delete(VisitedPlaceEntity visitedPlace) {
+		visitedPlaceRepository.delete(visitedPlace);
 	}
 
 }

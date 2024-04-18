@@ -38,4 +38,28 @@ public interface VisitedPlaceRepositoryI extends JpaRepository<VisitedPlaceEntit
 	boolean existsByUserAndCountryAndCityAndAttraction(UserEntity user, CountryEntity country, CityEntity city,
 			AttractionEntity attraction);
 
+	/**
+	 * Elimina los lugares visitados por un usuario en una atracción específica.
+	 * 
+	 * @param user       Usuario del que se eliminarán los lugares visitados.
+	 * @param attraction Atracción de la que se eliminarán los lugares visitados.
+	 */
+	void deleteByUserAndAttraction(UserEntity user, AttractionEntity attraction);
+
+	/**
+	 * Elimina los lugares visitados por un usuario en una ciudad específica.
+	 * 
+	 * @param user Usuario del que se eliminarán los lugares visitados.
+	 * @param city Ciudad de la que se eliminarán los lugares visitados.
+	 */
+	void deleteByUserAndCity(UserEntity user, CityEntity city);
+
+	/**
+	 * Elimina los lugares visitados por un usuario en un país específico.
+	 * 
+	 * @param user    Usuario del que se eliminarán los lugares visitados.
+	 * @param country País del que se eliminarán los lugares visitados.
+	 */
+	void deleteByUserAndCountry(UserEntity user, CountryEntity country);
+
 }

@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getVisitedPlacesByUsernameAndType } from '../../../service/visitedPlaceService';
+import { markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
@@ -14,6 +15,7 @@ export const Countries = () => {
     const [searchText, setSearchText] = useState('');
     const { activeUser } = useAuth();
     const navigate = useNavigate();
+    const [forceRemount, setForceRemount] = useState(false);
 
     // Recupero los paises
     useEffect(() => {
@@ -35,7 +37,7 @@ export const Countries = () => {
         if (activeUser) {
             fetchData();
         }
-    }, [activeUser]);
+    }, [activeUser, forceRemount]);
 
 
     // Compruebo que haya un usuario activo o devuelvo a login
@@ -59,16 +61,52 @@ export const Countries = () => {
     };
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-    function generateCountry(country, isVisited) {
+    function generateCountry(country, visitedPlaces) {
+        const isVisited = visitedPlaces.filter(place => place.id === country.id).length > 0;
         // Logica para mostrar las atracciones
         const handleCitiesClick = (country) => {
             sessionStorage.setItem('activeCountry', country);
             navigate('/cities');
         };
         // Logica para marcarlo como visitado
-        const handleVisitedClick = (id) => {
+        const handleVisitedClick = (countryId) => {
+            // Comprueba si está visitado y si no lo marca
+            if (!isVisited) {
+                markAsVisitedByUsername(activeUser.username, countryId)
+                    .then(() => {
+                        // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                        getVisitedPlacesByUsernameAndType(activeUser.username, 'country')
+                            .then(updatedVisitedPlacesIds => {
+                                setVisitedPlacesIds(updatedVisitedPlacesIds);
+                            })
+                            .catch(error => {
+                                console.error('Error updating visited places:', error);
+                            });
+                    })
+                    .catch(error => {
+                        console.error('Error marking visited place:', error);
+                    });
+            } else {
+                const visitedPlace = visitedPlaces.find(place => place.id === countryId);
+                if (visitedPlace) {
+                    deleteVisitedPlace(visitedPlace.visitedPlaceId)
+                        .then(() => {
+                            // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                            getVisitedPlacesByUsernameAndType(activeUser.username, 'country')
+                                .then(updatedVisitedPlacesIds => {
+                                    setVisitedPlacesIds(updatedVisitedPlacesIds);
+                                })
+                                .catch(error => {
+                                    console.error('Error updating visited places:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error deleting visited place:', error);
+                        });
+                }
+            }
+        };
 
-        }
 
         return (
             <div className="countries-principal-nivel8-frame01">
@@ -224,7 +262,7 @@ export const Countries = () => {
                             <div className="countries-principal-nivel7-frame1">
                                 {filteredCountries.map(country => (
                                     <div key={country.id}>
-                                        {generateCountry(country, visitedPlacesIds.includes(country.id) ? true : false)}
+                                        {generateCountry(country, visitedPlacesIds)}
                                     </div>
                                 ))}
                             </div>

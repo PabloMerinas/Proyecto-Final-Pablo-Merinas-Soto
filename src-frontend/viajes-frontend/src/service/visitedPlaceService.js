@@ -14,15 +14,57 @@ export const getVisitedPlacesByUsernameAndType = async (username, type) => {
                 username: username
             }
         });
+        const dataFiltered = response.data.filter(place => place.place === type);
 
-        // Se filtra dependiendo del tipo
-        const filteredPlaces = response.data.filter(place => place.place === type);
-        const placeIds = filteredPlaces.map(place => place.id);
-
-        // Devuelve la lista de ID
-        return placeIds;
+        // Devuelve la lista 
+        return dataFiltered;
     } catch (error) {
         console.error("Error retrieving visited places:", error);
         throw new Error('Error retrieving visited places');
     }
 };
+
+// Método para marcar un lugar como visitado por un usuario
+export const markAsVisitedByUsername = async (username, countryId, cityId, attractionId) => {
+    try {
+        // Se recupera el token
+        const token = localStorage.getItem('authToken');
+        // Realizar una solicitud POST a la API
+        const response = await axios.post('http://localhost:8080/v1/visitedPlaces/markAsVisitedByUsername', null, {
+            params: {
+                username: username,
+                countryId: countryId,
+                cityId: cityId,
+                attractionId: attractionId
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        // Devolver la respuesta de la API
+        return response.data;
+    } catch (error) {
+        console.error("Error al marcar el lugar como visitado:", error);
+        throw new Error('Error al marcar el lugar como visitado');
+    }
+};
+
+// Método para eliminar un lugar por su id
+export const deleteVisitedPlace = async (placeId) => {
+    try {
+        // Se recupera el token
+        const token = localStorage.getItem('authToken');
+        const response = await axios.delete(`http://localhost:8080/v1/visitedPlaces/deleteVisitedPlace?placeId=${placeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting the place.", error);
+        throw new Error('Error deleting the place');
+    }
+};
+

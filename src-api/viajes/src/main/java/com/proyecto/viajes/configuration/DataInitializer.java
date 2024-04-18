@@ -76,6 +76,7 @@ public class DataInitializer {
 		// Insertar lugares visitados
 		// Insertar visitas de ejemplo para el usuario 'admin'
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('admin', 3);");
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('admin', 1);");
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('admin', 1);");
 

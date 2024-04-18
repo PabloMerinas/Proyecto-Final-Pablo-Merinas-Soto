@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -100,6 +101,7 @@ public class VisitedPlaceRestController {
 				placeInfo.put("place", "attraction");
 				placeInfo.put("id", visitedPlace.getAttraction().getId());
 			}
+	        placeInfo.put("visitedPlaceId", visitedPlace.getId());
 			result.add(placeInfo);
 		}
 
@@ -160,5 +162,25 @@ public class VisitedPlaceRestController {
 			return ResponseEntity.badRequest().body("No se pudo marcar el lugar como visitado");
 		}
 	}
+	/**
+	 * Elimina un lugar visitado por su ID.
+	 * 
+	 * @param placeId  ID del lugar visitado a eliminar.
+	 * @return Respuesta del servidor.
+	 */
+	@DeleteMapping("/deleteVisitedPlace")
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	public ResponseEntity<String> deleteVisitedPlace(@RequestParam Long placeId) {
+	    // Buscar el lugar visitado por su ID
+	    VisitedPlaceEntity visitedPlace = visitedPlaceRepository.findById(placeId)
+	            .orElseThrow(() -> new RuntimeException("Lugar visitado no encontrado"));
+
+	    // Eliminar el lugar visitado
+	    visitedPlaceRepository.delete(visitedPlace);
+
+	    return ResponseEntity.ok("Lugar visitado eliminado correctamente");
+	}
+
+
 
 }
