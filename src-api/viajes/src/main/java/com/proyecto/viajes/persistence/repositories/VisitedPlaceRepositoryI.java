@@ -3,6 +3,8 @@ package com.proyecto.viajes.persistence.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.proyecto.viajes.persistence.model.UserEntity;
@@ -23,4 +25,7 @@ public interface VisitedPlaceRepositoryI extends JpaRepository<VisitedPlaceEntit
 	 */
 	List<VisitedPlaceEntity> findByUser(UserEntity user);
 
+
+    @Query("SELECT vp.id, vp.user, vp.country FROM VisitedPlaceEntity vp WHERE vp.user.username = :username")
+    List<Object[]> findVisitedCountriesByUsername(@Param("username") String username);
 }

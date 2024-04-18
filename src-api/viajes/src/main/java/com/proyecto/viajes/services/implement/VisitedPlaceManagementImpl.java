@@ -36,4 +36,8 @@ public class VisitedPlaceManagementImpl implements VisitedPlaceManagementI {
 		return visitedPlaceRepository.findByUser(user);
 	}
 
+	public List<Object[]> findVisitedCountriesByUsername(String username) {
+	    return visitedPlaceRepository.findVisitedCountriesByUsername(username);
+	}
+
 }
