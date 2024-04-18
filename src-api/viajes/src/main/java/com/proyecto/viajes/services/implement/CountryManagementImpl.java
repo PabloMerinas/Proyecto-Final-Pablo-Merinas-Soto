@@ -30,6 +30,11 @@ public class CountryManagementImpl implements CountryManagementI{
 	public void delete(CountryEntity country) {
 		countryRepository.delete(country);
 	}
+
+	@Override
+	public CountryEntity findById(Long id) {
+		return countryRepository.findById(id).orElse(null);
+	}
 	
 	
 }

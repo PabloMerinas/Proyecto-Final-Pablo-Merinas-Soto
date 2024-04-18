@@ -34,4 +34,16 @@ public interface VisitedPlaceManagementI {
 	 */
 	public List<VisitedPlaceEntity> getVisitedPlaces(UserEntity user);
 
+	/**
+	 * Comprueba si el lugar ya existe en la bbdd
+	 * 
+	 * @param user       Usuario que se va a comprobar.
+	 * @param country    Pais a comprobar.
+	 * @param city       Ciudad a comprobar.
+	 * @param attraction Attraccion a comprobar.
+	 * @return True or false si existe o no.
+	 */
+	public boolean existsByUserAndCountryAndCityAndAttraction(UserEntity user, CountryEntity country, CityEntity city,
+			AttractionEntity attraction);
+
 }

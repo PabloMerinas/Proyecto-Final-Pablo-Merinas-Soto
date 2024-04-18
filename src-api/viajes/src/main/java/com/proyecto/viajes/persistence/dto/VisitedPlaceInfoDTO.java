@@ -5,9 +5,9 @@ package com.proyecto.viajes.persistence.dto;
  * un lugar visitado, asi evito el problema de que me devuelva un JSON con los
  * hijos de cada item.
  */
-public record VisitedPlaceInfoDTO(String countryImgUrl, String countryCapital, Integer countryPopulation,
-		String countryName, String countryCountryCode, String countryCurrencyCode, Character countryCurrencySymbol,
-		String countryLanguageCode, String countryInfo, String cityName, String cityState, String cityAirportCode,
-		Integer cityPopulation, String cityInfo, String attractionName, String attractionCategory,
-		String attractionInfo) {
+public record VisitedPlaceInfoDTO(String username, String countryImgUrl, String countryCapital,
+		Integer countryPopulation, String countryName, String countryCountryCode, String countryCurrencyCode,
+		Character countryCurrencySymbol, String countryLanguageCode, String countryInfo, String cityName,
+		String cityState, String cityAirportCode, Integer cityPopulation, String cityInfo, String attractionName,
+		String attractionCategory, String attractionInfo) {
 }

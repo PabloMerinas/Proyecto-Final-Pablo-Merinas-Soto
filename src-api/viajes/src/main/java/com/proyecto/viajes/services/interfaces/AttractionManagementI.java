@@ -30,4 +30,12 @@ public interface AttractionManagementI {
 	 * @param attraction Attracción a eliminar.
 	 */
 	void delete(AttractionEntity attraction);
+
+	/**
+	 * Encuentra una attraccion por su ID.
+	 * 
+	 * @param attractionId ID de la attraccion.
+	 * @return Attraccion encontrada.
+	 */
+	public AttractionEntity findById(Long attractionId);
 }

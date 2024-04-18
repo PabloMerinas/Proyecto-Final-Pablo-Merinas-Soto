@@ -3,10 +3,11 @@ package com.proyecto.viajes.persistence.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.proyecto.viajes.persistence.model.AttractionEntity;
+import com.proyecto.viajes.persistence.model.CityEntity;
+import com.proyecto.viajes.persistence.model.CountryEntity;
 import com.proyecto.viajes.persistence.model.UserEntity;
 import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 
@@ -25,7 +26,16 @@ public interface VisitedPlaceRepositoryI extends JpaRepository<VisitedPlaceEntit
 	 */
 	List<VisitedPlaceEntity> findByUser(UserEntity user);
 
+	/**
+	 * Comprueba si el lugar ya existe en la bbdd
+	 * 
+	 * @param user       Usuario que se va a comprobar.
+	 * @param country    Pais a comprobar.
+	 * @param city       Ciudad a comprobar.
+	 * @param attraction Attraccion a comprobar.
+	 * @return True or false si existe o no.
+	 */
+	boolean existsByUserAndCountryAndCityAndAttraction(UserEntity user, CountryEntity country, CityEntity city,
+			AttractionEntity attraction);
 
-    @Query("SELECT vp.id, vp.user, vp.country FROM VisitedPlaceEntity vp WHERE vp.user.username = :username")
-    List<Object[]> findVisitedCountriesByUsername(@Param("username") String username);
 }
