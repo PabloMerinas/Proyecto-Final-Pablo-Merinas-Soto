@@ -613,3 +613,7 @@ a{
     text-decoration: none;
 
 }
+
+.visited{
+    border: 1px solid #3ba786;
+}

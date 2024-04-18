@@ -5,30 +5,38 @@ import { useAuth } from '../../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { getVisitedPlacesByUsernameAndType } from '../../../service/visitedPlaceService';
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
     const [filteredCountries, setFilteredCountries] = useState([]);
+    const [visitedPlacesIds, setVisitedPlacesIds] = useState([]);
     const [searchText, setSearchText] = useState('');
     const { activeUser } = useAuth();
     const navigate = useNavigate();
 
     // Recupero los paises
     useEffect(() => {
-        async function fetchCountries() {
+        async function fetchData() {
             try {
-                // Recupero el token
-                const token = localStorage.getItem("authToken");
-                const countriesData = await getCountries(token);
+                const countriesData = await getCountries();
                 setCountries(countriesData);
                 setFilteredCountries(countriesData);
+
+                // Obtiene los paises visitados del usuario 
+                const visitedPlacesIds = await getVisitedPlacesByUsernameAndType(activeUser.username, 'country');
+                setVisitedPlacesIds(visitedPlacesIds);
+
             } catch (error) {
-                console.error('Error al obtener los países:', error);
+                console.error('Error retrieving the visited places:', error);
             }
         }
 
-        fetchCountries();
-    }, []);
+        if (activeUser) {
+            fetchData();
+        }
+    }, [activeUser]);
+
 
     // Compruebo que haya un usuario activo o devuelvo a login
     if (!activeUser) {
@@ -51,49 +59,54 @@ export const Countries = () => {
     };
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-    function generateCountry(country, capital, currencyCode, currencySymbol, languageCode) {
+    function generateCountry(country, isVisited) {
         // Logica para mostrar las atracciones
         const handleCitiesClick = (country) => {
             sessionStorage.setItem('activeCountry', country);
             navigate('/cities');
         };
+        // Logica para marcarlo como visitado
+        const handleVisitedClick = (id) => {
+
+        }
+
         return (
             <div className="countries-principal-nivel8-frame01">
                 <div className="countries-principal-nivel9-frame01">
                     <div className="countries-principal-nivel10-frame006">
                         <span className="countries-principal-text16">
-                            <span>{country}</span>
+                            <span>{country.country}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame11">
                     <div className="countries-principal-nivel10-frame007">
                         <span className="countries-principal-text18">
-                            <span>{capital}</span>
+                            <span>{country.capital}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame21">
                     <div className="countries-principal-nivel10-frame008">
                         <span className="countries-principal-text20">
-                            <span>{currencyCode}</span>
+                            <span>{country.currencyCode}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame31">
                     <div className="countries-principal-nivel10-frame009">
-                        <span className="countries-principal-text22">{currencySymbol}</span>
+                        <span className="countries-principal-text22">{country.currencySymbol}</span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame41">
                     <div className="countries-principal-nivel10-frame010">
                         <span className="countries-principal-text23">
-                            <span>{languageCode}</span>
+                            <span>{country.languageCode}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame51">
-                    <Link to={`/countries/${country}`}>
+                    <Link to={`/countries/${country.country}`}>
                         <div className="countries-principal-nivel10-frame011">
                             <div className="countries-principal-nivel11-frame0">
                                 <div className="countries-principal-nivel12-frame0">
@@ -104,7 +117,7 @@ export const Countries = () => {
                             </div>
                         </div>
                     </Link>
-                    <div className="countries-principal-nivel10-frame011" onClick={() => handleCitiesClick(country)} >
+                    <div className="countries-principal-nivel10-frame011" onClick={() => handleCitiesClick(country.country)} >
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
@@ -113,11 +126,11 @@ export const Countries = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="countries-principal-nivel10-frame011">
+                    <div className={`countries-principal-nivel10-frame011 ${isVisited ? 'visited' : ''}`} onClick={() => handleVisitedClick(country.id)}>
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
-                                    <span><i className="fa-solid fa-check"></i></span>
+                                    <span>{isVisited ? <i class="fa-solid fa-check" style={{ color: '#3ba786' }}></i> : <i class="fa-solid fa-check"></i>}</span>
                                 </span>
                             </div>
                         </div>
@@ -211,7 +224,7 @@ export const Countries = () => {
                             <div className="countries-principal-nivel7-frame1">
                                 {filteredCountries.map(country => (
                                     <div key={country.id}>
-                                        {generateCountry(country.country, country.capital, country.currencyCode, country.currencySymbol, country.languageCode)}
+                                        {generateCountry(country, visitedPlacesIds.includes(country.id) ? true : false)}
                                     </div>
                                 ))}
                             </div>

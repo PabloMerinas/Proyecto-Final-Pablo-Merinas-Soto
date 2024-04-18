@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // Metodo para devolver los paises, se le pasa el token para verificar el usuario
-export const getCountries = async (token) => {
+export const getCountries = async () => {
     try {
+        const token = localStorage.getItem('authToken');
         // LLamo a la api
         const response = await axios.get('http://localhost:8080/v1/country/getCountries', {
             headers: {
