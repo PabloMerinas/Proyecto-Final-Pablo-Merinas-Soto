@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyecto.viajes.persistence.model.AttractionEntity;
 import com.proyecto.viajes.persistence.model.CityEntity;
-import com.proyecto.viajes.services.implement.AttractionManagementImpl;
 import com.proyecto.viajes.services.implement.CityManagementImpl;
 
 import lombok.AllArgsConstructor;
@@ -66,6 +64,18 @@ public class CityRestController {
 			// Si la ciudad no existe, devolver la respuesta
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+	/**
+	 * Endpoint para recuperar una ciudad por su nombre.
+	 * 
+	 * @param city Nombre de la ciudad.
+	 * @return Ciudad encontrada.
+	 */
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@GetMapping("/getCityByCity")
+	public CityEntity getCityByCity(@RequestParam String city) {
+		return cityRepository.findByCity(city);
 	}
 
 }

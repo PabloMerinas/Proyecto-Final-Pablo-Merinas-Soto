@@ -21,6 +21,28 @@ export const getCities = async () => {
     }
 };
 
+// Método para obtener una ciudad por su nombre
+export const getCityByCity = async (cityName) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        const response = await axios.get(`http://localhost:8080/v1/city/getCityByCity`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                city: cityName
+            }
+        });
+
+        // Devolver el país encontrado
+        return response.data;
+    } catch (error) {
+        console.error("Error recovering the countries:", error);
+        throw new Error('Error recovering the countries');
+    }
+};
+
+
 // Metodo para eliminar una ciudad por su nombre de ciudad
 export const deleteCityByCity = async (city) => {
     const token = localStorage.getItem('authToken');

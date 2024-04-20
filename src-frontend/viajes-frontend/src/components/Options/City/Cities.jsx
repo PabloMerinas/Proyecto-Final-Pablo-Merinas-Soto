@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../../authContext/autContext';
 import { getVisitedPlacesByUsernameAndType, markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
+import { Link } from 'react-router-dom';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
@@ -93,7 +94,7 @@ export const Cities = () => {
         const handleVisitedClick = (cityId) => {
             // Comprueba si está visitado y si no lo marca
             if (!isVisited) {
-                markAsVisitedByUsername(activeUser.username,null, cityId)
+                markAsVisitedByUsername(activeUser.username, null, cityId)
                     .then(() => {
                         // Actualiza el estado de visitedPlacesIds cuando se ha completado
                         getVisitedPlacesByUsernameAndType(activeUser.username, 'city')
@@ -163,15 +164,17 @@ export const Cities = () => {
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame51" style={{ marginLeft: '-35px' }}>
-                    <div className="countries-principal-nivel10-frame011">
-                        <div className="countries-principal-nivel11-frame0">
-                            <div className="countries-principal-nivel12-frame0">
-                                <span className="countries-principal-text25">
-                                    <span><i className="fa-solid fa-eye"></i></span>
-                                </span>
+                    <Link to={`/cities/${city.city}`}>
+                        <div className="countries-principal-nivel10-frame011">
+                            <div className="countries-principal-nivel11-frame0">
+                                <div className="countries-principal-nivel12-frame0">
+                                    <span className="countries-principal-text25">
+                                        <span><i className="fa-solid fa-eye"></i></span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                     <div className="countries-principal-nivel10-frame011" onClick={() => handleAttractionsClick(city)} >
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
