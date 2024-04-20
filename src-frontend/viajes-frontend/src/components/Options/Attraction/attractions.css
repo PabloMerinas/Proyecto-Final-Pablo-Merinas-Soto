@@ -232,7 +232,7 @@
 }
 
 .attractions-principal-nivel9-frame2 {
-    width: 153.203125px;
+    width: 240px;
     height: 45.5px;
     display: flex;
     padding: 12px 16px;
@@ -261,10 +261,12 @@
     line-height: 21px;
     font-stretch: normal;
     text-decoration: none;
+    position: relative;
+    left: 40px;
 }
 
 .attractions-principal-nivel9-frame3 {
-    width: 153.203125px;
+    width: 240px;
     height: 45.5px;
     display: flex;
     padding: 12px 16px;
@@ -293,6 +295,8 @@
     line-height: 21px;
     font-stretch: normal;
     text-decoration: none;
+    position: relative;
+    left: 40px;
 }
 
 .attractions-principal-nivel9-frame4 {
@@ -446,7 +450,7 @@
 }
 
 .attractions-principal-nivel9-frame21 {
-    width: 153.203125px;
+    width: 240px;
     height: 72px;
     display: flex;
     padding: 8px 16px;
@@ -479,7 +483,7 @@
 }
 
 .attractions-principal-nivel9-frame31 {
-    width: 153.203125px;
+    width: 240px;
     height: 72px;
     display: flex;
     padding: 8px 16px;

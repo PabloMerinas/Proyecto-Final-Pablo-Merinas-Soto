@@ -37,6 +37,11 @@ public class AttractionEntity {
 	private Long id;
 
 	/**
+	 * Direccion de la imagen de la atracción.
+	 */
+	private String imgUrl;
+
+	/**
 	 * Nombre de la atracción.
 	 */
 	private String attraction;

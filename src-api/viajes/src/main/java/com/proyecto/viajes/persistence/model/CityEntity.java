@@ -32,6 +32,11 @@ public class CityEntity {
 	private Long id;
 
 	/**
+	 * Direccion de la imagen de la ciudad.
+	 */
+	private String imgUrl;
+
+	/**
 	 * Nombre de la ciudad.
 	 */
 	private String city;

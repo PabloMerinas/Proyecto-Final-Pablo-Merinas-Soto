@@ -136,29 +136,23 @@ export const Attractions = () => {
                 <div className="attractions-principal-nivel9-frame11">
                     <div className="attractions-principal-nivel10-frame007">
                         <span className="attractions-principal-text18">
-                            <span>{attraction.country}</span>
+                            <span>{attraction.category}</span>
                         </span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame21">
                     <div className="attractions-principal-nivel10-frame008">
                         <span className="attractions-principal-text20">
-                            <span>{attraction.city}</span>
+                            <span>{attraction.country}</span>
                         </span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame31">
                     <div className="attractions-principal-nivel10-frame009">
-                        <span className="attractions-principal-text22">{attraction.category}</span>
+                        <span className="attractions-principal-text22">{attraction.city}</span>
                     </div>
                 </div>
-                <div className="attractions-principal-nivel9-frame41">
-                    <div className="attractions-principal-nivel10-frame010">
-                        <span className="attractions-principal-text23">
-                            <span>{attraction.info}</span>
-                        </span>
-                    </div>
-                </div>
+
                 <div className="countries-principal-nivel9-frame51" style={{ marginLeft: '35px' }}>
                     <div className="countries-principal-nivel10-frame011">
                         <div className="countries-principal-nivel11-frame0">
@@ -230,28 +224,21 @@ export const Attractions = () => {
                                     <div className="attractions-principal-nivel9-frame1">
                                         <div className="attractions-principal-nivel10-frame001">
                                             <span className="attractions-principal-text06">
-                                                <span>Country</span>
+                                                <span>Category</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="attractions-principal-nivel9-frame2">
                                         <div className="attractions-principal-nivel10-frame002">
                                             <span className="attractions-principal-text08">
-                                                <span>City</span>
+                                                <span>Country</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className="attractions-principal-nivel9-frame3">
                                         <div className="attractions-principal-nivel10-frame003">
                                             <span className="attractions-principal-text10">
-                                                <span>Category</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="attractions-principal-nivel9-frame4">
-                                        <div className="attractions-principal-nivel10-frame004">
-                                            <span className="attractions-principal-text12">
-                                                <span>Info</span>
+                                                <span>City</span>
                                             </span>
                                         </div>
                                     </div>
