@@ -3,12 +3,14 @@ import './attractions.css';
 import { getAttractions } from '../../../service/attractionService';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../../authContext/autContext';
+import { getVisitedPlacesByUsernameAndType, markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
 
 export const Attractions = () => {
     const [attractions, setAttractions] = useState([]);
     const [filteredAttractions, setFilteredAttractions] = useState([]);
     const [searchText, setSearchText] = useState('');
     const { activeUser } = useAuth();
+    const [visitedPlacesIds, setVisitedPlacesIds] = useState([]);
 
     // Compruebo si se le ha pasado el valor de la ciudad y si es asi filtro primero
     const activeCity = sessionStorage.getItem('activeCity');
@@ -34,6 +36,10 @@ export const Attractions = () => {
                 const AttractionsData = await getAttractions();
                 setAttractions(AttractionsData);
                 setFilteredAttractions(AttractionsData);
+
+                // Obtiene los paises visitados del usuario 
+                const visitedPlacesIds = await getVisitedPlacesByUsernameAndType(activeUser.username, 'attraction');
+                setVisitedPlacesIds(visitedPlacesIds);
             } catch (error) {
                 console.error('Error retrieving attractions:', error);
             }
@@ -43,7 +49,7 @@ export const Attractions = () => {
     }, []);
 
 
-    
+
     // Compruebo que haya un usuario activo o devuelvo a login
     if (!activeUser) {
         return <Navigate to="/" />;
@@ -77,40 +83,79 @@ export const Attractions = () => {
     };
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-    function generateAttraction(attraction, country, city, category, info) {
+    function generateAttraction(attraction, visitedPlaces) {
+        const isVisited = visitedPlaces.filter(place => place.id === attraction.id).length > 0;
 
+        // Logica para marcarlo como visitado
+        const handleVisitedClick = (attractionId) => {
+            // Comprueba si está visitado y si no lo marca
+            if (!isVisited) {
+                markAsVisitedByUsername(activeUser.username, null, null, attractionId)
+                    .then(() => {
+                        // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                        getVisitedPlacesByUsernameAndType(activeUser.username, 'attraction')
+                            .then(updatedVisitedPlacesIds => {
+                                setVisitedPlacesIds(updatedVisitedPlacesIds);
+                            })
+                            .catch(error => {
+                                console.error('Error updating visited places:', error);
+                            });
+                    })
+                    .catch(error => {
+                        console.error('Error marking visited place:', error);
+                    });
+            } else {
+                const visitedPlace = visitedPlaces.find(place => place.id === attractionId);
+                if (visitedPlace) {
+                    deleteVisitedPlace(visitedPlace.visitedPlaceId)
+                        .then(() => {
+                            // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                            getVisitedPlacesByUsernameAndType(activeUser.username, 'attraction')
+                                .then(updatedVisitedPlacesIds => {
+                                    setVisitedPlacesIds(updatedVisitedPlacesIds);
+                                })
+                                .catch(error => {
+                                    console.error('Error updating visited places:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error deleting visited place:', error);
+                        });
+                }
+            }
+        };
         return (
             <div className="attractions-principal-nivel8-frame01">
                 <div className="attractions-principal-nivel9-frame01">
                     <div className="attractions-principal-nivel10-frame006">
                         <span className="attractions-principal-text16">
-                            <span>{attraction}</span>
+                            <span>{attraction.attraction}</span>
                         </span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame11">
                     <div className="attractions-principal-nivel10-frame007">
                         <span className="attractions-principal-text18">
-                            <span>{country}</span>
+                            <span>{attraction.country}</span>
                         </span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame21">
                     <div className="attractions-principal-nivel10-frame008">
                         <span className="attractions-principal-text20">
-                            <span>{city}</span>
+                            <span>{attraction.city}</span>
                         </span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame31">
                     <div className="attractions-principal-nivel10-frame009">
-                        <span className="attractions-principal-text22">{category}</span>
+                        <span className="attractions-principal-text22">{attraction.category}</span>
                     </div>
                 </div>
                 <div className="attractions-principal-nivel9-frame41">
                     <div className="attractions-principal-nivel10-frame010">
                         <span className="attractions-principal-text23">
-                            <span>{info}</span>
+                            <span>{attraction.info}</span>
                         </span>
                     </div>
                 </div>
@@ -124,11 +169,11 @@ export const Attractions = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="countries-principal-nivel10-frame011">
+                    <div className={`countries-principal-nivel10-frame011 ${isVisited ? 'visited' : ''}`} onClick={() => handleVisitedClick(attraction.id)}>
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
-                                    <span><i className="fa-solid fa-check"></i></span>
+                                    <span>{isVisited ? <i className="fa-solid fa-check" style={{ color: '#3ba786' }}></i> : <i className="fa-solid fa-check"></i>}</span>
                                 </span>
                             </div>
                         </div>
@@ -222,7 +267,7 @@ export const Attractions = () => {
                             <div className="attractions-principal-nivel7-frame1">
                                 {filteredAttractions.map(attraction => (
                                     <div key={attraction.id}>
-                                        {generateAttraction(attraction.attraction, attraction.country, attraction.city, attraction.category, attraction.info)}
+                                        {generateAttraction(attraction, visitedPlacesIds)}
                                     </div>
                                 ))}
                             </div>

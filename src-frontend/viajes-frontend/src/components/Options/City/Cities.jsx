@@ -4,6 +4,7 @@ import { getCities } from '../../../service/cityService';
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../../authContext/autContext';
+import { getVisitedPlacesByUsernameAndType, markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
@@ -11,6 +12,7 @@ export const Cities = () => {
     const [searchText, setSearchText] = useState('');
     const navigate = useNavigate();
     const { activeUser } = useAuth();
+    const [visitedPlacesIds, setVisitedPlacesIds] = useState([]);
 
     // Compruebo si se le ha pasado el valor del pais y si es asi filtro primero
     const activeCountry = sessionStorage.getItem('activeCountry');
@@ -35,6 +37,10 @@ export const Cities = () => {
                 const CitiesData = await getCities();
                 setCities(CitiesData);
                 setFilteredCities(CitiesData);
+
+                // Obtiene los paises visitados del usuario 
+                const visitedPlacesIds = await getVisitedPlacesByUsernameAndType(activeUser.username, 'city');
+                setVisitedPlacesIds(visitedPlacesIds);
             } catch (error) {
                 console.error('Error retrieving cities:', error);
             }
@@ -75,46 +81,84 @@ export const Cities = () => {
     };
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
-    function generateCity(city, country, state, airportCode, population) {
+    function generateCity(city, visitedPlaces) {
+        const isVisited = visitedPlaces.filter(place => place.id === city.id).length > 0;
 
-        // Logica para mostrar las atracciones
+        // Logica para mostrar las ciudades
         const handleAttractionsClick = (city) => {
-            sessionStorage.setItem('activeCity', city);
+            sessionStorage.setItem('activeCity', city.city);
             navigate('/attractions');
         };
-
+        // Logica para marcarlo como visitado
+        const handleVisitedClick = (cityId) => {
+            // Comprueba si está visitado y si no lo marca
+            if (!isVisited) {
+                markAsVisitedByUsername(activeUser.username,null, cityId)
+                    .then(() => {
+                        // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                        getVisitedPlacesByUsernameAndType(activeUser.username, 'city')
+                            .then(updatedVisitedPlacesIds => {
+                                setVisitedPlacesIds(updatedVisitedPlacesIds);
+                            })
+                            .catch(error => {
+                                console.error('Error updating visited places:', error);
+                            });
+                    })
+                    .catch(error => {
+                        console.error('Error marking visited place:', error);
+                    });
+            } else {
+                const visitedPlace = visitedPlaces.find(place => place.id === cityId);
+                if (visitedPlace) {
+                    deleteVisitedPlace(visitedPlace.visitedPlaceId)
+                        .then(() => {
+                            // Actualiza el estado de visitedPlacesIds cuando se ha completado
+                            getVisitedPlacesByUsernameAndType(activeUser.username, 'city')
+                                .then(updatedVisitedPlacesIds => {
+                                    setVisitedPlacesIds(updatedVisitedPlacesIds);
+                                })
+                                .catch(error => {
+                                    console.error('Error updating visited places:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error deleting visited place:', error);
+                        });
+                }
+            }
+        };
         return (
             <div className="countries-principal-nivel8-frame01">
                 <div className="countries-principal-nivel9-frame01">
                     <div className="countries-principal-nivel10-frame006">
                         <span className="countries-principal-text16">
-                            <span>{city}</span>
+                            <span>{city.city}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame11">
                     <div className="countries-principal-nivel10-frame007">
                         <span className="countries-principal-text18">
-                            <span>{country}</span>
+                            <span>{city.country}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame21">
                     <div className="countries-principal-nivel10-frame008">
                         <span className="countries-principal-text20">
-                            <span>{state}</span>
+                            <span>{city.state}</span>
                         </span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame31">
                     <div className="countries-principal-nivel10-frame009">
-                        <span className="countries-principal-text22">{airportCode}</span>
+                        <span className="countries-principal-text22">{city.airportCode}</span>
                     </div>
                 </div>
                 <div className="countries-principal-nivel9-frame41">
                     <div className="countries-principal-nivel10-frame010">
                         <span className="countries-principal-text23">
-                            <span>{population}</span>
+                            <span>{city.population}</span>
                         </span>
                     </div>
                 </div>
@@ -137,11 +181,11 @@ export const Cities = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="countries-principal-nivel10-frame011">
+                    <div className={`countries-principal-nivel10-frame011 ${isVisited ? 'visited' : ''}`} onClick={() => handleVisitedClick(city.id)}>
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
-                                    <span><i className="fa-solid fa-check"></i></span>
+                                    <span>{isVisited ? <i className="fa-solid fa-check" style={{ color: '#3ba786' }}></i> : <i className="fa-solid fa-check"></i>}</span>
                                 </span>
                             </div>
                         </div>
@@ -235,7 +279,7 @@ export const Cities = () => {
                             <div className="cities-principal-nivel7-frame1">
                                 {filteredCities.map(city => (
                                     <div key={city.id}>
-                                        {generateCity(city.city, city.country, city.state, city.airportCode, city.population)}
+                                        {generateCity(city, visitedPlacesIds)}
                                     </div>
                                 ))}
                             </div>

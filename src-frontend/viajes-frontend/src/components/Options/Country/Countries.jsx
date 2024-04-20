@@ -5,8 +5,7 @@ import { useAuth } from '../../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { getVisitedPlacesByUsernameAndType } from '../../../service/visitedPlaceService';
-import { markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
+import { getVisitedPlacesByUsernameAndType, markAsVisitedByUsername, deleteVisitedPlace } from '../../../service/visitedPlaceService';
 
 export const Countries = () => {
     const [countries, setCountries] = useState([]);
