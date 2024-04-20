@@ -46,7 +46,7 @@ export const Attractions = () => {
         }
 
         fetchAttractions();
-    }, []);
+    }, [activeUser]);
 
 
 
@@ -209,7 +209,7 @@ export const Attractions = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
-                                        placeholder="Buscar ciudades" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        placeholder="Search attractions" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
                         </div>

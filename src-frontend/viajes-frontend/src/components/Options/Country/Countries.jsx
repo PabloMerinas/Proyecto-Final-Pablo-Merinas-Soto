@@ -202,7 +202,7 @@ export const Countries = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
-                                        placeholder="Buscar países" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        placeholder="Search countries" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
                         </div>

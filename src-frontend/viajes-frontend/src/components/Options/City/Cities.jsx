@@ -47,7 +47,7 @@ export const Cities = () => {
         }
 
         fetchCities();
-    }, []);
+    }, [activeUser]);
 
     // Compruebo que haya un usuario activo o devuelvo a login
     if (!activeUser) {
@@ -221,7 +221,7 @@ export const Cities = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
-                                        placeholder="Buscar ciudades" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        placeholder="Search cities" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
                         </div>
