@@ -46,9 +46,9 @@ public class DataInitializer {
 		// Insertar ciudades de prueba con URLs de prueba
 		executeSqlStatement("INSERT INTO T_CITY (img_Url, population, state ,city, airport_code, country_id, info) \n"
 		        + "VALUES \n"
-		        + "('URLDEPRUEBA', 3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
-		        + "('URLDEPRUEBA', 8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
-		        + "('URLDEPRUEBA', 7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
+		        + "('https://a.cdn-hotels.com/gdcs/production133/d1207/7ad2d7f0-68ce-11e8-8a0f-0242ac11000c.jpg?impolicy=fcrop&w=800&h=533&q=medium', 3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
+		        + "('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Seal_of_the_District_of_Columbia.svg/1200px-Seal_of_the_District_of_Columbia.svg.png', 8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
+		        + "('https://regiones.prisamedia.co/wp-content/uploads/elementor/thumbs/GettyImages-1410364139-scaled-q7751ozpu2jxayci9zbf1wk1yv1tx6kyqt08jjba6w.jpg', 7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
 		        + "");
 
 		// Insertar atracciones de prueba con URLs de prueba

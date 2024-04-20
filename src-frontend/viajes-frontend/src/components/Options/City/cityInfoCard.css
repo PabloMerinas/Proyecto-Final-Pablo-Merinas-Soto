@@ -1,0 +1,591 @@
+.city-card-info-container {
+    width: 965px;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 50px;
+    border: 1px solid rgba(209, 214, 252, 1);
+    border-radius: 12px;
+
+}
+
+.city-card-info-city-card {
+    gap: 13px;
+    width: 960px;
+    height: auto;
+    display: flex;
+    padding: 16px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-color: rgba(247, 250, 252, 1);
+}
+
+.city-card-info-city-img {
+    width: 389px;
+    height: 402px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 12px;
+    justify-content: center;
+}
+
+.city-card-info-city-info {
+    width: 520px;
+    height: 402px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-city-titulo {
+    width: 510px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth11-frame0 {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    flex-direction: column;
+}
+
+.city-card-info-text {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    font-size: 48px;
+    font-style: Black;
+    text-align: center;
+    font-weight: 900;
+    line-height: 60px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-city-data {
+    width: 510px;
+    height: 294px;
+    display: flex;
+    padding: 16px;
+    position: relative;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth5-frame0 {
+    gap: 2px;
+    top: 16px;
+    left: 16px;
+    width: 479px;
+    height: 79px;
+    display: flex;
+    padding: 5px;
+    position: absolute;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth6-frame0 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.city-card-info-depth7-frame0 {
+    height: 21px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame0 {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    flex-direction: column;
+}
+
+.city-card-info-text02 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth6-frame1 {
+    display: flex;
+    opacity: 0.80;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.city-card-info-depth7-frame001 {
+    display: flex;
+    flex-grow: 1;
+    align-self: stretch;
+    align-items: center;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame001 {
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-self: stretch;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.city-card-info-text04 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    flex-grow: 1;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Regular;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth5-frame2 {
+    gap: 4px;
+    top: 95px;
+    left: 16px;
+    width: 240px;
+    height: 79px;
+    display: flex;
+    padding: 16px 8px 16px 0;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth6-frame01 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame002 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame002 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text06 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth6-frame11 {
+    width: 232px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame003 {
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame003 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text08 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth5-frame3 {
+    gap: 4px;
+    top: 95px;
+    left: 256px;
+    width: 240px;
+    height: 79px;
+    display: flex;
+    padding: 16px 0 16px 8px;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth6-frame02 {
+    width: 232px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame004 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame004 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text10 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth6-frame12 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame005 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame005 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text12 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth5-frame4 {
+    gap: 4px;
+    top: 174.5px;
+    left: 15.5px;
+    width: 232px;
+    height: 79px;
+    display: flex;
+    padding: 16px 240px 16px 0;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth6-frame03 {
+    width: 232px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame006 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame006 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text14 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth6-frame13 {
+    width: 240px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame007 {
+    width: 34.578125px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame007 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text16 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 14px;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth5-frame5 {
+    gap: 4px;
+    top: 174.5px;
+    left: 263.5px;
+    width: 232px;
+    height: 79px;
+    display: flex;
+    padding: 16px 240px 16px 0;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth6-frame04 {
+    width: 232px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame008 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame008 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text18 {
+    color: rgba(79, 102, 150, 1);
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth6-frame14 {
+    width: 232px;
+    height: 21px;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.city-card-info-depth7-frame009 {
+    width: 232px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.city-card-info-depth8-frame009 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text20 {
+    color: rgba(12, 17, 28, 1);
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Regular;
+    text-align: left;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.city-card-info-depth8-frame1 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.city-card-info-depth9-frame0 {
+    width: 120.578125px;
+    height: 48px;
+    display: flex;
+    padding: 0 20px;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    justify-content: center;
+    background-color: rgba(25, 91, 229, 1);
+}
+
+.city-card-info-depth10-frame0 {
+    width: 80.578125px;
+    height: 24px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    background-color: rgba(25, 91, 229, 1);
+}
+
+.city-card-info-depth11-frame01 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.city-card-info-text22 {
+    color: rgba(247, 249, 252, 1);
+    width: 81px;
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: center;
+    font-weight: 700;
+    line-height: 24px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.linkCenter{
+    display: contents;
+}
