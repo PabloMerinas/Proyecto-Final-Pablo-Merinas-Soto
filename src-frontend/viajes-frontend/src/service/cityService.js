@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 // Metodo para devolver las ciudades, se le pasa el token para verificar el usuario
-export const getCities = async (token) => {
+export const getCities = async () => {
     try {
+        // Recupero el token
+        const token = localStorage.getItem("authToken");
         // LLamo a la api
         const response = await axios.get('http://localhost:8080/v1/city/getCities', {
             headers: {

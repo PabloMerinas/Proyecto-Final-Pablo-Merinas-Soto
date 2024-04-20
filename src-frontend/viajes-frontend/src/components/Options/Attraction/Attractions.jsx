@@ -31,9 +31,7 @@ export const Attractions = () => {
     useEffect(() => {
         async function fetchAttractions() {
             try {
-                // Recupero el token
-                const token = localStorage.getItem("authToken");
-                const AttractionsData = await getAttractions(token);
+                const AttractionsData = await getAttractions();
                 setAttractions(AttractionsData);
                 setFilteredAttractions(AttractionsData);
             } catch (error) {
@@ -44,11 +42,13 @@ export const Attractions = () => {
         fetchAttractions();
     }, []);
 
-        // Compruebo que haya un usuario activo o devuelvo a login
-        if (!activeUser) {
-            return <Navigate to="/" />;
+
     
-        }
+    // Compruebo que haya un usuario activo o devuelvo a login
+    if (!activeUser) {
+        return <Navigate to="/" />;
+
+    }
 
 
     const handleInputChange = (event) => {
@@ -75,10 +75,6 @@ export const Attractions = () => {
         // Actualizar atracciones filtradas
         setFilteredAttractions(filtered);
     };
-
-
-
-
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateAttraction(attraction, country, city, category, info) {

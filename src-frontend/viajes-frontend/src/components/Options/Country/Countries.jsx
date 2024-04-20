@@ -15,7 +15,6 @@ export const Countries = () => {
     const [searchText, setSearchText] = useState('');
     const { activeUser } = useAuth();
     const navigate = useNavigate();
-    const [forceRemount, setForceRemount] = useState(false);
 
     // Recupero los paises
     useEffect(() => {
@@ -37,7 +36,7 @@ export const Countries = () => {
         if (activeUser) {
             fetchData();
         }
-    }, [activeUser, forceRemount]);
+    }, [activeUser]);
 
 
     // Compruebo que haya un usuario activo o devuelvo a login
@@ -168,7 +167,7 @@ export const Countries = () => {
                         <div className="countries-principal-nivel11-frame0">
                             <div className="countries-principal-nivel12-frame0">
                                 <span className="countries-principal-text25">
-                                    <span>{isVisited ? <i class="fa-solid fa-check" style={{ color: '#3ba786' }}></i> : <i class="fa-solid fa-check"></i>}</span>
+                                    <span>{isVisited ? <i className="fa-solid fa-check" style={{ color: '#3ba786' }}></i> : <i className="fa-solid fa-check"></i>}</span>
                                 </span>
                             </div>
                         </div>

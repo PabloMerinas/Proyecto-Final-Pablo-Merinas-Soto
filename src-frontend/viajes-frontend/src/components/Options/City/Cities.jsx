@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './cities.css';
 import { getCities } from '../../../service/cityService';
 import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../../authContext/autContext';
 
 export const Cities = () => {
     const [cities, setCities] = useState([]);
-    const [filteredCities, setfilteredCities] = useState([]);
+    const [filteredCities, setFilteredCities] = useState([]);
     const [searchText, setSearchText] = useState('');
     const navigate = useNavigate();
+    const { activeUser } = useAuth();
 
     // Compruebo si se le ha pasado el valor del pais y si es asi filtro primero
     const activeCountry = sessionStorage.getItem('activeCountry');
@@ -18,9 +21,9 @@ export const Cities = () => {
             const filtered = cities.filter(city =>
                 city.country.toLowerCase() === activeCountry.toLowerCase()
             );
-            setfilteredCities(filtered);
+            setFilteredCities(filtered);
         } else {
-            setfilteredCities(cities);
+            setFilteredCities(cities);
 
         }
     }, [cities, activeCountry]);
@@ -29,11 +32,9 @@ export const Cities = () => {
     useEffect(() => {
         async function fetchCities() {
             try {
-                // Recupero el token
-                const token = localStorage.getItem("authToken");
-                const citiesData = await getCities(token);
-                setCities(citiesData);
-                setfilteredCities(citiesData);
+                const CitiesData = await getCities();
+                setCities(CitiesData);
+                setFilteredCities(CitiesData);
             } catch (error) {
                 console.error('Error retrieving cities:', error);
             }
@@ -42,7 +43,11 @@ export const Cities = () => {
         fetchCities();
     }, []);
 
+    // Compruebo que haya un usuario activo o devuelvo a login
+    if (!activeUser) {
+        return <Navigate to="/" />;
 
+    }
 
     const handleInputChange = (event) => {
         setSearchText(event.target.value || '');
@@ -52,14 +57,22 @@ export const Cities = () => {
 
     // Metodo para filtrar ciudades
     const filterCities = (text) => {
-        const filtered = cities.filter(city =>
-            city.city.toLowerCase().includes(text.toLowerCase())
-        );
-        setfilteredCities(filtered);
+        let filtered;
+        if (activeCountry) {
+            // Filtrar ciudades por el país activo y su texto de búsqueda
+            filtered = cities.filter(city =>
+                city.country.toLowerCase() === activeCountry.toLowerCase() &&
+                city.city.toLowerCase().includes(text.toLowerCase())
+            );
+        } else {
+            // Filtrar ciudades solo por el texto de búsqueda
+            filtered = cities.filter(city =>
+                city.city.toLowerCase().includes(text.toLowerCase())
+            );
+        }
+        // Actualiza las ciudades
+        setFilteredCities(filtered);
     };
-
-
-
 
     // Metodo para generar la linea del pais y llamar a su tarjeta con la información
     function generateCity(city, country, state, airportCode, population) {

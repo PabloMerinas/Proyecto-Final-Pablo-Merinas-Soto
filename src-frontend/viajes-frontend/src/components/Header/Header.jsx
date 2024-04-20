@@ -202,7 +202,7 @@ export const Header = () => {
           <div className="nivel-frame-4">
             <div className="nivel-frame-5">
               <div className="nivel-frame-6">
-                <Link className="header-a" to="/countries"><div className="text-wrapper-2" onClick={deleteSessionCookies}>Countries</div></Link>
+                <Link className="header-a" to="/countries"><div className="text-wrapper-2">Countries</div></Link>
               </div>
             </div>
             <div className="nivel-frame-7">
@@ -248,9 +248,10 @@ export const Header = () => {
 
 // Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado
 function deleteSessionCookies() {
-  sessionStorage.removeItem('activeCity');
   sessionStorage.removeItem('activeCountry');
+  sessionStorage.removeItem('activeCity');
 }
+
 
 
 

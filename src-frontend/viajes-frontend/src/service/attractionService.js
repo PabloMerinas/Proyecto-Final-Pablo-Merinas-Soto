@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 // Metodo para devolver las attractions, se le pasa el token para verificar el usuario
-export const getAttractions = async (token) => {
+export const getAttractions = async () => {
     try {
+        // Recupero el token
+        const token = localStorage.getItem("authToken");
         // LLamo a la api
         const response = await axios.get('http://localhost:8080/v1/attraction', {
             headers: {
