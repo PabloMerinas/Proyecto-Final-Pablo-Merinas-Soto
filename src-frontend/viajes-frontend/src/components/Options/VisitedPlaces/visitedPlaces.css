@@ -1,0 +1,123 @@
+.visited-places-container {
+  width: 1300px;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.visited-places-visited-places-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.visited-places-visited-place-title {
+  width: 100%;
+  gap: 12px;
+  height: 80px;
+  display: flex;
+  padding: 16px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.visited-places-depth5-frame0 {
+  gap: 12px;
+  top: 16px;
+  left: 0px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.visited-places-depth6-frame0 {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+  
+}
+
+.visited-places-depth7-frame0 {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-direction: column;
+  
+}
+
+.visited-places-text {
+  color: rgba(12, 17, 28, 1);
+  height: auto;
+  font-size: 32px;
+  font-style: Bold;
+  text-align: center;
+  font-weight: 700;
+  line-height: 40px;
+  font-stretch: normal;
+  text-decoration: none;
+}
+
+.visited-places-visited-place-grid {
+  gap: 18px;
+  width: 960px;
+  display: grid;
+  padding: 12px 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual tamaño */
+
+}
+
+.visited-places-visited-place-item1 {
+  width: 393px;
+  height: 72px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background-color: rgba(247, 250, 252, 1);
+  border: 1px solid rgba(209, 214, 252, 1);
+}
+
+.visited-places-img1 {
+  left: 9px;
+  width: 67px;
+  height: 67px; 
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center; 
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.visited-places-text4 {
+  top: 18px;
+  left: 90px;
+  color: rgba(0, 0, 0, 1);
+  width: 287px;
+  height: auto;
+  position: absolute;
+  font-size: 18px;
+  font-style: Medium;
+  text-align: left;
+  font-weight: 500;
+  line-height: 24px;
+  font-stretch: normal;
+  text-decoration: none;
+}

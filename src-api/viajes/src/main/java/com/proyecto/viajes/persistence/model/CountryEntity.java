@@ -77,5 +77,7 @@ public class CountryEntity {
 	 */
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CityEntity> cities;
+	
+
 
 }
