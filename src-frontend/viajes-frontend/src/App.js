@@ -18,6 +18,7 @@ import { Notification } from './components/Notification/Notification';
 import { Login } from './components/Login/Login';
 import { AuthProvider } from './authContext/autContext';
 import { AdminUsers } from './components/AdminUsers/AdminUsers';
+import { VisitedPlaces } from './components/Options/VisitedPlaces/VisitedPlaces';
 
 function App() {
   const { activeUser } = useAuth();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/cities/:city" element={<CityInfoCard />} />
         <Route path="/attractions" element={<Attractions />} />
         <Route path="/attractions/:attraction" element={<AttractionInfoCard />} />
+        <Route path='/visitedPlaces' element={<VisitedPlaces />} />
         <Route path="/notifications" element={<Notification />} />
       </Routes>
       {/*Aqui deberia ir el footer*/}

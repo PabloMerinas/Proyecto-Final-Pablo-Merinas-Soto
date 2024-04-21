@@ -217,7 +217,7 @@ export const Header = () => {
             </div>
             <div className="nivel-frame-10">
               <div className="nivel-frame-8">
-                <Link className="header-a" to="/itineraries"> <div className="text-wrapper-3">Itineraries</div></Link>
+                <Link className="header-a" to="/visitedPlaces"> <div className="text-wrapper-3">My Places</div></Link>
               </div>
             </div>
           </div>
