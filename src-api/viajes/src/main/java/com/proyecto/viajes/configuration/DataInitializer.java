@@ -45,35 +45,30 @@ public class DataInitializer {
 
 		// Insertar ciudades de prueba con URLs de prueba
 		executeSqlStatement("INSERT INTO T_CITY (img_Url, population, state ,city, airport_code, country_id, info) \n"
-		        + "VALUES \n"
-		        + "('https://a.cdn-hotels.com/gdcs/production133/d1207/7ad2d7f0-68ce-11e8-8a0f-0242ac11000c.jpg?impolicy=fcrop&w=800&h=533&q=medium', 3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
-		        + "('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Seal_of_the_District_of_Columbia.svg/1200px-Seal_of_the_District_of_Columbia.svg.png', 8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
-		        + "('https://regiones.prisamedia.co/wp-content/uploads/elementor/thumbs/GettyImages-1410364139-scaled-q7751ozpu2jxayci9zbf1wk1yv1tx6kyqt08jjba6w.jpg', 7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
-		        + "");
+				+ "VALUES \n"
+				+ "('https://a.cdn-hotels.com/gdcs/production133/d1207/7ad2d7f0-68ce-11e8-8a0f-0242ac11000c.jpg?impolicy=fcrop&w=800&h=533&q=medium', 3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),\n"
+				+ "('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Seal_of_the_District_of_Columbia.svg/1200px-Seal_of_the_District_of_Columbia.svg.png', 8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),\n"
+				+ "('https://regiones.prisamedia.co/wp-content/uploads/elementor/thumbs/GettyImages-1410364139-scaled-q7751ozpu2jxayci9zbf1wk1yv1tx6kyqt08jjba6w.jpg', 7400000, 'Departamento de Cundinamarca', 'Bogotá', 'BOG', 3, 'Bogotá es la capital de Colombia y la ciudad más grande del país');\n"
+				+ "");
 
 		// Insertar atracciones de prueba con URLs de prueba
-		executeSqlStatement("INSERT INTO t_attraction (img_Url, attraction, info, city_id, category) VALUES \n"
-		        + "('URLDEPRUEBA', 'Museo del Prado', 'Museos de arte más importantes del mundo', 1, 'MUSEUM'),\n"
-		        + "('URLDEPRUEBA', 'Monumento a Lincoln', 'Monumento conmemorativo.', 2, 'LANDMARK'),\n"
-		        + "('URLDEPRUEBA', 'Museo del Oro', 'Museo ubicado en Bogotá', 3, 'MUSEUM');\n"
-		        + "");
+		executeSqlStatement("INSERT INTO t_attraction (img_Url, attraction, info, city_id, category, price) VALUES \n"
+				+ "('https://imagenes.elpais.com/resizer/aF_mNTYUzJPggYcxQfl1N0vFcDw=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/UZ5J2W3XBVG4ZOT52PU3UJKT4A.png', 'Museo del Prado', 'Museos de arte más importantes del mundo', 1, 'MUSEUM', '20'),\n"
+				+ "('https://upload.wikimedia.org/wikipedia/commons/8/80/Lincoln_statue%2C_Lincoln_Memorial.jpg', 'Monumento a Lincoln', 'Monumento conmemorativo.', 2, 'LANDMARK', '5'),\n"
+				+ "('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/8e/65/b9/caption.jpg?w=1200&h=-1&s=1', 'Museo del Oro', 'Museo ubicado en Bogotá', 3, 'MUSEUM', '30');\n"
+				+ "");
 
 		executeSqlStatement("INSERT INTO t_attraction (img_Url, attraction, info, city_id, category) VALUES \n"
-		        + "('URLDEPRUEBA', 'Catedral de Sevilla', 'Catedral gótica más grande del mundo', 1, 'CHURCH'),\n"
-		        + "('URLDEPRUEBA', 'Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');\n"
-		        + "");
-
-
-
-
+				+ "('https://www.diariodesevilla.es/2019/07/25/sevilla/imagen-Catedral-Sevilla_1376273216_103031676_667x375.jpg', 'Catedral de Sevilla', 'Catedral gótica más grande del mundo', 1, 'CHURCH'),\n"
+				+ "('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/6a/30/c5/fabulosa-arquitectura.jpg?w=1200&h=-1&s=1', 'Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');\n"
+				+ "");
 
 		// Insertar notificaciones
 		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, time_ago)\n" + "VALUES \n"
 				+ "(1, 'New Destination: Kyoto, Japan', '6h ago'),\n"
 				+ "(2, 'New Attraction: Golden Pavilion', '2h ago'),\n"
 				+ "(3, 'Local Event: Oia Sunset', '2 days ago'),\n"
-				+ "(4, 'New Attraction: Amoudi Bay', '1 day ago');\n"
-				+ "");
+				+ "(4, 'New Attraction: Amoudi Bay', '1 day ago');\n" + "");
 
 		// Insertar notificaciones
 		executeSqlStatement(
@@ -90,7 +85,6 @@ public class DataInitializer {
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('user', 2);");
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('user', 2);");
 		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('user', 2);");
-
 
 	}
 

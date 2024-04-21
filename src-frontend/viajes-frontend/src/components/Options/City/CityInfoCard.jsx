@@ -24,7 +24,7 @@ export const CityInfoCard = () => {
     return (
         <div className="city-card-info-container">
             <div className="city-card-info-city-card">
-            <div className="city-card-info-city-img" style={{ backgroundImage: `url(${actualCity.imgUrl})`, backgroundSize: 'cover' }}></div>
+                <div className="city-card-info-city-img" style={{ backgroundImage: `url(${actualCity.imgUrl})`, backgroundSize: 'cover' }}></div>
                 <div className="city-card-info-city-info">
                     <div className="city-card-info-city-titulo">
                         <div className="city-card-info-depth11-frame0">
@@ -48,8 +48,8 @@ export const CityInfoCard = () => {
                                 <div className="city-card-info-depth7-frame001">
                                     <div className="city-card-info-depth8-frame001">
                                         <span className="city-card-info-text04">
-                                            <span>{actualCity && actualCity.info ? actualCity.info : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
-
+                                            <span>
+                                                {actualCity && actualCity.info ? actualCity.info : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
                                             </span>
                                         </span>
                                     </div>
