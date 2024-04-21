@@ -13,6 +13,7 @@ import { CountryInfoCard } from './components/Options/Country/CountryInfoCard';
 import { Cities } from './components/Options/City/Cities';
 import { CityInfoCard } from './components/Options/City/CityInfoCard';
 import { Attractions } from './components/Options/Attraction/Attractions';
+import { AttractionInfoCard } from './components/Options/Attraction/AttractionInfoCard';
 import { Notification } from './components/Notification/Notification';
 import { Login } from './components/Login/Login';
 import { AuthProvider } from './authContext/autContext';
@@ -35,6 +36,7 @@ function App() {
         <Route path="/cities" element={<Cities />} />
         <Route path="/cities/:city" element={<CityInfoCard />} />
         <Route path="/attractions" element={<Attractions />} />
+        <Route path="/attractions/:attraction" element={<AttractionInfoCard />} />
         <Route path="/notifications" element={<Notification />} />
       </Routes>
       {/*Aqui deberia ir el footer*/}

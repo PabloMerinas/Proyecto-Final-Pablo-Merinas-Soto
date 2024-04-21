@@ -23,7 +23,6 @@ export const getCities = async () => {
 
 // Método para obtener una ciudad por su nombre
 export const getCityByCity = async (cityName) => {
-    console.log("Entra")
     const token = localStorage.getItem('authToken');
     try {
         const response = await axios.get(`http://localhost:8080/v1/city/getCityByCity`, {

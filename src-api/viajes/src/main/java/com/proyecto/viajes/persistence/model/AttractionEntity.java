@@ -66,6 +66,11 @@ public class AttractionEntity {
 	private String info;
 
 	/**
+	 * Precio de la atraccion.
+	 */
+	private Double price;
+
+	/**
 	 * Metodo para devolver el valor de su ciudad asociada
 	 * 
 	 * @return Nombre de la ciudad asociada

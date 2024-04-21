@@ -41,7 +41,20 @@ public class AttractionRestController {
 	}
 
 	/**
-	 * Endpoint para eliminar una atracción por su nombre. Se requiere el rol de: "ROLE_ADMIN"
+	 * Endpoint para recuperar una atraccion por su nombre.
+	 * 
+	 * @param Attraction Nombre de la atraccion.
+	 * @return Atracción encontrada.
+	 */
+	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
+	@GetMapping("/getAttractionByAttraction")
+	public AttractionEntity getAttractionByAttraction(@RequestParam String attraction) {
+		return attractionRepository.findByAttraction(attraction);
+	}
+
+	/**
+	 * Endpoint para eliminar una atracción por su nombre. Se requiere el rol de:
+	 * "ROLE_ADMIN"
 	 * 
 	 * @param attraction Nombre de la atracción a eliminar.
 	 * @return ResponseEntity con la respuesta del servidor.
@@ -49,16 +62,16 @@ public class AttractionRestController {
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/deleteAttractionByAttraction")
 	public ResponseEntity<String> deleteAttractionByAttraction(@RequestParam String attraction) {
-	    // Buscar la atracción por su nombre
-	    AttractionEntity attractionToDelete = attractionRepository.findByAttraction(attraction);
-	    
-	    if (attractionToDelete != null) {
-	        // Eliminar la atracción
-	        attractionRepository.delete(attractionToDelete);
-	        return ResponseEntity.ok().body("Atracción eliminada correctamente");
-	    } else {
-	        // Si la atracción no existe, devolver la respuesta
-	        return ResponseEntity.notFound().build();
-	    }
+		// Buscar la atracción por su nombre
+		AttractionEntity attractionToDelete = attractionRepository.findByAttraction(attraction);
+
+		if (attractionToDelete != null) {
+			// Eliminar la atracción
+			attractionRepository.delete(attractionToDelete);
+			return ResponseEntity.ok().body("Atracción eliminada correctamente");
+		} else {
+			// Si la atracción no existe, devolver la respuesta
+			return ResponseEntity.notFound().build();
+		}
 	}
 }

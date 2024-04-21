@@ -42,3 +42,23 @@ export const deleteAttractionByAttraction = async (attraction) => {
         throw new Error('Error deleting the attraction');
     }
 };
+
+// Método para obtener una atraccion por su nombre
+export const getAttractionByAttraction = async (attractionName) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        const response = await axios.get('http://localhost:8080/v1/attraction/getAttractionByAttraction', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                attraction: attractionName
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error recovering the attraction:", error);
+        throw new Error('Error recovering the attraction');
+    }
+}

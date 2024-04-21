@@ -9,7 +9,7 @@ export const CityInfoCard = () => {
 
 
     useEffect(() => {
-        const fetchCountry = async () => {
+        const fetchCity = async () => {
             try {
                 const cityData = await getCityByCity(cityParam);
                 setActualCity(cityData);
@@ -18,7 +18,7 @@ export const CityInfoCard = () => {
             }
         };
 
-        fetchCountry();
+        fetchCity();
     }, [cityParam]);
 
     return (
