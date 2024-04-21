@@ -69,6 +69,7 @@ export const VisitedPlaces = () => {
 
     }
 
+    // Metodo para generar una card
     function generateCard(img, title, link) {
         return (
             <Link to={link}>

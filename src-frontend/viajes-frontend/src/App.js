@@ -22,7 +22,7 @@ import { VisitedPlaces } from './components/Options/VisitedPlaces/VisitedPlaces'
 
 function App() {
   const { activeUser } = useAuth();
-
+  document.title = 'EasyTravels' // Cambio el titulo de la pagina
   return (
     <Router>
       {activeUser ? <Header /> : <HeaderBasic />}
