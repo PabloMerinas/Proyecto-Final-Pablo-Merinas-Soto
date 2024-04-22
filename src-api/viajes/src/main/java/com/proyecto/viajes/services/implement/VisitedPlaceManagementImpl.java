@@ -68,4 +68,29 @@ public class VisitedPlaceManagementImpl implements VisitedPlaceManagementI {
 		visitedPlaceRepository.delete(visitedPlace);
 	}
 
+	@Override
+	public List<VisitedPlaceEntity> findByAttraction(AttractionEntity attraction) {
+		return visitedPlaceRepository.findByAttraction(attraction);
+	}
+
+	@Override
+	public List<VisitedPlaceEntity> findByCity(CityEntity city) {
+		return visitedPlaceRepository.findByCity(city);
+	}
+
+	@Override
+	public List<VisitedPlaceEntity> findByCountry(CountryEntity country) {
+		return visitedPlaceRepository.findByCountry(country);
+	}
+
+	@Override
+	public void save(VisitedPlaceEntity visitedPlace) {
+		visitedPlaceRepository.save(visitedPlace);
+	}
+
+	@Override
+	public List<VisitedPlaceEntity> findByUser(UserEntity userOptional) {
+		return visitedPlaceRepository.findByUser(userOptional);
+	}
+
 }

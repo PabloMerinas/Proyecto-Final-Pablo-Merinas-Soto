@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.UserEntity;
+import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.security.JwtUtils;
 import com.proyecto.viajes.security.UserRoleEntity;
 import com.proyecto.viajes.services.implement.RoleManagementImpl;
 import com.proyecto.viajes.services.implement.UserManagementImpl;
+import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -56,6 +58,11 @@ public class UserRestController {
 	 * Inyección de dependencia de JwtUtils.
 	 */
 	private JwtUtils jwtUtils;
+
+	/**
+	 * Inyeccion de dependencia de visitedPlace.
+	 */
+	private VisitedPlaceManagementImpl visitedPlaceRepository;
 
 	/**
 	 * Metodo por defecto GET, devuelve la lista de todos los usuarios.
@@ -268,7 +275,8 @@ public class UserRestController {
 	}
 
 	/**
-	 * Endpoint para eliminar un usuario por su nombre de usuario. Se requiere el rol de: "ROLE_ADMIN"
+	 * Endpoint para eliminar un usuario por su nombre de usuario. Se requiere el
+	 * rol de: "ROLE_ADMIN"
 	 * 
 	 * @param username Nombre de usuario del usuario a eliminar.
 	 * @return ResponseEntity con la respuesta del servidor.
@@ -276,22 +284,30 @@ public class UserRestController {
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/deleteUserByUsername/{username}")
 	public ResponseEntity<String> deleteUserByUsername(@PathVariable String username) {
-	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-	    
-	    if (userOptional.isPresent()) {
-	        // Eliminar los roles asociados a ese usuario
-	        roleRepository.deleteRolesFromUsername(username);
-	        
-	        // Eliminar al usuario
-	        userRepository.delete(userOptional.get());
-	        
-	        return ResponseEntity.ok().body("Usuario eliminado correctamente");
-	    } else {
-	        // Si el usuario no existe, devolver la respuesta
-	        return ResponseEntity.notFound().build();
-	    }
-	}
+		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 
+		if (userOptional.isPresent()) {
+			// Eliminar los roles asociados a ese usuario
+			roleRepository.deleteRolesFromUsername(username);
+
+			// Elimina sus lugares visitados
+			UserEntity user = userOptional.get();
+			List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByUser(user);
+			// Eliminar la relación entre los lugares visitados y la atracción
+			for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
+				visitedPlace.setUser(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
+
+			// Eliminar al usuario
+			userRepository.delete(userOptional.get());
+
+			return ResponseEntity.ok().body("Usuario eliminado correctamente");
+		} else {
+			// Si el usuario no existe, devolver la respuesta
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	/**
 	 * Endpoint para eliminar un usuario Se requiere el rol de: "ROLE_CUSTOMER",
@@ -324,7 +340,7 @@ public class UserRestController {
 					.body("Se produjo un error al eliminar el usuario");
 		}
 	}
-	
+
 	/**
 	 * Endpoint para eliminar un usuario. Se requiere el rol de: "ROLE_ADMIN"
 	 * 
@@ -334,25 +350,25 @@ public class UserRestController {
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/deleteUser")
 	public ResponseEntity<String> deleteUser(@RequestBody UserEntity user) {
-	    try {
-	        Optional<UserEntity> existingUser = userRepository.findByUsername(user.getUsername());
-	        
-	        if (existingUser.isPresent()) {
-	            // Eliminar los roles asociados a ese usuario
-	            roleRepository.deleteRolesFromUsername(user.getUsername());
-	            
-	            // Eliminar al usuario
-	            userRepository.delete(existingUser.get());
-	            
-	            return ResponseEntity.ok().body("Usuario eliminado correctamente");
-	        } else {
-	            return ResponseEntity.notFound().build();
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body("Se produjo un error al eliminar el usuario");
-	    }
+		try {
+			Optional<UserEntity> existingUser = userRepository.findByUsername(user.getUsername());
+
+			if (existingUser.isPresent()) {
+				// Eliminar los roles asociados a ese usuario
+				roleRepository.deleteRolesFromUsername(user.getUsername());
+
+				// Eliminar al usuario
+				userRepository.delete(existingUser.get());
+
+				return ResponseEntity.ok().body("Usuario eliminado correctamente");
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Se produjo un error al eliminar el usuario");
+		}
 	}
 
 }

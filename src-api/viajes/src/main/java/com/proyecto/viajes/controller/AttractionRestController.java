@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
+import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.services.implement.AttractionManagementImpl;
+import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -27,6 +29,11 @@ public class AttractionRestController {
 	 * Inyección de dependencia.
 	 */
 	private AttractionManagementImpl attractionRepository;
+
+	/**
+	 * Inyeccion de dependencia de visitedPlace.
+	 */
+	private VisitedPlaceManagementImpl visitedPlaceRepository;
 
 	/**
 	 * Endpoint para obtener todas las atraciones. Se requiere que el usuario tenga
@@ -66,6 +73,13 @@ public class AttractionRestController {
 		AttractionEntity attractionToDelete = attractionRepository.findByAttraction(attraction);
 
 		if (attractionToDelete != null) {
+			List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository
+					.findByAttraction(attractionToDelete);
+			// Eliminar la relación entre los lugares visitados y la atracción
+			for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
+				visitedPlace.setAttraction(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
 			// Eliminar la atracción
 			attractionRepository.delete(attractionToDelete);
 			return ResponseEntity.ok().body("Atracción eliminada correctamente");

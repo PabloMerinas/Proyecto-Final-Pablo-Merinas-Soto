@@ -74,7 +74,7 @@ export const RegisterForm = () => {
             </span>
           </div>
         </div>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} id='registerForm' name='registerForm'>
           <div className="principal-nivel4-frame1">
             <div className="principal-nivel5-frame01">
               <div className="principal-nivel6-frame0">

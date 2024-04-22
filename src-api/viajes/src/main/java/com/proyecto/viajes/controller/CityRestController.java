@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.viajes.persistence.model.AttractionEntity;
 import com.proyecto.viajes.persistence.model.CityEntity;
+import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.services.implement.CityManagementImpl;
+import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -29,6 +32,11 @@ public class CityRestController {
 	 * 
 	 */
 	private CityManagementImpl cityRepository;
+
+	/**
+	 * Inyeccion de dependencia de visitedPlace.
+	 */
+	private VisitedPlaceManagementImpl visitedPlaceRepository;
 
 	/**
 	 * Endpoint para obtener todas las ciudades. Se requiere que el usuario tenga el
@@ -56,6 +64,21 @@ public class CityRestController {
 		CityEntity cityToDelete = cityRepository.findByCity(city);
 
 		if (cityToDelete != null) {
+			List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByCity(cityToDelete);
+			// Eliminar la relación entre los lugares visitados y la atracción
+			for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
+				visitedPlace.setCity(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
+			for (AttractionEntity attractionToDeleteVisitedPlaces : cityToDelete.getAttractions()) {
+				List<VisitedPlaceEntity> AttractionVisitedPlacesToDelete = visitedPlaceRepository
+						.findByAttraction(attractionToDeleteVisitedPlaces);
+				// Eliminar la relación entre los lugares visitados y la atracción
+				for (VisitedPlaceEntity visitedPlace : AttractionVisitedPlacesToDelete) {
+					visitedPlace.setAttraction(null);
+					visitedPlaceRepository.save(visitedPlace);
+				}
+			}
 
 			// Eliminar la ciudad
 			cityRepository.delete(cityToDelete);

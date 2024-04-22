@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.viajes.persistence.model.AttractionEntity;
+import com.proyecto.viajes.persistence.model.CityEntity;
 import com.proyecto.viajes.persistence.model.CountryEntity;
+import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.services.implement.CountryManagementImpl;
+import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -28,6 +32,11 @@ public class CountryRestController {
 	 * Inyección de dependencia de CountryManagementImpl.
 	 */
 	private CountryManagementImpl countryRepository;
+
+	/**
+	 * Inyeccion de dependencia de visitedPlace.
+	 */
+	private VisitedPlaceManagementImpl visitedPlaceRepository;
 
 	/**
 	 * Endpoint para obtener todos los países. Se requiere que el usuario tenga el
@@ -65,7 +74,36 @@ public class CountryRestController {
 	public ResponseEntity<String> deleteCountryByCountry(@RequestParam String country) {
 		CountryEntity countryToDelete = countryRepository.findByCountry(country);
 
+		// Obtengo la lista de los country y los elimino
 		if (countryToDelete != null) {
+			List<VisitedPlaceEntity> visitedPlacesToDeleteCountry = visitedPlaceRepository
+					.findByCountry(countryToDelete);
+			for (VisitedPlaceEntity visitedPlace : visitedPlacesToDeleteCountry) {
+				visitedPlace.setCountry(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
+
+			// Obtener la lista de ciudades asociadas al país
+			List<CityEntity> citiesToDelete = countryToDelete.getCities();
+
+			// Eliminar los visitedPlaces asociados a las ciudades del país
+			for (CityEntity city : citiesToDelete) {
+				List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByCity(city);
+				for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
+					visitedPlace.setCity(null);
+					visitedPlaceRepository.save(visitedPlace);
+				}
+
+				// Eliminar las atracciones asociadas a la ciudad
+				for (AttractionEntity attractionToDelete : city.getAttractions()) {
+					List<VisitedPlaceEntity> attractionVisitedPlacesToDelete = visitedPlaceRepository
+							.findByAttraction(attractionToDelete);
+					for (VisitedPlaceEntity visitedPlace : attractionVisitedPlacesToDelete) {
+						visitedPlace.setAttraction(null);
+						visitedPlaceRepository.save(visitedPlace);
+					}
+				}
+			}
 			// Eliminar el país
 			countryRepository.delete(countryToDelete);
 			return ResponseEntity.ok().body("País eliminado correctamente");

@@ -13,8 +13,9 @@ export const Login = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Desloguear al montar el componente
+    // Desloguear al montar el componente y eliminar la cookie
     logout();
+    localStorage.removeItem('authToken');
   }, [logout]);
 
   // Función para manejar el envío del formulario
@@ -32,7 +33,7 @@ export const Login = () => {
 
       // Manejar la respuesta de la solicitud HTTP
       if (!response.ok) {
-        throw new Error('Error al iniciar sesión');
+        throw new Error('Error login');
       }
 
       const data = await response.text();
@@ -71,7 +72,7 @@ export const Login = () => {
           <p className="text-wrapper">Sign in to your account</p>
         </div>
       </div>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} id='loginForm' name='loginForm'>
         <div className="nivel-frame-wrapper">
           <div className="div">
             <div className="nivel-frame-2">

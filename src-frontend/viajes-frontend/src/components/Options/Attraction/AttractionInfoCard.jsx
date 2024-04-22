@@ -19,7 +19,6 @@ export const AttractionInfoCard = () => {
 
         fetchAttraction();
     }, [attractionParam]);
-    console.log(actualAttraction)
 
     return (
         <div className="attraction-info-card-container">

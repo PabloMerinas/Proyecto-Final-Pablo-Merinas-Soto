@@ -62,4 +62,28 @@ public interface VisitedPlaceRepositoryI extends JpaRepository<VisitedPlaceEntit
 	 */
 	void deleteByUserAndCountry(UserEntity user, CountryEntity country);
 
+	/**
+	 * Busca las relaciones que tiene un lugar por una atraccion.
+	 * 
+	 * @param attraction Attraction que se busca.
+	 * @return Lista con los lugares visitados.
+	 */
+	List<VisitedPlaceEntity> findByAttraction(AttractionEntity attraction);
+
+	/**
+	 * Busca las relaciones que tiene un lugar por una ciudad.
+	 * 
+	 * @param city Ciudad a buscar sus relaciones.
+	 * @return Lista de los lugares visitados.
+	 */
+	List<VisitedPlaceEntity> findByCity(CityEntity city);
+
+	/**
+	 * Busca las relaciones que tiene un lugar por un pais.
+	 * 
+	 * @param country Pais a buscar sus relaciones.
+	 * @return Lista de los lugares visitados.
+	 */
+	List<VisitedPlaceEntity> findByCountry(CountryEntity country);
+
 }

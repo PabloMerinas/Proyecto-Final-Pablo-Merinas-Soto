@@ -34,8 +34,7 @@ export const getCityByCity = async (cityName) => {
             }
         });
 
-        // console.log(response.data)
-        // Devolver el país encontrado
+        // Devolver la ciudad encontrada
         return response.data;
     } catch (error) {
         console.error("Error recovering the countries:", error);

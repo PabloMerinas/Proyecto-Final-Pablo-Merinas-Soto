@@ -86,4 +86,43 @@ public interface VisitedPlaceManagementI {
 	 */
 	public void delete(VisitedPlaceEntity visitedPlace);
 
+	/**
+	 * Guarda un lugar visitado.
+	 * 
+	 * @param visitedPlace Lugar visitado a guardar.
+	 */
+	public void save(VisitedPlaceEntity visitedPlace);
+
+	/**
+	 * Busca todas las relacion de un lugar visitado hacia una atraccion.
+	 * 
+	 * @param attraction Attraccion que se va a buscar.
+	 * @return Lista de las relaciones que tiene esa atraccion.
+	 */
+	public List<VisitedPlaceEntity> findByAttraction(AttractionEntity attraction);
+
+	/**
+	 * Busca las relaciones que tiene un lugar por una ciudad.
+	 * 
+	 * @param city Ciudad a buscar sus relaciones.
+	 * @return Lista de los lugares visitados.
+	 */
+	public List<VisitedPlaceEntity> findByCity(CityEntity city);
+
+	/**
+	 * Busca las relaciones que tiene un lugar por un pais.
+	 * 
+	 * @param country Pais a buscar sus relaciones.
+	 * @return Lista de los lugares visitados.
+	 */
+	public List<VisitedPlaceEntity> findByCountry(CountryEntity country);
+
+	/**
+	 * Busca las relaciones que tiene un usuario.
+	 * 
+	 * @param userOptional Usuario a buscar.
+	 * @return Lista de sus relaciones.
+	 */
+	public List<VisitedPlaceEntity> findByUser(UserEntity userOptional);
+
 }
