@@ -5,7 +5,7 @@ import { getCountryByCountry } from '../../../service/countryService';
 import { addCountry } from '../../../service/countryService';
 
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
-export const CountryInfoCard = ({ countryToEdit, setSelectedOption }) => {
+export const CountryInfoCard = ({ setSelectedOption }) => {
   const { country: countryParam } = useParams();
   const [actualCountry, setActualCountry] = useState(null);
   const [formData, setFormData] = useState({
@@ -47,6 +47,7 @@ export const CountryInfoCard = ({ countryToEdit, setSelectedOption }) => {
     addCountry(formData)
       .then(response => {
         console.log('Country added:', response);
+        setSelectedOption(2);
       })
       .catch(error => {
         console.error('Error adding the country:', error);

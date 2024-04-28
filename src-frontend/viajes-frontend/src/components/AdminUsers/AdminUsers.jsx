@@ -163,7 +163,7 @@ export const AdminUsers = () => {
         )
     }
     // HTML para usuarios
-    const AdminUser = ({ actualUsername }) => {
+    const AdminUser = () => {
         return (
             <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
@@ -217,7 +217,7 @@ export const AdminUsers = () => {
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(user => (
                                 <div key={user.username} id={user.username}>
-                                    {generateUser(user, actualUsername)}
+                                    {generateUser(user, activeUser.username)}
                                 </div>
                             ))}
                         </div>
@@ -227,7 +227,7 @@ export const AdminUsers = () => {
         );
     }
     // Metodo para generar la linea del usuario
-    function generateUser(user, actualUsername) {
+    function generateUser(user) {
         return (
             <div className="users-principal-nivel8-frame01" key={user.username}>
                 <div className="users-principal-nivel9-frame01 ">
@@ -269,7 +269,7 @@ export const AdminUsers = () => {
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
                                 <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
-                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user', actualUsername)}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user')}></i>
                             </span>
                         </span>
                     </div>
@@ -281,7 +281,7 @@ export const AdminUsers = () => {
     }
 
     // HTML para paises
-    const AdminCountries = ({ filteredData }) => {
+    const AdminCountries = () => {
         return (
             <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
@@ -333,7 +333,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredData.map(country => (
+                            {filteredItem.map(country => (
                                 <div key={country.country}>
                                     {generateCountry(country)}
                                 </div>
@@ -386,7 +386,7 @@ export const AdminUsers = () => {
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
                                 <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(country, 'country')}></i>
-                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(country, 'country', '')}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(country, 'country')}></i>
                             </span>
                         </span>
                     </div>
@@ -398,7 +398,7 @@ export const AdminUsers = () => {
     }
 
     // HTML para ciudades
-    const AdminCities = ({ filteredData }) => {
+    const AdminCities = () => {
         return (
             <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
@@ -450,7 +450,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredData.map(city => (
+                            {filteredItem.map(city => (
                                 <div key={city.city}>
                                     {generateCity(city)}
                                 </div>
@@ -503,7 +503,7 @@ export const AdminUsers = () => {
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
                                 <i className="fa-solid fa-pen-to-square"></i>
-                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city', '')}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city')}></i>
                             </span>
                         </span>
                     </div>
@@ -515,7 +515,7 @@ export const AdminUsers = () => {
     }
 
     // HTML para las atracciones
-    const AdminAttractions = ({ filteredData }) => {
+    const AdminAttractions = () => {
         return (
             <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
@@ -567,7 +567,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredData.map(attracion => (
+                            {filteredItem.map(attracion => (
                                 <div key={attracion.attracion}>
                                     {generateAttraction(attracion)}
                                 </div>
@@ -620,7 +620,7 @@ export const AdminUsers = () => {
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
                                 <i className="fa-solid fa-pen-to-square"></i>
-                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction', '')}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction')}></i>
                             </span>
                         </span>
                     </div>
@@ -632,8 +632,8 @@ export const AdminUsers = () => {
     }
 
     // Metodo para eliminar una fila sea del modulo que sea
-    function deleteDataItem(item, typeData, actualUsername) {
-        if (typeData === 'user' && item.username === actualUsername) {
+    function deleteDataItem(item, typeData) {
+        if (typeData === 'user' && item.username === activeUser.username) {
             alert('You cannot delete yourself!');
         } else {
             let elementToDelete;
@@ -663,12 +663,13 @@ export const AdminUsers = () => {
         }
     }
     // Metodo para editar una fila sea del modulo que sea
-    function editDataItem(item, typeItem) {
+    function editDataItem(item, typeData) {
         alert(JSON.stringify(item));
 
     }
+    // Función que gestiona que componente se vera
     function AddRenderComponent() {
-        return <CountryInfoCard />
+        return <CountryInfoCard setSelectedOption={setSelectedOption} />
     }
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
@@ -700,7 +701,21 @@ export const AdminUsers = () => {
 
     // Funcion para añadir un item, dependiendo de la opcion seleccionada
     function addItem() {
-        setSelectedOption(5);
+        switch (selectedOption) {
+            case 1:
+                break;
+            case 2:
+                setSelectedOption(5);
+                break;
+            case 3:
+                setSelectedOption(6);
+                break;
+            case 4:
+                setSelectedOption(7);
+                break;
+            default:
+                setSelectedOption(1);
+        }
     }
 
     return (
@@ -716,6 +731,7 @@ export const AdminUsers = () => {
                     </div>
                 </div>
                 < Modules />
+                {selectedOption >= 1 && selectedOption <= 4 && (
                 <div className="users-principal-nivel4-frame1">
                     <div className="users-principal-nivel5-frame01">
                         <div className="users-principal-nivel6-frame01">
@@ -736,7 +752,7 @@ export const AdminUsers = () => {
                     <div className="users-principal-nivel6-frame20" onClick={() => addItem()}>
                         <span>Add</span>
                     </div>
-                </div>
+                </div>)}
             </div>
             {filteredItem.length === 0 ? ( // Si no hay objetos mostrare un div avisandolo
                 <div>
@@ -748,7 +764,7 @@ export const AdminUsers = () => {
                 </div>
             ) : (
                 <div>
-                    <ComponentToRender filteredData={filteredItem} actualUsername={activeUser.username} />
+                    <ComponentToRender />
                 </div>
             )}
         </div>
