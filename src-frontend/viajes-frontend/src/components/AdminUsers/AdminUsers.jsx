@@ -8,6 +8,7 @@ import { getAttractions } from '../../service/attractionService';
 import { deleteUserByUsername } from '../../service/userService';
 import { deleteAttractionByAttraction } from '../../service/attractionService';
 import { deleteCityByCity } from '../../service/cityService';
+import { CountryInfoCard } from '../Options/Country/CountryInfoCard';
 
 import './adminUsers.css';
 
@@ -161,7 +162,514 @@ export const AdminUsers = () => {
             </div>
         )
     }
+    // HTML para usuarios
+    const AdminUser = ({ actualUsername }) => {
+        return (
+            <div className="users-principal-nivel4-frame2">
+                <div className="users-principal-nivel5-frame02">
+                    <div className="users-principal-nivel6-frame02">
+                        <div className="users-principal-nivel7-frame02">
+                            <div className="users-principal-nivel8-frame0">
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>User</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Email</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame1">
+                                    <div className="users-principal-nivel10-frame001">
+                                        <span className="users-principal-text06">
+                                            <span>Username</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame2">
+                                    <div className="users-principal-nivel10-frame002">
+                                        <span className="users-principal-text08">
+                                            <span>Rol</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame3">
+                                    <div className="users-principal-nivel10-frame003">
+                                        <span className="users-principal-text10">
+                                            <span>Phone</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame4">
+                                    <div className="users-principal-nivel10-frame004">
+                                        <span className="users-principal-text12">
+                                            <span>Actions</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="users-principal-nivel7-frame1">
+                            {filteredItem.map(user => (
+                                <div key={user.username} id={user.username}>
+                                    {generateUser(user, actualUsername)}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    // Metodo para generar la linea del usuario
+    function generateUser(user, actualUsername) {
+        return (
+            <div className="users-principal-nivel8-frame01" key={user.username}>
+                <div className="users-principal-nivel9-frame01 ">
+                    <div className="users-principal-text199">
+                        <span className="users-principal-text199">
+                            <span>
+                                <img className='admin-user-profile-img' src={user.imgUrl} alt='Profile'></img></span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame01">
+                    <div className="users-principal-nivel10-frame006">
+                        <span className="users-principal-text16">
+                            <span>{user.email ? user.email : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame11">
+                    <div className="users-principal-nivel10-frame007">
+                        <span className="users-principal-text18">
+                            <span>{user.username ? user.username : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame21">
+                    <div className="users-principal-nivel10-frame008">
+                        <span className="users-principal-text20">
+                            <span>{user.roles ? user.roles.join(', ') : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame31">
+                    <div className="users-principal-nivel10-frame009">
+                        <span className="users-principal-text22">{user.phone ? user.phone : 'No added'}</span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame41">
+                    <div className="users-principal-nivel10-frame010">
+                        <span className="users-principal-text23">
+                            <span className='admin-principal-options-icons'>
+                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user', actualUsername)}></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
 
+            </div>
+
+        )
+    }
+
+    // HTML para paises
+    const AdminCountries = ({ filteredData }) => {
+        return (
+            <div className="users-principal-nivel4-frame2">
+                <div className="users-principal-nivel5-frame02">
+                    <div className="users-principal-nivel6-frame02">
+                        <div className="users-principal-nivel7-frame02">
+                            <div className="users-principal-nivel8-frame0">
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Country</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Population</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame1">
+                                    <div className="users-principal-nivel10-frame001">
+                                        <span className="users-principal-text06">
+                                            <span>Capital</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame2">
+                                    <div className="users-principal-nivel10-frame002">
+                                        <span className="users-principal-text08">
+                                            <span>Country Code</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame3">
+                                    <div className="users-principal-nivel10-frame003">
+                                        <span className="users-principal-text10">
+                                            <span>Currency</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame4">
+                                    <div className="users-principal-nivel10-frame004">
+                                        <span className="users-principal-text12">
+                                            <span>Actions</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="users-principal-nivel7-frame1">
+                            {filteredData.map(country => (
+                                <div key={country.country}>
+                                    {generateCountry(country)}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    // Metodo para generar la linea del pais
+    function generateCountry(country) {
+        return (
+            <div className="users-principal-nivel8-frame01" id={country.country}>
+                <div className="users-principal-nivel9-frame01 ">
+                    <div className="users-principal-text199">
+                        <span className="users-principal-text199">
+                            <span>{country.country ? country.country : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame01">
+                    <div className="users-principal-nivel10-frame006">
+                        <span className="users-principal-text16">
+                            <span>{country.population ? country.population : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame11">
+                    <div className="users-principal-nivel10-frame007">
+                        <span className="users-principal-text18">
+                            <span>{country.capital ? country.capital : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame21">
+                    <div className="users-principal-nivel10-frame008">
+                        <span className="users-principal-text20">
+                            <span>{country.countryCode ? country.countryCode : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame31">
+                    <div className="users-principal-nivel10-frame009">
+                        <span className="users-principal-text22">{country.currencySymbol ? country.currencySymbol : 'No added'}</span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame41">
+                    <div className="users-principal-nivel10-frame010">
+                        <span className="users-principal-text23">
+                            <span className='admin-principal-options-icons'>
+                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(country, 'country')}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(country, 'country', '')}></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        )
+    }
+
+    // HTML para ciudades
+    const AdminCities = ({ filteredData }) => {
+        return (
+            <div className="users-principal-nivel4-frame2">
+                <div className="users-principal-nivel5-frame02">
+                    <div className="users-principal-nivel6-frame02">
+                        <div className="users-principal-nivel7-frame02">
+                            <div className="users-principal-nivel8-frame0">
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>City</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Population</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame1">
+                                    <div className="users-principal-nivel10-frame001">
+                                        <span className="users-principal-text06">
+                                            <span>State</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame2">
+                                    <div className="users-principal-nivel10-frame002">
+                                        <span className="users-principal-text08">
+                                            <span>Airport Code</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame3">
+                                    <div className="users-principal-nivel10-frame003">
+                                        <span className="users-principal-text10">
+                                            <span>Country</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame4">
+                                    <div className="users-principal-nivel10-frame004">
+                                        <span className="users-principal-text12">
+                                            <span>Actions</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="users-principal-nivel7-frame1">
+                            {filteredData.map(city => (
+                                <div key={city.city}>
+                                    {generateCity(city)}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    // Metodo para generar la linea de la ciudad
+    function generateCity(city) {
+        return (
+            <div className="users-principal-nivel8-frame01" id={city.city}>
+                <div className="users-principal-nivel9-frame01 ">
+                    <div className="users-principal-text199">
+                        <span className="users-principal-text199">
+                            <span>{city.city ? city.city : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame01">
+                    <div className="users-principal-nivel10-frame006">
+                        <span className="users-principal-text16">
+                            <span>{city.population ? city.population : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame11">
+                    <div className="users-principal-nivel10-frame007">
+                        <span className="users-principal-text18">
+                            <span>{city.state ? city.state : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame21">
+                    <div className="users-principal-nivel10-frame008">
+                        <span className="users-principal-text20">
+                            <span>{city.airportCode ? city.airportCode : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame31">
+                    <div className="users-principal-nivel10-frame009">
+                        <span className="users-principal-text22">{city.country ? city.country : 'default'}</span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame41">
+                    <div className="users-principal-nivel10-frame010">
+                        <span className="users-principal-text23">
+                            <span className='admin-principal-options-icons'>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city', '')}></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        )
+    }
+
+    // HTML para las atracciones
+    const AdminAttractions = ({ filteredData }) => {
+        return (
+            <div className="users-principal-nivel4-frame2">
+                <div className="users-principal-nivel5-frame02">
+                    <div className="users-principal-nivel6-frame02">
+                        <div className="users-principal-nivel7-frame02">
+                            <div className="users-principal-nivel8-frame0">
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Attraction</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame0">
+                                    <div className="users-principal-nivel10-frame0">
+                                        <span className="users-principal-text04">
+                                            <span>Category</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame1">
+                                    <div className="users-principal-nivel10-frame001">
+                                        <span className="users-principal-text06">
+                                            <span>Ciudad</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame2">
+                                    <div className="users-principal-nivel10-frame002">
+                                        <span className="users-principal-text08">
+                                            <span>Pais</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame3">
+                                    <div className="users-principal-nivel10-frame003">
+                                        <span className="users-principal-text10">
+                                            <span>Info</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="users-principal-nivel9-frame4">
+                                    <div className="users-principal-nivel10-frame004">
+                                        <span className="users-principal-text12">
+                                            <span>Actions</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="users-principal-nivel7-frame1">
+                            {filteredData.map(attracion => (
+                                <div key={attracion.attracion}>
+                                    {generateAttraction(attracion)}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    // Metodo para generar la linea de la attracion
+    function generateAttraction(attraction) {
+        return (
+            <div className="users-principal-nivel8-frame01" id={attraction.attraction}>
+                <div className="users-principal-nivel9-frame01 ">
+                    <div className="users-principal-text199">
+                        <span className="users-principal-text199">
+                            <span>{attraction.attraction ? attraction.attraction : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame01">
+                    <div className="users-principal-nivel10-frame006">
+                        <span className="users-principal-text16">
+                            <span>{attraction.category ? attraction.category : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame11">
+                    <div className="users-principal-nivel10-frame007">
+                        <span className="users-principal-text18">
+                            <span>{attraction.city ? attraction.city : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame21">
+                    <div className="users-principal-nivel10-frame008">
+                        <span className="users-principal-text20">
+                            <span>{attraction.country ? attraction.country : 'default'}</span>
+                        </span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame31">
+                    <div className="users-principal-nivel10-frame009">
+                        <span className="users-principal-text22">{attraction.info ? attraction.info : 'default'}</span>
+                    </div>
+                </div>
+                <div className="users-principal-nivel9-frame41">
+                    <div className="users-principal-nivel10-frame010">
+                        <span className="users-principal-text23">
+                            <span className='admin-principal-options-icons'>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction', '')}></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        )
+    }
+
+    // Metodo para eliminar una fila sea del modulo que sea
+    function deleteDataItem(item, typeData, actualUsername) {
+        if (typeData === 'user' && item.username === actualUsername) {
+            alert('You cannot delete yourself!');
+        } else {
+            let elementToDelete;
+            switch (typeData) {
+                case 'user':
+                    deleteUserByUsername(item.username);
+                    elementToDelete = document.getElementById(item.username);
+                    break;
+                case 'country':
+                    deleteCountryByCountry(item.country);
+                    elementToDelete = document.getElementById(item.country);
+                    break;
+                case 'city':
+                    deleteCityByCity(item.city);
+                    elementToDelete = document.getElementById(item.city);
+                    break;
+                case 'attraction':
+                    deleteAttractionByAttraction(item.attraction);
+                    elementToDelete = document.getElementById(item.attraction);
+                    break;
+                default:
+                    break;
+            }
+            if (elementToDelete) {
+                elementToDelete.remove();
+            }
+        }
+    }
+    // Metodo para editar una fila sea del modulo que sea
+    function editDataItem(item, typeItem) {
+        alert(JSON.stringify(item));
+
+    }
+    function AddRenderComponent() {
+        return <CountryInfoCard />
+    }
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
     let textToFind; // Este es el texto para el la barra de busqueda.
@@ -182,9 +690,17 @@ export const AdminUsers = () => {
             ComponentToRender = AdminAttractions;
             textToFind = 'attractions';
             break;
+        case 5:
+            ComponentToRender = AddRenderComponent;
+            break;
         default:
             ComponentToRender = AdminUser;
             textToFind = 'users';
+    }
+
+    // Funcion para añadir un item, dependiendo de la opcion seleccionada
+    function addItem() {
+        setSelectedOption(5);
     }
 
     return (
@@ -217,7 +733,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="users-principal-nivel6-frame20">
+                    <div className="users-principal-nivel6-frame20" onClick={() => addItem()}>
                         <span>Add</span>
                     </div>
                 </div>
@@ -237,514 +753,9 @@ export const AdminUsers = () => {
             )}
         </div>
     )
+
+
 }
 
 
-// Metodo para eliminar una fila sea del modulo que sea
-function deleteDataItem(item, typeData, actualUsername) {
-    if (typeData === 'user' && item.username === actualUsername) {
-        alert('You cannot delete yourself!');
-    } else {
-        let elementToDelete;
-        switch (typeData) {
-            case 'user':
-                deleteUserByUsername(item.username);
-                elementToDelete = document.getElementById(item.username);
-                break;
-            case 'country':
-                deleteCountryByCountry(item.country);
-                elementToDelete = document.getElementById(item.country);
-                break;
-            case 'city':
-                deleteCityByCity(item.city);
-                elementToDelete = document.getElementById(item.city);
-                break;
-            case 'attraction':
-                deleteAttractionByAttraction(item.attraction);
-                elementToDelete = document.getElementById(item.attraction);
-                break;
-            default:
-                break;
-        }
-        if (elementToDelete) {
-            elementToDelete.remove();
-        }
-    }
-}
-// Metodo para editar una fila sea del modulo que sea
-function editDataItem() {
-    alert("edita ")
-}
-
-
-
-
-// HTML para usuarios
-const AdminUser = ({ filteredData, actualUsername }) => {
-    return (
-        <div className="users-principal-nivel4-frame2">
-            <div className="users-principal-nivel5-frame02">
-                <div className="users-principal-nivel6-frame02">
-                    <div className="users-principal-nivel7-frame02">
-                        <div className="users-principal-nivel8-frame0">
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>User</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Email</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame1">
-                                <div className="users-principal-nivel10-frame001">
-                                    <span className="users-principal-text06">
-                                        <span>Username</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame2">
-                                <div className="users-principal-nivel10-frame002">
-                                    <span className="users-principal-text08">
-                                        <span>Rol</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame3">
-                                <div className="users-principal-nivel10-frame003">
-                                    <span className="users-principal-text10">
-                                        <span>Phone</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame4">
-                                <div className="users-principal-nivel10-frame004">
-                                    <span className="users-principal-text12">
-                                        <span>Actions</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="users-principal-nivel7-frame1">
-                        {filteredData.map(user => (
-                            <div key={user.username} id={user.username}>
-                                {generateUser(user, actualUsername)}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-// Metodo para generar la linea del usuario
-function generateUser(user, actualUsername) {
-    return (
-        <div className="users-principal-nivel8-frame01" key={user.username}>
-            <div className="users-principal-nivel9-frame01 ">
-                <div className="users-principal-text199">
-                    <span className="users-principal-text199">
-                        <span>
-                            <img className='admin-user-profile-img' src={user.imgUrl} alt='Profile'></img></span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame01">
-                <div className="users-principal-nivel10-frame006">
-                    <span className="users-principal-text16">
-                        <span>{user.email ? user.email : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame11">
-                <div className="users-principal-nivel10-frame007">
-                    <span className="users-principal-text18">
-                        <span>{user.username ? user.username : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame21">
-                <div className="users-principal-nivel10-frame008">
-                    <span className="users-principal-text20">
-                        <span>{user.roles ? user.roles.join(', ') : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame31">
-                <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{user.phone ? user.phone : 'No added'}</span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame41">
-                <div className="users-principal-nivel10-frame010">
-                    <span className="users-principal-text23">
-                        <span className='admin-principal-options-icons'>
-                            <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user', actualUsername)}></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
-
-// HTML para paises
-const AdminCountries = ({ filteredData }) => {
-    return (
-        <div className="users-principal-nivel4-frame2">
-            <div className="users-principal-nivel5-frame02">
-                <div className="users-principal-nivel6-frame02">
-                    <div className="users-principal-nivel7-frame02">
-                        <div className="users-principal-nivel8-frame0">
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Country</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Population</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame1">
-                                <div className="users-principal-nivel10-frame001">
-                                    <span className="users-principal-text06">
-                                        <span>Capital</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame2">
-                                <div className="users-principal-nivel10-frame002">
-                                    <span className="users-principal-text08">
-                                        <span>Country Code</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame3">
-                                <div className="users-principal-nivel10-frame003">
-                                    <span className="users-principal-text10">
-                                        <span>Currency</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame4">
-                                <div className="users-principal-nivel10-frame004">
-                                    <span className="users-principal-text12">
-                                        <span>Actions</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="users-principal-nivel7-frame1">
-                        {filteredData.map(country => (
-                            <div key={country.country}>
-                                {generateCountry(country)}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-// Metodo para generar la linea del pais
-function generateCountry(country) {
-    return (
-        <div className="users-principal-nivel8-frame01" id={country.country}>
-            <div className="users-principal-nivel9-frame01 ">
-                <div className="users-principal-text199">
-                    <span className="users-principal-text199">
-                        <span>{country.country ? country.country : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame01">
-                <div className="users-principal-nivel10-frame006">
-                    <span className="users-principal-text16">
-                        <span>{country.population ? country.population : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame11">
-                <div className="users-principal-nivel10-frame007">
-                    <span className="users-principal-text18">
-                        <span>{country.capital ? country.capital : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame21">
-                <div className="users-principal-nivel10-frame008">
-                    <span className="users-principal-text20">
-                        <span>{country.countryCode ? country.countryCode : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame31">
-                <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{country.currencySymbol ? country.currencySymbol : 'No added'}</span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame41">
-                <div className="users-principal-nivel10-frame010">
-                    <span className="users-principal-text23">
-                        <span className='admin-principal-options-icons'>
-                            <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(country, 'country', '')}></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
-
-// HTML para ciudades
-const AdminCities = ({ filteredData }) => {
-    return (
-        <div className="users-principal-nivel4-frame2">
-            <div className="users-principal-nivel5-frame02">
-                <div className="users-principal-nivel6-frame02">
-                    <div className="users-principal-nivel7-frame02">
-                        <div className="users-principal-nivel8-frame0">
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>City</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Population</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame1">
-                                <div className="users-principal-nivel10-frame001">
-                                    <span className="users-principal-text06">
-                                        <span>State</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame2">
-                                <div className="users-principal-nivel10-frame002">
-                                    <span className="users-principal-text08">
-                                        <span>Airport Code</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame3">
-                                <div className="users-principal-nivel10-frame003">
-                                    <span className="users-principal-text10">
-                                        <span>Country</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame4">
-                                <div className="users-principal-nivel10-frame004">
-                                    <span className="users-principal-text12">
-                                        <span>Actions</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="users-principal-nivel7-frame1">
-                        {filteredData.map(city => (
-                            <div key={city.city}>
-                                {generateCity(city)}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-// Metodo para generar la linea de la ciudad
-function generateCity(city) {
-    return (
-        <div className="users-principal-nivel8-frame01" id={city.city}>
-            <div className="users-principal-nivel9-frame01 ">
-                <div className="users-principal-text199">
-                    <span className="users-principal-text199">
-                        <span>{city.city ? city.city : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame01">
-                <div className="users-principal-nivel10-frame006">
-                    <span className="users-principal-text16">
-                        <span>{city.population ? city.population : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame11">
-                <div className="users-principal-nivel10-frame007">
-                    <span className="users-principal-text18">
-                        <span>{city.state ? city.state : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame21">
-                <div className="users-principal-nivel10-frame008">
-                    <span className="users-principal-text20">
-                        <span>{city.airportCode ? city.airportCode : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame31">
-                <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{city.country ? city.country : 'default'}</span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame41">
-                <div className="users-principal-nivel10-frame010">
-                    <span className="users-principal-text23">
-                        <span className='admin-principal-options-icons'>
-                            <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city', '')}></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
-
-// HTML para las atracciones
-const AdminAttractions = ({ filteredData }) => {
-    return (
-        <div className="users-principal-nivel4-frame2">
-            <div className="users-principal-nivel5-frame02">
-                <div className="users-principal-nivel6-frame02">
-                    <div className="users-principal-nivel7-frame02">
-                        <div className="users-principal-nivel8-frame0">
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Attraction</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame0">
-                                <div className="users-principal-nivel10-frame0">
-                                    <span className="users-principal-text04">
-                                        <span>Category</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame1">
-                                <div className="users-principal-nivel10-frame001">
-                                    <span className="users-principal-text06">
-                                        <span>Ciudad</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame2">
-                                <div className="users-principal-nivel10-frame002">
-                                    <span className="users-principal-text08">
-                                        <span>Pais</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame3">
-                                <div className="users-principal-nivel10-frame003">
-                                    <span className="users-principal-text10">
-                                        <span>Info</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="users-principal-nivel9-frame4">
-                                <div className="users-principal-nivel10-frame004">
-                                    <span className="users-principal-text12">
-                                        <span>Actions</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="users-principal-nivel7-frame1">
-                        {filteredData.map(attracion => (
-                            <div key={attracion.attracion}>
-                                {generateAttraction(attracion)}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-// Metodo para generar la linea de la attracion
-function generateAttraction(attraction) {
-    return (
-        <div className="users-principal-nivel8-frame01" id={attraction.attraction}>
-            <div className="users-principal-nivel9-frame01 ">
-                <div className="users-principal-text199">
-                    <span className="users-principal-text199">
-                        <span>{attraction.attraction ? attraction.attraction : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame01">
-                <div className="users-principal-nivel10-frame006">
-                    <span className="users-principal-text16">
-                        <span>{attraction.category ? attraction.category : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame11">
-                <div className="users-principal-nivel10-frame007">
-                    <span className="users-principal-text18">
-                        <span>{attraction.city ? attraction.city : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame21">
-                <div className="users-principal-nivel10-frame008">
-                    <span className="users-principal-text20">
-                        <span>{attraction.country ? attraction.country : 'default'}</span>
-                    </span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame31">
-                <div className="users-principal-nivel10-frame009">
-                    <span className="users-principal-text22">{attraction.info ? attraction.info : 'default'}</span>
-                </div>
-            </div>
-            <div className="users-principal-nivel9-frame41">
-                <div className="users-principal-nivel10-frame010">
-                    <span className="users-principal-text23">
-                        <span className='admin-principal-options-icons'>
-                            <i className="fa-solid fa-pen-to-square"></i>
-                            <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction', '')}></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    )
-}
 

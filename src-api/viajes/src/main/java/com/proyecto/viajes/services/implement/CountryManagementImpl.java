@@ -36,5 +36,10 @@ public class CountryManagementImpl implements CountryManagementI{
 		return countryRepository.findById(id).orElse(null);
 	}
 	
+	@Override
+	public void save(CountryEntity countryEntity) {
+		countryRepository.save(countryEntity);
+	}
+	
 	
 }

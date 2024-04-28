@@ -2,12 +2,16 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
@@ -110,5 +114,28 @@ public class CountryRestController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	/**
+	 * Endpoint para agregar un nuevo país. Se requiere el rol de "ROLE_ADMIN".
+	 * 
+	 * @param countryEntity Datos del país a agregar.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/addCountry")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<String> addCountry(@RequestBody CountryEntity countryEntity) {
+	    if (countryEntity != null) {
+	        // Verificar si el país ya existe
+	        if (countryRepository.findByCountry(countryEntity.getCountry()) != null) {
+	            return ResponseEntity.status(HttpStatus.CONFLICT).body("El país ya existe");
+	        }
+	        // Guardar el nuevo país
+	        countryRepository.save(countryEntity);
+	        return ResponseEntity.status(HttpStatus.CREATED).body("País agregado correctamente");
+	    } else {
+	        return ResponseEntity.badRequest().body("Los datos del país son nulos");
+	    }
 	}
 }

@@ -110,6 +110,10 @@
     align-items: center;
 }
 
+.users-principal-nivel6-frame20:hover{
+    border: 1px solid rgba(209, 214, 232, 1);
+}
+
 .users-principal-nivel6-frame20 span {
     color: rgba(12, 17, 28, 1);
     width: 66px;

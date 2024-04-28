@@ -59,3 +59,22 @@ export const deleteCountryByCountry = async (country) => {
         throw new Error('Error deleting the country');
     }
 }
+
+// Método para agregar un nuevo país
+export const addCountry = async (newCountryData) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        // Llamo a la API para agregar el nuevo país
+        const response = await axios.post('http://localhost:8080/v1/country/addCountry', newCountryData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error adding the country:", error);
+        throw new Error('Error adding the country');
+    }
+}
