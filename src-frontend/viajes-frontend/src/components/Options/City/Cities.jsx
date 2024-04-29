@@ -281,7 +281,7 @@ export const Cities = () => {
                             </div>
                             <div className="cities-principal-nivel7-frame1">
                                 {filteredCities.map(city => (
-                                    <div key={city.id}>
+                                    <div key={city.city}>
                                         {generateCity(city, visitedPlacesIds)}
                                     </div>
                                 ))}

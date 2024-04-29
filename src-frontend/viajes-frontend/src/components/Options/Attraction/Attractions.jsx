@@ -256,7 +256,7 @@ export const Attractions = () => {
                             </div>
                             <div className="attractions-principal-nivel7-frame1">
                                 {filteredAttractions.map(attraction => (
-                                    <div key={attraction.id}>
+                                    <div key={attraction.attraction}>
                                         {generateAttraction(attraction, visitedPlacesIds)}
                                     </div>
                                 ))}

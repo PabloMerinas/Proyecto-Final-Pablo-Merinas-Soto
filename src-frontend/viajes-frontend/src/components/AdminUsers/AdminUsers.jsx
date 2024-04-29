@@ -152,7 +152,7 @@ export const AdminUsers = () => {
     // HTML para usuarios
     const AdminUser = () => {
         return (
-            <div className="users-principal-nivel4-frame2" key={'admin-users-div'}>
+            <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -203,7 +203,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(user => (
-                                <div key={user.username} id={user.username}>
+                                <div id={user.username}>
                                     {generateUser(user, activeUser.username)}
                                 </div>
                             ))}
@@ -270,7 +270,7 @@ export const AdminUsers = () => {
     // HTML para paises
     const AdminCountries = () => {
         return (
-            <div className="users-principal-nivel4-frame2" key={'admin-countries-div'}>
+            <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -321,7 +321,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(country => (
-                                <div key={country.country}>
+                                <div id={country.country}>
                                     {generateCountry(country)}
                                 </div>
                             ))}
@@ -387,7 +387,7 @@ export const AdminUsers = () => {
     // HTML para ciudades
     const AdminCities = () => {
         return (
-            <div className="users-principal-nivel4-frame2" key={'admin-cities-div'}>
+            <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -438,7 +438,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(city => (
-                                <div key={city.city}>
+                                <div id={city.city}>
                                     {generateCity(city)}
                                 </div>
                             ))}
@@ -504,7 +504,7 @@ export const AdminUsers = () => {
     // HTML para las atracciones
     const AdminAttractions = () => {
         return (
-            <div className="users-principal-nivel4-frame2" key={'admin-attractions-div'}>
+            <div className="users-principal-nivel4-frame2">
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -554,9 +554,9 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(attracion => (
-                                <div key={attracion.attracion}>
-                                    {generateAttraction(attracion)}
+                            {filteredItem.map(attraction => (
+                                <div id={attraction.attraction}>
+                                    {generateAttraction(attraction)}
                                 </div>
                             ))}
                         </div>
@@ -718,6 +718,8 @@ export const AdminUsers = () => {
     // Funcion para eliminar los items guardados
     function deleteDataItemsSelected() {
         setCountryToEdit(null);
+        setCityToEdit(null);
+        setAttractionToEdit(null);
     }
 
     // Funcion para añadir un item, dependiendo de la opcion seleccionada

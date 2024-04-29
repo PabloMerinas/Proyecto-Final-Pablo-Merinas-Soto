@@ -259,7 +259,7 @@ export const Countries = () => {
                             </div>
                             <div className="countries-principal-nivel7-frame1">
                                 {filteredCountries.map(country => (
-                                    <div key={country.id}>
+                                    <div key={country.country}>
                                         {generateCountry(country, visitedPlacesIds)}
                                     </div>
                                 ))}
