@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './countryInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
-import { getCountryByCountry } from '../../../service/countryService';
-import { addCountry } from '../../../service/countryService';
+import { getCountryByCountry,addCountry, updateCountry } from '../../../service/countryService';
+
 
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
-export const CountryInfoCard = ({ setSelectedOption }) => {
+export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
   const { country: countryParam } = useParams();
   const [actualCountry, setActualCountry] = useState(null);
   const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ export const CountryInfoCard = ({ setSelectedOption }) => {
     currencySymbol: '',
     countryCode: ''
   });
+
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -35,6 +36,23 @@ export const CountryInfoCard = ({ setSelectedOption }) => {
     }
   }, [countryParam]);
 
+  // Si le llega el pais que se editara recoge sus valores
+  useEffect(() => {
+    if (countryToEdit) {
+      setFormData({
+        imgUrl: countryToEdit.imgUrl || '',
+        country: countryToEdit.country || '',
+        info: countryToEdit.info || '',
+        capital: countryToEdit.capital || '',
+        population: countryToEdit.population || '',
+        currencyCode: countryToEdit.currencyCode || '',
+        languageCode: countryToEdit.languageCode || '',
+        currencySymbol: countryToEdit.currencySymbol || '',
+        countryCode: countryToEdit.countryCode || ''
+      });
+    }
+  }, [countryToEdit]);
+
   // Gestiona los cambios del texto
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,15 +61,25 @@ export const CountryInfoCard = ({ setSelectedOption }) => {
   // Gestiona el envio del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Agrego el nuevo pais
-    addCountry(formData)
-      .then(response => {
-        console.log('Country added:', response);
-        setSelectedOption(2);
-      })
-      .catch(error => {
-        console.error('Error adding the country:', error);
-      });
+    if (!countryToEdit) { // Si no viene pais para editar es que añade
+      // Agrego el nuevo pais
+      addCountry(formData)
+        .then(response => {
+          setSelectedOption(2);
+        })
+        .catch(error => {
+          console.error('Error adding the country:', error);
+        });
+    }else{ // En caso contrario llama a editar el pais
+        updateCountry(countryToEdit.country, formData)
+        .then(response => {
+          setSelectedOption(2);
+        })
+        .catch(error => {
+          console.error('Error updating the country:', error);
+        });
+    }
+
   };
 
   if (countryParam) {
@@ -241,7 +269,7 @@ export const CountryInfoCard = ({ setSelectedOption }) => {
         )}
       </div>
     )
-  } else {
+  } else { // En caso de que sea para editar o añadir
     return (
       <div className="country-info-card-principal-container">
         <form onSubmit={handleSubmit}>
@@ -430,21 +458,21 @@ export const CountryInfoCard = ({ setSelectedOption }) => {
                 <input type="checkbox" id="myCheckbox" name="myCheckbox" />
                 <label htmlFor="myCheckbox">  Send notifications to all user</label>
               </div>
-                <button type="submit" id='submitCountry'>
-                  <div className="country-info-card-principal-nivel8-frame1">
-                    <div className="country-info-card-principal-nivel9-frame01">
-                      <div className="country-info-card-principal-nivel10-frame01">
-                        <div className="country-info-card-principal-nivel11-frame02">
-                          <span className="country-info-card-principal-text28">
-                            <span>
-                              Sumbit
-                            </span>
+              <button type="submit" id='submitCountry'>
+                <div className="country-info-card-principal-nivel8-frame1">
+                  <div className="country-info-card-principal-nivel9-frame01">
+                    <div className="country-info-card-principal-nivel10-frame01">
+                      <div className="country-info-card-principal-nivel11-frame02">
+                        <span className="country-info-card-principal-text28">
+                          <span>
+                            {countryToEdit ? 'Save' : 'Add'}
                           </span>
-                        </div>
+                        </span>
                       </div>
                     </div>
                   </div>
-                </button>
+                </div>
+              </button>
             </div>
           </div>
         </form>

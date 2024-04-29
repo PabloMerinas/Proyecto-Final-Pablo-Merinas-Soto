@@ -115,7 +115,7 @@ public class CountryRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	/**
 	 * Endpoint para agregar un nuevo país. Se requiere el rol de "ROLE_ADMIN".
 	 * 
@@ -126,16 +126,55 @@ public class CountryRestController {
 	@PostMapping("/addCountry")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<String> addCountry(@RequestBody CountryEntity countryEntity) {
-	    if (countryEntity != null) {
-	        // Verificar si el país ya existe
-	        if (countryRepository.findByCountry(countryEntity.getCountry()) != null) {
-	            return ResponseEntity.status(HttpStatus.CONFLICT).body("El país ya existe");
-	        }
-	        // Guardar el nuevo país
-	        countryRepository.save(countryEntity);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("País agregado correctamente");
-	    } else {
-	        return ResponseEntity.badRequest().body("Los datos del país son nulos");
-	    }
+		if (countryEntity != null) {
+			// Verificar si el país ya existe
+			if (countryRepository.findByCountry(countryEntity.getCountry()) != null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("El país ya existe");
+			}
+			// Guardar el nuevo país
+			countryRepository.save(countryEntity);
+			return ResponseEntity.status(HttpStatus.CREATED).body("País agregado correctamente");
+		} else {
+			return ResponseEntity.badRequest().body("Los datos del país son nulos");
+		}
 	}
+
+	/**
+	 * Endpoint para actualizar un país. Se requiere el rol de "ROLE_ADMIN".
+	 * 
+	 * @param country        Nombre del país a actualizar.
+	 * @param updatedCountry Datos actualizados del país.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/updateCountry")
+	public ResponseEntity<String> updateCountry(@RequestParam String country,
+			@RequestBody CountryEntity updatedCountry) {
+		// Verificar si el país existe
+		CountryEntity countryToUpdate = countryRepository.findByCountry(country);
+		if (countryToUpdate != null) {
+			if (!country.equals(updatedCountry.getCountry())
+					&& countryRepository.findByCountry(updatedCountry.getCountry()) != null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("El nuevo nombre de país ya existe");
+			}
+
+			// Actualizar los campos
+			countryToUpdate.setImgUrl(updatedCountry.getImgUrl());
+			countryToUpdate.setCapital(updatedCountry.getCapital());
+			countryToUpdate.setPopulation(updatedCountry.getPopulation());
+			countryToUpdate.setCountryCode(updatedCountry.getCountryCode());
+			countryToUpdate.setCurrencyCode(updatedCountry.getCurrencyCode());
+			countryToUpdate.setCurrencySymbol(updatedCountry.getCurrencySymbol());
+			countryToUpdate.setLanguageCode(updatedCountry.getLanguageCode());
+			countryToUpdate.setInfo(updatedCountry.getInfo());
+
+			// Guardo los cambios
+			countryRepository.save(countryToUpdate);
+
+			return ResponseEntity.ok().body("País actualizado correctamente");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 }

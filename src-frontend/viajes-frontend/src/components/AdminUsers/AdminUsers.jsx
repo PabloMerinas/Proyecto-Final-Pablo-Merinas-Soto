@@ -20,6 +20,7 @@ export const AdminUsers = () => {
     const { activeUser } = useAuth();
     // Dependiendo de la opcion seleccionada mostrara un menu u otro.
     const [selectedOption, setSelectedOption] = useState(1);
+    const [countryToEdit, setCountryToEdit] = useState(null);
 
     // Métodos para recuperar los datos dependiendo de la opcion seleccionada.
     useEffect(() => {
@@ -51,6 +52,7 @@ export const AdminUsers = () => {
             }
         }
         fetchData();
+        if (selectedOption < 5) deleteDataItemsSelected(); // Siempre que no sea una opcion de un modulo, eliminara los item seleccionados
     }, [selectedOption]);
 
     // Regresa al login si se accede sin logearse antes
@@ -106,6 +108,20 @@ export const AdminUsers = () => {
             setSearchText(''); // Si cambio de opcion se borra lo que tenga en la barra de busqueda.
         };
 
+        function moduleOption(actualSelectedOption, title) {
+            return (
+                <div className="modules-depth7-frame0" onClick={() => handleModuleClick(actualSelectedOption)}>
+                    <div className="modules-depth8-frame0">
+                        <div className="modules-depth9-frame0">
+                            <span className="modules-text02">
+                                <span className={selectedOption === actualSelectedOption ? 'selected-option' : ''}>{title}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <div className="modules-container">
                 <div className="modules-depth4-frame2">
@@ -120,42 +136,10 @@ export const AdminUsers = () => {
                 <div className="modules-depth4-frame3">
                     <div className="modules-depth5-frame01">
                         <div className="modules-depth6-frame01">
-                            <div className="modules-depth7-frame0" onClick={() => handleModuleClick(1)}>
-                                <div className="modules-depth8-frame0">
-                                    <div className="modules-depth9-frame0">
-                                        <span className="modules-text02">
-                                            <span className={selectedOption === 1 ? 'selected-option' : ''}>Users</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="modules-depth7-frame1" onClick={() => handleModuleClick(2)}>
-                                <div className="modules-depth8-frame01">
-                                    <div className="modules-depth9-frame01">
-                                        <span className="modules-text04">
-                                            <span className={selectedOption === 2 ? 'selected-option' : ''}>Countries</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="modules-depth7-frame2" onClick={() => handleModuleClick(3)}>
-                                <div className="modules-depth8-frame02">
-                                    <div className="modules-depth9-frame02">
-                                        <span className="modules-text06">
-                                            <span className={selectedOption === 3 ? 'selected-option' : ''}>Cities</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="modules-depth7-frame3" onClick={() => handleModuleClick(4)}>
-                                <div className="modules-depth8-frame03">
-                                    <div className="modules-depth9-frame03">
-                                        <span className="modules-text08">
-                                            <span className={selectedOption === 4 ? 'selected-option' : ''}>Attractions</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                            {moduleOption(1, 'Users')}
+                            {moduleOption(2, 'Countries')}
+                            {moduleOption(3, 'Cities')}
+                            {moduleOption(4, 'Attractions')}
                         </div>
                     </div>
                 </div>
@@ -663,13 +647,32 @@ export const AdminUsers = () => {
         }
     }
     // Metodo para editar una fila sea del modulo que sea
-    function editDataItem(item, typeData) {
-        alert(JSON.stringify(item));
+    function editDataItem(item) {
+        // alert(JSON.stringify(item));
+        switch (selectedOption) {
+            case 1:
+                break;
+            case 2:
+                setCountryToEdit(item);
+                setSelectedOption(5);
+                break;
+            case 3:
+                setSelectedOption(6);
+                break;
+            case 4:
+                setSelectedOption(7);
+                break;
+            default:
+                setSelectedOption(1);
+        }
 
     }
     // Función que gestiona que componente se vera
-    function AddRenderComponent() {
+    function RenderAddCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} />
+    }
+    function RenderEditCountry() {
+        return <CountryInfoCard setSelectedOption={setSelectedOption} countryToEdit={countryToEdit} />
     }
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
@@ -692,11 +695,16 @@ export const AdminUsers = () => {
             textToFind = 'attractions';
             break;
         case 5:
-            ComponentToRender = AddRenderComponent;
+            countryToEdit == null ? ComponentToRender = RenderAddCountry : ComponentToRender = RenderEditCountry;
             break;
         default:
             ComponentToRender = AdminUser;
             textToFind = 'users';
+    }
+
+    // Funcion para eliminar los items guardados
+    function deleteDataItemsSelected() {
+        setCountryToEdit(null);
     }
 
     // Funcion para añadir un item, dependiendo de la opcion seleccionada
@@ -732,27 +740,27 @@ export const AdminUsers = () => {
                 </div>
                 < Modules />
                 {selectedOption >= 1 && selectedOption <= 4 && (
-                <div className="users-principal-nivel4-frame1">
-                    <div className="users-principal-nivel5-frame01">
-                        <div className="users-principal-nivel6-frame01">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <div className="users-principal-nivel6-frame1">
-                            <div className="users-principal-nivel7-frame01">
-                                <span className="users-principal-text02">
-                                    <input
-                                        type="text"
-                                        value={searchText}
-                                        onChange={handleInputChange}
-                                        placeholder={`Find ${textToFind}`} style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
-                                    /> </span>
+                    <div className="users-principal-nivel4-frame1">
+                        <div className="users-principal-nivel5-frame01">
+                            <div className="users-principal-nivel6-frame01">
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <div className="users-principal-nivel6-frame1">
+                                <div className="users-principal-nivel7-frame01">
+                                    <span className="users-principal-text02">
+                                        <input
+                                            type="text"
+                                            value={searchText}
+                                            onChange={handleInputChange}
+                                            placeholder={`Find ${textToFind}`} style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
+                                        /> </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="users-principal-nivel6-frame20" onClick={() => addItem()}>
-                        <span>Add</span>
-                    </div>
-                </div>)}
+                        <div className="users-principal-nivel6-frame20" onClick={() => addItem()}>
+                            <span>Add</span>
+                        </div>
+                    </div>)}
             </div>
             {filteredItem.length === 0 ? ( // Si no hay objetos mostrare un div avisandolo
                 <div>

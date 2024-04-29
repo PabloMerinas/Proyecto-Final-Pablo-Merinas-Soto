@@ -78,3 +78,24 @@ export const addCountry = async (newCountryData) => {
         throw new Error('Error adding the country');
     }
 }
+
+// Método para actualizar un país existente
+export const updateCountry = async (countryName, updatedCountryData) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        // Llamo a la API para actualizar el país
+        const response = await axios.post(`http://localhost:8080/v1/country/updateCountry`, updatedCountryData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }, params: {
+                country: countryName
+            }
+        });
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error updating the country:", error);
+        throw new Error('Error updating the country');
+    }
+}
