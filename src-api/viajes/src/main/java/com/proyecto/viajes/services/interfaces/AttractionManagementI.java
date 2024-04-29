@@ -38,4 +38,11 @@ public interface AttractionManagementI {
 	 * @return Attraccion encontrada.
 	 */
 	public AttractionEntity findById(Long attractionId);
+
+	/**
+	 * Guarda una atraccion.
+	 * 
+	 * @param attractionEntity Attraccion a guardar.
+	 */
+	public void save(AttractionEntity attractionEntity);
 }

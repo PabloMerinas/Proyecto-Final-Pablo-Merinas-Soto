@@ -3,7 +3,6 @@ import './countryInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
 import { getCountryByCountry,addCountry, updateCountry } from '../../../service/countryService';
 
-
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
 export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
   const { country: countryParam } = useParams();
@@ -30,7 +29,6 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
         console.error('Error fetching the country:', error);
       }
     };
-
     if (countryParam != null) {
       fetchCountry();
     }

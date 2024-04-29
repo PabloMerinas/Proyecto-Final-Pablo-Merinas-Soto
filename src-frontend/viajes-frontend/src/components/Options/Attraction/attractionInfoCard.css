@@ -23,7 +23,7 @@
 }
 
 .attraction-info-card-attraction-info {
-    height: 402px;
+    /* height: 402px; */
     display: flex;
     overflow: hidden;
     align-items: flex-start;

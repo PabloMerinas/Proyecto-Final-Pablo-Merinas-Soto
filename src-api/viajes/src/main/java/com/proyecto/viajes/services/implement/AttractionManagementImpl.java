@@ -36,4 +36,9 @@ public class AttractionManagementImpl implements AttractionManagementI {
 		return attractionRepository.findById(attractionId).orElse(null);
 	}
 
+	@Override
+	public void save(AttractionEntity attractionEntity) {
+		attractionRepository.save(attractionEntity);
+	}
+
 }

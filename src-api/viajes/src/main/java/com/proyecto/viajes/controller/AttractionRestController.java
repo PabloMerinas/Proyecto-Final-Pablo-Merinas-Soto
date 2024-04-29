@@ -2,17 +2,23 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
+import com.proyecto.viajes.persistence.model.CityEntity;
 import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.services.implement.AttractionManagementImpl;
+import com.proyecto.viajes.services.implement.CityManagementImpl;
 import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +41,12 @@ public class AttractionRestController {
 	 */
 	private VisitedPlaceManagementImpl visitedPlaceRepository;
 
+	/**
+	 * Inyeccion de dependencia de cityRepository;
+	 */
+	private CityManagementImpl cityRepository;
+	
+	
 	/**
 	 * Endpoint para obtener todas las atraciones. Se requiere que el usuario tenga
 	 * el rol "ROLE_CUSTOMER" o "ROLE_ADMIN".
@@ -88,4 +100,36 @@ public class AttractionRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	/**
+	 * Endpoint para agregar una nueva atracción. Se requiere el rol de "ROLE_ADMIN".
+	 * 
+	 * @param attractionEntity Datos de la atracción a agregar.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/addAttraction")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<String> addAttraction(@RequestBody AttractionEntity attractionEntity, @RequestParam String cityName) {
+	    if (attractionEntity != null) {
+	        // Verificar si la atracción existe
+	        if (attractionRepository.findByAttraction(attractionEntity.getAttraction()) != null) {
+	            return ResponseEntity.status(HttpStatus.CONFLICT).body("La atracción ya existe");
+	        }
+	        
+	        // Buscar la ciudad por su nombre
+	        CityEntity city = cityRepository.findByCity(cityName);
+	        if (city == null) {
+	            return ResponseEntity.badRequest().body("La ciudad especificada no fue encontrada");
+	        }
+	        attractionEntity.setCity(city);
+
+	        // Guardar la nueva atracción
+	        attractionRepository.save(attractionEntity);
+	        return ResponseEntity.status(HttpStatus.CREATED).body("Atracción agregada correctamente");
+	    } else {
+	        return ResponseEntity.badRequest().body("Los datos de la atracción son nulos");
+	    }
+	}
+
 }

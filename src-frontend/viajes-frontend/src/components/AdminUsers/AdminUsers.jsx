@@ -9,7 +9,8 @@ import { deleteUserByUsername } from '../../service/userService';
 import { deleteAttractionByAttraction } from '../../service/attractionService';
 import { deleteCityByCity } from '../../service/cityService';
 import { CountryInfoCard } from '../Options/Country/CountryInfoCard';
-
+// import { CityInfoCard } from '../Options/City/CityInfoCard';
+import { AttractionInfoCard } from '../Options/Attraction/AttractionInfoCard';
 import './adminUsers.css';
 
 export const AdminUsers = () => {
@@ -21,6 +22,8 @@ export const AdminUsers = () => {
     // Dependiendo de la opcion seleccionada mostrara un menu u otro.
     const [selectedOption, setSelectedOption] = useState(1);
     const [countryToEdit, setCountryToEdit] = useState(null);
+    const [cityToEdit, setCityToEdit] = useState(null);
+    const [attractionToEdit, setAttractionToEdit] = useState(null);
 
     // Métodos para recuperar los datos dependiendo de la opcion seleccionada.
     useEffect(() => {
@@ -149,7 +152,7 @@ export const AdminUsers = () => {
     // HTML para usuarios
     const AdminUser = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-users-div'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -213,7 +216,7 @@ export const AdminUsers = () => {
     // Metodo para generar la linea del usuario
     function generateUser(user) {
         return (
-            <div className="users-principal-nivel8-frame01" key={user.username}>
+            <div className="users-principal-nivel8-frame01">
                 <div className="users-principal-nivel9-frame01 ">
                     <div className="users-principal-text199">
                         <span className="users-principal-text199">
@@ -267,7 +270,7 @@ export const AdminUsers = () => {
     // HTML para paises
     const AdminCountries = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-countries-div'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -331,7 +334,7 @@ export const AdminUsers = () => {
     // Metodo para generar la linea del pais
     function generateCountry(country) {
         return (
-            <div className="users-principal-nivel8-frame01" id={country.country}>
+            <div className="users-principal-nivel8-frame01">
                 <div className="users-principal-nivel9-frame01 ">
                     <div className="users-principal-text199">
                         <span className="users-principal-text199">
@@ -384,7 +387,7 @@ export const AdminUsers = () => {
     // HTML para ciudades
     const AdminCities = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-cities-div'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -448,7 +451,7 @@ export const AdminUsers = () => {
     // Metodo para generar la linea de la ciudad
     function generateCity(city) {
         return (
-            <div className="users-principal-nivel8-frame01" id={city.city}>
+            <div className="users-principal-nivel8-frame01">
                 <div className="users-principal-nivel9-frame01 ">
                     <div className="users-principal-text199">
                         <span className="users-principal-text199">
@@ -501,7 +504,7 @@ export const AdminUsers = () => {
     // HTML para las atracciones
     const AdminAttractions = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-attractions-div'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -565,7 +568,7 @@ export const AdminUsers = () => {
     // Metodo para generar la linea de la attracion
     function generateAttraction(attraction) {
         return (
-            <div className="users-principal-nivel8-frame01" id={attraction.attraction}>
+            <div className="users-principal-nivel8-frame01">
                 <div className="users-principal-nivel9-frame01 ">
                     <div className="users-principal-text199">
                         <span className="users-principal-text199">
@@ -667,12 +670,19 @@ export const AdminUsers = () => {
         }
 
     }
-    // Función que gestiona que componente se vera
+
+    // Funciónes que gestiona que componente se vera
     function RenderAddCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} />
     }
     function RenderEditCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} countryToEdit={countryToEdit} />
+    }
+    function RenderAddAttraction() {
+        return <AttractionInfoCard setSelectedOption={setSelectedOption} />
+    }
+    function RenderEditAttraction() {
+        return <AttractionInfoCard setSelectedOption={setSelectedOption} attractionToEdit={attractionToEdit} />
     }
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
@@ -694,8 +704,11 @@ export const AdminUsers = () => {
             ComponentToRender = AdminAttractions;
             textToFind = 'attractions';
             break;
-        case 5:
+        case 6:
             countryToEdit == null ? ComponentToRender = RenderAddCountry : ComponentToRender = RenderEditCountry;
+            break;
+        case 8:
+            attractionToEdit == null ? ComponentToRender = RenderAddAttraction : ComponentToRender = RenderEditAttraction;
             break;
         default:
             ComponentToRender = AdminUser;
@@ -711,15 +724,16 @@ export const AdminUsers = () => {
     function addItem() {
         switch (selectedOption) {
             case 1:
-                break;
-            case 2:
                 setSelectedOption(5);
                 break;
-            case 3:
+            case 2:
                 setSelectedOption(6);
                 break;
-            case 4:
+            case 3:
                 setSelectedOption(7);
+                break;
+            case 4:
+                setSelectedOption(8);
                 break;
             default:
                 setSelectedOption(1);

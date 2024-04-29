@@ -36,7 +36,4 @@ public class CityManagementImpl implements CityManagementI {
 		return cityRepository.findById(cityId).orElse(null);
 	}
 
-	
-
-
 }

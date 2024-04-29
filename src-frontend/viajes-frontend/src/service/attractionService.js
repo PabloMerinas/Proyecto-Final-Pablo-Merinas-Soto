@@ -62,3 +62,23 @@ export const getAttractionByAttraction = async (attractionName) => {
         throw new Error('Error recovering the attraction');
     }
 }
+
+// Método para agregar una nueva atracción
+export const addAttraction = async (attractionData, cityName) => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.post('http://localhost:8080/v1/attraction/addAttraction', attractionData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                cityName: cityName
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error adding atracción:", error);
+        throw new Error('Error adding atracción');
+    }
+};

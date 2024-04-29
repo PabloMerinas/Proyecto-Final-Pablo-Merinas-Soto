@@ -38,4 +38,5 @@ public interface CityManagementI {
 	 * @return Ciudad encontrada.
 	 */
 	public CityEntity findById(Long cityId);
+
 }
