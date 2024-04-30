@@ -82,3 +82,24 @@ export const addAttraction = async (attractionData, cityName) => {
         throw new Error('Error adding atracción');
     }
 };
+
+// Método para actualizar una atraccion existente
+export const updateAttraction = async (cityName, updatedAttractionData) => {
+    const token = localStorage.getItem('authToken');
+    try {
+        // Llamo a la API para actualizar el país
+        const response = await axios.post(`http://localhost:8080/v1/attraction/updateAttraction`, updatedAttractionData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }, params: {
+                cityName: cityName
+            }
+        });
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Error updating the attraction:", error);
+        throw new Error('Error updating the attraction');
+    }
+}

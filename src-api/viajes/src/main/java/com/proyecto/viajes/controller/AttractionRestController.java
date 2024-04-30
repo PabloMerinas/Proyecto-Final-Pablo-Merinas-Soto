@@ -45,8 +45,7 @@ public class AttractionRestController {
 	 * Inyeccion de dependencia de cityRepository;
 	 */
 	private CityManagementImpl cityRepository;
-	
-	
+
 	/**
 	 * Endpoint para obtener todas las atraciones. Se requiere que el usuario tenga
 	 * el rol "ROLE_CUSTOMER" o "ROLE_ADMIN".
@@ -100,9 +99,10 @@ public class AttractionRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	/**
-	 * Endpoint para agregar una nueva atracción. Se requiere el rol de "ROLE_ADMIN".
+	 * Endpoint para agregar una nueva atracción. Se requiere el rol de
+	 * "ROLE_ADMIN".
 	 * 
 	 * @param attractionEntity Datos de la atracción a agregar.
 	 * @return ResponseEntity con el resultado de la operación.
@@ -110,26 +110,62 @@ public class AttractionRestController {
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/addAttraction")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> addAttraction(@RequestBody AttractionEntity attractionEntity, @RequestParam String cityName) {
-	    if (attractionEntity != null) {
-	        // Verificar si la atracción existe
-	        if (attractionRepository.findByAttraction(attractionEntity.getAttraction()) != null) {
-	            return ResponseEntity.status(HttpStatus.CONFLICT).body("La atracción ya existe");
-	        }
-	        
-	        // Buscar la ciudad por su nombre
-	        CityEntity city = cityRepository.findByCity(cityName);
-	        if (city == null) {
-	            return ResponseEntity.badRequest().body("La ciudad especificada no fue encontrada");
-	        }
-	        attractionEntity.setCity(city);
+	public ResponseEntity<String> addAttraction(@RequestBody AttractionEntity attractionEntity,
+			@RequestParam String cityName) {
+		if (attractionEntity != null) {
+			// Verificar si la atracción existe
+			if (attractionRepository.findByAttraction(attractionEntity.getAttraction()) != null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("La atracción ya existe");
+			}
 
-	        // Guardar la nueva atracción
-	        attractionRepository.save(attractionEntity);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Atracción agregada correctamente");
-	    } else {
-	        return ResponseEntity.badRequest().body("Los datos de la atracción son nulos");
-	    }
+			// Buscar la ciudad por su nombre
+			CityEntity city = cityRepository.findByCity(cityName);
+			if (city == null) {
+				return ResponseEntity.badRequest().body("La ciudad especificada no fue encontrada");
+			}
+			attractionEntity.setCity(city);
+
+			// Guardar la nueva atracción
+			attractionRepository.save(attractionEntity);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Atracción agregada correctamente");
+		} else {
+			return ResponseEntity.badRequest().body("Los datos de la atracción son nulos");
+		}
+	}
+
+	/**
+	 * Endpoint para actualizar una atracción. Se requiere el rol de "ROLE_ADMIN".
+	 * 
+	 * @param attractionName    Nombre de la atracción a actualizar.
+	 * @param updatedAttraction Datos actualizados de la atracción.
+	 * @param cityName          Nombre de la ciudad asociada a la atracción.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/updateAttraction")
+	public ResponseEntity<String> updateAttraction(@RequestBody AttractionEntity updatedAttraction,
+			@RequestParam String cityName) {
+		AttractionEntity existingAttraction = attractionRepository.findByAttraction(updatedAttraction.getAttraction());
+
+		if (existingAttraction != null) {
+			CityEntity city = cityRepository.findByCity(cityName);
+			if (city == null) {
+				return ResponseEntity.badRequest().body("La ciudad especificada no fue encontrada");
+			}
+			existingAttraction.setAttraction(updatedAttraction.getAttraction());
+			existingAttraction.setCategory(updatedAttraction.getCategory());
+			existingAttraction.setCity(city);
+			existingAttraction.setImgUrl(updatedAttraction.getImgUrl());
+			existingAttraction.setInfo(updatedAttraction.getInfo());
+			existingAttraction.setPrice(updatedAttraction.getPrice());
+			
+
+			// Guardao
+			attractionRepository.save(existingAttraction);
+			return ResponseEntity.ok().body("Atracción actualizada correctamente");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }

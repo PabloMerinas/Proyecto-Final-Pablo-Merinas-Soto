@@ -606,7 +606,7 @@ export const AdminUsers = () => {
                     <div className="users-principal-nivel10-frame010">
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
-                                <i className="fa-solid fa-pen-to-square"></i>
+                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(attraction, 'attraction')}></i>
                                 <i className="fa-solid fa-trash" onClick={() => deleteDataItem(attraction, 'attraction')}></i>
                             </span>
                         </span>
@@ -657,20 +657,39 @@ export const AdminUsers = () => {
                 break;
             case 2:
                 setCountryToEdit(item);
-                setSelectedOption(5);
+                setSelectedOption(6);
                 break;
             case 3:
                 setSelectedOption(6);
                 break;
             case 4:
-                setSelectedOption(7);
+                setAttractionToEdit(item);
+                setSelectedOption(8);
                 break;
             default:
                 setSelectedOption(1);
         }
 
     }
-
+    // Funcion para añadir un item, dependiendo de la opcion seleccionada
+    function addItem() {
+        switch (selectedOption) {
+            case 1:
+                setSelectedOption(5);
+                break;
+            case 2:
+                setSelectedOption(6);
+                break;
+            case 3:
+                setSelectedOption(7);
+                break;
+            case 4:
+                setSelectedOption(8);
+                break;
+            default:
+                setSelectedOption(1);
+        }
+    }
     // Funciónes que gestiona que componente se vera
     function RenderAddCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} />
@@ -722,25 +741,7 @@ export const AdminUsers = () => {
         setAttractionToEdit(null);
     }
 
-    // Funcion para añadir un item, dependiendo de la opcion seleccionada
-    function addItem() {
-        switch (selectedOption) {
-            case 1:
-                setSelectedOption(5);
-                break;
-            case 2:
-                setSelectedOption(6);
-                break;
-            case 3:
-                setSelectedOption(7);
-                break;
-            case 4:
-                setSelectedOption(8);
-                break;
-            default:
-                setSelectedOption(1);
-        }
-    }
+
 
     return (
         <div className="users-principal-container">

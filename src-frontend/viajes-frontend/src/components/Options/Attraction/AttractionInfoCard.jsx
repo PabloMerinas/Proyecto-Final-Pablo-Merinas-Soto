@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './attractionInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
-import { addAttraction, getAttractionByAttraction } from "../../../service/attractionService";
+import { addAttraction, getAttractionByAttraction, updateAttraction } from "../../../service/attractionService";
 import { getCities } from "../../../service/cityService";
 
 export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
@@ -23,6 +23,16 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
     };
 
     useEffect(() => {
+        if(attractionToEdit){
+            setFormData({
+                imgUrl: attractionToEdit.imgUrl,
+                attraction: attractionToEdit.attraction,
+                category: attractionToEdit.category,
+                info: attractionToEdit.info,
+                price: attractionToEdit.price,
+                city: attractionToEdit.city
+            })
+        }
         const fetchAttraction = async () => {
             try {
                 const attractionData = await getAttractionByAttraction(attractionParam);
@@ -183,7 +193,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
             </div>
         )
     }
-    function addMode() {
+    function addAndEditMode() {
         return (
             <form onSubmit={handleSubmit}>
                 <div className="attraction-info-card-container" style={{ width: '980px' }}>
@@ -193,7 +203,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                 <div className="attraction-info-card-depth11-frame0">
                                     <span className="attraction-info-card-text">
                                         <span>
-                                            <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required />
+                                            <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit}/>
                                         </span>
                                     </span>
                                 </div>
@@ -336,7 +346,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                         <div className="attraction-info-card-depth10-frame0">
                                             <div className="attraction-info-card-depth11-frame01">
                                                 <span className="attraction-info-card-text22">
-                                                    <span>Add</span>
+                                                    <span>{attractionToEdit ? 'Save' : 'Add'}</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -365,13 +375,23 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                     console.error('Error adding the attraction:', error);
                 });
         }
+        else{
+            // Edito la atraccion
+            updateAttraction(formData.city, formData)
+            .then(response => {
+                setSelectedOption(4);
+            })
+            .catch(error => {
+                console.error('Error updating the attraction:', error);
+            });
+        }
 
     };
     if (attractionParam) {
         return viewMode();
     }
     else {
-        return addMode();
+        return addAndEditMode();
     }
 
 }

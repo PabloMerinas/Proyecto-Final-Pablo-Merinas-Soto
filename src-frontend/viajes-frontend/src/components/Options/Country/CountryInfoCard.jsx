@@ -286,7 +286,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                                   <div className="country-info-card-principal-nivel11-frame0">
                                     <span className="country-info-card-principal-text">
                                       <span>
-                                        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required style={{ width: '100%' }} />
+                                        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required disabled={countryToEdit} style={{ width: '100%' }} />
                                       </span>
                                     </span>
                                   </div>
@@ -295,7 +295,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                                   <div className="country-info-card-principal-nivel11-frame01">
                                     <span className="country-info-card-principal-text02">
                                       <span>
-                                        <textarea name="info" value={formData.info} onChange={handleChange} placeholder="Info" />
+                                        <textarea name="info" value={formData.info} onChange={handleChange} placeholder="Info"/>
                                       </span>
                                     </span>
                                   </div>
