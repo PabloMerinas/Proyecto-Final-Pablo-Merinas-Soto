@@ -84,6 +84,22 @@ export const addCity = async(countryName, cityData) => {
 }
 
 // Metodo para editar una ciudad
-export const updateCity = async (countryName, updatedCityData) => {
+export const updateCity = async (updatedCityData, countryName) => {
+    delete updatedCityData.country;
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.post('http://localhost:8080/v1/city/updateCity', updatedCityData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                countryName: countryName
+            }
+        });
 
+        return response.data;
+    } catch (error) {
+        console.error("Error updating city:", error);
+        throw new Error('Error updating city');
+    }
 }

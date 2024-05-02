@@ -143,6 +143,38 @@ public class CityRestController {
 	        return ResponseEntity.badRequest().body("Los datos de la ciudad son nulos");
 	    }
 	}
+	
+	/**
+	 * Endpoint para actualizar una ciudad. Se requiere el rol de "ROLE_ADMIN".
+	 * 
+	 * @param updatedCity Datos actualizados de la ciudad.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/updateCity")
+	public ResponseEntity<String> updateCity(@RequestBody CityEntity updatedCity, @RequestParam String countryName) {
+	    CityEntity existingCity = cityRepository.findByCity(updatedCity.getCity());
+	    
+	    if (existingCity != null) {
+	        // Actualizar los campos de la ciudad
+	        existingCity.setState(updatedCity.getState());
+	        existingCity.setAirportCode(updatedCity.getAirportCode());
+	        existingCity.setPopulation(updatedCity.getPopulation());
+	        existingCity.setImgUrl(updatedCity.getImgUrl());
+	        existingCity.setInfo(updatedCity.getInfo());
+	        
+	        CountryEntity country = countryRepository.findByCountry(countryName);
+	        if(country != null) {
+	        	existingCity.setCountry(country);
+	        }
+	        // Guardar los cambios en la base de datos
+	        cityRepository.save(existingCity);
+	        return ResponseEntity.ok().body("Ciudad actualizada correctamente");
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
+	}
+
 
 
 }

@@ -382,7 +382,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
         }
         else {
             // Edito la ciudad
-            updateCity(formData.country, formData)
+            updateCity(formData, formData.country)
                 .then(response => {
                     setSelectedOption(3);
                 })
