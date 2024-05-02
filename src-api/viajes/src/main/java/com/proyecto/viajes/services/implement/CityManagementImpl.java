@@ -30,10 +30,15 @@ public class CityManagementImpl implements CityManagementI {
 	public void delete(CityEntity cityToDelete) {
 		cityRepository.delete(cityToDelete);
 	}
-	
+
 	@Override
 	public CityEntity findById(Long cityId) {
 		return cityRepository.findById(cityId).orElse(null);
+	}
+
+	@Override
+	public void save(CityEntity cityEntity) {
+		cityRepository.save(cityEntity);
 	}
 
 }

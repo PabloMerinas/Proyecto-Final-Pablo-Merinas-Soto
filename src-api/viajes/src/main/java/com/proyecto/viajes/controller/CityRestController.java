@@ -2,18 +2,24 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.viajes.persistence.model.AttractionEntity;
 import com.proyecto.viajes.persistence.model.CityEntity;
+import com.proyecto.viajes.persistence.model.CountryEntity;
 import com.proyecto.viajes.persistence.model.VisitedPlaceEntity;
 import com.proyecto.viajes.services.implement.CityManagementImpl;
+import com.proyecto.viajes.services.implement.CountryManagementImpl;
 import com.proyecto.viajes.services.implement.VisitedPlaceManagementImpl;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +39,11 @@ public class CityRestController {
 	 */
 	private CityManagementImpl cityRepository;
 
+	/**
+	 * Inyeccion de dependencia de CountryManagementImpl.
+	 */
+	private CountryManagementImpl countryRepository;
+	
 	/**
 	 * Inyeccion de dependencia de visitedPlace.
 	 */
@@ -100,5 +111,38 @@ public class CityRestController {
 	public CityEntity getCityByCity(@RequestParam String city) {
 		return cityRepository.findByCity(city);
 	}
+	
+	/**
+	 * Endpoint para agregar una nueva ciudad. Se requiere el rol de
+	 * "ROLE_ADMIN".
+	 * 
+	 * @param cityEntity Datos de la ciudad a agregar.
+	 * @return ResponseEntity con el resultado de la operación.
+	 */
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/addCity")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<String> addCity(@RequestBody CityEntity cityEntity, @RequestParam String countryName) {
+	    if (cityEntity != null) {
+	        // Verificar si la ciudad ya existe
+	        if (cityRepository.findByCity(cityEntity.getCity()) != null) {
+	            return ResponseEntity.status(HttpStatus.CONFLICT).body("La ciudad ya existe");
+	        }
+	        
+	        // Buscar su pais por su nombre
+	        CountryEntity country = countryRepository.findByCountry(countryName);
+	        if(country == null) {
+	        	return ResponseEntity.badRequest().body("El pais especificado no fue encontrado");
+	        }
+	        cityEntity.setCountry(country);
+	        
+	        // Guardar la nueva ciudad
+	        cityRepository.save(cityEntity);
+	        return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad agregada correctamente");
+	    } else {
+	        return ResponseEntity.badRequest().body("Los datos de la ciudad son nulos");
+	    }
+	}
+
 
 }

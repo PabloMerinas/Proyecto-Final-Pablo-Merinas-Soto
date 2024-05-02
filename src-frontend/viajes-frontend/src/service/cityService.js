@@ -61,3 +61,29 @@ export const deleteCityByCity = async (city) => {
         throw new Error('Error deleting the city');
     }
 };
+
+// Metodo para añadir una ciudad
+export const addCity = async(countryName, cityData) => {
+    delete cityData.country;
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.post('http://localhost:8080/v1/city/addCity', cityData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                countryName: countryName
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error adding city:", error);
+        throw new Error('Error adding city');
+    }
+}
+
+// Metodo para editar una ciudad
+export const updateCity = async (countryName, updatedCityData) => {
+
+}

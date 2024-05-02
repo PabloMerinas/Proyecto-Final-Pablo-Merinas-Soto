@@ -39,4 +39,10 @@ public interface CityManagementI {
 	 */
 	public CityEntity findById(Long cityId);
 
+	/**
+	 * Guarda una ciudad.
+	 * @param cityEntity Ciudad que se guarda.
+	 */
+	void save(CityEntity cityEntity);
+
 }

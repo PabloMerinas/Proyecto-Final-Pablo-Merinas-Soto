@@ -136,7 +136,6 @@ public class AttractionRestController {
 	/**
 	 * Endpoint para actualizar una atracción. Se requiere el rol de "ROLE_ADMIN".
 	 * 
-	 * @param attractionName    Nombre de la atracción a actualizar.
 	 * @param updatedAttraction Datos actualizados de la atracción.
 	 * @param cityName          Nombre de la ciudad asociada a la atracción.
 	 * @return ResponseEntity con el resultado de la operación.
@@ -158,7 +157,6 @@ public class AttractionRestController {
 			existingAttraction.setImgUrl(updatedAttraction.getImgUrl());
 			existingAttraction.setInfo(updatedAttraction.getInfo());
 			existingAttraction.setPrice(updatedAttraction.getPrice());
-			
 
 			// Guardao
 			attractionRepository.save(existingAttraction);

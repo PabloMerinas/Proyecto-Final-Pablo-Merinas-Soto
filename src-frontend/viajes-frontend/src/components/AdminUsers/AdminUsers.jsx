@@ -9,7 +9,7 @@ import { deleteUserByUsername } from '../../service/userService';
 import { deleteAttractionByAttraction } from '../../service/attractionService';
 import { deleteCityByCity } from '../../service/cityService';
 import { CountryInfoCard } from '../Options/Country/CountryInfoCard';
-// import { CityInfoCard } from '../Options/City/CityInfoCard';
+import { CityInfoCard } from '../Options/City/CityInfoCard';
 import { AttractionInfoCard } from '../Options/Attraction/AttractionInfoCard';
 import './adminUsers.css';
 
@@ -489,7 +489,7 @@ export const AdminUsers = () => {
                     <div className="users-principal-nivel10-frame010">
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
-                                <i className="fa-solid fa-pen-to-square"></i>
+                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(city, 'city')}></i>
                                 <i className="fa-solid fa-trash" onClick={() => deleteDataItem(city, 'city')}></i>
                             </span>
                         </span>
@@ -660,7 +660,8 @@ export const AdminUsers = () => {
                 setSelectedOption(6);
                 break;
             case 3:
-                setSelectedOption(6);
+                setCityToEdit(item);
+                setSelectedOption(7);
                 break;
             case 4:
                 setAttractionToEdit(item);
@@ -697,12 +698,19 @@ export const AdminUsers = () => {
     function RenderEditCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} countryToEdit={countryToEdit} />
     }
+    function RenderAddCity() {
+        return <CityInfoCard setSelectedOption={setSelectedOption} />
+    }
+    function RenderEditCity() {
+        return <CityInfoCard setSelectedOption={setSelectedOption} cityToEdit={cityToEdit} />
+    }
     function RenderAddAttraction() {
         return <AttractionInfoCard setSelectedOption={setSelectedOption} />
     }
     function RenderEditAttraction() {
         return <AttractionInfoCard setSelectedOption={setSelectedOption} attractionToEdit={attractionToEdit} />
     }
+
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
     let textToFind; // Este es el texto para el la barra de busqueda.
@@ -725,6 +733,9 @@ export const AdminUsers = () => {
             break;
         case 6:
             countryToEdit == null ? ComponentToRender = RenderAddCountry : ComponentToRender = RenderEditCountry;
+            break;
+        case 7:
+            cityToEdit == null ? ComponentToRender = RenderAddCity : ComponentToRender = RenderEditCity;
             break;
         case 8:
             attractionToEdit == null ? ComponentToRender = RenderAddAttraction : ComponentToRender = RenderEditAttraction;
