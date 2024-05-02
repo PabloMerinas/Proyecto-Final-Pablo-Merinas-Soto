@@ -111,6 +111,44 @@ public class UserRestController {
 		}
 	}
 
+	@PostMapping("/addUserFromAdmin")
+	public ResponseEntity<String> addUserFromAdmin(@RequestBody UserEntity u, @RequestParam boolean isAdmin,
+			@RequestParam boolean isCustomer) {
+		Optional<UserEntity> existingUser = userRepository.findByUsername(u.getUsername());
+
+		if (existingUser.isPresent()) {
+			// El usuario ya existe en la base de datos
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe");
+		} else {
+			UserEntity newUser = new UserEntity();
+			newUser.setUsername(u.getUsername());
+			newUser.setPassword(passwordEncoder.encode(u.getPassword()));
+			newUser.setEmail(u.getEmail());
+			newUser.setActive(true);
+			userRepository.save(newUser);
+
+			String jwt = jwtUtils.create(u.getUsername());
+			HttpHeaders headers = new HttpHeaders();
+
+			// Le agrego el rol que le paso
+			if (isCustomer) {
+				UserRoleEntity customer = new UserRoleEntity();
+				customer.setUsername(u.getUsername());
+				customer.setRole("CUSTOMER");
+				roleRepository.save(customer);
+			}
+			if (isAdmin) {
+				UserRoleEntity admin = new UserRoleEntity();
+				admin.setUsername(u.getUsername());
+				admin.setRole("ADMIN");
+				roleRepository.save(admin);
+			}
+
+			return ResponseEntity.ok().body("Usuario añadido correctamente");
+		}
+
+	}
+
 	/**
 	 * Endpoint para recuperar un usuario pasandole un token. Se requiere el rol de:
 	 * "ROLE_CUSTOMER", "ROLE_ADMIN"
@@ -225,6 +263,8 @@ public class UserRestController {
 				// Codificar y guardar la nueva contraseña
 				existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
 			}
+
+			// Compruebo los roles 
 
 			// Guardar los cambios
 			userRepository.save(existingUser);

@@ -144,50 +144,68 @@ export const getAllUsers = async (token) => {
 
 
 
-  // Actualiza la imagen de perfil de un usuario
-  export const uploadProfileImageByUsername = async (formData, username) => {
-    const token = localStorage.getItem("authToken");
-    try {
-      await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
-        }
-      });
+// Actualiza la imagen de perfil de un usuario
+export const uploadProfileImageByUsername = async (formData, username) => {
+  const token = localStorage.getItem("authToken");
+  try {
+    await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+    });
 
-      // Obtengo la URL de la imagen de perfil del usuario
-      const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
-        headers: {
-          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
-        },
-        params: {
-          username: username
-        },
-        responseType: 'blob'
-      });
+    // Obtengo la URL de la imagen de perfil del usuario
+    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      },
+      params: {
+        username: username
+      },
+      responseType: 'blob'
+    });
 
-      // Para obtener la imagen del perfil ( Esto me ha costado la vida )
-      const imageData = profileImageResponse.data;
-      const imageUrl = URL.createObjectURL(imageData);
-      return imageUrl;
-    } catch (error) {
-      console.error('Error updating user profile image: ', error);
-      throw new Error('Error updating user profile image: ' + error.response.data);
-    }
+    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+    const imageData = profileImageResponse.data;
+    const imageUrl = URL.createObjectURL(imageData);
+    return imageUrl;
+  } catch (error) {
+    console.error('Error updating user profile image: ', error);
+    throw new Error('Error updating user profile image: ' + error.response.data);
   }
+}
 
-  // Elimina un usuario pasandole el usuario
-  export const deleteUserByUsername = async (username) => {
-    const token = localStorage.getItem("authToken");
-    try {
-      await axios.delete(`http://localhost:8080/v1/user/deleteUserByUsername/${username}`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
-        }
-      });
-    } catch (error) {
-      console.error('Error deleting user: ', error);
-      throw new Error('Error deleting user: ' + error.response.data);
-    }
+// Elimina un usuario pasandole el usuario
+export const deleteUserByUsername = async (username) => {
+  const token = localStorage.getItem("authToken");
+  try {
+    await axios.delete(`http://localhost:8080/v1/user/deleteUserByUsername/${username}`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+  } catch (error) {
+    console.error('Error deleting user: ', error);
+    throw new Error('Error deleting user: ' + error.response.data);
   }
+}
+
+export const addUserFromAdmin = async (userData, isAdmin, isCustomer) => {
+  try {
+    const response = axios.post('http://localhost:8080/v1/user/addUserFromAdmin', userData, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }, params: {
+        isAdmin: isAdmin,
+        isCustomer: isCustomer
+      }
+      
+    });
+  } catch (error) {
+    console.error('Error adding the user:', error.message);
+
+  }
+}

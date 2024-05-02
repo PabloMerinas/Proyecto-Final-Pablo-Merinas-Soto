@@ -1,0 +1,240 @@
+.user-info-card-container {
+    width: 960px;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .user-info-card-user-card {
+    gap: 13px;
+    height: auto;
+    display: flex;
+    padding: 16px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-color: rgba(247, 250, 252, 1);
+    border: 1px solid rgba(209, 214, 232, 1);;
+
+  }
+  .user-info-card-attraction-info {
+    width: 652px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+  .user-info-card-attraction-title {
+    height: 60px;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+  .user-info-card-depth11-frame0 {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    flex-direction: column;
+  }
+  .user-info-card-text {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    font-size: 48px;
+    font-style: Black;
+    text-align: center;
+    font-weight: 900;
+    line-height: 60px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-attraction-data {
+    gap: 5px;
+    display: flex;
+    padding: 5px;
+    flex-wrap: wrap;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+  .user-info-card-email {
+    gap: 2px;
+    width: 444px;
+    display: flex;
+    padding: 5px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+  }
+  .user-info-card-text02 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-text04 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-password {
+    gap: 2px;
+    width: 219px;
+    display: flex;
+    padding: 5px 0;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+  }
+  .user-info-card-text06 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-text08 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-phone {
+    gap: 2px;
+    width: 433px;
+    display: flex;
+    padding: 5px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+  }
+  .user-info-card-text14 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-text16 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-bio {
+    gap: 2px;
+    width: 433px;
+    display: flex;
+    padding: 5px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(229, 232, 234, 1);
+    border-style: solid;
+    border-width: 1px 0 0;
+    flex-direction: column;
+  }
+  .user-info-card-text18 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-text20 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    align-self: stretch;
+    text-align: center;
+    font-weight: 400;
+    line-height: 21px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .user-info-card-button {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+  .user-info-card-depth9-frame0 {
+    width: 120.578125px;
+    height: 48px;
+    display: flex;
+    padding: 0 20px;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    justify-content: center;
+    background-color: rgba(25, 91, 229, 1);
+  }
+  .user-info-card-depth10-frame0 {
+    width: 80.578125px;
+    height: 24px;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: column;
+    background-color: rgba(25, 91, 229, 1);
+  }
+  .user-info-card-depth11-frame01 {
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .user-info-card-text22 {
+    color: rgba(247, 249, 252, 1);
+    width: 81px;
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: center;
+    font-weight: 700;
+    line-height: 24px;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  

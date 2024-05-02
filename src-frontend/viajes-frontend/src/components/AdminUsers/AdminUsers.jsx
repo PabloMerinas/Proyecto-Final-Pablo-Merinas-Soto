@@ -11,6 +11,8 @@ import { deleteCityByCity } from '../../service/cityService';
 import { CountryInfoCard } from '../Options/Country/CountryInfoCard';
 import { CityInfoCard } from '../Options/City/CityInfoCard';
 import { AttractionInfoCard } from '../Options/Attraction/AttractionInfoCard';
+import { UserInfoCard } from './UserInfoCard';
+
 import './adminUsers.css';
 
 export const AdminUsers = () => {
@@ -23,14 +25,18 @@ export const AdminUsers = () => {
     const [selectedOption, setSelectedOption] = useState(1);
     const [countryToEdit, setCountryToEdit] = useState(null);
     const [cityToEdit, setCityToEdit] = useState(null);
+    const [userToEdit, setUserToEdit] = useState(null);
     const [attractionToEdit, setAttractionToEdit] = useState(null);
-
+    const [dataLoaded, setDataLoaded] = useState(false); // Creo este estado para que siempre compruebe si estan los datos borrados y no se sobreescriban, dado que me daba un fallo con las keys
     // Métodos para recuperar los datos dependiendo de la opcion seleccionada.
     useEffect(() => {
         // Recupero el token
         const token = localStorage.getItem("authToken");
         async function fetchData() {
             try {
+                // Reinicio los datos
+                setOptionData([]);
+                setFilteredItem([]);
                 let data;
                 switch (selectedOption) {
                     case 1:
@@ -48,6 +54,7 @@ export const AdminUsers = () => {
                     default:
                         data = await getAllUsers(token);
                 }
+                setDataLoaded(true);
                 setOptionData(data);
                 setFilteredItem(data);
             } catch (error) {
@@ -55,6 +62,7 @@ export const AdminUsers = () => {
             }
         }
         fetchData();
+
         if (selectedOption < 5) deleteDataItemsSelected(); // Siempre que no sea una opcion de un modulo, eliminara los item seleccionados
     }, [selectedOption]);
 
@@ -70,6 +78,7 @@ export const AdminUsers = () => {
         filterItem(event.target.value || ''); // Llamo al metodo para filtrar ( Lo dejo aqui para que se vaya actualizando solo)
 
     };
+
     // Metodo para filtrar usuarios
     const filterItem = (text) => {
         // Dependiendo de que opcion este renderizada se filtrara por una opcion u otra.
@@ -100,6 +109,7 @@ export const AdminUsers = () => {
                     user.username.toLowerCase().includes(text.toLowerCase())
                 );
         }
+
         setFilteredItem(filtered);
     };
 
@@ -124,7 +134,6 @@ export const AdminUsers = () => {
                 </div>
             )
         }
-
         return (
             <div className="modules-container">
                 <div className="modules-depth4-frame2">
@@ -203,7 +212,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(user => (
-                                <div id={user.username}>
+                                <div id={user.username} key={user.username}>
                                     {generateUser(user, activeUser.username)}
                                 </div>
                             ))}
@@ -255,7 +264,7 @@ export const AdminUsers = () => {
                     <div className="users-principal-nivel10-frame010">
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
-                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem()}></i>
+                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(user, 'user')}></i>
                                 <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user')}></i>
                             </span>
                         </span>
@@ -270,7 +279,7 @@ export const AdminUsers = () => {
     // HTML para paises
     const AdminCountries = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-countries'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -321,7 +330,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(country => (
-                                <div id={country.country}>
+                                <div id={country.country} key={country.country}>
                                     {generateCountry(country)}
                                 </div>
                             ))}
@@ -387,7 +396,7 @@ export const AdminUsers = () => {
     // HTML para ciudades
     const AdminCities = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-cities'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -438,7 +447,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(city => (
-                                <div id={city.city}>
+                                <div id={city.city} key={city.city}>
                                     {generateCity(city)}
                                 </div>
                             ))}
@@ -504,7 +513,7 @@ export const AdminUsers = () => {
     // HTML para las atracciones
     const AdminAttractions = () => {
         return (
-            <div className="users-principal-nivel4-frame2">
+            <div className="users-principal-nivel4-frame2" key={'admin-attractions'}>
                 <div className="users-principal-nivel5-frame02">
                     <div className="users-principal-nivel6-frame02">
                         <div className="users-principal-nivel7-frame02">
@@ -555,7 +564,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(attraction => (
-                                <div id={attraction.attraction}>
+                                <div id={attraction.attraction} key={attraction.attraction}>
                                     {generateAttraction(attraction)}
                                 </div>
                             ))}
@@ -654,6 +663,8 @@ export const AdminUsers = () => {
         // alert(JSON.stringify(item));
         switch (selectedOption) {
             case 1:
+                setUserToEdit(item);
+                setSelectedOption(5);
                 break;
             case 2:
                 setCountryToEdit(item);
@@ -692,6 +703,14 @@ export const AdminUsers = () => {
         }
     }
     // Funciónes que gestiona que componente se vera
+    function RenderAddUser() {
+        return <UserInfoCard setSelectedOption={setSelectedOption} />
+
+    }
+    function RenderEditUser() {
+        return <UserInfoCard setSelectedOption={setSelectedOption} userToEdit={userToEdit} />
+
+    }
     function RenderAddCountry() {
         return <CountryInfoCard setSelectedOption={setSelectedOption} />
     }
@@ -710,6 +729,7 @@ export const AdminUsers = () => {
     function RenderEditAttraction() {
         return <AttractionInfoCard setSelectedOption={setSelectedOption} attractionToEdit={attractionToEdit} />
     }
+
 
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
     let ComponentToRender; // Este sera el componente que se va a renderizar.
@@ -731,6 +751,9 @@ export const AdminUsers = () => {
             ComponentToRender = AdminAttractions;
             textToFind = 'attractions';
             break;
+        case 5:
+            userToEdit == null ? ComponentToRender = RenderAddUser : ComponentToRender = RenderEditUser;
+            break;
         case 6:
             countryToEdit == null ? ComponentToRender = RenderAddCountry : ComponentToRender = RenderEditCountry;
             break;
@@ -750,11 +773,12 @@ export const AdminUsers = () => {
         setCountryToEdit(null);
         setCityToEdit(null);
         setAttractionToEdit(null);
+        setUserToEdit(null);
     }
 
 
 
-    return (
+    return dataLoaded ? (
         <div className="users-principal-container">
             <div className="users-principal-users">
                 <div className="users-principal-nivel4-frame0">
@@ -804,7 +828,7 @@ export const AdminUsers = () => {
                 </div>
             )}
         </div>
-    )
+    ) : null;
 
 
 }

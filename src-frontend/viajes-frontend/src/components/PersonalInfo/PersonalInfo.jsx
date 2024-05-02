@@ -5,6 +5,7 @@ import { deleteMyUser } from "../../service/userService";
 import { useAuth } from '../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
 import { uploadProfileImageByUsername } from "../../service/userService";
+import { act } from "react";
 
 export const PersonalInfo = () => {
     // Defino las variables y sus valores por defecto
@@ -28,20 +29,32 @@ export const PersonalInfo = () => {
                 // Actualizo la cookie con el nuevo valor y actualizo el user
                 await updateUser(token, { username, password, email, phone, bio });
 
+                activeUser.email = email;
+                activeUser.phone = phone;
+                activeUser.bio = bio;
                 // FormData para la imagen
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('username', activeUser.username);
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('username', activeUser.username);
 
-                const newImage = await uploadProfileImageByUsername(formData, username);
-                activeUser.imgUrl = newImage;
+                    const newImage = await uploadProfileImageByUsername(formData, username);
+                    activeUser.imgUrl = newImage;
 
-                // La imagen se aplica correctamente, pero como no se actualiza hasta que clica algo del header, 
-                // agrego esto para que esteticamente se haga al momento
-                const imageElement = document.querySelector('img');
-                if (imageElement) {
-                    imageElement.src = newImage;
+                    // La imagen se aplica correctamente, pero como no se actualiza hasta que clica algo del header, 
+                    // agrego esto para que esteticamente se haga al momento
+                    const imageElement = document.querySelector('img');
+                    if (imageElement) {
+                        imageElement.src = newImage;
+                    }
+
+
                 }
+                // Si todo va bien defino los valores de nuevo
+                setEmail(email);
+                setPhone(phone);
+                setBio(bio);
+
 
             } catch (error) {
                 console.error('Error updating the user: ', error);

@@ -43,7 +43,7 @@ public class CityRestController {
 	 * Inyeccion de dependencia de CountryManagementImpl.
 	 */
 	private CountryManagementImpl countryRepository;
-	
+
 	/**
 	 * Inyeccion de dependencia de visitedPlace.
 	 */
@@ -111,10 +111,9 @@ public class CityRestController {
 	public CityEntity getCityByCity(@RequestParam String city) {
 		return cityRepository.findByCity(city);
 	}
-	
+
 	/**
-	 * Endpoint para agregar una nueva ciudad. Se requiere el rol de
-	 * "ROLE_ADMIN".
+	 * Endpoint para agregar una nueva ciudad. Se requiere el rol de "ROLE_ADMIN".
 	 * 
 	 * @param cityEntity Datos de la ciudad a agregar.
 	 * @return ResponseEntity con el resultado de la operación.
@@ -123,27 +122,27 @@ public class CityRestController {
 	@PostMapping("/addCity")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<String> addCity(@RequestBody CityEntity cityEntity, @RequestParam String countryName) {
-	    if (cityEntity != null) {
-	        // Verificar si la ciudad ya existe
-	        if (cityRepository.findByCity(cityEntity.getCity()) != null) {
-	            return ResponseEntity.status(HttpStatus.CONFLICT).body("La ciudad ya existe");
-	        }
-	        
-	        // Buscar su pais por su nombre
-	        CountryEntity country = countryRepository.findByCountry(countryName);
-	        if(country == null) {
-	        	return ResponseEntity.badRequest().body("El pais especificado no fue encontrado");
-	        }
-	        cityEntity.setCountry(country);
-	        
-	        // Guardar la nueva ciudad
-	        cityRepository.save(cityEntity);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad agregada correctamente");
-	    } else {
-	        return ResponseEntity.badRequest().body("Los datos de la ciudad son nulos");
-	    }
+		if (cityEntity != null) {
+			// Verificar si la ciudad ya existe
+			if (cityRepository.findByCity(cityEntity.getCity()) != null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("La ciudad ya existe");
+			}
+
+			// Buscar su pais por su nombre
+			CountryEntity country = countryRepository.findByCountry(countryName);
+			if (country == null) {
+				return ResponseEntity.badRequest().body("El pais especificado no fue encontrado");
+			}
+			cityEntity.setCountry(country);
+
+			// Guardar la nueva ciudad
+			cityRepository.save(cityEntity);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad agregada correctamente");
+		} else {
+			return ResponseEntity.badRequest().body("Los datos de la ciudad son nulos");
+		}
 	}
-	
+
 	/**
 	 * Endpoint para actualizar una ciudad. Se requiere el rol de "ROLE_ADMIN".
 	 * 
@@ -153,28 +152,26 @@ public class CityRestController {
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/updateCity")
 	public ResponseEntity<String> updateCity(@RequestBody CityEntity updatedCity, @RequestParam String countryName) {
-	    CityEntity existingCity = cityRepository.findByCity(updatedCity.getCity());
-	    
-	    if (existingCity != null) {
-	        // Actualizar los campos de la ciudad
-	        existingCity.setState(updatedCity.getState());
-	        existingCity.setAirportCode(updatedCity.getAirportCode());
-	        existingCity.setPopulation(updatedCity.getPopulation());
-	        existingCity.setImgUrl(updatedCity.getImgUrl());
-	        existingCity.setInfo(updatedCity.getInfo());
-	        
-	        CountryEntity country = countryRepository.findByCountry(countryName);
-	        if(country != null) {
-	        	existingCity.setCountry(country);
-	        }
-	        // Guardar los cambios en la base de datos
-	        cityRepository.save(existingCity);
-	        return ResponseEntity.ok().body("Ciudad actualizada correctamente");
-	    } else {
-	        return ResponseEntity.notFound().build();
-	    }
+		CityEntity existingCity = cityRepository.findByCity(updatedCity.getCity());
+
+		if (existingCity != null) {
+			// Actualizar los campos de la ciudad
+			existingCity.setState(updatedCity.getState());
+			existingCity.setAirportCode(updatedCity.getAirportCode());
+			existingCity.setPopulation(updatedCity.getPopulation());
+			existingCity.setImgUrl(updatedCity.getImgUrl());
+			existingCity.setInfo(updatedCity.getInfo());
+
+			CountryEntity country = countryRepository.findByCountry(countryName);
+			if (country != null) {
+				existingCity.setCountry(country);
+			}
+			// Guardar los cambios en la base de datos
+			cityRepository.save(existingCity);
+			return ResponseEntity.ok().body("Ciudad actualizada correctamente");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
-
-
 
 }
