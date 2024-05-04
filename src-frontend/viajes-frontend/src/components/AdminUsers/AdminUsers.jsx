@@ -27,25 +27,23 @@ export const AdminUsers = () => {
     const [cityToEdit, setCityToEdit] = useState(null);
     const [userToEdit, setUserToEdit] = useState(null);
     const [attractionToEdit, setAttractionToEdit] = useState(null);
-    const [dataLoaded, setDataLoaded] = useState(false); // Creo este estado para que siempre compruebe si estan los datos borrados y no se sobreescriban, dado que me daba un fallo con las keys
     // Métodos para recuperar los datos dependiendo de la opcion seleccionada.
     useEffect(() => {
         // Recupero el token
         const token = localStorage.getItem("authToken");
         async function fetchData() {
             try {
-                // Reinicio los datos
-                setOptionData([]);
-                setFilteredItem([]);
                 let data;
                 switch (selectedOption) {
                     case 1:
                         data = await getAllUsers(token);
                         break;
                     case 2:
+                        setOptionData(data)
                         data = await getCountries(token);
                         break;
                     case 3:
+                        setOptionData(data)
                         data = await getCities(token);
                         break;
                     case 4:
@@ -54,7 +52,6 @@ export const AdminUsers = () => {
                     default:
                         data = await getAllUsers(token);
                 }
-                setDataLoaded(true);
                 setOptionData(data);
                 setFilteredItem(data);
             } catch (error) {
@@ -62,6 +59,7 @@ export const AdminUsers = () => {
             }
         }
         fetchData();
+
 
         if (selectedOption < 5) deleteDataItemsSelected(); // Siempre que no sea una opcion de un modulo, eliminara los item seleccionados
     }, [selectedOption]);
@@ -736,6 +734,9 @@ export const AdminUsers = () => {
     let textToFind; // Este es el texto para el la barra de busqueda.
     switch (selectedOption) {
         case 1:
+            if(optionData.length != 0){
+                setOptionData([]);
+            }
             ComponentToRender = AdminUser;
             textToFind = 'users';
             break;
@@ -778,7 +779,7 @@ export const AdminUsers = () => {
 
 
 
-    return dataLoaded ? (
+    return(
         <div className="users-principal-container">
             <div className="users-principal-users">
                 <div className="users-principal-nivel4-frame0">
@@ -828,7 +829,7 @@ export const AdminUsers = () => {
                 </div>
             )}
         </div>
-    ) : null;
+    )
 
 
 }
