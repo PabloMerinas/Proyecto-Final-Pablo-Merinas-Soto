@@ -203,8 +203,17 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
             <form onSubmit={handleSubmit}>
                 <div className="city-card-info-container">
                     <div className="city-card-info-city-card">
-                        <div className="city-card-info-city-img" style={{ backgroundImage: `url(${'https://www.svgrepo.com/show/170952/add-button.svg'})`, backgroundSize: 'cover' }}>
-                            <input type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' style={{ position: 'relative', top: '10px' }} />
+                        <div className="city-card-info-city-img" style={{ backgroundImage: `url(${formData.imgUrl})`, backgroundSize: 'cover' }}>
+                            <img
+                                src={formData.imgUrl}
+                                alt="Imagen"
+                                style={{ display: 'none' }}
+                                onError={(e) => {
+                                    e.target.style.display = 'none'; // Oculta la imagen que no se pudo cargar
+                                    e.target.parentElement.style.backgroundImage = `url('https://www.svgrepo.com/show/170952/add-button.svg')`; // Establece la imagen predeterminada como fondo
+                                }}
+                            />
+                            <input required type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' style={{ position: 'relative', top: '10px' }} />
                         </div>
                         <div className="city-card-info-city-info" style={{ height: 'auto' }}>
                             <div className="city-card-info-city-titulo">
@@ -232,6 +241,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                                 <span className="city-card-info-text04">
                                                     <span>
                                                         <textarea
+                                                            required
                                                             style={{ width: '100%', resize: 'none' }}
                                                             name="info"
                                                             id="info"
@@ -290,7 +300,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                             <div className="city-card-info-depth8-frame005">
                                                 <span className="city-card-info-text12">
                                                     <span>
-                                                        <input type="text" name="state" id="state" value={formData.state} placeholder='State' onChange={handleChange} />
+                                                        <input required type="text" name="state" id="state" value={formData.state} placeholder='State' onChange={handleChange} />
 
                                                     </span>
                                                 </span>
@@ -313,7 +323,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                             <div className="city-card-info-depth8-frame007">
                                                 <span className="city-card-info-text16">
                                                     <span>
-                                                        <input type="text" name="airportCode" id="airportCode" onChange={handleChange} value={formData.airportCode} placeholder='Airport Code' />
+                                                        <input required type="text" name="airportCode" id="airportCode" onChange={handleChange} value={formData.airportCode} placeholder='Airport Code' />
                                                     </span>
                                                 </span>
                                             </div>
@@ -335,7 +345,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                             <div className="city-card-info-depth8-frame009">
                                                 <span className="city-card-info-text20">
                                                     <span>
-                                                        <input type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' />
+                                                        <input required type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' />
                                                     </span>
                                                 </span>
                                             </div>

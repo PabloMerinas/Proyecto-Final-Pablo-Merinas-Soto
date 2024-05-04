@@ -23,7 +23,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
     };
 
     useEffect(() => {
-        if(attractionToEdit){
+        if (attractionToEdit) {
             setFormData({
                 imgUrl: attractionToEdit.imgUrl,
                 attraction: attractionToEdit.attraction,
@@ -56,7 +56,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
             fetchCities();
         }
 
-    }, [attractionParam]);
+    }, [attractionParam, attractionToEdit]);
 
     function viewMode() {
         return (
@@ -203,7 +203,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                 <div className="attraction-info-card-depth11-frame0">
                                     <span className="attraction-info-card-text">
                                         <span>
-                                            <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit}/>
+                                            <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit} />
                                         </span>
                                     </span>
                                 </div>
@@ -224,6 +224,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                             <div className="attraction-info-card-depth8-frame001">
                                                 <span className="attraction-info-card-text04">
                                                     <textarea
+                                                        required
                                                         style={{ width: '100%', resize: 'none' }}
                                                         name="info"
                                                         id="info"
@@ -328,7 +329,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                             <div className="attraction-info-card-depth8-frame009">
                                                 <span className="attraction-info-card-text20">
                                                     <span>
-                                                        <input type="number" name="price" id="price" onChange={handleChange} value={formData.price} placeholder="Price" />
+                                                        <input required type="number" name="price" id="price" onChange={handleChange} value={formData.price} placeholder="Price" />
                                                     </span>
                                                 </span>
                                             </div>
@@ -340,7 +341,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                 <input type="checkbox" id="myCheckbox" name="myCheckbox" />
                                 <label htmlFor="myCheckbox">  Send notifications to all user</label>
                             </div>
-                            <button type="submit" style={{display: 'contents'}}>
+                            <button type="submit" style={{ display: 'contents' }}>
                                 <div className="attraction-info-card-depth8-frame1">
                                     <div className="attraction-info-card-depth9-frame0">
                                         <div className="attraction-info-card-depth10-frame0">
@@ -354,8 +355,17 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                 </div>
                             </button>
                         </div>
-                        <div className="attraction-info-card-attraction-img" style={{ backgroundImage: `url(${'https://www.svgrepo.com/show/170952/add-button.svg'})`, backgroundSize: 'cover' }}>
-                            <input type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' style={{ position: 'relative', top: '10px' }} />
+                        <div className="attraction-info-card-attraction-img" style={{ backgroundImage: `url(${formData.imgUrl})`, backgroundSize: 'cover' }}>
+                            <img
+                                src={formData.imgUrl}
+                                alt="Imagen"
+                                style={{ display: 'none' }}
+                                onError={(e) => {
+                                    e.target.style.display = 'none'; // Oculta la imagen que no se pudo cargar
+                                    e.target.parentElement.style.backgroundImage = `url('https://www.svgrepo.com/show/170952/add-button.svg')`; // Establece la imagen predeterminada como fondo
+                                }}
+                            />
+                            <input required type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' style={{ position: 'relative', top: '10px' }} />
                         </div>
                     </div>
                 </div>
@@ -375,15 +385,15 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                     console.error('Error adding the attraction:', error);
                 });
         }
-        else{
+        else {
             // Edito la atraccion
             updateAttraction(formData.city, formData)
-            .then(response => {
-                setSelectedOption(4);
-            })
-            .catch(error => {
-                console.error('Error updating the attraction:', error);
-            });
+                .then(response => {
+                    setSelectedOption(4);
+                })
+                .catch(error => {
+                    console.error('Error updating the attraction:', error);
+                });
         }
 
     };

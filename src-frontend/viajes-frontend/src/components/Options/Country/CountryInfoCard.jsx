@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './countryInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
-import { getCountryByCountry,addCountry, updateCountry } from '../../../service/countryService';
+import { getCountryByCountry, addCountry, updateCountry } from '../../../service/countryService';
 
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
 export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
@@ -68,8 +68,8 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
         .catch(error => {
           console.error('Error adding the country:', error);
         });
-    }else{ // En caso contrario llama a editar el pais
-        updateCountry(countryToEdit.country, formData)
+    } else { // En caso contrario llama a editar el pais
+      updateCountry(countryToEdit.country, formData)
         .then(response => {
           setSelectedOption(2);
         })
@@ -276,7 +276,16 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
               <div className="country-info-card-principal-nivel1-frame0">
                 <div className="country-info-card-principal-nivel2-frame1">
                   <div className="country-info-card-principal-nivel3-frame0">
-                    <div className="country-info-card-principal-nivel4-frame0" style={{ backgroundImage: `url(${'https://www.svgrepo.com/show/170952/add-button.svg'})` }}>
+                    <div className="country-info-card-principal-nivel4-frame0" style={{ backgroundImage: `url(${formData.imgUrl})`, backgroundSize: 'cover' }}>
+                      <img
+                        src={formData.imgUrl}
+                        alt="Imagen"
+                        style={{ display: 'none' }}
+                        onError={(e) => {
+                          e.target.style.display = 'none'; // Oculta la imagen que no se pudo cargar
+                          e.target.parentElement.style.backgroundImage = `url('https://www.svgrepo.com/show/170952/add-button.svg')`; // Establece la imagen predeterminada como fondo
+                        }}
+                      />
                       <div className="country-info-card-principal-nivel5-frame0">
                         <div className="country-info-card-principal-nivel6-frame0">
                           <div className="country-info-card-principal-nivel7-frame0">
@@ -295,7 +304,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                                   <div className="country-info-card-principal-nivel11-frame01">
                                     <span className="country-info-card-principal-text02">
                                       <span>
-                                        <textarea name="info" value={formData.info} onChange={handleChange} placeholder="Info"/>
+                                        <textarea name="info" value={formData.info} onChange={handleChange} placeholder="Info" required />
                                       </span>
                                     </span>
                                   </div>
@@ -310,7 +319,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                       <div className="country-info-card-principal-nivel5-frame01 width100">
                         <div className="country-info-card-principal-nivel6-frame01 width100">
                           <span className="country-info-card-principal-text04 width100">
-                            <input type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' />
+                            <input type="text" name="imgUrl" id="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder='Image url' className='width100' required />
                           </span>
                         </div>
                       </div>
@@ -331,7 +340,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame002">
                               <span className="country-info-card-principal-text07">
                                 <span>
-                                  <input type="text" name="capital" id="capital" onChange={handleChange} placeholder='Capital' value={formData.capital} />
+                                  <input type="text" name="capital" id="capital" onChange={handleChange} placeholder='Capital' value={formData.capital} required />
                                 </span>
                               </span>
                             </div>
@@ -353,7 +362,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame004">
                               <span className="country-info-card-principal-text11">
                                 <span>
-                                  <input type="number" name="population" id="population" onChange={handleChange} placeholder='Population' value={formData.population} />
+                                  <input type="number" name="population" id="population" onChange={handleChange} placeholder='Population' value={formData.population} required />
                                 </span>
                               </span>
                             </div>
@@ -375,7 +384,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame006">
                               <span className="country-info-card-principal-text15">
                                 <span>
-                                  <input type="text" name="currencyCode" id="currencyCode" onChange={handleChange} placeholder='Currency Code' value={formData.currencyCode} />
+                                  <input type="text" name="currencyCode" id="currencyCode" onChange={handleChange} placeholder='Currency Code' value={formData.currencyCode} required />
                                 </span>
                               </span>
                             </div>
@@ -397,7 +406,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame008">
                               <span className="country-info-card-principal-text19">
                                 <span>
-                                  <input type="text" name="languageCode" id="languageCode" value={formData.languageCode} onChange={handleChange} placeholder='Language Code' />
+                                  <input type="text" name="languageCode" id="languageCode" value={formData.languageCode} onChange={handleChange} placeholder='Language Code' required />
                                 </span>
                               </span>
                             </div>
@@ -419,7 +428,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame010">
                               <span className="country-info-card-principal-text23">
                                 <span>
-                                  <input type="text" maxLength={1} name="currencySymbol" id="currencySymbol" value={formData.currencySymbol} onChange={handleChange} placeholder='Currecy Symbol' />
+                                  <input type="text" maxLength={1} name="currencySymbol" id="currencySymbol" value={formData.currencySymbol} onChange={handleChange} placeholder='Currecy Symbol' required />
                                 </span>
                               </span>
                             </div>
@@ -441,7 +450,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame012">
                               <span className="country-info-card-principal-text26">
                                 <span>
-                                  <input type="text" name="countryCode" id="countryCode" value={formData.countryCode} onChange={handleChange} placeholder='Country Code' />
+                                  <input type="text" name="countryCode" id="countryCode" value={formData.countryCode} onChange={handleChange} placeholder='Country Code' required />
                                 </span>
                               </span>
                             </div>
