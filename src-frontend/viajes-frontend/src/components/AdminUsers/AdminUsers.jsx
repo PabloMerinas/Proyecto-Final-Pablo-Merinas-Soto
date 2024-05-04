@@ -327,7 +327,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(country => country.country &&(
+                            {filteredItem.map(country => country.countryCode &&(
                                 <div id={country.country} key={country.country}>
                                     {generateCountry(country)}
                                 </div>
@@ -561,8 +561,8 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(attraction => attraction.attraction &&(
-                                <div id={attraction.attraction} key={attraction.attraction}>
+                            {filteredItem.map(attraction => attraction.category &&(
+                                <div id={attraction.attraction} key={attraction.attraction + attraction.id}>
                                     {generateAttraction(attraction)}
                                 </div>
                             ))}

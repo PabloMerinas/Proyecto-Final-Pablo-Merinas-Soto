@@ -13,10 +13,11 @@ export const Account = () => {
     }
     // Compruebo si es admin
     let isAdmin = false; // Por defecto, el usuario no es administrador
+    let isCustomer = false;
 
     if (activeUser) {
-        const activeUserRoles = activeUser.roles;
-        isAdmin = activeUserRoles.includes('ADMIN');
+        isAdmin = activeUser.roles.includes('ADMIN');
+        isCustomer = activeUser.roles.includes('CUSTOMER');
     }
 
     function generateItem(awesomeIco, title, description, link) {
@@ -66,11 +67,11 @@ export const Account = () => {
                 <div className="account-principal-nivel4-frame2">
                     {generateItem("fa-solid fa-user", "Personal info", "View my profile", "/personal")}
                     {isAdmin ? generateItem("fa-solid fa-user-tie", "Admin Dashboard", "View and manage all the modules", "/adminUsers") : null}
-                    {generateItem("fa-solid fa-mountain-sun", "Countries", "View all the countries", "/countries")}
-                    {generateItem("fa-solid fa-city", "Cities", "View all the cities", "/cities")}
-                    {generateItem("fa-solid fa-compass", "Attractions", "View all the attractions", "/attractions")}
-                    {generateItem("fa-solid fa-clipboard-list", "Visited Places", "View my visited places", "/visitedPlaces")}
-                    {generateItem("fa-solid fa-envelope", "Notifications", "View my notifications", "/notifications")}
+                    {isCustomer ? generateItem("fa-solid fa-mountain-sun", "Countries", "View all the countries", "/countries") : null}
+                    {isCustomer ? generateItem("fa-solid fa-city", "Cities", "View all the cities", "/cities") : null}
+                    {isCustomer ? generateItem("fa-solid fa-compass", "Attractions", "View all the attractions", "/attractions") : null}
+                    {isCustomer ? generateItem("fa-solid fa-clipboard-list", "Visited Places", "View my visited places", "/visitedPlaces") : null}
+                    {isCustomer ? generateItem("fa-solid fa-envelope", "Notifications", "View my notifications", "/notifications") : null}
                     {generateItem("fa-solid fa-right-from-bracket", "Log out", "Log out my session", "/")}
                 </div>
                 <div className="account-principal-nivel4-frame1">

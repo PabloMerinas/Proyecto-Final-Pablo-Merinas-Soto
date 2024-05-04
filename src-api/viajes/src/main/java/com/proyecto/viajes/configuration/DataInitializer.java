@@ -30,9 +30,11 @@ public class DataInitializer {
 	public void initializeData() {
 		insertarUsuario("admin", "admin", "admin@admin.com", false, false, "adminImg.png");
 		insertarUsuario("user", "user", "user@user.com", false, false, "");
+		insertarUsuario("super", "super", "super@super.com", false, false, "root-user.png");
 		insertarRol("admin", "ADMIN");
-		insertarRol("admin", "CUSTOMER");
 		insertarRol("user", "CUSTOMER");
+		insertarRol("super", "CUSTOMER");
+		insertarRol("super", "ADMIN");
 
 		// Insertar países de prueba
 		executeSqlStatement(

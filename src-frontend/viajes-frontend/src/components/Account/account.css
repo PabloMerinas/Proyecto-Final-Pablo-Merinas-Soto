@@ -71,7 +71,7 @@
 .account-principal-nivel4-frame2 {
     gap: 12px;
     width: 960px;
-    height: 421px;
+    /* height: 421px; */
     display: flex;
     flex-wrap: wrap;
     padding: 16px;
