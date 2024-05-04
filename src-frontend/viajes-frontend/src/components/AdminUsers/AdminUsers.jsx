@@ -209,7 +209,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(user => (
+                            {filteredItem.map(user => user.username && (
                                 <div id={user.username} key={user.username}>
                                     {generateUser(user, activeUser.username)}
                                 </div>
@@ -327,7 +327,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(country => (
+                            {filteredItem.map(country => country.country &&(
                                 <div id={country.country} key={country.country}>
                                     {generateCountry(country)}
                                 </div>
@@ -444,8 +444,8 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(city => (
-                                <div id={city.city} key={city.city}>
+                            {filteredItem.map(city => city.population &&(
+                                <div id={city.city} key={city.population}>
                                     {generateCity(city)}
                                 </div>
                             ))}
@@ -561,7 +561,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(attraction => (
+                            {filteredItem.map(attraction => attraction.attraction &&(
                                 <div id={attraction.attraction} key={attraction.attraction}>
                                     {generateAttraction(attraction)}
                                 </div>
@@ -730,13 +730,10 @@ export const AdminUsers = () => {
 
 
     // Dependiendo de la opcion seleccionada mostrara un componente u otro.
-    let ComponentToRender; // Este sera el componente que se va a renderizar.
+    let ComponentToRender = null; // Este sera el componente que se va a renderizar.
     let textToFind; // Este es el texto para el la barra de busqueda.
     switch (selectedOption) {
         case 1:
-            if(optionData.length != 0){
-                setOptionData([]);
-            }
             ComponentToRender = AdminUser;
             textToFind = 'users';
             break;

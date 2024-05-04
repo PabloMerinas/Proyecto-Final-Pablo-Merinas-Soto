@@ -103,8 +103,9 @@ export const VisitedPlaces = () => {
                 <div className="visited-places-visited-place-grid">
                     {countries.length > 0 ? (
                         countries.map(country => (
-                            <div key={country.country}>
-                                {generateCard(country.details.imgUrl, country.details.country, `/countries/${country.details.country}`)}                            </div>
+                            <div key={country.details.country}>
+                                {generateCard(country.details.imgUrl, country.details.country, `/countries/${country.details.country}`)}
+                            </div>
                         ))
                     ) : (
                         <p>No countries visited.</p>
@@ -114,7 +115,7 @@ export const VisitedPlaces = () => {
                 <div className="visited-places-visited-place-grid">
                     {cities.length > 0 ? (
                         cities.map(city => (
-                            <div key={city.city}>
+                            <div key={city.details.city}>
                                 {generateCard(city.details.imgUrl, city.details.city, `/cities/${city.details.city}`)}
                             </div>
                         ))
@@ -126,7 +127,7 @@ export const VisitedPlaces = () => {
                 <div className="visited-places-visited-place-grid">
                     {attractions.length > 0 ? (
                         attractions.map(attraction => (
-                            <div key={attraction.attraction}>
+                            <div key={attraction.details.attraction}>
                                 {generateCard(attraction.details.imgUrl, attraction.details.attraction, `/attractions/${attraction.details.attraction}`)}
                             </div>
                         ))
