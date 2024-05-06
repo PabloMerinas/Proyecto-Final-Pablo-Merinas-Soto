@@ -66,11 +66,11 @@ public class DataInitializer {
 				+ "");
 
 		// Insertar notificaciones
-		executeSqlStatement("INSERT INTO T_NOTIFICATION (id, title, time_ago)\n" + "VALUES \n"
-				+ "(1, 'New Destination: Kyoto, Japan', '6h ago'),\n"
-				+ "(2, 'New Attraction: Golden Pavilion', '2h ago'),\n"
-				+ "(3, 'Local Event: Oia Sunset', '2 days ago'),\n"
-				+ "(4, 'New Attraction: Amoudi Bay', '1 day ago');\n" + "");
+		executeSqlStatement("INSERT INTO T_NOTIFICATION (title, time_ago)\n" + "VALUES \n"
+				+ "('New Destination: Kyoto, Japan', '6h ago'),\n"
+				+ "('New Attraction: Golden Pavilion', '2h ago'),\n"
+				+ "('Local Event: Oia Sunset', '2 days ago'),\n"
+				+ "('New Attraction: Amoudi Bay', '1 day ago');\n" + "");
 
 		// Insertar notificaciones
 		executeSqlStatement(

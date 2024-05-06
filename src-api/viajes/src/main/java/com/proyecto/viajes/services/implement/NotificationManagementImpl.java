@@ -32,4 +32,19 @@ public class NotificationManagementImpl implements NotificationManagementI {
 		return notificationRepository.findById(id);
 	}
 
+	@Override
+	public NotificationEntity save(NotificationEntity userNotification) {
+		return notificationRepository.save(userNotification);
+	}
+
+	@Override
+	public void addUserToNotification(String username, Long notificationId) {
+		notificationRepository.addUserToNotification(username, notificationId);
+	}
+
+	@Override
+	public NotificationEntity findByTitleAndTimeAgo(String title, String timeAgo) {
+		return notificationRepository.findByTitleAndTimeAgo(title, timeAgo);
+	}
+
 }

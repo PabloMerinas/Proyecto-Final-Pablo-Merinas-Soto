@@ -47,4 +47,14 @@ public class UserManagementImpl implements UserManagementI {
 		userRepository.delete(userEntity);
 	}
 
+	@Override
+	public List<UserEntity> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public void saveAll(List<UserEntity> users) {
+		userRepository.saveAll(users);
+	}
+
 }

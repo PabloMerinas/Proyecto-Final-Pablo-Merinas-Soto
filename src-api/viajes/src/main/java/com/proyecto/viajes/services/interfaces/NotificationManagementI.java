@@ -33,4 +33,15 @@ public interface NotificationManagementI {
 	 */
 	Optional<NotificationEntity> findById(Long id);
 
+	/**
+	 * Guarda una notificación.
+	 * @param userNotification Notificacion.
+	 * @return Notificacion guardada.
+	 */
+	NotificationEntity save(NotificationEntity notificationEntity);
+
+	void addUserToNotification(String username, Long notificationId);
+
+	NotificationEntity findByTitleAndTimeAgo(String title, String timeAgo);
+
 }

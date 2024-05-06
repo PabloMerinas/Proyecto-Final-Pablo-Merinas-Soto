@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,5 +89,35 @@ public class NotificationRestController {
 					.body("Error deleting the notificacion: " + e.getMessage());
 		}
 	}
+
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/addNotificationToAllUsers")
+	public ResponseEntity<String> addNotificationToAllUsers(@RequestBody NotificationEntity notificationEntity) {
+	    try {
+	        // Guarda la notificación
+	        NotificationEntity savedNotification = notificationRepository.save(notificationEntity);
+
+	        // Recupera las usuarios
+	        List<UserEntity> users = userRepository.getAllUsers();
+
+	        // Agregar la notificacion a cada usuario
+	        for (UserEntity user : users) {
+	            user.getNotification().add(savedNotification);
+
+	            // Agrega la relacion de usuario - notificacion
+	            Long notificationId = savedNotification.getId();
+	            notificationRepository.addUserToNotification(user.getUsername(), notificationId);
+
+	            // Guardar el usuario actualizado
+	            userRepository.save(user);
+	        }
+
+	        return ResponseEntity.ok("Notification added to all users successfully");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Error adding notification to all users: " + e.getMessage());
+	    }
+	}
+
 
 }
