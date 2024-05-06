@@ -26,7 +26,7 @@ export const PersonalInfo = () => {
             try {
                 let username = activeUser.username;
                 // Actualizo la cookie con el nuevo valor y actualizo el user
-                await updateUser({ username, password, email, phone, bio });
+                await updateUser({ username, password, email, phone, bio }, activeUser.roles.includes("ADMIN"), activeUser.roles.includes("CUSTOMER"));
 
                 activeUser.email = email;
                 activeUser.phone = phone;

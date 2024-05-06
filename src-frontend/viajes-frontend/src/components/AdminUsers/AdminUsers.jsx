@@ -12,7 +12,7 @@ import { CountryInfoCard } from '../Options/Country/CountryInfoCard';
 import { CityInfoCard } from '../Options/City/CityInfoCard';
 import { AttractionInfoCard } from '../Options/Attraction/AttractionInfoCard';
 import { UserInfoCard } from './UserInfoCard';
-
+import { Link } from 'react-router-dom';
 import './adminUsers.css';
 
 export const AdminUsers = () => {
@@ -262,7 +262,14 @@ export const AdminUsers = () => {
                     <div className="users-principal-nivel10-frame010">
                         <span className="users-principal-text23">
                             <span className='admin-principal-options-icons'>
-                                <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(user, 'user')}></i>
+                                {user.username === activeUser.username ? ( // No quiero que pueda editarse a si mismo desde ese menú
+                                    <Link to={'/personal'} className='a-no-style'>
+                                        <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(user, 'user')}></i>
+                                    </Link>
+                                ) : (
+                                    <i className="fa-solid fa-pen-to-square" onClick={() => editDataItem(user, 'user')}></i>
+                                )}
+
                                 <i className="fa-solid fa-trash" onClick={() => deleteDataItem(user, 'user')}></i>
                             </span>
                         </span>
@@ -327,7 +334,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(country => country.countryCode &&(
+                            {filteredItem.map(country => country.countryCode && (
                                 <div id={country.country} key={country.country}>
                                     {generateCountry(country)}
                                 </div>
@@ -444,7 +451,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(city => city.population &&(
+                            {filteredItem.map(city => city.population && (
                                 <div id={city.city} key={city.population}>
                                     {generateCity(city)}
                                 </div>
@@ -561,7 +568,7 @@ export const AdminUsers = () => {
                             </div>
                         </div>
                         <div className="users-principal-nivel7-frame1">
-                            {filteredItem.map(attraction => attraction.category &&(
+                            {filteredItem.map(attraction => attraction.category && (
                                 <div id={attraction.attraction} key={attraction.attraction + attraction.id}>
                                     {generateAttraction(attraction)}
                                 </div>
@@ -658,7 +665,6 @@ export const AdminUsers = () => {
     }
     // Metodo para editar una fila sea del modulo que sea
     function editDataItem(item) {
-        // alert(JSON.stringify(item));
         switch (selectedOption) {
             case 1:
                 setUserToEdit(item);
@@ -776,7 +782,7 @@ export const AdminUsers = () => {
 
 
 
-    return(
+    return (
         <div className="users-principal-container">
             <div className="users-principal-users">
                 <div className="users-principal-nivel4-frame0">

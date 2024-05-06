@@ -270,22 +270,15 @@ public class UserRestController {
 			
 			// Elimino primero los roles asociados a ese usuario
 			roleRepository.deleteRolesFromUsername(existingUser.getUsername());
-			//PRUEBAS
-			// ELiminar rol por id
 			
-			
-			System.out.println("ADMIN:" + roleRepository.checkRoleFromUsername("ADMIN",existingUser.getUsername()));
-			System.out.println("CUSTOMER:" + roleRepository.checkRoleFromUsername("CUSTOMER",existingUser.getUsername()));
-//			// Agregar roles si corresponde
+			// Agregar roles si corresponde
 			if (isCustomer && !roleRepository.checkRoleFromUsername("CUSTOMER", updatedUser.getUsername())) {
-				System.out.println("Añade customer");
 				UserRoleEntity customer = new UserRoleEntity();
 				customer.setUsername(updatedUser.getUsername());
 				customer.setRole("CUSTOMER");
 				roleRepository.save(customer);
 			}
 			if (isAdmin && !roleRepository.checkRoleFromUsername("ADMIN", updatedUser.getUsername())) {
-				System.out.println("Añade admin");
 				UserRoleEntity admin = new UserRoleEntity();
 				admin.setUsername(updatedUser.getUsername());
 				admin.setRole("ADMIN");

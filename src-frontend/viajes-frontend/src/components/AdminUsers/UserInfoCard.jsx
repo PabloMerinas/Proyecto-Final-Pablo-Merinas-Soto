@@ -12,7 +12,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
     phone: '',
     bio: '',
     isAdmin: false,
-    isCustomer: true
+    isCustomer: false
   });
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
         email: userToEdit.email,
         password: '',
         username: userToEdit.username,
-        phone: userToEdit.phone,
-        bio: userToEdit.bio,
+        phone: userToEdit.phone ? userToEdit.phone : '',
+        bio: userToEdit.bio ? userToEdit.bio : '',
         isAdmin: userToEdit.roles.includes("ADMIN"),
         isCustomer: userToEdit.roles.includes("CUSTOMER")
       })
