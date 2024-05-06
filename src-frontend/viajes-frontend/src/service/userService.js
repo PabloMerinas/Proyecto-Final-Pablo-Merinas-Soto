@@ -200,7 +200,7 @@ export const deleteUserByUsername = async (username) => {
 
 export const addUserFromAdmin = async (userData, isAdmin, isCustomer) => {
   try {
-    const response = axios.post('http://localhost:8080/v1/user/addUserFromAdmin', userData, {
+    const response = await axios.post('http://localhost:8080/v1/user/addUserFromAdmin', userData, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -208,12 +208,17 @@ export const addUserFromAdmin = async (userData, isAdmin, isCustomer) => {
         isAdmin: isAdmin,
         isCustomer: isCustomer
       }
-      
+
     });
 
-    return response;
+    return response.data;
   } catch (error) {
-    console.error('Error adding the user:', error.message);
-
+    if (error.response && error.response.status === 409) {
+      console.error("User already exists:", error);
+      throw new Error('The User already exists.');
+    } else {
+      console.error("Error adding the User:", error);
+      throw new Error('Error adding the User');
+    }
   }
 }

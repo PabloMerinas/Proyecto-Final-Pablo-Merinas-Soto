@@ -20,6 +20,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
     countryCode: ''
   });
   const [sendToAllUsers, setSendToAllUsers] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -56,6 +57,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrorMessage('');
   };
   // Gestiona el envio del formulario
   const handleSubmit = (e) => {
@@ -65,41 +67,42 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
       addCountry(formData)
         .then(response => {
           setSelectedOption(2);
+          if (sendToAllUsers) { // Si se ha marcado la opcion, agrega la notificacion a todos los usuarios
+            const currentDate = new Date(); // Creo la fecha y la formateo
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = currentDate.getFullYear();
+            const hours = currentDate.getHours().toString().padStart(2, '0');
+            const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+
+            const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
+
+            const notificationToAdd = {
+              title: 'New country: ' + formData.country,
+              timeAgo: 'Added at: ' + formattedDate
+            };
+            // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
+            const notificationCounter = document.getElementsByClassName('notification-counter')[0];
+            let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
+
+            if (isNaN(notificationCount)) {
+              notificationCount = 0;
+            }
+            notificationCount++; // Sumo
+            notificationCounter.style.visibility = 'visible';
+            notificationCounter.innerText = notificationCount;
+
+            addNotificationToAllUsers(notificationToAdd)
+              .catch(error => {
+                console.error('Error adding notification to all users:', error);
+              });
+          }
         })
         .catch(error => {
-          console.error('Error adding the country:', error);
+          setErrorMessage(error.message);
         });
 
-      if (sendToAllUsers) { // Si se ha marcado la opcion, agrega la notificacion a todos los usuarios
-        const currentDate = new Date(); // Creo la fecha y la formateo
-        const day = currentDate.getDate().toString().padStart(2, '0');
-        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        const year = currentDate.getFullYear();
-        const hours = currentDate.getHours().toString().padStart(2, '0');
-        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
 
-        const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
-
-        const notificationToAdd = {
-          title: 'New country: ' + formData.country,
-          timeAgo: 'Added at: ' + formattedDate
-        };
-        // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
-        const notificationCounter = document.getElementsByClassName('notification-counter')[0];
-        let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
-
-        if (isNaN(notificationCount)) {
-          notificationCount = 0;
-        }
-        notificationCount++; // Sumo
-        notificationCounter.style.visibility = 'visible'; 
-        notificationCounter.innerText = notificationCount;
-
-        addNotificationToAllUsers(notificationToAdd)
-          .catch(error => {
-            console.error('Error adding notification to all users:', error);
-          });
-      }
     } else { // En caso contrario llama a editar el pais
       updateCountry(countryToEdit.country, formData)
         .then(response => {
@@ -515,6 +518,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
             </div>
           </div>
         </form>
+        <div className="error-messages" style={{ marginTop: '10px', color: 'red' }}>{errorMessage}</div>
       </div>
     )
   }

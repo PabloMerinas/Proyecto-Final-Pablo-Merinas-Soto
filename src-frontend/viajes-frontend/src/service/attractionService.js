@@ -77,9 +77,14 @@ export const addAttraction = async (attractionData, cityName) => {
         });
 
         return response.data;
-    } catch (error) {
-        console.error("Error adding atracción:", error);
-        throw new Error('Error adding atracción');
+    } catch (error)  {
+        if (error.response && error.response.status === 409) {
+            console.error("Attraction already exists:", error);
+            throw new Error('The Attraction already exists.');
+        } else {
+            console.error("Error adding the Attraction:", error);
+            throw new Error('Error adding the Attraction');
+        }
     }
 };
 

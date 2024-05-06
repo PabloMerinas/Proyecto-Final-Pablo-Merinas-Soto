@@ -74,8 +74,13 @@ export const addCountry = async (newCountryData) => {
         return response.data;
 
     } catch (error) {
-        console.error("Error adding the country:", error);
-        throw new Error('Error adding the country');
+        if (error.response && error.response.status === 409) {
+            console.error("Country already exists:", error);
+            throw new Error('The country already exists.');
+        } else {
+            console.error("Error adding the country:", error);
+            throw new Error('Error adding the country');
+        }
     }
 }
 
