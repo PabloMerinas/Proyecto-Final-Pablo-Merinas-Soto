@@ -87,7 +87,17 @@ export const PersonalInfo = () => {
     // Maneja el evento para cambiar la imagen
     const handlePhotoChange = (event) => {
         const selectedFile = event.target.files[0];
-        setFile(selectedFile);
+            // Verificar si la extensión es .png
+            if (selectedFile) {
+            // Obtener la extensión del archivo
+            const extension = selectedFile.name.split('.').pop().toLowerCase();
+            if (extension === 'png') {
+                setFile(selectedFile);
+            } else {
+                alert('Please select a PNG file.');
+                event.target.value = null;
+            }
+        }
     }
 
     // Manejar boton de pulsar enter para guardar
@@ -127,6 +137,7 @@ export const PersonalInfo = () => {
                                     onKeyDown={handleKeyDown}
                                     readOnly={!editMode}
                                     placeholder={placeholder}
+                                    accept=".png"
                                 />
                             </span>
                         </div>
