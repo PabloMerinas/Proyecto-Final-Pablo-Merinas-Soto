@@ -35,3 +35,21 @@ export const deleteNotificationById = async (token, id) => {
         throw error;
     }
 }
+
+// Método para agregar una notificación a todos los usuarios
+export const addNotificationToAllUsers = async (notificationData) => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.post('http://localhost:8080/v1/notification/addNotificationToAllUsers', notificationData, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        // Devuelve la respuesta
+        return response.data;
+    } catch (error) {
+        console.error('Error adding notification to all users:', error);
+        throw error;
+    }
+};

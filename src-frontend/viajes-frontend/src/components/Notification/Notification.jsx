@@ -130,14 +130,14 @@ export const Notification = () => {
         const updatedNotifications = notifications.filter(notification => notification.id !== id);
         setNotifications(updatedNotifications);
 
-        // Actualizo el contador
         if (updatedNotifications.length !== 0) {
-          notificationCounter.innerHTML = updatedNotifications.length
+          notificationCounter.innerHTML = updatedNotifications.length;
+          notificationCounter.style.visibility = 'visible'; 
         } else {
           notificationCounter.innerHTML = '';
-          notificationCounter.style.border = 'none';
-          notificationCounter.style.backgroundColor = 'transparent';
+          notificationCounter.style.visibility = 'hidden'; 
         }
+        
       } catch (error) {
         console.error('Error deleting the notification:', error);
       }

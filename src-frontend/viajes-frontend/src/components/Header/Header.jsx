@@ -22,7 +22,13 @@ export const Header = () => {
         const authToken = localStorage.getItem('authToken');
         const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
         const count = Array.isArray(notificationsData) ? notificationsData.length : 0;
+        
+        if(count === 0){
+          const notificationCounter = document.getElementsByClassName('notification-counter')[0];
+          notificationCounter.style.visibility = 'hidden'; 
+        }
         setNotificationCount(count);
+
       } catch (error) {
         console.error('Error counting notifications:', error);
       }
@@ -30,6 +36,7 @@ export const Header = () => {
 
     countNotifications();
   }, [activeUser]);
+  
 
   // Función para mostrar los popup
   const handlePopupToggle = () => {
@@ -179,7 +186,7 @@ export const Header = () => {
         {generateSimpleNotification(notifications)}
       </div>);
   };
-
+  const notificationCounter = document.getElementsByClassName('notification-counter')[0]
 
   return (
     <div className="header">
@@ -239,9 +246,7 @@ export const Header = () => {
           {activeUser.roles.includes('CUSTOMER') && (
             <div className="nivel-frame-11">
               <div className="nivel-frame-12" onClick={handlePopupSimpleNotification}>
-                {notificationCount > 0 && (
-                  <div className="notification-counter">{notificationCount}</div>
-                )}
+                <div className="notification-counter">{notificationCount !== 0 ? notificationCount : null}</div>
                 <div className="nivel-frame-13">
                   <div className="vector-wrapper">
                     <i className="fa-solid fa-bell"></i>

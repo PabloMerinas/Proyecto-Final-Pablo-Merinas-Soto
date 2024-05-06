@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './countryInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
 import { getCountryByCountry, addCountry, updateCountry } from '../../../service/countryService';
+import { addNotificationToAllUsers } from '../../../service/notificationService';
 
 // Metodo que me genera la tarjeta del pais con toda la información, le defino los valores por defecto
 export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
@@ -18,7 +19,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
     currencySymbol: '',
     countryCode: ''
   });
-
+  const [sendToAllUsers, setSendToAllUsers] = useState(false);
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -68,6 +69,37 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
         .catch(error => {
           console.error('Error adding the country:', error);
         });
+
+      if (sendToAllUsers) { // Si se ha marcado la opcion, agrega la notificacion a todos los usuarios
+        const currentDate = new Date(); // Creo la fecha y la formateo
+        const day = currentDate.getDate().toString().padStart(2, '0');
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        const year = currentDate.getFullYear();
+        const hours = currentDate.getHours().toString().padStart(2, '0');
+        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+
+        const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
+
+        const notificationToAdd = {
+          title: 'New country: ' + formData.country,
+          timeAgo: 'Added at: ' + formattedDate
+        };
+        // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
+        const notificationCounter = document.getElementsByClassName('notification-counter')[0];
+        let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
+
+        if (isNaN(notificationCount)) {
+          notificationCount = 0;
+        }
+        notificationCount++; // Sumo
+        notificationCounter.style.visibility = 'visible'; 
+        notificationCounter.innerText = notificationCount;
+
+        addNotificationToAllUsers(notificationToAdd)
+          .catch(error => {
+            console.error('Error adding notification to all users:', error);
+          });
+      }
     } else { // En caso contrario llama a editar el pais
       updateCountry(countryToEdit.country, formData)
         .then(response => {
@@ -462,7 +494,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                 </div>
               </div>
               <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
-                <input type="checkbox" id="myCheckbox" name="myCheckbox" />
+                <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)} />
                 <label htmlFor="myCheckbox">  Send notifications to all user</label>
               </div>
               <button type="submit" id='submitCountry'>
