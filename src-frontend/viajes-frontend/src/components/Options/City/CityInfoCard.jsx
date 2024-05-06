@@ -3,6 +3,7 @@ import './cityInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
 import { getCityByCity, addCity, updateCity } from '../../../service/cityService';
 import { getCountries } from '../../../service/countryService';
+import { addNotificationToAllUsers } from '../../../service/notificationService';
 
 export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
     const { city: cityParam } = useParams();
@@ -18,6 +19,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
         country: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
+    const [sendToAllUsers, setSendToAllUsers] = useState(false);
 
     // Gestiona los cambios del texto
     const handleChange = (e) => {
@@ -277,7 +279,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                                             <select name="country" id="country" value={formData.country} onChange={handleChange} required>
                                                                 <option value="" disabled>Select a country</option>
                                                                 {countries.map(country => (
-                                                                    <option key={country.id} value={country.country}>{country.country}</option>
+                                                                    <option key={country.country + country.capital} value={country.country}>{country.country}</option>
                                                                 ))}
                                                             </select>
 
@@ -358,7 +360,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                     </div>
                                 </div>
                                 <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
-                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" />
+                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)}/>
                                     <label htmlFor="myCheckbox">  Send notifications to all user</label>
                                 </div>
                                 <button type="submit" style={{ display: 'contents' }}>
@@ -391,6 +393,36 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
             addCity(formData.country, formData)
                 .then(response => {
                     setSelectedOption(3);
+                    if (sendToAllUsers) { // Si se ha marcado la opcion, agrega la notificacion a todos los usuarios
+                        const currentDate = new Date(); // Creo la fecha y la formateo
+                        const day = currentDate.getDate().toString().padStart(2, '0');
+                        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                        const year = currentDate.getFullYear();
+                        const hours = currentDate.getHours().toString().padStart(2, '0');
+                        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+            
+                        const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
+            
+                        const notificationToAdd = {
+                          title: 'New city: ' + formData.city,
+                          timeAgo: 'Added at: ' + formattedDate
+                        };
+                        // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
+                        const notificationCounter = document.getElementsByClassName('notification-counter')[0];
+                        let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
+            
+                        if (isNaN(notificationCount)) {
+                          notificationCount = 0;
+                        }
+                        notificationCount++; // Sumo
+                        notificationCounter.style.visibility = 'visible';
+                        notificationCounter.innerText = notificationCount;
+            
+                        addNotificationToAllUsers(notificationToAdd)
+                          .catch(error => {
+                            console.error('Error adding notification to all users:', error);
+                          });
+                      }
                 })
                 .catch(error => {
                     setErrorMessage(error.message);

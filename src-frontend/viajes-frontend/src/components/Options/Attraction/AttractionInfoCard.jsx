@@ -3,6 +3,7 @@ import './attractionInfoCard.css';
 import { Link, useParams } from 'react-router-dom';
 import { addAttraction, getAttractionByAttraction, updateAttraction } from "../../../service/attractionService";
 import { getCities } from "../../../service/cityService";
+import { addNotificationToAllUsers } from "../../../service/notificationService";
 
 export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
     const { attraction: attractionParam } = useParams();
@@ -16,6 +17,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
         price: '',
         city: ''
     });
+    const [sendToAllUsers, setSendToAllUsers] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     // Gestiona los cambios del texto
@@ -281,7 +283,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                                             <select name="city" id="city" value={formData.city} onChange={handleChange} required>
                                                                 <option value="" disabled>Select a city</option>
                                                                 {cities.map(city => (
-                                                                    <option key={city.id} value={city.city}>{city.city}</option>
+                                                                    <option key={city.id + city.airportCode} value={city.city}>{city.city}</option>
                                                                 ))}
                                                             </select>
                                                         </span>
@@ -342,7 +344,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                     </div>
                                 </div>
                                 <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
-                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" />
+                                    <input type="checkbox" id="myCheckbox" name="myCheckbox"  onChange={(e) => setSendToAllUsers(e.target.checked)} />
                                     <label htmlFor="myCheckbox">  Send notifications to all user</label>
                                 </div>
                                 <button type="submit" style={{ display: 'contents' }}>
@@ -386,6 +388,36 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
             addAttraction(formData, formData.city)
                 .then(response => {
                     setSelectedOption(4);
+                    if (sendToAllUsers) { // Si se ha marcado la opcion, agrega la notificacion a todos los usuarios
+                        const currentDate = new Date(); // Creo la fecha y la formateo
+                        const day = currentDate.getDate().toString().padStart(2, '0');
+                        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                        const year = currentDate.getFullYear();
+                        const hours = currentDate.getHours().toString().padStart(2, '0');
+                        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+            
+                        const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
+            
+                        const notificationToAdd = {
+                          title: 'New attraction: ' + formData.attraction,
+                          timeAgo: 'Added at: ' + formattedDate
+                        };
+                        // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
+                        const notificationCounter = document.getElementsByClassName('notification-counter')[0];
+                        let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
+            
+                        if (isNaN(notificationCount)) {
+                          notificationCount = 0;
+                        }
+                        notificationCount++; // Sumo
+                        notificationCounter.style.visibility = 'visible';
+                        notificationCounter.innerText = notificationCount;
+            
+                        addNotificationToAllUsers(notificationToAdd)
+                          .catch(error => {
+                            console.error('Error adding notification to all users:', error);
+                          });
+                      }
                 })
                 .catch(error => {
                     setErrorMessage(error.message);
