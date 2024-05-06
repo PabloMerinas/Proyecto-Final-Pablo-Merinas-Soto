@@ -5,7 +5,6 @@ import { deleteMyUser } from "../../service/userService";
 import { useAuth } from '../../authContext/autContext';
 import { Navigate } from 'react-router-dom';
 import { uploadProfileImageByUsername } from "../../service/userService";
-import { act } from "react";
 
 export const PersonalInfo = () => {
     // Defino las variables y sus valores por defecto
@@ -27,7 +26,7 @@ export const PersonalInfo = () => {
             try {
                 let username = activeUser.username;
                 // Actualizo la cookie con el nuevo valor y actualizo el user
-                await updateUser(token, { username, password, email, phone, bio });
+                await updateUser({ username, password, email, phone, bio });
 
                 activeUser.email = email;
                 activeUser.phone = phone;

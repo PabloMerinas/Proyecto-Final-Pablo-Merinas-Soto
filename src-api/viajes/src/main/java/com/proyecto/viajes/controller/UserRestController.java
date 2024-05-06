@@ -243,11 +243,14 @@ public class UserRestController {
 	 * "ROLE_ADMIN"
 	 * 
 	 * @param updatedUser Usuario con los datos actualizados.
+	 * @param isAdmin Determina el rol de admin.
+	 * @param isCustomer Determina el rol de customer.
 	 * @return RespondeEntity con la respuesta de la operación.
 	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@PutMapping
-	public ResponseEntity<String> updateUser(@RequestBody UserEntity updatedUser) {
+	public ResponseEntity<String> updateUser(@RequestBody UserEntity updatedUser, @RequestParam boolean isAdmin,
+			@RequestParam boolean isCustomer) {
 		Optional<UserEntity> existingUserOptional = userRepository.findByUsername(updatedUser.getUsername());
 
 		if (existingUserOptional.isPresent()) {
@@ -264,7 +267,30 @@ public class UserRestController {
 				existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
 			}
 
-			// Compruebo los roles 
+			
+			// Elimino primero los roles asociados a ese usuario
+			roleRepository.deleteRolesFromUsername(existingUser.getUsername());
+			//PRUEBAS
+			// ELiminar rol por id
+			
+			
+			System.out.println("ADMIN:" + roleRepository.checkRoleFromUsername("ADMIN",existingUser.getUsername()));
+			System.out.println("CUSTOMER:" + roleRepository.checkRoleFromUsername("CUSTOMER",existingUser.getUsername()));
+//			// Agregar roles si corresponde
+			if (isCustomer && !roleRepository.checkRoleFromUsername("CUSTOMER", updatedUser.getUsername())) {
+				System.out.println("Añade customer");
+				UserRoleEntity customer = new UserRoleEntity();
+				customer.setUsername(updatedUser.getUsername());
+				customer.setRole("CUSTOMER");
+				roleRepository.save(customer);
+			}
+			if (isAdmin && !roleRepository.checkRoleFromUsername("ADMIN", updatedUser.getUsername())) {
+				System.out.println("Añade admin");
+				UserRoleEntity admin = new UserRoleEntity();
+				admin.setUsername(updatedUser.getUsername());
+				admin.setRole("ADMIN");
+				roleRepository.save(admin);
+			}
 
 			// Guardar los cambios
 			userRepository.save(existingUser);

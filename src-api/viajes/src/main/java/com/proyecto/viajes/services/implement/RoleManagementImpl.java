@@ -9,12 +9,16 @@ import com.proyecto.viajes.persistence.repositories.RoleRepositoryI;
 import com.proyecto.viajes.security.UserRoleEntity;
 import com.proyecto.viajes.services.interfaces.RoleManagementI;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class RoleManagementImpl implements RoleManagementI {
 
+	/**
+	 * Inyección de dependencias
+	 */
 	private RoleRepositoryI roleRepository;
 
 	@Override
@@ -42,11 +46,28 @@ public class RoleManagementImpl implements RoleManagementI {
 
 	/**
 	 * Metodo para eliminar todos los roles de un usuario
+	 * @param username Usuario del que se eliminan los roles.
 	 */
 	@Override
+	@Transactional
 	public void deleteRolesFromUsername(String username) {
-		List<UserRoleEntity> userRolesToDelete = roleRepository.findByUsername(username);
-		roleRepository.deleteAll(userRolesToDelete);
+		roleRepository.deleteByUsername(username);
+	}
+
+	@Override
+	public boolean checkRoleFromUsername(String role, String username) {
+		List<UserRoleEntity> roles = roleRepository.findByUsername(username);
+		for (UserRoleEntity userRoleEntity : roles) {
+			if (userRoleEntity.getRole().equals(role)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		roleRepository.deleteById(id);
 	}
 
 }

@@ -12,7 +12,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
     phone: '',
     bio: '',
     isAdmin: false,
-    isCustomer: false
+    isCustomer: true
   });
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
         isCustomer: userToEdit.roles.includes("CUSTOMER")
       })
     }
-  }, [])
+  }, [userToEdit])
 
   // Gestiona los cambios del texto
   const handleChange = (e) => {
@@ -37,6 +37,11 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
   };
   function handleSubmit(e) {
     e.preventDefault();
+    // Compruebo que al menos haya un rol seleccionado
+    if (!(formData.isAdmin || formData.isCustomer)) {
+      alert("You must select at least one role.");
+      return;
+    }
 
     if (!userToEdit) {
       // Agrego el usuario
@@ -50,9 +55,9 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
     }
     else {
       // Edito el usuario
-      updateUser(formData)
+      updateUser(formData, formData.isAdmin, formData.isCustomer)
         .then(response => {
-          setSelectedOption(4);
+          setSelectedOption(1);
         })
         .catch(error => {
           console.error('Error updating the user:', error);
@@ -62,7 +67,10 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
   // Cambios en el check del rol
   const handleRoleChange = (e) => {
     const { name, checked } = e.target;
-    setFormData({ ...formData, [name]: checked });
+    setFormData({
+      ...formData,
+      [name]: checked
+    });
   };
 
   return (
@@ -120,11 +128,24 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                 </span>
               </div>
-              <div className="user-info-card-roles" style={{ marginTop: '20px' }}> ROLES <br></br>
-                <input type="checkbox" id="adminRole" name="isAdmin" checked={formData.isAdmin} onChange={handleRoleChange} />
+              <div className="user-info-card-roles" style={{ marginTop: '20px' }}>
+                ROLES <br></br>
+                <input
+                  type="checkbox"
+                  id="adminRole"
+                  name="isAdmin"
+                  checked={formData.isAdmin}
+                  onChange={handleRoleChange}
+                />
                 <label htmlFor="adminRole" style={{ marginLeft: '10px' }}>ADMIN</label>
                 <br />
-                <input type="checkbox" id="customerRole" name="isCustomer" checked={formData.isCustomer} onChange={handleRoleChange} />
+                <input
+                  type="checkbox"
+                  id="customerRole"
+                  name="isCustomer"
+                  checked={formData.isCustomer}
+                  onChange={handleRoleChange}
+                />
                 <label htmlFor="customerRole" style={{ marginLeft: '10px' }}>CUSTOMER</label>
               </div>
 

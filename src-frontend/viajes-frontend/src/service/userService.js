@@ -51,12 +51,18 @@ export const getUserInfo = async (token) => {
 };
 
 // Funcion para actualizar un usuario
-export const updateUser = async (token, newData) => {
+export const updateUser = async (newData, isAdmin, isCustomer) => {
   try {
+    const token = localStorage.getItem('authToken');
+    delete newData.isAdmin;
+    delete newData.isCustomer;
     // Realizar la solicitud para actualizar el usuario
     const response = await axios.put('http://localhost:8080/v1/user', newData, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+      }, params: {
+        isAdmin: isAdmin,
+        isCustomer: isCustomer
       }
     });
 
@@ -188,7 +194,7 @@ export const deleteUserByUsername = async (username) => {
     });
   } catch (error) {
     console.error('Error deleting user: ', error);
-    throw new Error('Error deleting user: ' + error.response.data);
+    throw new Error('Error deleting user: ' + error);
   }
 }
 
@@ -204,6 +210,8 @@ export const addUserFromAdmin = async (userData, isAdmin, isCustomer) => {
       }
       
     });
+
+    return response;
   } catch (error) {
     console.error('Error adding the user:', error.message);
 

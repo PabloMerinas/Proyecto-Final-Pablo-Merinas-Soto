@@ -32,10 +32,24 @@ public interface RoleManagementI {
 	void save(UserRoleEntity r);
 
 	/**
+	 * Comprueba si un usuario tiene un rol.
+	 * @param role Rol.
+	 * @param username Usuario.
+	 * @return Respuesta.
+	 */
+	boolean checkRoleFromUsername(String role, String username);
+
+	/**
 	 * Elimina todos los roles asociados a un usuario específico.
 	 * 
 	 * @param username El nombre de usuario del cual se eliminarán los roles.
 	 */
 	void deleteRolesFromUsername(String username);
+
+	/**
+	 * Elimina un rol por su id.
+	 * @param id Id del rol a eliminar.
+	 */
+	void deleteById(Long id);
 
 }
