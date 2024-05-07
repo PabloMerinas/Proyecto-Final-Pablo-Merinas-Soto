@@ -452,7 +452,7 @@ export const AdminUsers = () => {
                         </div>
                         <div className="users-principal-nivel7-frame1">
                             {filteredItem.map(city => city.city && city.airportCode && (
-                                <div key={city.city + city.airportCode}>
+                                <div id={city.city} key={city.city + city.airportCode}>
                                     {generateCity(city)}
                                 </div>
                             ))}

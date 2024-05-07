@@ -108,14 +108,6 @@ public class DataInitializer {
 						('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/6a/30/c5/fabulosa-arquitectura.jpg?w=1200&h=-1&s=1', 'Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');
 						""");
 
-		// Insertar attracciones
-		executeSqlStatement(
-				"""
-						INSERT INTO t_attraction (img_Url, attraction, info, city_id, category) VALUES
-						('https://assets.buendiatours.com/s3fs-public/styles/highlight_large/public/2021-03/vista-area-catedral-sevilla-guia-viaje-buendiatours.jpg.webp?VersionId=KKEluqtl1ZYJZghaN8aMLdNCmhxshFKS&itok=lFzk9Dsc', 'Catedral de Sevilla', 'Catedral gótica más grande del mundo', 1, 'CHURCH'),
-						('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/6a/30/c5/fabulosa-arquitectura.jpg?w=1200&h=-1&s=1', 'Parque de María Luisa', 'Famoso parque público en Sevilla', 1, 'NATIONAL_PARK');
-						""");
-
 		// Insertar notificaciones
 		executeSqlStatement("""
 				INSERT INTO T_NOTIFICATION (title, time_ago)
