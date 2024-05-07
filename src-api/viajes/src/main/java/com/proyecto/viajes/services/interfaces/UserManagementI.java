@@ -55,15 +55,17 @@ public interface UserManagementI {
 	 * @return Una lista de todos los usuarios.
 	 */
 	List<UserEntity> findAll();
-	
+
 	/**
 	 * Recupera todos los usuarios.
+	 * 
 	 * @return Lista con los usuarios.
 	 */
 	public List<UserEntity> getAllUsers();
 
 	/**
 	 * Guarda todos los usuarios.
+	 * 
 	 * @param users Lista de los usuarios a guardar.
 	 */
 	void saveAll(List<UserEntity> users);

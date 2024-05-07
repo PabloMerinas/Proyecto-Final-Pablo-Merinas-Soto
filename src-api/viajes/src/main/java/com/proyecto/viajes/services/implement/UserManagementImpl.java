@@ -11,10 +11,16 @@ import com.proyecto.viajes.services.interfaces.UserManagementI;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa la interfaz de UserManagementI.
+ */
 @Service
 @AllArgsConstructor
 public class UserManagementImpl implements UserManagementI {
 
+	/**
+	 * Repositorio de UserEntity.
+	 */
 	private UserRepositoryI userRepository;
 
 	@Override

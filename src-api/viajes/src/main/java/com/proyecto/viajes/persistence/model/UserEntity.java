@@ -78,6 +78,5 @@ public class UserEntity {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "userNotified", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<NotificationEntity> notification;
-	
 
 }

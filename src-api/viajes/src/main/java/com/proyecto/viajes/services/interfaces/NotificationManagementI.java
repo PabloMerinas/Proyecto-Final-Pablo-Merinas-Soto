@@ -35,13 +35,27 @@ public interface NotificationManagementI {
 
 	/**
 	 * Guarda una notificación.
+	 * 
 	 * @param userNotification Notificacion.
 	 * @return Notificacion guardada.
 	 */
 	NotificationEntity save(NotificationEntity notificationEntity);
 
+	/**
+	 * Añade una notificacion a un usuario.
+	 * 
+	 * @param username       Usuario.
+	 * @param notificationId Id de la notificacion.
+	 */
 	void addUserToNotification(String username, Long notificationId);
 
+	/**
+	 * Busca una notificacion por su titulo y su tiempo.
+	 * 
+	 * @param title   Titulo de la notificación.
+	 * @param timeAgo Fecha de la notificacion.
+	 * @return Notificación encontrada.
+	 */
 	NotificationEntity findByTitleAndTimeAgo(String title, String timeAgo);
 
 }

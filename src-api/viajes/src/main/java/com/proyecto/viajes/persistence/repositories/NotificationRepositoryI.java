@@ -15,16 +15,24 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface NotificationRepositoryI extends JpaRepository<NotificationEntity, Long> {
 
-    /**
-     * Agrega la relación entre una notificación y un usuario mediante una consulta personalizada.
-     * 
-     * @param username El nombre de usuario.
-     * @param notificationId El ID de la notificación.
-     */
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES (:username, :notificationId)", nativeQuery = true)
-    void addUserToNotification(String username, Long notificationId);
+	/**
+	 * Agrega la relación entre una notificación y un usuario mediante una consulta
+	 * personalizada.
+	 * 
+	 * @param username       El nombre de usuario.
+	 * @param notificationId El ID de la notificación.
+	 */
+	@Transactional
+	@Modifying
+	@Query(value = "INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES (:username, :notificationId)", nativeQuery = true)
+	void addUserToNotification(String username, Long notificationId);
 
+	/**
+	 * Busca una notificación por su titulo y su fecha.
+	 * 
+	 * @param title   Titulo de la notificacion.
+	 * @param timeAgo Fecha de la notificacion.
+	 * @return Notificacion encontrada.
+	 */
 	NotificationEntity findByTitleAndTimeAgo(String title, String timeAgo);
 }

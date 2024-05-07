@@ -33,7 +33,8 @@ public interface RoleManagementI {
 
 	/**
 	 * Comprueba si un usuario tiene un rol.
-	 * @param role Rol.
+	 * 
+	 * @param role     Rol.
 	 * @param username Usuario.
 	 * @return Respuesta.
 	 */
@@ -48,6 +49,7 @@ public interface RoleManagementI {
 
 	/**
 	 * Elimina un rol por su id.
+	 * 
 	 * @param id Id del rol a eliminar.
 	 */
 	void deleteById(Long id);

@@ -18,9 +18,19 @@ import lombok.AllArgsConstructor;
  */
 public class DataInitializer {
 
+	/**
+	 * JdbcTemplate para interactuar con la base de datos.
+	 */
 	private final JdbcTemplate jdbcTemplate;
 
+	/**
+	 * Repositorio de usuarios.
+	 */
 	private UserRepositoryI usuarioRepository;
+
+	/**
+	 * Codificador de contraseñas.
+	 */
 	private PasswordEncoder passwordEncoder;
 
 	/**
@@ -67,10 +77,9 @@ public class DataInitializer {
 
 		// Insertar notificaciones
 		executeSqlStatement("INSERT INTO T_NOTIFICATION (title, time_ago)\n" + "VALUES \n"
-				+ "('New Destination: Kyoto, Japan', '6h ago'),\n"
-				+ "('New Attraction: Golden Pavilion', '2h ago'),\n"
-				+ "('Local Event: Oia Sunset', '2 days ago'),\n"
-				+ "('New Attraction: Amoudi Bay', '1 day ago');\n" + "");
+				+ "('New Destination: Kyoto, Japan', '6h ago'),\n" + "('New Attraction: Golden Pavilion', '2h ago'),\n"
+				+ "('Local Event: Oia Sunset', '2 days ago'),\n" + "('New Attraction: Amoudi Bay', '1 day ago');\n"
+				+ "");
 
 		// Insertar notificaciones
 		executeSqlStatement(

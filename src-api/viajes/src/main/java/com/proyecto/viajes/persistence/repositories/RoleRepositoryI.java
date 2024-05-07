@@ -28,12 +28,11 @@ public interface RoleRepositoryI extends JpaRepository<UserRoleEntity, Long> {
 
 	/**
 	 * Elimina los roles de un usuario.
+	 * 
 	 * @param username Usuario del que se eliminan los roles.
 	 */
-    @Modifying
-    @Query("DELETE FROM UserRoleEntity u WHERE u.username = :username")
-    void deleteByUsername(@Param("username") String username);
-
-
+	@Modifying
+	@Query("DELETE FROM UserRoleEntity u WHERE u.username = :username")
+	void deleteByUsername(@Param("username") String username);
 
 }

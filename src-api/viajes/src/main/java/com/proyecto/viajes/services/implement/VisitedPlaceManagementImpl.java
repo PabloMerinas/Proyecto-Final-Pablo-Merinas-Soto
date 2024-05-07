@@ -15,10 +15,16 @@ import com.proyecto.viajes.services.interfaces.VisitedPlaceManagementI;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa los metodos de la interfaz VisitedPlaceManagementI
+ */
 @Service
 @AllArgsConstructor
 public class VisitedPlaceManagementImpl implements VisitedPlaceManagementI {
 
+	/**
+	 * Repositorio de VisitedPlace.
+	 */
 	private VisitedPlaceRepositoryI visitedPlaceRepository;
 
 	@Override

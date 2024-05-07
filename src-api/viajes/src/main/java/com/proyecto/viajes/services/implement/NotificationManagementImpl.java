@@ -11,10 +11,16 @@ import com.proyecto.viajes.services.interfaces.NotificationManagementI;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa la interfaz de NotificationEntity.
+ */
 @Service
 @AllArgsConstructor
 public class NotificationManagementImpl implements NotificationManagementI {
 
+	/**
+	 * Repositorio de NotificationEntity.
+	 */
 	private NotificationRepositoryI notificationRepository;
 
 	@Override

@@ -90,34 +90,39 @@ public class NotificationRestController {
 		}
 	}
 
+	/**
+	 * Añade una notificación a todos los usuarios existentes.
+	 * 
+	 * @param notificationEntity Notificación que se va a añadir.
+	 * @return Respuesta de la operación.
+	 */
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/addNotificationToAllUsers")
 	public ResponseEntity<String> addNotificationToAllUsers(@RequestBody NotificationEntity notificationEntity) {
-	    try {
-	        // Guarda la notificación
-	        NotificationEntity savedNotification = notificationRepository.save(notificationEntity);
+		try {
+			// Guarda la notificación
+			NotificationEntity savedNotification = notificationRepository.save(notificationEntity);
 
-	        // Recupera las usuarios
-	        List<UserEntity> users = userRepository.getAllUsers();
+			// Recupera las usuarios
+			List<UserEntity> users = userRepository.getAllUsers();
 
-	        // Agregar la notificacion a cada usuario
-	        for (UserEntity user : users) {
-	            user.getNotification().add(savedNotification);
+			// Agregar la notificacion a cada usuario
+			for (UserEntity user : users) {
+				user.getNotification().add(savedNotification);
 
-	            // Agrega la relacion de usuario - notificacion
-	            Long notificationId = savedNotification.getId();
-	            notificationRepository.addUserToNotification(user.getUsername(), notificationId);
+				// Agrega la relacion de usuario - notificacion
+				Long notificationId = savedNotification.getId();
+				notificationRepository.addUserToNotification(user.getUsername(), notificationId);
 
-	            // Guardar el usuario actualizado
-	            userRepository.save(user);
-	        }
+				// Guardar el usuario actualizado
+				userRepository.save(user);
+			}
 
-	        return ResponseEntity.ok("Notification added to all users successfully");
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body("Error adding notification to all users: " + e.getMessage());
-	    }
+			return ResponseEntity.ok("Notification added to all users successfully");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error adding notification to all users: " + e.getMessage());
+		}
 	}
-
 
 }

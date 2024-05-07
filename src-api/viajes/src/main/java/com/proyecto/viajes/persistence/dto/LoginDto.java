@@ -12,7 +12,7 @@ public class LoginDto {
 	 * Usuario.
 	 */
 	private String username;
-	
+
 	/**
 	 * Contraseña.
 	 */

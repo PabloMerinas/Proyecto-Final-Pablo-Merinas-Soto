@@ -127,10 +127,7 @@ public class UserRestController {
 			newUser.setActive(true);
 			userRepository.save(newUser);
 
-			String jwt = jwtUtils.create(u.getUsername());
-			HttpHeaders headers = new HttpHeaders();
-
-			// Le agrego el rol que le paso
+			// Le agrego los roles que le paso
 			if (isCustomer) {
 				UserRoleEntity customer = new UserRoleEntity();
 				customer.setUsername(u.getUsername());
@@ -243,8 +240,8 @@ public class UserRestController {
 	 * "ROLE_ADMIN"
 	 * 
 	 * @param updatedUser Usuario con los datos actualizados.
-	 * @param isAdmin Determina el rol de admin.
-	 * @param isCustomer Determina el rol de customer.
+	 * @param isAdmin     Determina el rol de admin.
+	 * @param isCustomer  Determina el rol de customer.
 	 * @return RespondeEntity con la respuesta de la operación.
 	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
@@ -267,10 +264,9 @@ public class UserRestController {
 				existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
 			}
 
-			
 			// Elimino primero los roles asociados a ese usuario
 			roleRepository.deleteRolesFromUsername(existingUser.getUsername());
-			
+
 			// Agregar roles si corresponde
 			if (isCustomer && !roleRepository.checkRoleFromUsername("CUSTOMER", updatedUser.getUsername())) {
 				UserRoleEntity customer = new UserRoleEntity();

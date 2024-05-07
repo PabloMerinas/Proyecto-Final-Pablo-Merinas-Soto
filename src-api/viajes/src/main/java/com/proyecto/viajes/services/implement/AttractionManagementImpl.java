@@ -10,10 +10,16 @@ import com.proyecto.viajes.services.interfaces.AttractionManagementI;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa la interfaz de AttractionEntity.
+ */
 @Service
 @AllArgsConstructor
 public class AttractionManagementImpl implements AttractionManagementI {
 
+	/**
+	 * Repositorio de AttractionEntity.
+	 */
 	private AttractionRepositoryI attractionRepository;
 
 	@Override

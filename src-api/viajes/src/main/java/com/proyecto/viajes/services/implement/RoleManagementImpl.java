@@ -12,6 +12,9 @@ import com.proyecto.viajes.services.interfaces.RoleManagementI;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa la interfaz de RoleEntity.
+ */
 @Service
 @AllArgsConstructor
 public class RoleManagementImpl implements RoleManagementI {
@@ -44,10 +47,6 @@ public class RoleManagementImpl implements RoleManagementI {
 		roleRepository.save(r);
 	}
 
-	/**
-	 * Metodo para eliminar todos los roles de un usuario
-	 * @param username Usuario del que se eliminan los roles.
-	 */
 	@Override
 	@Transactional
 	public void deleteRolesFromUsername(String username) {

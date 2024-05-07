@@ -10,10 +10,16 @@ import com.proyecto.viajes.services.interfaces.CityManagementI;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Servicio que implementa la interfaz de CityEntity.
+ */
 @Service
 @AllArgsConstructor
 public class CityManagementImpl implements CityManagementI {
 
+	/**
+	 * Repositorio de CityEntity.
+	 */
 	private CityRepositoryI cityRepository;
 
 	@Override
