@@ -2,6 +2,8 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -32,6 +34,11 @@ import lombok.AllArgsConstructor;
 public class AttractionRestController {
 
 	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AttractionRestController.class);
+
+	/**
 	 * Inyección de dependencia.
 	 */
 	private AttractionManagementImpl attractionRepository;
@@ -55,6 +62,7 @@ public class AttractionRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping()
 	public List<AttractionEntity> getAttractions() {
+		LOGGER.info("Se recuperan las atracciones");
 		return attractionRepository.findAll();
 	}
 
@@ -93,6 +101,7 @@ public class AttractionRestController {
 			}
 			// Eliminar la atracción
 			attractionRepository.delete(attractionToDelete);
+			LOGGER.info("Se ha eliminado la atracción: {}", attractionToDelete);
 			return ResponseEntity.ok().body("Atracción eliminada correctamente");
 		} else {
 			// Si la atracción no existe, devolver la respuesta

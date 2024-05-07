@@ -82,10 +82,10 @@ public class CityRestController {
 				visitedPlaceRepository.save(visitedPlace);
 			}
 			for (AttractionEntity attractionToDeleteVisitedPlaces : cityToDelete.getAttractions()) {
-				List<VisitedPlaceEntity> AttractionVisitedPlacesToDelete = visitedPlaceRepository
+				List<VisitedPlaceEntity> attractionVisitedPlacesToDelete = visitedPlaceRepository
 						.findByAttraction(attractionToDeleteVisitedPlaces);
 				// Eliminar la relación entre los lugares visitados y la atracción
-				for (VisitedPlaceEntity visitedPlace : AttractionVisitedPlacesToDelete) {
+				for (VisitedPlaceEntity visitedPlace : attractionVisitedPlacesToDelete) {
 					visitedPlace.setAttraction(null);
 					visitedPlaceRepository.save(visitedPlace);
 				}

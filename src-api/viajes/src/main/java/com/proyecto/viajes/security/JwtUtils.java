@@ -3,6 +3,8 @@ package com.proyecto.viajes.security;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -15,11 +17,12 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
  */
 @Component
 public class JwtUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
 	/**
 	 * Clave secreta para la generacion
 	 */
-	private static final String SECRET_KEY = "pablo_merinas";
+	private static final String SECRET_KEY = "h&2QKjDq^S5PZ%mL@9b!8FgUr3NtWxYp";
 
 	/**
 	 * Algoritmo de generacion.
@@ -48,6 +51,7 @@ public class JwtUtils {
 			JWT.require(ALGORITHM).build().verify(jwt);
 			return true;
 		} catch (JWTVerificationException e) {
+            LOGGER.error("JwtUtils | validateJwtToken | JWT token is invalid: {}", e.getMessage());
 			return false;
 		}
 	}

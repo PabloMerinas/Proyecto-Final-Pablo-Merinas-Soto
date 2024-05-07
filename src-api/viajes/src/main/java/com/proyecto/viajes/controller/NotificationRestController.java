@@ -57,14 +57,9 @@ public class NotificationRestController {
 	@GetMapping("/getNotificationsByUsername")
 	public List<NotificationEntity> getNotificationByUsernam(String username) {
 		// Buscar el usuario por nombre de usuario
-		Optional<UserEntity> user = userRepository.findByUsername(username);
+	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+	    return userOptional.map(UserEntity::getNotification).orElse(Collections.emptyList());
 
-		if (user != null) {
-			// Obtener las notificaciones del usuario
-			return user.get().getNotification();
-		} else {
-			return Collections.emptyList();
-		}
 	}
 
 	/**

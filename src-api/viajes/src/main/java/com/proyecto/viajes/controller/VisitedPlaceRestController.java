@@ -38,6 +38,16 @@ import lombok.AllArgsConstructor;
 public class VisitedPlaceRestController {
 
 	/**
+	 * Constante con el texto El lugar no existe.
+	 */
+	private static final String EL_LUGAR_NO_EXISTE = "El lugar no existe";
+
+	/**
+	 * Constante con el texto place
+	 */
+	private static final String PLACE = "place";
+
+	/**
 	 * Inyección de dependencia de VititedPlaceManagementImpl.
 	 */
 	private VisitedPlaceManagementImpl visitedPlaceRepository;
@@ -92,13 +102,13 @@ public class VisitedPlaceRestController {
 			Map<String, Object> placeInfo = new HashMap<>();
 			// Determinar el tipo de lugar visitado y su ID correspondiente
 			if (visitedPlace.getCountry() != null) {
-				placeInfo.put("place", "country");
+				placeInfo.put(PLACE, "country");
 				placeInfo.put("id", visitedPlace.getCountry().getId());
 			} else if (visitedPlace.getCity() != null) {
-				placeInfo.put("place", "city");
+				placeInfo.put(PLACE, "city");
 				placeInfo.put("id", visitedPlace.getCity().getId());
 			} else if (visitedPlace.getAttraction() != null) {
-				placeInfo.put("place", "attraction");
+				placeInfo.put(PLACE, "attraction");
 				placeInfo.put("id", visitedPlace.getAttraction().getId());
 			}
 			placeInfo.put("visitedPlaceId", visitedPlace.getId());
@@ -131,21 +141,21 @@ public class VisitedPlaceRestController {
 		if (countryId != null) {
 			country = countryRepository.findById(countryId);
 			if (country == null)
-				return ResponseEntity.badRequest().body("El lugar no existe");
+				return ResponseEntity.badRequest().body(EL_LUGAR_NO_EXISTE);
 		}
 
 		CityEntity city = null;
 		if (cityId != null) {
 			city = cityRepository.findById(cityId);
 			if (city == null)
-				return ResponseEntity.badRequest().body("El lugar no existe");
+				return ResponseEntity.badRequest().body(EL_LUGAR_NO_EXISTE);
 		}
 
 		AttractionEntity attraction = null;
 		if (attractionId != null) {
 			attraction = attractionRepository.findById(attractionId);
 			if (attraction == null)
-				return ResponseEntity.badRequest().body("El lugar no existe");
+				return ResponseEntity.badRequest().body(EL_LUGAR_NO_EXISTE);
 		}
 
 		// Verificar si el lugar ya está marcado como visitado

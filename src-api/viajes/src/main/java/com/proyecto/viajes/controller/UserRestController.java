@@ -39,6 +39,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserRestController {
 
+	
+	private static final String ADMIN_TEXT = "ADMIN";
+	private static final String CUSTOMER_TEXT = "CUSTOMER";
+	
 	/**
 	 * Inyección de dependencia de UserManagementImpl.
 	 */
@@ -102,7 +106,7 @@ public class UserRestController {
 			// Le agrego el rol por defecto: CUSTOMER
 			UserRoleEntity customer = new UserRoleEntity();
 			customer.setUsername(u.getUsername());
-			customer.setRole("CUSTOMER");
+			customer.setRole(CUSTOMER_TEXT);
 			roleRepository.save(customer);
 
 			// Devuelvo en el header el token, asi al registrar y acceder ya tiene
@@ -131,13 +135,13 @@ public class UserRestController {
 			if (isCustomer) {
 				UserRoleEntity customer = new UserRoleEntity();
 				customer.setUsername(u.getUsername());
-				customer.setRole("CUSTOMER");
+				customer.setRole(CUSTOMER_TEXT);
 				roleRepository.save(customer);
 			}
 			if (isAdmin) {
 				UserRoleEntity admin = new UserRoleEntity();
 				admin.setUsername(u.getUsername());
-				admin.setRole("ADMIN");
+				admin.setRole(ADMIN_TEXT);
 				roleRepository.save(admin);
 			}
 
@@ -268,16 +272,16 @@ public class UserRestController {
 			roleRepository.deleteRolesFromUsername(existingUser.getUsername());
 
 			// Agregar roles si corresponde
-			if (isCustomer && !roleRepository.checkRoleFromUsername("CUSTOMER", updatedUser.getUsername())) {
+			if (isCustomer && !roleRepository.checkRoleFromUsername(CUSTOMER_TEXT, updatedUser.getUsername())) {
 				UserRoleEntity customer = new UserRoleEntity();
 				customer.setUsername(updatedUser.getUsername());
-				customer.setRole("CUSTOMER");
+				customer.setRole(CUSTOMER_TEXT);
 				roleRepository.save(customer);
 			}
-			if (isAdmin && !roleRepository.checkRoleFromUsername("ADMIN", updatedUser.getUsername())) {
+			if (isAdmin && !roleRepository.checkRoleFromUsername(ADMIN_TEXT, updatedUser.getUsername())) {
 				UserRoleEntity admin = new UserRoleEntity();
 				admin.setUsername(updatedUser.getUsername());
-				admin.setRole("ADMIN");
+				admin.setRole(ADMIN_TEXT);
 				roleRepository.save(admin);
 			}
 
@@ -357,7 +361,7 @@ public class UserRestController {
 			// Eliminar al usuario
 			userRepository.delete(userOptional.get());
 
-			return ResponseEntity.ok().body("Usuario eliminado correctamente");
+			return ResponseEntity.ok().body("Usuario eliminado");
 		} else {
 			// Si el usuario no existe, devolver la respuesta
 			return ResponseEntity.notFound().build();

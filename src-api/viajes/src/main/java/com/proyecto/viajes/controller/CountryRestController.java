@@ -87,32 +87,50 @@ public class CountryRestController {
 				visitedPlaceRepository.save(visitedPlace);
 			}
 
-			// Obtener la lista de ciudades asociadas al país
-			List<CityEntity> citiesToDelete = countryToDelete.getCities();
-
-			// Eliminar los visitedPlaces asociados a las ciudades del país
-			for (CityEntity city : citiesToDelete) {
-				List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByCity(city);
-				for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
-					visitedPlace.setCity(null);
-					visitedPlaceRepository.save(visitedPlace);
-				}
-
-				// Eliminar las atracciones asociadas a la ciudad
-				for (AttractionEntity attractionToDelete : city.getAttractions()) {
-					List<VisitedPlaceEntity> attractionVisitedPlacesToDelete = visitedPlaceRepository
-							.findByAttraction(attractionToDelete);
-					for (VisitedPlaceEntity visitedPlace : attractionVisitedPlacesToDelete) {
-						visitedPlace.setAttraction(null);
-						visitedPlaceRepository.save(visitedPlace);
-					}
-				}
-			}
+			deleteAsociateCitiesToCountry(countryToDelete);
 			// Eliminar el país
 			countryRepository.delete(countryToDelete);
 			return ResponseEntity.ok().body("País eliminado correctamente");
 		} else {
 			return ResponseEntity.notFound().build();
+		}
+	}
+
+	/**
+	 * Elimina las ciudades de un pais.
+	 * 
+	 * @param countryToDelete Pais.
+	 */
+	private void deleteAsociateCitiesToCountry(CountryEntity countryToDelete) {
+		// Obtener la lista de ciudades asociadas al país
+		List<CityEntity> citiesToDelete = countryToDelete.getCities();
+
+		// Eliminar los visitedPlaces asociados a las ciudades del país
+		for (CityEntity city : citiesToDelete) {
+			List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByCity(city);
+			for (VisitedPlaceEntity visitedPlace : visitedPlacesToDelete) {
+				visitedPlace.setCity(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
+
+			deleteAsociateAttractionToCity(city);
+		}
+	}
+
+	/**
+	 * Elimina las attracciones asocidadas a una ciudad.
+	 * 
+	 * @param city Ciudad.
+	 */
+	private void deleteAsociateAttractionToCity(CityEntity city) {
+		// Eliminar las atracciones asociadas a la ciudad
+		for (AttractionEntity attractionToDelete : city.getAttractions()) {
+			List<VisitedPlaceEntity> attractionVisitedPlacesToDelete = visitedPlaceRepository
+					.findByAttraction(attractionToDelete);
+			for (VisitedPlaceEntity visitedPlace : attractionVisitedPlacesToDelete) {
+				visitedPlace.setAttraction(null);
+				visitedPlaceRepository.save(visitedPlace);
+			}
 		}
 	}
 

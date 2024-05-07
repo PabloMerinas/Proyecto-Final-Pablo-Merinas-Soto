@@ -92,7 +92,10 @@ public class FileRestController {
 			}
 
 			// Guarda el archivo en el servidor
-			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+			String fileName = file.getOriginalFilename();
+			if (fileName != null) {
+				fileName = StringUtils.cleanPath(fileName);
+			}
 			String uploadDir = "./src/main/resources/profile-images";
 			Path uploadPath = Paths.get(uploadDir);
 
@@ -100,12 +103,7 @@ public class FileRestController {
 				Files.createDirectories(uploadPath);
 			}
 
-			try (InputStream inputStream = file.getInputStream()) {
-				Path filePath = uploadPath.resolve(fileName);
-				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException ex) {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-			}
+			saveImage(file, fileName, uploadPath);
 
 			// Actualiza la URL de la imagen en la base de datos
 			UserEntity user = userRepository.findByUsername(username)
@@ -118,6 +116,22 @@ public class FileRestController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
 		}
+	}
+
+	/**
+	 * @param file
+	 * @param fileName
+	 * @param uploadPath
+	 * @return
+	 */
+	private ResponseEntity<String> saveImage(MultipartFile file, String fileName, Path uploadPath) {
+		try (InputStream inputStream = file.getInputStream()) {
+			Path filePath = uploadPath.resolve(fileName);
+			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+		}
+		return null;
 	}
 
 }
