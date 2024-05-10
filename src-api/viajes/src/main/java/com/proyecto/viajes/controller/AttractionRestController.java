@@ -62,7 +62,6 @@ public class AttractionRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping()
 	public List<AttractionEntity> getAttractions() {
-		LOGGER.info("Se recuperan las atracciones");
 		return attractionRepository.findAll();
 	}
 
@@ -75,7 +74,11 @@ public class AttractionRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping("/getAttractionByAttraction")
 	public AttractionEntity getAttractionByAttraction(@RequestParam String attraction) {
-		return attractionRepository.findByAttraction(attraction);
+		AttractionEntity attractionEntity = attractionRepository.findByAttraction(attraction);
+		if (attractionEntity == null) {
+			LOGGER.error("No se encontró ninguna atracción con el nombre: {}", attraction);
+		}
+		return attractionEntity;
 	}
 
 	/**
@@ -130,14 +133,17 @@ public class AttractionRestController {
 			// Buscar la ciudad por su nombre
 			CityEntity city = cityRepository.findByCity(cityName);
 			if (city == null) {
+	            LOGGER.error("La ciudad especificada no fue encontrada: {}", cityName);
 				return ResponseEntity.badRequest().body("La ciudad especificada no fue encontrada");
 			}
 			attractionEntity.setCity(city);
 
 			// Guardar la nueva atracción
 			attractionRepository.save(attractionEntity);
+			LOGGER.info("Attracción agregada correctamente: {}", attractionEntity);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Atracción agregada correctamente");
 		} else {
+	        LOGGER.error("Los datos de la atracción son nulos");
 			return ResponseEntity.badRequest().body("Los datos de la atracción son nulos");
 		}
 	}
@@ -169,8 +175,10 @@ public class AttractionRestController {
 
 			// Guardao
 			attractionRepository.save(existingAttraction);
+			LOGGER.info("Atracción actualizada correctamente: {}", existingAttraction);
 			return ResponseEntity.ok().body("Atracción actualizada correctamente");
 		} else {
+	        LOGGER.error("No se encontró ninguna atracción con el nombre: {}", updatedAttraction.getAttraction());
 			return ResponseEntity.notFound().build();
 		}
 	}

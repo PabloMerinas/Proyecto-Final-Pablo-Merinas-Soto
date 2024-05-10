@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/visitedPlaces")
 @AllArgsConstructor
 public class VisitedPlaceRestController {
+
+	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(VisitedPlaceRestController.class);
 
 	/**
 	 * Constante con el texto El lugar no existe.
@@ -82,6 +89,7 @@ public class VisitedPlaceRestController {
 	@PostMapping
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	public ResponseEntity<VisitedPlaceEntity> markAsVisited(@RequestBody VisitedPlaceEntity visitedPlace) {
+		LOGGER.info("Marcando lugar como visitado: {}", visitedPlace);
 		return ResponseEntity.ok(visitedPlace);
 	}
 
@@ -114,7 +122,6 @@ public class VisitedPlaceRestController {
 			placeInfo.put("visitedPlaceId", visitedPlace.getId());
 			result.add(placeInfo);
 		}
-
 		return ResponseEntity.ok(result);
 	}
 
@@ -167,8 +174,10 @@ public class VisitedPlaceRestController {
 		VisitedPlaceEntity visitedPlace = visitedPlaceRepository.markAsVisited(user, country, city, attraction);
 
 		if (visitedPlace != null) {
+			LOGGER.info("Marcando lugar como visitado por usuario: {}", username);
 			return ResponseEntity.ok("Lugar marcado como visitado correctamente");
 		} else {
+			LOGGER.error("No se pudo marcar el lugar como visitado");
 			return ResponseEntity.badRequest().body("No se pudo marcar el lugar como visitado");
 		}
 	}
@@ -188,7 +197,7 @@ public class VisitedPlaceRestController {
 
 		// Eliminar el lugar visitado
 		visitedPlaceRepository.delete(visitedPlace);
-
+		LOGGER.info("Lugar visitado eliminado correctamente");
 		return ResponseEntity.ok("Lugar visitado eliminado correctamente");
 	}
 

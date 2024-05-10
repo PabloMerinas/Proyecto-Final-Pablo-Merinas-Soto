@@ -2,6 +2,8 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -31,6 +33,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/country")
 @AllArgsConstructor
 public class CountryRestController {
+
+	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CountryRestController.class);
 
 	/**
 	 * Inyección de dependencia de CountryManagementImpl.
@@ -90,8 +97,10 @@ public class CountryRestController {
 			deleteAsociateCitiesToCountry(countryToDelete);
 			// Eliminar el país
 			countryRepository.delete(countryToDelete);
+			LOGGER.info("País eliminado correctamente: {}", countryToDelete);
 			return ResponseEntity.ok().body("País eliminado correctamente");
 		} else {
+			LOGGER.error("No se encontró el país a eliminar: {}", country);
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -147,12 +156,15 @@ public class CountryRestController {
 		if (countryEntity != null) {
 			// Verificar si el país ya existe
 			if (countryRepository.findByCountry(countryEntity.getCountry()) != null) {
+				LOGGER.error("El país ya existe: {}", countryEntity.getCountry());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("El país ya existe");
 			}
 			// Guardar el nuevo país
 			countryRepository.save(countryEntity);
+			LOGGER.info("País agregado correctamente: {}", countryEntity);
 			return ResponseEntity.status(HttpStatus.CREATED).body("País agregado correctamente");
 		} else {
+			LOGGER.error("Los datos del país son nulos");
 			return ResponseEntity.badRequest().body("Los datos del país son nulos");
 		}
 	}
@@ -173,6 +185,7 @@ public class CountryRestController {
 		if (countryToUpdate != null) {
 			if (!country.equals(updatedCountry.getCountry())
 					&& countryRepository.findByCountry(updatedCountry.getCountry()) != null) {
+				LOGGER.error("El nuevo nombre de país ya existe: {}", updatedCountry.getCountry());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("El nuevo nombre de país ya existe");
 			}
 
@@ -188,9 +201,10 @@ public class CountryRestController {
 
 			// Guardo los cambios
 			countryRepository.save(countryToUpdate);
-
+			LOGGER.info("País actualizado correctamente: {}", countryToUpdate.getCountry());
 			return ResponseEntity.ok().body("País actualizado correctamente");
 		} else {
+			LOGGER.error("No se encontró el país a actualizar: {}", country);
 			return ResponseEntity.notFound().build();
 		}
 	}

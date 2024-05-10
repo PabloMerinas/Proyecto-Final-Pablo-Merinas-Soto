@@ -22,7 +22,6 @@ public interface NotificationRepositoryI extends JpaRepository<NotificationEntit
 	 * @param username       El nombre de usuario.
 	 * @param notificationId El ID de la notificación.
 	 */
-	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES (:username, :notificationId)", nativeQuery = true)
 	void addUserToNotification(String username, Long notificationId);

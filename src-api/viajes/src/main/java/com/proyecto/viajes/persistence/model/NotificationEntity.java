@@ -43,4 +43,11 @@ public class NotificationEntity {
 	@JsonIgnore
 	@ManyToMany
 	private List<UserEntity> userNotified;
+
+	@Override
+	public String toString() {
+		return "NotificationEntity [" + (id != null ? "id=" + id + ", " : "")
+				+ (title != null ? "title=" + title + ", " : "") + (timeAgo != null ? "timeAgo=" + timeAgo : "") + "]";
+	}
+
 }

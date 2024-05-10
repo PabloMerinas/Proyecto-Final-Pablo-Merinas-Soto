@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +41,17 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserRestController {
 
-	
+	private static final String USUARIO_ACTUALIZADO_CORRECTAMENTE = "Usuario actualizado correctamente";
+	private static final String USUARIO_NO_ENCONTRADO = "Usuario {} no encontrado";
+	private static final String USUARIO_ELIMINADO_CORRECTAMENTE = "Usuario {} eliminado correctamente";
 	private static final String ADMIN_TEXT = "ADMIN";
 	private static final String CUSTOMER_TEXT = "CUSTOMER";
-	
+
+	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserRestController.class);
+
 	/**
 	 * Inyección de dependencia de UserManagementImpl.
 	 */
@@ -84,12 +93,14 @@ public class UserRestController {
 	 * 
 	 * @return ResponseEntity con un mensaje indicando el resultado de la operación.
 	 */
+
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserEntity u) {
 		Optional<UserEntity> existingUser = userRepository.findByUsername(u.getUsername());
 
 		if (existingUser.isPresent()) {
 			// El usuario ya existe en la base de datos
+			LOGGER.error("El usuario ya existe: {}", u.getUsername());
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe");
 		} else {
 			// El usuario no existe, se puede agregar a la base de datos
@@ -111,6 +122,7 @@ public class UserRestController {
 
 			// Devuelvo en el header el token, asi al registrar y acceder ya tiene
 			// identificado el usuario
+			LOGGER.info("Usuario creado: {}", newUser);
 			return ResponseEntity.ok().headers(headers).body(jwt);
 		}
 	}
@@ -122,6 +134,7 @@ public class UserRestController {
 
 		if (existingUser.isPresent()) {
 			// El usuario ya existe en la base de datos
+			LOGGER.error("El usuario ya existe: {}", u.getUsername());
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe");
 		} else {
 			UserEntity newUser = new UserEntity();
@@ -144,7 +157,7 @@ public class UserRestController {
 				admin.setRole(ADMIN_TEXT);
 				roleRepository.save(admin);
 			}
-
+			LOGGER.info("Usuario creado: {}", newUser);
 			return ResponseEntity.ok().body("Usuario añadido correctamente");
 		}
 
@@ -173,9 +186,9 @@ public class UserRestController {
 			finalUser.setActive(userOptional.get().getActive());
 
 		} else {
+			LOGGER.error("Usuario no encontrado para el token proporcionado: {}", token);
 			throw new NoSuchElementException("Usuario no encontrado para el token proporcionado");
 		}
-
 		return finalUser;
 	}
 
@@ -205,7 +218,6 @@ public class UserRestController {
 				roles.add(userRole.getRole());
 			}
 		}
-
 		return roles;
 	}
 
@@ -235,7 +247,6 @@ public class UserRestController {
 				roles.add(userRole.getRole());
 			}
 		}
-
 		return roles;
 	}
 
@@ -287,10 +298,11 @@ public class UserRestController {
 
 			// Guardar los cambios
 			userRepository.save(existingUser);
-
-			return ResponseEntity.ok().body("Usuario actualizado correctamente");
+			LOGGER.info(USUARIO_ACTUALIZADO_CORRECTAMENTE);
+			return ResponseEntity.ok().body(USUARIO_ACTUALIZADO_CORRECTAMENTE);
 		} else {
 			// Usuario no encontrado
+			LOGGER.error(USUARIO_NO_ENCONTRADO, updatedUser.getUsername());
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -325,10 +337,11 @@ public class UserRestController {
 
 			// Guardar los cambios
 			userRepository.save(existingUser);
-
-			return ResponseEntity.ok().body("Usuario actualizado correctamente");
+			LOGGER.info(USUARIO_ACTUALIZADO_CORRECTAMENTE);
+			return ResponseEntity.ok().body(USUARIO_ACTUALIZADO_CORRECTAMENTE);
 		} else {
 			// Usuario no encontrado
+			LOGGER.error(USUARIO_NO_ENCONTRADO, username);
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -346,9 +359,6 @@ public class UserRestController {
 		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 
 		if (userOptional.isPresent()) {
-			// Eliminar los roles asociados a ese usuario
-			roleRepository.deleteRolesFromUsername(username);
-
 			// Elimina sus lugares visitados
 			UserEntity user = userOptional.get();
 			List<VisitedPlaceEntity> visitedPlacesToDelete = visitedPlaceRepository.findByUser(user);
@@ -360,9 +370,10 @@ public class UserRestController {
 
 			// Eliminar al usuario
 			userRepository.delete(userOptional.get());
-
+			LOGGER.info(USUARIO_ELIMINADO_CORRECTAMENTE, username);
 			return ResponseEntity.ok().body("Usuario eliminado");
 		} else {
+			LOGGER.error(USUARIO_NO_ENCONTRADO, username);
 			// Si el usuario no existe, devolver la respuesta
 			return ResponseEntity.notFound().build();
 		}
@@ -382,14 +393,13 @@ public class UserRestController {
 			// Buscar al usuario por su nombre de usuario en la base de datos
 			Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 			if (userOptional.isPresent()) {
-				// Elimino primero los roles asociados a ese usuario
-				roleRepository.deleteRolesFromUsername(username);
-
 				// Si el usuario existe, eliminarlo
 				userRepository.delete(userOptional.get());
+				LOGGER.info(USUARIO_ELIMINADO_CORRECTAMENTE, username);
 				return ResponseEntity.ok().body("Usuario eliminado correctamente");
 			} else {
 				// Si el usuario no existe, devolver la respuesta
+				LOGGER.error(USUARIO_NO_ENCONTRADO, username);
 				return ResponseEntity.notFound().build();
 			}
 		} catch (Exception e) {
@@ -419,6 +429,7 @@ public class UserRestController {
 				// Eliminar al usuario
 				userRepository.delete(existingUser.get());
 
+				LOGGER.info(USUARIO_ELIMINADO_CORRECTAMENTE, existingUser.get().getUsername());
 				return ResponseEntity.ok().body("Usuario eliminado correctamente");
 			} else {
 				return ResponseEntity.notFound().build();

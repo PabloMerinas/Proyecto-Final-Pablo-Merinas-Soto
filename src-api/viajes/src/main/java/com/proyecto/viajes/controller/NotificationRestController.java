@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -32,6 +34,11 @@ import lombok.AllArgsConstructor;
 public class NotificationRestController {
 
 	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(NotificationRestController.class);
+
+	/**
 	 * Inyección de dependencia de NotificationManagementImpl.
 	 */
 	private NotificationManagementImpl notificationRepository;
@@ -57,8 +64,8 @@ public class NotificationRestController {
 	@GetMapping("/getNotificationsByUsername")
 	public List<NotificationEntity> getNotificationByUsernam(String username) {
 		// Buscar el usuario por nombre de usuario
-	    Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-	    return userOptional.map(UserEntity::getNotification).orElse(Collections.emptyList());
+		Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+		return userOptional.map(UserEntity::getNotification).orElse(Collections.emptyList());
 
 	}
 
@@ -75,13 +82,16 @@ public class NotificationRestController {
 			Optional<NotificationEntity> notification = notificationRepository.findById(id);
 			if (notification.isPresent()) {
 				notificationRepository.delete(notification.get());
-				return ResponseEntity.ok("Notification deleted successfully");
+				LOGGER.info("Notificación eliminada correctamente: {}", notification);
+				return ResponseEntity.ok("Notificación eliminada correctamente");
 			} else {
+				LOGGER.error("Notificación no encontrada para el ID proporcionado");
 				return ResponseEntity.notFound().build();
 			}
 		} catch (Exception e) {
+			LOGGER.error("Error al eliminar la notificación: {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error deleting the notificacion: " + e.getMessage());
+					.body("Error al eliminar la notificación: " + e.getMessage());
 		}
 	}
 
@@ -112,11 +122,12 @@ public class NotificationRestController {
 				// Guardar el usuario actualizado
 				userRepository.save(user);
 			}
-
-			return ResponseEntity.ok("Notification added to all users successfully");
+			LOGGER.info("Notificación añadida a todos los usuarios correctamente");
+			return ResponseEntity.ok("Notificación añadida a todos los usuarios correctamente");
 		} catch (Exception e) {
+			LOGGER.error("Error al añadir la notificación a todos los usuarios: {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error adding notification to all users: " + e.getMessage());
+					.body("Error al añadir la notificación a todos los usuarios: " + e.getMessage());
 		}
 	}
 

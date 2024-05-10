@@ -33,6 +33,6 @@ public interface RoleRepositoryI extends JpaRepository<UserRoleEntity, Long> {
 	 */
 	@Modifying
 	@Query("DELETE FROM UserRoleEntity u WHERE u.username = :username")
-	void deleteByUsername(@Param("username") String username);
+	void deleteRolesFromUsername(@Param("username") String username);
 
 }

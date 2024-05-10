@@ -90,4 +90,16 @@ public class AttractionEntity {
 		return city != null ? city.getCountryName() : null;
 	}
 
+	@Override
+	public String toString() {
+		return "AttractionEntity [" + (id != null ? "id=" + id + ", " : "")
+				+ (imgUrl != null ? "imgUrl=" + imgUrl + ", " : "")
+				+ (attraction != null ? "attraction=" + attraction + ", " : "")
+				+ (category != null ? "category=" + category + ", " : "") + (info != null ? "info=" + info + ", " : "")
+				+ (price != null ? "price=" + price : "") + "]";
+	}
+	
+	
+	
+
 }

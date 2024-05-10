@@ -50,7 +50,7 @@ public class RoleManagementImpl implements RoleManagementI {
 	@Override
 	@Transactional
 	public void deleteRolesFromUsername(String username) {
-		roleRepository.deleteByUsername(username);
+		roleRepository.deleteRolesFromUsername(username);
 	}
 
 	@Override

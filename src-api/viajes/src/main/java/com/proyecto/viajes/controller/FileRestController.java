@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +40,11 @@ import lombok.AllArgsConstructor;
 public class FileRestController {
 
 	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileRestController.class);
+
+	/**
 	 * Inyección de dependencia de UserManagementImpl.
 	 */
 	private UserManagementImpl userRepository;
@@ -47,6 +54,7 @@ public class FileRestController {
 	 * usuario. Se requiere que el usuario tenga el rol "ROLE_CUSTOMER" o
 	 * "ROLE_ADMIN".
 	 * 
+	 * @param username Usuario.
 	 * @return la imagen de perfil del usuario como un recurso ByteArrayResource.
 	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
@@ -79,6 +87,7 @@ public class FileRestController {
 	 * usuario. Se requiere que el usuario tenga el rol "ROLE_CUSTOMER" o
 	 * "ROLE_ADMIN".
 	 * 
+	 * @param file Archivo subido.
 	 * @return Mensaje indicando el resultado.
 	 */
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
@@ -88,6 +97,7 @@ public class FileRestController {
 		try {
 			// Verifica si el archivo es nulo o vacío
 			if (file.isEmpty()) {
+				LOGGER.error("Archivo vacío enviado para el usuario: {}", username);
 				return ResponseEntity.badRequest().body("Archivo vacío");
 			}
 
@@ -112,23 +122,28 @@ public class FileRestController {
 			user.setImgUrl(fileName);
 			userRepository.save(user);
 
+			LOGGER.info("Imagen de perfil subida exitosamente para el usuario: {}", username);
 			return ResponseEntity.ok().body("Imagen subida exitosamente");
 		} catch (Exception e) {
+			LOGGER.error("Error al procesar la solicitud de carga de imagen de perfil para el usuario: {}", username);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la solicitud");
 		}
 	}
 
 	/**
-	 * @param file
-	 * @param fileName
-	 * @param uploadPath
-	 * @return
+	 * Guarda la imagen.
+	 * 
+	 * @param file       Archivo que guarda.
+	 * @param fileName   Nombre del archivo.
+	 * @param uploadPath Path donde se guarda.
+	 * @return Repsuesta.
 	 */
 	private ResponseEntity<String> saveImage(MultipartFile file, String fileName, Path uploadPath) {
 		try (InputStream inputStream = file.getInputStream()) {
 			Path filePath = uploadPath.resolve(fileName);
 			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException ex) {
+			LOGGER.error("Error al subir el archivo de imagen de perfil: {}", ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
 		}
 		return null;

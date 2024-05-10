@@ -25,7 +25,7 @@ export const Header = () => {
         
         if(count === 0){
           const notificationCounter = document.getElementsByClassName('notification-counter')[0];
-          notificationCounter.style.visibility = 'hidden'; 
+          if(notificationCounter != null) notificationCounter.style.visibility = 'hidden'; 
         }
         setNotificationCount(count);
 

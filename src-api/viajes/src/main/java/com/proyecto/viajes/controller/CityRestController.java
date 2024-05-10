@@ -2,6 +2,8 @@ package com.proyecto.viajes.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -32,6 +34,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/v1/city")
 @AllArgsConstructor
 public class CityRestController {
+
+	/**
+	 * Inicializo el LOGGER con Slf4j.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CityRestController.class);
 
 	/**
 	 * Inyección de dependencia de CityManagementImpl.
@@ -93,9 +100,11 @@ public class CityRestController {
 
 			// Eliminar la ciudad
 			cityRepository.delete(cityToDelete);
+			LOGGER.info("Ciudad eliminada correctamente: {}", cityToDelete);
 			return ResponseEntity.ok().body("Ciudad eliminada correctamente");
 		} else {
 			// Si la ciudad no existe, devolver la respuesta
+			LOGGER.error("No se encontró la ciudad a eliminar: {}", city);
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -125,20 +134,24 @@ public class CityRestController {
 		if (cityEntity != null) {
 			// Verificar si la ciudad ya existe
 			if (cityRepository.findByCity(cityEntity.getCity()) != null) {
+				LOGGER.error("La ciudad ya existe: {}", cityEntity.getCity());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("La ciudad ya existe");
 			}
 
 			// Buscar su pais por su nombre
 			CountryEntity country = countryRepository.findByCountry(countryName);
 			if (country == null) {
+				LOGGER.error("El país especificado no fue encontrado: {}", countryName);
 				return ResponseEntity.badRequest().body("El pais especificado no fue encontrado");
 			}
 			cityEntity.setCountry(country);
 
 			// Guardar la nueva ciudad
 			cityRepository.save(cityEntity);
+			LOGGER.info("Ciudad agregada correctamente: {}", cityEntity);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad agregada correctamente");
 		} else {
+			LOGGER.error("Los datos de la ciudad son nulos");
 			return ResponseEntity.badRequest().body("Los datos de la ciudad son nulos");
 		}
 	}
@@ -168,8 +181,10 @@ public class CityRestController {
 			}
 			// Guardar los cambios en la base de datos
 			cityRepository.save(existingCity);
+			LOGGER.info("Ciudad actualizada correctamente: {}", existingCity.getCity());
 			return ResponseEntity.ok().body("Ciudad actualizada correctamente");
 		} else {
+			LOGGER.error("No se encontró la ciudad a actualizar: {}", updatedCity.getCity());
 			return ResponseEntity.notFound().build();
 		}
 	}

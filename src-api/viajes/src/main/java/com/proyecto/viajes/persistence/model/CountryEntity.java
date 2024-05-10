@@ -78,4 +78,17 @@ public class CountryEntity {
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CityEntity> cities;
 
+	@Override
+	public String toString() {
+		return "CountryEntity [" + (id != null ? "id=" + id + ", " : "")
+				+ (imgUrl != null ? "imgUrl=" + imgUrl + ", " : "")
+				+ (capital != null ? "capital=" + capital + ", " : "")
+				+ (population != null ? "population=" + population + ", " : "")
+				+ (country != null ? "country=" + country + ", " : "")
+				+ (countryCode != null ? "countryCode=" + countryCode + ", " : "")
+				+ (currencyCode != null ? "currencyCode=" + currencyCode + ", " : "") + "currencySymbol="
+				+ currencySymbol + ", " + (languageCode != null ? "languageCode=" + languageCode + ", " : "")
+				+ (info != null ? "info=" + info : "") + "]";
+	}
+
 }
