@@ -1,0 +1,9 @@
+com.proyecto.viajes
+com.proyecto.viajes.configuration
+com.proyecto.viajes.controller
+com.proyecto.viajes.persistence.dto
+com.proyecto.viajes.persistence.model
+com.proyecto.viajes.persistence.repositories
+com.proyecto.viajes.security
+com.proyecto.viajes.services.implement
+com.proyecto.viajes.services.interfaces
