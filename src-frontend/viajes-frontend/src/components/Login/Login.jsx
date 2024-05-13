@@ -86,6 +86,7 @@ export const Login = () => {
                       <div className="text-wrapper-3">
                         <input className='custom-input'
                           type="text"
+                          name='login-form-username'
                           value={username}
                           onChange={handleUsernameChange}
                           placeholder="Enter your username"
@@ -113,6 +114,7 @@ export const Login = () => {
                         <input className='custom-input'
                           type="password"
                           value={password}
+                          name='login-form-password'
                           onChange={handlePasswordChange}
                           placeholder="Enter your password"
                           required

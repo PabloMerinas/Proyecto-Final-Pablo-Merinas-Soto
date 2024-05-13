@@ -305,7 +305,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
   } else { // En caso de que sea para editar o añadir
     return (
       <div className="country-info-card-principal-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name='country-info-card-form'>
           <div className="country-info-card-principal-country-card">
             <div className="country-info-card-principal-nivel0-frame0" style={{ height: '960px' }}>
               <div className="country-info-card-principal-nivel1-frame0">

@@ -87,8 +87,8 @@ export const PersonalInfo = () => {
     // Maneja el evento para cambiar la imagen
     const handlePhotoChange = (event) => {
         const selectedFile = event.target.files[0];
-            // Verificar si la extensión es .png
-            if (selectedFile) {
+        // Verificar si la extensión es .png
+        if (selectedFile) {
             // Obtener la extensión del archivo
             const extension = selectedFile.name.split('.').pop().toLowerCase();
             if (extension === 'png') {
@@ -112,38 +112,42 @@ export const PersonalInfo = () => {
     function generateOption(awesomeIco, inputType, title, value, handleChange, placeholder) {
         const inputClass = editMode ? 'input-edit-mode' : 'input-view-mode';
         return (
-            <div className="personal-info-principal-nivel5-frame06">
-                <div className="personal-info-principal-nivel6-frame06">
-                    <div className="personal-info-principal-nivel7-frame012">
-                        <i className={awesomeIco}></i>
-                    </div>
-                </div>
-                <div className="personal-info-principal-nivel6-frame16">
-                    <div className="personal-info-principal-nivel7-frame013">
-                        <div className="personal-info-principal-nivel8-frame017">
-                            <span className="personal-info-principal-text28">
-                                <span>{title}</span>
-                            </span>
+            <form action="">
+                <div className="personal-info-principal-nivel5-frame06">
+                    <div className="personal-info-principal-nivel6-frame06">
+                        <div className="personal-info-principal-nivel7-frame012">
+                            <i className={awesomeIco}></i>
                         </div>
                     </div>
-                    <div className="personal-info-principal-nivel7-frame14">
-                        <div className="personal-info-principal-nivel8-frame018">
-                            <span className="personal-info-principal-text30">
-                                <input
-                                    type={inputType}
-                                    className={`personal-info-principal-input ${inputClass}`}
-                                    value={value ? value : ""}
-                                    onChange={handleChange}
-                                    onKeyDown={handleKeyDown}
-                                    readOnly={!editMode}
-                                    placeholder={placeholder}
-                                    accept=".png"
-                                />
-                            </span>
+                    <div className="personal-info-principal-nivel6-frame16">
+                        <div className="personal-info-principal-nivel7-frame013">
+                            <div className="personal-info-principal-nivel8-frame017">
+                                <span className="personal-info-principal-text28">
+                                    <span>{title}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="personal-info-principal-nivel7-frame14">
+                            <div className="personal-info-principal-nivel8-frame018">
+                                <span className="personal-info-principal-text30">
+                                    <input
+                                        type={inputType}
+                                        className={`personal-info-principal-input ${inputClass}`}
+                                        value={value ? value : ""}
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyDown}
+                                        readOnly={!editMode}
+                                        placeholder={placeholder}
+                                        accept=".png"
+                                        autoComplete="text"
+                                    />
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
         )
     }
 

@@ -206,7 +206,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
     function addAndEditMode() {
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} name='city-info-card-form'>
                     <div className="city-card-info-container">
                         <div className="city-card-info-city-card">
                             <div className="city-card-info-city-img" style={{ backgroundImage: `url(${formData.imgUrl})`, backgroundSize: 'cover' }}>
@@ -307,7 +307,6 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                                     <span className="city-card-info-text12">
                                                         <span>
                                                             <input required type="text" name="state" id="state" value={formData.state} placeholder='State' onChange={handleChange} />
-
                                                         </span>
                                                     </span>
                                                 </div>

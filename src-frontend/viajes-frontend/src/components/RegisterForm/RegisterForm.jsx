@@ -88,7 +88,7 @@ export const RegisterForm = () => {
                     <div className="principal-nivel9-frame0 custom-width">
                       <div className="principal-nivel10-frame0">
                         <label htmlFor="email" className="principal-text04">
-                          <input type="email" id="email" placeholder="you@example.com" required
+                          <input type="email" name='email' id="email" placeholder="you@example.com" required
                             onChange={handleEmailChange} value={email} />
                         </label>
                       </div>
@@ -111,7 +111,7 @@ export const RegisterForm = () => {
                     <div className="principal-nivel9-frame01 custom-width">
                       <div className="principal-nivel10-frame01">
                         <label htmlFor="username" className="principal-text08">
-                          <input type="text" id="username" placeholder="Enter your username"
+                          <input type="text" name='username' id="username" placeholder="Enter your username"
                             onChange={handleUsernameChange} value={username}
                             required />
                         </label>

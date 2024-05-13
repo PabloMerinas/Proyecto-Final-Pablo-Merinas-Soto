@@ -201,7 +201,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
     function addAndEditMode() {
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} name="attraction-info-card-form">
                     <div className="attraction-info-card-container" style={{ width: '980px' }}>
                         <div className="attraction-info-card-attraction-card">
                             <div className="attraction-info-card-attraction-info">
