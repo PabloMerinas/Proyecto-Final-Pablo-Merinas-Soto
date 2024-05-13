@@ -84,7 +84,7 @@ public class DataInitializer {
 		// Insertar ciudades de prueba con URLs de prueba
 		executeSqlStatement(
 				"""
-						INSERT INTO T_CITY (img_Url, population, state, city, airport_code, country_id, info)
+						INSERT INTO t_city (img_Url, population, state, city, airport_code, country_id, info)
 						VALUES
 						('https://a.cdn-hotels.com/gdcs/production133/d1207/7ad2d7f0-68ce-11e8-8a0f-0242ac11000c.jpg?impolicy=fcrop&w=800&h=533&q=medium', 3000000, 'Comunidad de Madrid', 'Madrid', 'MAD', 1, 'Madrid es la capital de España y una de las ciudades más grandes de Europa'),
 						('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Seal_of_the_District_of_Columbia.svg/1200px-Seal_of_the_District_of_Columbia.svg.png', 8800000, 'Distrito de Columbia', 'Washington D.C.', 'DCA', 2, 'Washington D.C. es la capital de los Estados Unidos y el centro político del país'),
@@ -110,7 +110,7 @@ public class DataInitializer {
 
 		// Insertar notificaciones
 		executeSqlStatement("""
-				INSERT INTO T_NOTIFICATION (title, time_ago)
+				INSERT INTO t_notification (title, time_ago)
 				VALUES
 				('New Destination: Kyoto, Japan', '6h ago'),
 				('New Attraction: Golden Pavilion', '2h ago'),
@@ -118,19 +118,19 @@ public class DataInitializer {
 				('New Attraction: Amoudi Bay', '1 day ago');
 				""");
 		executeSqlStatement(
-				"INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);");
+				"INSERT INTO t_notification_user_notified (user_notified_username, notification_id) VALUES ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);");
 
 		// Insertar lugares visitados
 		// Insertar visitas de ejemplo para el usuario 'admin'
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('admin', 1);");
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('admin', 3);");
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('admin', 1);");
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, country_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, country_id) VALUES ('admin', 3);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, city_id) VALUES ('admin', 1);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, attraction_id) VALUES ('admin', 1);");
 
 		// Insertar visitas de ejemplo para el usuario 'user'
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, country_id) VALUES ('user', 2);");
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, city_id) VALUES ('user', 2);");
-		executeSqlStatement("INSERT INTO T_VISITED_PLACES (user_username, attraction_id) VALUES ('user', 2);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, country_id) VALUES ('user', 2);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, city_id) VALUES ('user', 2);");
+		executeSqlStatement("INSERT INTO t_visited_places (user_username, attraction_id) VALUES ('user', 2);");
 
 	}
 

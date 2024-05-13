@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+
 // Función para recuperar la información del usuario utilizando el token
 export const getUserInfo = async (token) => {
 
   try {
     // Obtengo el usuario
-    const response = await axios.get('http://localhost:8080/v1/user/getUserByToken', {
+    const response = await axios.get(`${BASE_URL}/user/getUserByToken`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -15,7 +17,7 @@ export const getUserInfo = async (token) => {
     });
 
     // Obtengo la URL de la imagen de perfil del usuario
-    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+    const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -32,7 +34,7 @@ export const getUserInfo = async (token) => {
 
 
     // Obtengo sus roles
-    const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByToken', {
+    const rolesResponse = await axios.get(`${BASE_URL}/user/getRolesByToken`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -57,7 +59,7 @@ export const updateUser = async (newData, isAdmin, isCustomer) => {
     delete newData.isAdmin;
     delete newData.isCustomer;
     // Realizar la solicitud para actualizar el usuario
-    const response = await axios.put('http://localhost:8080/v1/user', newData, {
+    const response = await axios.put(`${BASE_URL}/user`, newData, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       }, params: {
@@ -76,7 +78,7 @@ export const updateUser = async (newData, isAdmin, isCustomer) => {
 // Función para eliminar un usuario
 export const deleteMyUser = async (username, token) => {
   try {
-    const response = await axios.delete('http://localhost:8080/v1/user/deleteMyUser', {
+    const response = await axios.delete(`${BASE_URL}/user/deleteMyUser`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -95,7 +97,7 @@ export const deleteMyUser = async (username, token) => {
 // Funcion para recuperar todos los usuarios con sus imágenes de perfil y roles
 export const getAllUsers = async (token) => {
   try {
-    const response = await axios.get('http://localhost:8080/v1/user', {
+    const response = await axios.get(`${BASE_URL}/user`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       }
@@ -107,7 +109,7 @@ export const getAllUsers = async (token) => {
     // Para cada usuario, obtener la imagen de perfil y los roles
     const usersWithImagesAndRoles = await Promise.all(users.map(async (user) => {
       // Obtener la imagen de perfil
-      const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+      const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
         headers: {
           Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
         },
@@ -122,7 +124,7 @@ export const getAllUsers = async (token) => {
       const imageUrl = URL.createObjectURL(imageData);
 
       // Obtener los roles del usuario específico
-      const rolesResponse = await axios.get('http://localhost:8080/v1/user/getRolesByUsername', {
+      const rolesResponse = await axios.get(`${BASE_URL}/user/getRolesByUsername`, {
         headers: {
           Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
         },
@@ -154,7 +156,7 @@ export const getAllUsers = async (token) => {
 export const uploadProfileImageByUsername = async (formData, username) => {
   const token = localStorage.getItem("authToken");
   try {
-    await axios.post('http://localhost:8080/v1/file/uploadProfileImageToUseraname', formData, {
+    await axios.post(`${BASE_URL}/file/uploadProfileImageToUseraname`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
@@ -162,7 +164,7 @@ export const uploadProfileImageByUsername = async (formData, username) => {
     });
 
     // Obtengo la URL de la imagen de perfil del usuario
-    const profileImageResponse = await axios.get('http://localhost:8080/v1/file/getProfileImageByUsername', {
+    const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
       },
@@ -186,7 +188,7 @@ export const uploadProfileImageByUsername = async (formData, username) => {
 export const deleteUserByUsername = async (username) => {
   const token = localStorage.getItem("authToken");
   try {
-    await axios.delete(`http://localhost:8080/v1/user/deleteUserByUsername/${username}`, {
+    await axios.delete(`${BASE_URL}/user/deleteUserByUsername/${username}`, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
@@ -200,7 +202,7 @@ export const deleteUserByUsername = async (username) => {
 
 export const addUserFromAdmin = async (userData, isAdmin, isCustomer) => {
   try {
-    const response = await axios.post('http://localhost:8080/v1/user/addUserFromAdmin', userData, {
+    const response = await axios.post(`${BASE_URL}/user/addUserFromAdmin`, userData, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

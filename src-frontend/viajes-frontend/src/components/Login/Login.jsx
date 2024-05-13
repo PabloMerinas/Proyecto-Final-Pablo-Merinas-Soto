@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../service/userService';
 import { useAuth } from '../../authContext/autContext';
 
+const BASE_URL = 'http://13.53.46.224:8080/api'; // Linea con la ip de coneccion
+
 export const Login = () => {
   const { login, logout } = useAuth();
   // Estado para almacenar los valores de los campos del formulario
@@ -23,7 +25,7 @@ export const Login = () => {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
 
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

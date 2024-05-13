@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+
 // Método para recuperar los lugares visitados por un usuario por su nombre de usuario
 export const getVisitedPlacesByUsernameAndType = async (username, type) => {
     try {
         // Se recupera el token
         const token = localStorage.getItem('authToken');
         // Realizar una solicitud GET a la API
-        const response = await axios.get(`http://localhost:8080/v1/visitedPlaces/getVisitedPlacesByUsername`, {
+        const response = await axios.get(`${BASE_URL}/visitedPlaces/getVisitedPlacesByUsername`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -30,7 +32,7 @@ export const markAsVisitedByUsername = async (username, countryId, cityId, attra
         // Se recupera el token
         const token = localStorage.getItem('authToken');
         // Realizar una solicitud POST a la API
-        const response = await axios.post('http://localhost:8080/v1/visitedPlaces/markAsVisitedByUsername', null, {
+        const response = await axios.post(`${BASE_URL}/visitedPlaces/markAsVisitedByUsername`, null, {
             params: {
                 username: username,
                 countryId: countryId,
@@ -55,7 +57,7 @@ export const deleteVisitedPlace = async (placeId) => {
     try {
         // Se recupera el token
         const token = localStorage.getItem('authToken');
-        const response = await axios.delete(`http://localhost:8080/v1/visitedPlaces/deleteVisitedPlace?placeId=${placeId}`, {
+        const response = await axios.delete(`${BASE_URL}/visitedPlaces/deleteVisitedPlace?placeId=${placeId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

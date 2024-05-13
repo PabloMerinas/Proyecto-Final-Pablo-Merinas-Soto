@@ -1,10 +1,13 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+
+
 // Método para recuperar las notificaciones de un usuario en especifico
 export const getNotificationsByUsername = async (username) => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get(`http://localhost:8080/v1/notification/getNotificationsByUsername?username=${username}`, {
+        const response = await axios.get(`${BASE_URL}/notification/getNotificationsByUsername?username=${username}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -22,7 +25,7 @@ export const getNotificationsByUsername = async (username) => {
 // Método para eliminar una notificación pasandole el id de esta
 export const deleteNotificationById = async (token, id) => {
     try {
-        const response = await axios.delete(`http://localhost:8080/v1/notification/deleteNotificationById?id=${id}`, {
+        const response = await axios.delete(`${BASE_URL}/notification/deleteNotificationById?id=${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -41,7 +44,7 @@ export const deleteNotificationById = async (token, id) => {
 export const addNotificationToAllUsers = async (notificationData) => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('http://localhost:8080/v1/notification/addNotificationToAllUsers', notificationData, {
+        const response = await axios.post(`${BASE_URL}/notification/addNotificationToAllUsers`, notificationData, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

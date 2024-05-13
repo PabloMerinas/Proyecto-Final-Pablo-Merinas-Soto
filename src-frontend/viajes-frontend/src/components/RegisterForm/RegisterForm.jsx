@@ -4,6 +4,7 @@ import { getUserInfo } from "../../service/userService";
 import { useAuth } from '../../authContext/autContext';
 import './registerForm.css';
 
+
 export const RegisterForm = () => {
   const { login } = useAuth();
   const [username, setUsername] = useState('');
@@ -17,7 +18,8 @@ export const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/v1/user/addUser', {
+      const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+      const response = await fetch(`${BASE_URL}/user/addUser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

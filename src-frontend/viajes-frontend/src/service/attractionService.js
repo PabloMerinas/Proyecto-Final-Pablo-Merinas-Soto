@@ -1,12 +1,13 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
 // Metodo para devolver las attractions, se le pasa el token para verificar el usuario
 export const getAttractions = async () => {
     try {
         // Recupero el token
         const token = localStorage.getItem("authToken");
         // LLamo a la api
-        const response = await axios.get('http://localhost:8080/v1/attraction', {
+        const response = await axios.get(`${BASE_URL}/attraction`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -26,7 +27,7 @@ export const deleteAttractionByAttraction = async (attraction) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamar a la API
-        const response = await axios.delete('http://localhost:8080/v1/attraction/deleteAttractionByAttraction', {
+        const response = await axios.delete(`${BASE_URL}/attraction/deleteAttractionByAttraction`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -47,7 +48,7 @@ export const deleteAttractionByAttraction = async (attraction) => {
 export const getAttractionByAttraction = async (attractionName) => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await axios.get('http://localhost:8080/v1/attraction/getAttractionByAttraction', {
+        const response = await axios.get(`${BASE_URL}/attraction/getAttractionByAttraction`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -67,7 +68,7 @@ export const getAttractionByAttraction = async (attractionName) => {
 export const addAttraction = async (attractionData, cityName) => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('http://localhost:8080/v1/attraction/addAttraction', attractionData, {
+        const response = await axios.post(`${BASE_URL}/attraction/addAttraction`, attractionData, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -93,7 +94,7 @@ export const updateAttraction = async (cityName, updatedAttractionData) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamo a la API para actualizar el país
-        const response = await axios.post(`http://localhost:8080/v1/attraction/updateAttraction`, updatedAttractionData, {
+        const response = await axios.post(`${BASE_URL}/attraction/updateAttraction`, updatedAttractionData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }, params: {

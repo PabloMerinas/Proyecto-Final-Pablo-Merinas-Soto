@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+
 // Metodo para devolver las ciudades, se le pasa el token para verificar el usuario
 export const getCities = async () => {
     try {
         // Recupero el token
         const token = localStorage.getItem("authToken");
         // LLamo a la api
-        const response = await axios.get('http://localhost:8080/v1/city/getCities', {
+        const response = await axios.get(`${BASE_URL}/city/getCities`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -25,7 +27,7 @@ export const getCities = async () => {
 export const getCityByCity = async (cityName) => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await axios.get(`http://localhost:8080/v1/city/getCityByCity`, {
+        const response = await axios.get(`${BASE_URL}/city/getCityByCity`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -48,7 +50,7 @@ export const deleteCityByCity = async (city) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamo a la API para eliminar la ciudad por su nombre
-        const response = await axios.delete(`http://localhost:8080/v1/city/deleteCityByCity?city=${city}`, {
+        const response = await axios.delete(`${BASE_URL}/city/deleteCityByCity?city=${city}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -67,7 +69,7 @@ export const addCity = async(countryName, cityData) => {
     delete cityData.country;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('http://localhost:8080/v1/city/addCity', cityData, {
+        const response = await axios.post(`${BASE_URL}/city/addCity`, cityData, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -93,7 +95,7 @@ export const updateCity = async (updatedCityData, countryName) => {
     delete updatedCityData.country;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('http://localhost:8080/v1/city/updateCity', updatedCityData, {
+        const response = await axios.post(`${BASE_URL}/city/updateCity`, updatedCityData, {
             headers: {
                 Authorization: `Bearer ${token}`
             },

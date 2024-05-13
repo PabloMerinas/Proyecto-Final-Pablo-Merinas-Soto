@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+
 // Metodo para devolver los paises, se le pasa el token para verificar el usuario
 export const getCountries = async () => {
     try {
         const token = localStorage.getItem('authToken');
         // LLamo a la api
-        const response = await axios.get('http://localhost:8080/v1/country/getCountries', {
+        const response = await axios.get(`${BASE_URL}/country/getCountries`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -24,7 +26,7 @@ export const getCountries = async () => {
 export const getCountryByCountry = async (countryName) => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await axios.get(`http://localhost:8080/v1/country/getCountryByCountry`, {
+        const response = await axios.get(`${BASE_URL}/country/getCountryByCountry`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -46,7 +48,7 @@ export const deleteCountryByCountry = async (country) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamo a la API para eliminar el pais por su nombre
-        const response = await axios.delete(`http://localhost:8080/v1/country/deleteCountryByCountry?country=${country}`, {
+        const response = await axios.delete(`${BASE_URL}/country/deleteCountryByCountry?country=${country}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -65,7 +67,7 @@ export const addCountry = async (newCountryData) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamo a la API para agregar el nuevo país
-        const response = await axios.post('http://localhost:8080/v1/country/addCountry', newCountryData, {
+        const response = await axios.post(`${BASE_URL}/country/addCountry`, newCountryData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -89,7 +91,7 @@ export const updateCountry = async (countryName, updatedCountryData) => {
     const token = localStorage.getItem('authToken');
     try {
         // Llamo a la API para actualizar el país
-        const response = await axios.post(`http://localhost:8080/v1/country/updateCountry`, updatedCountryData, {
+        const response = await axios.post(`${BASE_URL}/country/updateCountry`, updatedCountryData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }, params: {
