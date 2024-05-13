@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import './notifications.css';
-import { getNotificationsByUsername } from "../../service/notificationService";
-import { deleteNotificationById } from "../../service/notificationService";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../../authContext/autContext";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { deleteNotificationById, getNotificationsByUsername } from "../../service/notificationService";
+import './notifications.css';
 
 // Método que genera la lista de las notificaciones simples, se le pasa un array de notificaciones
 export function generateSimpleNotification(notifications) {
@@ -71,13 +69,15 @@ export const Notification = () => {
           return <Navigate to="/" />;
 
         }
-        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+        const notificationsData = await getNotificationsByUsername(activeUser.username);
         setNotifications(notificationsData);
       } catch (error) {
         console.error('Error recuperando las notifications:', error);
       }
     };
-    fetchData();
+    if (activeUser) {
+      fetchData();
+    }
 
   }, [activeUser]);
 
@@ -132,12 +132,12 @@ export const Notification = () => {
 
         if (updatedNotifications.length !== 0) {
           notificationCounter.innerHTML = updatedNotifications.length;
-          notificationCounter.style.visibility = 'visible'; 
+          notificationCounter.style.visibility = 'visible';
         } else {
           notificationCounter.innerHTML = '';
-          notificationCounter.style.visibility = 'hidden'; 
+          notificationCounter.style.visibility = 'hidden';
         }
-        
+
       } catch (error) {
         console.error('Error deleting the notification:', error);
       }

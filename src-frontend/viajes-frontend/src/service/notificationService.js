@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // Método para recuperar las notificaciones de un usuario en especifico
-export const getNotificationsByUsername = async (token, username) => {
+export const getNotificationsByUsername = async (username) => {
     try {
+        const token = localStorage.getItem('authToken');
         const response = await axios.get(`http://localhost:8080/v1/notification/getNotificationsByUsername?username=${username}`, {
             headers: {
                 'Authorization': `Bearer ${token}`

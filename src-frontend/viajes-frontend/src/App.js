@@ -25,7 +25,7 @@ function App() {
   document.title = 'EasyTravels' // Cambio el titulo de la pagina
   return (
     <Router>
-      {activeUser ? <Header /> : <HeaderBasic />}
+      {activeUser && activeUser != null ? <Header /> : <HeaderBasic />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/account" element={<Account />} />

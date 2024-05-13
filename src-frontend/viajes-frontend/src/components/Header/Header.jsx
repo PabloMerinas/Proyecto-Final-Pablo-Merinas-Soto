@@ -19,13 +19,12 @@ export const Header = () => {
     // Metodo para contar las notificaciones y asi mostrarlas
     const countNotifications = async () => {
       try {
-        const authToken = localStorage.getItem('authToken');
-        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+        const notificationsData = await getNotificationsByUsername(activeUser.username);
         const count = Array.isArray(notificationsData) ? notificationsData.length : 0;
-        
-        if(count === 0){
+
+        if (count === 0) {
           const notificationCounter = document.getElementsByClassName('notification-counter')[0];
-          if(notificationCounter != null) notificationCounter.style.visibility = 'hidden'; 
+          if (notificationCounter != null) notificationCounter.style.visibility = 'hidden';
         }
         setNotificationCount(count);
 
@@ -33,10 +32,11 @@ export const Header = () => {
         console.error('Error counting notifications:', error);
       }
     };
-
-    countNotifications();
+    if (activeUser != null) {
+      countNotifications();
+    }
   }, [activeUser]);
-  
+
 
   // Función para mostrar los popup
   const handlePopupToggle = () => {
@@ -150,8 +150,7 @@ export const Header = () => {
 
     const fetchData = async () => {
       try {
-        const authToken = localStorage.getItem('authToken');
-        const notificationsData = await getNotificationsByUsername(authToken, activeUser.username);
+        const notificationsData = await getNotificationsByUsername(activeUser.username);
 
         // Verificar si notificationsData es un array no vacío antes de actualizar el estado
         if (Array.isArray(notificationsData) && notificationsData.length > 0) {
@@ -170,7 +169,10 @@ export const Header = () => {
 
     // Llamar a fetchData cuando se monta el componente para obtener las notificaciones
     useEffect(() => {
-      fetchData();
+      if (activeUser) {
+
+        fetchData();
+      }
     }, []);
 
     if (notifications.length === 0 && !isLoading) {
