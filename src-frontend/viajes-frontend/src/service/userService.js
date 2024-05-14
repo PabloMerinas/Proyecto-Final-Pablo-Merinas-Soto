@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { BASE_URL } from '../App';
 
-const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
 
 // Función para recuperar la información del usuario utilizando el token
 export const getUserInfo = async (token) => {

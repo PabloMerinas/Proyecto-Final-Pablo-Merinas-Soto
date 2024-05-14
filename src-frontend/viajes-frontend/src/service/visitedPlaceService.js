@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { BASE_URL } from '../App';
 
-const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
 
 // Método para recuperar los lugares visitados por un usuario por su nombre de usuario
 export const getVisitedPlacesByUsernameAndType = async (username, type) => {

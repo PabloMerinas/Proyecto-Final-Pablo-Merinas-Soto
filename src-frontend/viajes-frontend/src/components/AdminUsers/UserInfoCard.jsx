@@ -137,7 +137,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   <input
                     type="checkbox"
                     id="user-info-card-form-adminRole"
-                    name="user-info-card-form-isAdmin"
+                    name="isAdmin"
                     checked={formData.isAdmin}
                     onChange={handleRoleChange}
                   />
@@ -146,7 +146,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   <input
                     type="checkbox"
                     id="user-info-card-form-customerRole"
-                    name="user-info-card-form-isCustomer"
+                    name="isCustomer"
                     checked={formData.isCustomer}
                     onChange={handleRoleChange}
                   />

@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { BASE_URL } from '../App';
 
-const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
 
 // Metodo para devolver las ciudades, se le pasa el token para verificar el usuario
 export const getCities = async () => {
