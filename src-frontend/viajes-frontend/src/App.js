@@ -2,9 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import { useAuth } from './authContext/autContext';
 import { Header } from './components/Header/Header';
-import HeaderBasic from './components/HeaderBasic/HeaderBasic';
 import { Account } from './components/Account/Account';
 import { RegisterForm } from './components/RegisterForm/RegisterForm';
 import { PersonalInfo } from './components/PersonalInfo/PersonalInfo';
@@ -23,11 +21,13 @@ import { VisitedPlaces } from './components/Options/VisitedPlaces/VisitedPlaces'
 export const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
 
 function App() {
-  const { activeUser } = useAuth();
   document.title = 'EasyTravels' // Cambio el titulo de la pagina
+
+  const shouldShowBasicHeader = window.location.pathname === "/";
+
   return (
     <Router>
-      {activeUser && activeUser != null ? <Header /> : <HeaderBasic />}
+      {shouldShowBasicHeader ? <Header basicHeader={true} /> : <Header />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/account" element={<Account />} />

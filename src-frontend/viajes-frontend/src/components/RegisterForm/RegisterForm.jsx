@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from "../../service/userService";
 import { useAuth } from '../../authContext/autContext';
 import './registerForm.css';
-
+import { BASE_URL } from '../../App';
 
 export const RegisterForm = () => {
   const { login } = useAuth();
@@ -18,7 +18,6 @@ export const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
       const response = await fetch(`${BASE_URL}/user/addUser`, {
         method: 'POST',
         headers: {
@@ -90,7 +89,7 @@ export const RegisterForm = () => {
                     <div className="principal-nivel9-frame0 custom-width">
                       <div className="principal-nivel10-frame0">
                         <label htmlFor="email" className="principal-text04">
-                          <input type="email" name='email' id="email" placeholder="you@example.com" required
+                          <input type="email" name='email' id="email" placeholder="you@example.com" required autoComplete='email'
                             onChange={handleEmailChange} value={email} />
                         </label>
                       </div>
@@ -113,7 +112,7 @@ export const RegisterForm = () => {
                     <div className="principal-nivel9-frame01 custom-width">
                       <div className="principal-nivel10-frame01">
                         <label htmlFor="username" className="principal-text08">
-                          <input type="text" name='username' id="username" placeholder="Enter your username"
+                          <input type="text" name='username' id="username" placeholder="Enter your username" autoComplete='username'
                             onChange={handleUsernameChange} value={username}
                             required />
                         </label>
@@ -138,7 +137,7 @@ export const RegisterForm = () => {
                     <div className="principal-nivel9-frame02 custom-width">
                       <div className="principal-nivel10-frame02">
                         <label htmlFor="password" className="principal-text12">
-                          <input type="password" id="password" placeholder="Enter your password" required value={password}
+                          <input type="password" id="password" placeholder="Enter your password" required value={password} autoComplete='current-password'
                             onChange={handlePasswordChange} />
                         </label>
                       </div>

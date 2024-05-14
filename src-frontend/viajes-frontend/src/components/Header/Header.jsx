@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from 'react-router-dom';
 import "./header.css";
 import { generateSimpleNotification, NoNotifications } from "../Notification/Notification";
 import { getNotificationsByUsername } from "../../service/notificationService";
@@ -14,6 +15,8 @@ export const Header = () => {
   const popupRef = useRef(null); // Referencia al elemento del popup
   const [notificationCount, setNotificationCount] = useState(0);
   const { activeUser } = useAuth();
+  const location = useLocation();
+  const shouldShowBasicHeader = location.pathname === "/";
 
   useEffect(() => {
     // Metodo para contar las notificaciones y asi mostrarlas
@@ -32,11 +35,10 @@ export const Header = () => {
         console.error('Error counting notifications:', error);
       }
     };
-    if (activeUser != null) {
+    if (!shouldShowBasicHeader) {
       countNotifications();
     }
   }, [activeUser]);
-
 
   // Función para mostrar los popup
   const handlePopupToggle = () => {
@@ -188,86 +190,103 @@ export const Header = () => {
         {generateSimpleNotification(notifications)}
       </div>);
   };
-  const notificationCounter = document.getElementsByClassName('notification-counter')[0]
+  // const notificationCounter = document.getElementsByClassName('notification-counter')[0]
 
-  return (
-    <div className="header">
-      <div className="nivel-frame">
-        <div className="nivel-frame-wrapper">
-          <Link to="/account" className="header-links">
-            <div className="header-div">
-              <div className="png-transparent-wrapper">
-                <i className="fa-solid fa-plane-departure"></i>
-              </div>
-              <div className="div-wrapper">
-                <div className="nivel-frame-2">
-                  <div className="text-wrapper">EasyTravels</div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="nivel-frame-3">
-          <div className="nivel-frame-4">
-            {activeUser.roles.includes('ADMIN') && (
-              <div className="nivel-frame-5" style={{ width: '115px' }}>
-                <div className="nivel-frame-6">
-                  <Link className="header-a" to="/countries"><div className="text-wrapper-2">Admin Dashboard</div></Link>
-                </div>
-              </div>
-            )}
-            {activeUser.roles.includes('CUSTOMER') && (
-              <div className="nivel-frame-5">
-                <div className="nivel-frame-6">
-                  <Link className="header-a" to="/countries"><div className="text-wrapper-2">Countries</div></Link>
-                </div>
-              </div>
-            )}
-            {activeUser.roles.includes('CUSTOMER') && (
-              <div className="nivel-frame-7">
-                <div className="nivel-frame-8">
-                  <Link className="header-a" to="/cities"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Cities</div></Link>
-                </div>
-              </div>
-            )}
-            {activeUser.roles.includes('CUSTOMER') && (
-              <div className="nivel-frame-9">
-                <div className="nivel-frame-8">
-                  <Link className="header-a" to="/attractions"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Attractions</div></Link>
-                </div>
-              </div>
-            )}
-            {activeUser.roles.includes('CUSTOMER') && (
-              <div className="nivel-frame-10">
-                <div className="nivel-frame-8">
-                  <Link className="header-a" to="/visitedPlaces"> <div className="text-wrapper-3">My Places</div></Link>
-                </div>
-              </div>
-            )}
-          </div>
-          {activeUser.roles.includes('CUSTOMER') && (
-            <div className="nivel-frame-11">
-              <div className="nivel-frame-12" onClick={handlePopupSimpleNotification}>
-                <div className="notification-counter">{notificationCount !== 0 ? notificationCount : null}</div>
-                <div className="nivel-frame-13">
-                  <div className="vector-wrapper">
-                    <i className="fa-solid fa-bell"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div onClick={handlePopupToggle} className="nivel-frame-14">
-            <img src={activeUser.imgUrl} alt="Imagen de perfil del usuario activo" />
-          </div>
-
-        </div>
-        {showPopup && <Popup />}
-        {showNotificationPopup && <PopupNotification />}
+  const basicHeader = () => (
+    <div className="divHeader">
+      <div className="div-2">
+        <i className="fa-solid fa-plane-departure logo-basic-header" ></i>
+        <div className="div-3">EasyTravels</div>
       </div>
     </div>
   );
+  
 
+  const header = () => {
+    return (
+      <div className="header">
+        <div className="nivel-frame">
+          <div className="nivel-frame-wrapper">
+            <Link to="/account" className="header-links">
+              <div className="header-div">
+                <div className="png-transparent-wrapper">
+                  <i className="fa-solid fa-plane-departure"></i>
+                </div>
+                <div className="div-wrapper">
+                  <div className="nivel-frame-2">
+                    <div className="text-wrapper">EasyTravels</div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="nivel-frame-3">
+            <div className="nivel-frame-4">
+              {activeUser.roles.includes('ADMIN') && (
+                <div className="nivel-frame-5" style={{ width: '115px' }}>
+                  <div className="nivel-frame-6">
+                    <Link className="header-a" to="/countries"><div className="text-wrapper-2">Admin Dashboard</div></Link>
+                  </div>
+                </div>
+              )}
+              {activeUser.roles.includes('CUSTOMER') && (
+                <div className="nivel-frame-5">
+                  <div className="nivel-frame-6">
+                    <Link className="header-a" to="/countries"><div className="text-wrapper-2">Countries</div></Link>
+                  </div>
+                </div>
+              )}
+              {activeUser.roles.includes('CUSTOMER') && (
+                <div className="nivel-frame-7">
+                  <div className="nivel-frame-8">
+                    <Link className="header-a" to="/cities"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Cities</div></Link>
+                  </div>
+                </div>
+              )}
+              {activeUser.roles.includes('CUSTOMER') && (
+                <div className="nivel-frame-9">
+                  <div className="nivel-frame-8">
+                    <Link className="header-a" to="/attractions"> <div className="text-wrapper-2" onClick={deleteSessionCookies}>Attractions</div></Link>
+                  </div>
+                </div>
+              )}
+              {activeUser.roles.includes('CUSTOMER') && (
+                <div className="nivel-frame-10">
+                  <div className="nivel-frame-8">
+                    <Link className="header-a" to="/visitedPlaces"> <div className="text-wrapper-3">My Places</div></Link>
+                  </div>
+                </div>
+              )}
+            </div>
+            {activeUser.roles.includes('CUSTOMER') && (
+              <div className="nivel-frame-11">
+                <div className="nivel-frame-12" onClick={handlePopupSimpleNotification}>
+                  <div className="notification-counter">{notificationCount !== 0 ? notificationCount : null}</div>
+                  <div className="nivel-frame-13">
+                    <div className="vector-wrapper">
+                      <i className="fa-solid fa-bell"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div onClick={handlePopupToggle} className="nivel-frame-14">
+              <img src={activeUser.imgUrl} alt="Imagen de perfil del usuario activo" />
+            </div>
+
+          </div>
+          {showPopup && <Popup />}
+          {showNotificationPopup && <PopupNotification />}
+        </div>
+      </div>
+    );
+  }
+
+  if (!shouldShowBasicHeader) {
+    return header();
+  } else {
+    return basicHeader();
+  }
 };
 
 // Elimino esa cookie para garantizar que siempre que le de a ese enlace me salga todo el listado

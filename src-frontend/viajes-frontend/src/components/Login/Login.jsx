@@ -18,6 +18,7 @@ export const Login = () => {
     // Desloguear al montar el componente y eliminar la cookie
     logout();
     localStorage.removeItem('authToken');
+    localStorage.removeItem('activeUser');
   }, [logout]);
 
   // Función para manejar el envío del formulario
@@ -93,6 +94,7 @@ export const Login = () => {
                           onChange={handleUsernameChange}
                           placeholder="Enter your username"
                           required
+                          autoComplete='username'
                         />
                       </div>
                     </div>
@@ -120,6 +122,7 @@ export const Login = () => {
                           onChange={handlePasswordChange}
                           placeholder="Enter your password"
                           required
+                          autoComplete='current-password'
                         /></div>
                     </div>
                   </div>

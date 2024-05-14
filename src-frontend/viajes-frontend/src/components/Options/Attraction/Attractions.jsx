@@ -206,6 +206,7 @@ export const Attractions = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
+                                        name='attractions-find-bar'
                                         placeholder="Search attractions" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>

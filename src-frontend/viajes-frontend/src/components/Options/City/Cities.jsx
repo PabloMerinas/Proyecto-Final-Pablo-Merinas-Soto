@@ -224,6 +224,7 @@ export const Cities = () => {
                                         type="text"
                                         value={searchText}
                                         onChange={handleInputChange}
+                                        name='cities-find-bar'
                                         placeholder="Search cities" style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                     /> </span>
                             </div>
