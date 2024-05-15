@@ -18,7 +18,8 @@ import { AuthProvider } from './authContext/autContext';
 import { AdminUsers } from './components/AdminUsers/AdminUsers';
 import { VisitedPlaces } from './components/Options/VisitedPlaces/VisitedPlaces';
 
-export const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+// export const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de coneccion
+export const BASE_URL = 'http://localhost:8080/v1'; // Linea con la ip de coneccion
 
 function App() {
   document.title = 'EasyTravels' // Cambio el titulo de la pagina

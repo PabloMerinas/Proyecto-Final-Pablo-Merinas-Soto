@@ -1,5 +1,6 @@
 package com.proyecto.viajes.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -7,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
@@ -60,27 +60,34 @@ public class FileRestController {
 	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping(value = "/getProfileImageByUsername", produces = MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<Resource> getProfileImageByUsername(@RequestParam String username) {
-		try {
-			String imgUrl = userRepository.findByUsername(username).map(UserEntity::getImgUrl).orElse("default.png");
-			if (imgUrl.equals(""))
-				imgUrl = "default.png";
+	    try {
+	        String imgUrl = userRepository.findByUsername(username).map(UserEntity::getImgUrl).orElse("default.png");
+	        if (imgUrl.equals(""))
+	            imgUrl = "default.png";
 
-			InputStream imageStream = getClass().getResourceAsStream("/profile-images/" + imgUrl);
+	        String userHome = System.getProperty("user.home");
+	        String imagePathString = userHome + File.separator + "profile-images" + File.separator + imgUrl;
+	        Path imagePath = Paths.get(imagePathString);
 
-			if (imageStream != null) {
-				byte[] imageBytes = IOUtils.toByteArray(imageStream);
-				ByteArrayResource resource = new ByteArrayResource(imageBytes);
+	        if (Files.exists(imagePath)) {
+	            byte[] imageBytes = Files.readAllBytes(imagePath);
+	            ByteArrayResource resource = new ByteArrayResource(imageBytes);
 
-				HttpHeaders headers = new HttpHeaders();
-				headers.setContentType(MediaType.IMAGE_PNG);
-				return ResponseEntity.ok().headers(headers).contentLength(imageBytes.length).body(resource);
-			} else {
-				return ResponseEntity.notFound().build();
-			}
-		} catch (IOException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+	            HttpHeaders headers = new HttpHeaders();
+	            headers.setContentType(MediaType.IMAGE_PNG);
+	            return ResponseEntity.ok().headers(headers).contentLength(imageBytes.length).body(resource);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    } catch (IOException e) {
+	        LOGGER.error("Error al intentar recuperar la imagen de perfil para el usuario: {}. Detalles: {}", username, e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    } catch (Exception e) {
+	        LOGGER.error("Error al procesar la solicitud para recuperar la imagen de perfil para el usuario: {}. Detalles: {}", username, e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
 	}
+
 
 	/**
 	 * Endpoint para cargar una imagen de perfil a un usuario por su nombre de
@@ -106,8 +113,9 @@ public class FileRestController {
 			if (fileName != null) {
 				fileName = StringUtils.cleanPath(fileName);
 			}
-			String uploadDir = "./src/main/resources/profile-images";
-			Path uploadPath = Paths.get(uploadDir);
+	        String userHome = System.getProperty("user.home");
+	        String uploadDir = userHome + File.separator + "profile-images";
+	        Path uploadPath = Paths.get(uploadDir);
 
 			if (!Files.exists(uploadPath)) {
 				Files.createDirectories(uploadPath);

@@ -164,6 +164,16 @@ export const uploadProfileImageByUsername = async (formData, username) => {
     });
 
     // Obtengo la URL de la imagen de perfil del usuario
+    return await getProfileImageURL(username, token);
+  } catch (error) {
+    console.error('Error updating user profile image: ', error);
+    throw new Error('Error updating user profile image: ' + (error.response ? error.response.data : error.message));
+  }
+}
+
+// Obtener la URL de la imagen de perfil del usuario
+export const getProfileImageURL = async (username, token) => {
+  try {
     const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
       headers: {
         Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
@@ -174,15 +184,16 @@ export const uploadProfileImageByUsername = async (formData, username) => {
       responseType: 'blob'
     });
 
-    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+    // Para obtener la imagen del perfil
     const imageData = profileImageResponse.data;
     const imageUrl = URL.createObjectURL(imageData);
     return imageUrl;
   } catch (error) {
-    console.error('Error updating user profile image: ', error);
-    throw new Error('Error updating user profile image: ' + error.response.data);
+    console.error('Error getting user profile image URL: ', error);
+    throw new Error('Error getting user profile image URL: ' + (error.response ? error.response.data : error.message));
   }
 }
+
 
 // Elimina un usuario pasandole el usuario
 export const deleteUserByUsername = async (username) => {
