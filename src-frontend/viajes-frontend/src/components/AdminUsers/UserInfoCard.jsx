@@ -86,7 +86,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                 <div className="user-info-card-depth11-frame0">
                   <span className="user-info-card-text">
                     <span>
-                      <input type="text" name="user-info-card-form-username" id="user-info-card-form-username" placeholder="Username" disabled={userToEdit} value={formData.username} onChange={handleChange} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} />
+                      <input type="text" name="username" id="user-info-card-form-username" placeholder="Username" disabled={userToEdit} value={formData.username} onChange={handleChange} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} />
                     </span>
                   </span>
                 </div>
@@ -98,7 +98,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text04">
                     <span>
-                      <input type="email" name="user-info-card-form-email" id="user-info-card-form-email" placeholder="Email" required onChange={handleChange} value={formData.email} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} autoComplete="email"/>
+                      <input type="email" name="email" id="user-info-card-form-email" placeholder="Email" required onChange={handleChange} value={formData.email} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} autoComplete="email"/>
                     </span>
                   </span>
                 </div>
@@ -108,7 +108,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text08">
                     <span>
-                      <input type="text" name="user-info-card-form-password" id="user-info-card-form-password" placeholder="Password" required={!userToEdit} onChange={handleChange} value={formData.password} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} />
+                      <input type="text" name="password" id="user-info-card-form-password" placeholder="Password" required={!userToEdit} onChange={handleChange} value={formData.password} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} />
                     </span>
                   </span>
                 </div>
@@ -118,7 +118,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text16">
                     <span>
-                      <input type="text" name="user-info-card-form-phone" id="user-info-card-form-phone" placeholder="Phone number" onChange={handleChange} value={formData.phone} />
+                      <input type="text" name="phone" id="user-info-card-form-phone" placeholder="Phone number" onChange={handleChange} value={formData.phone} />
                     </span>
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text20">
                     <span>
-                      <textarea type="text" name="user-info-card-form-bio" id="user-info-card-form-bio" placeholder="Biography" onChange={handleChange} value={formData.bio} />
+                      <textarea type="text" name="bio" id="user-info-card-form-bio" placeholder="Biography" onChange={handleChange} value={formData.bio} />
                     </span>
                   </span>
                 </div>
@@ -136,7 +136,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   ROLES <br></br>
                   <input
                     type="checkbox"
-                    id="user-info-card-form-adminRole"
+                    id="adminRole"
                     name="isAdmin"
                     checked={formData.isAdmin}
                     onChange={handleRoleChange}
@@ -145,12 +145,12 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   <br />
                   <input
                     type="checkbox"
-                    id="user-info-card-form-customerRole"
+                    id="customerRole"
                     name="isCustomer"
                     checked={formData.isCustomer}
                     onChange={handleRoleChange}
                   />
-                  <label htmlFor="user-info-card-form-customerRole" style={{ marginLeft: '10px' }}>CUSTOMER</label>
+                  <label htmlFor="customerRole" style={{ marginLeft: '10px' }}>CUSTOMER</label>
                 </div>
 
               </div>
