@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../service/userService';
 import { useAuth } from '../../authContext/autContext';
 
-const BASE_URL = 'http://localhost:8080/api'; // Linea con la ip de coneccion
+const BASE_URL = 'http://13.53.46.224:8080/api'; // Linea con la ip de coneccion
 
 export const Login = () => {
   const { login, logout } = useAuth();

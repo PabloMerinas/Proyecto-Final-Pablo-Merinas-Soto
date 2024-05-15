@@ -118,7 +118,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text16">
                     <span>
-                      <input type="text" name="user-info-card-phone" id="user-info-card-form-phone" placeholder="Phone number" onChange={handleChange} value={formData.phone} />
+                      <input type="text" name="phone" id="user-info-card-form-phone" placeholder="Phone number" onChange={handleChange} value={formData.phone} />
                     </span>
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                   </span>
                   <span className="user-info-card-text20">
                     <span>
-                      <textarea type="text" name="user-info-card-bio" id="user-info-card-form-bio" placeholder="Biography" onChange={handleChange} value={formData.bio} />
+                      <textarea type="text" name="bio" id="user-info-card-form-bio" placeholder="Biography" onChange={handleChange} value={formData.bio} />
                     </span>
                   </span>
                 </div>
