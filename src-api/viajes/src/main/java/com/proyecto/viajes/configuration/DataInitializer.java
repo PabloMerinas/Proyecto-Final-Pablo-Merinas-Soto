@@ -112,10 +112,10 @@ public class DataInitializer {
 		executeSqlStatement("""
 				INSERT INTO t_notification (title, time_ago)
 				VALUES
-				('New Destination: Kyoto, Japan', '6h ago'),
-				('New Attraction: Golden Pavilion', '2h ago'),
-				('Local Event: Oia Sunset', '2 days ago'),
-				('New Attraction: Amoudi Bay', '1 day ago');
+				('New Destination: Kyoto, Japan', 'Added at: 15-05-2024 15:33'),
+				('New Attraction: Golden Pavilion', 'Added at: 23-01-2024 15:33'),
+				('Local Event: Oia Sunset', 'Added at: 11-05-2024 15:33'),
+				('New Attraction: Amoudi Bay', 'Added at: 12-05-2024 15:33');
 				""");
 		executeSqlStatement(
 				"INSERT INTO t_notification_user_notified (user_notified_username, notification_id) VALUES ('admin', 2), ('user', 1), ('user', 3), ('admin', 4), ('user', 2);");

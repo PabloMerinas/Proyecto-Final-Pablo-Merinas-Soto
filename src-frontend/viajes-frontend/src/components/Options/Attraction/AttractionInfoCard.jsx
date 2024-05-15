@@ -209,7 +209,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                     <div className="attraction-info-card-depth11-frame0">
                                         <span className="attraction-info-card-text">
                                             <span>
-                                                <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit} title={attractionToEdit ? "You can't edit this field" : ""}/>
+                                                <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit} title={attractionToEdit ? "You can't edit this field" : ""} />
                                             </span>
                                         </span>
                                     </div>
@@ -335,7 +335,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                                 <div className="attraction-info-card-depth8-frame009">
                                                     <span className="attraction-info-card-text20">
                                                         <span>
-                                                            <input required type="number" name="price" id="price" onChange={handleChange} value={formData.price} placeholder="Price" />
+                                                            <input required type="number" name="price" id="price" onChange={handleChange} value={formData.price} placeholder="Price" min={1}/>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -343,10 +343,11 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
-                                    <input type="checkbox" id="myCheckbox" name="myCheckbox"  onChange={(e) => setSendToAllUsers(e.target.checked)} />
-                                    <label htmlFor="myCheckbox">  Send notifications to all user</label>
-                                </div>
+                                {!attractionToEdit ? (
+                                    <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
+                                        <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)} />
+                                        <label htmlFor="myCheckbox">  Send notifications to all user</label>
+                                    </div>) : null}
                                 <button type="submit" style={{ display: 'contents' }}>
                                     <div className="attraction-info-card-depth8-frame1">
                                         <div className="attraction-info-card-depth9-frame0">
@@ -395,29 +396,29 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                         const year = currentDate.getFullYear();
                         const hours = currentDate.getHours().toString().padStart(2, '0');
                         const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-            
+
                         const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
-            
+
                         const notificationToAdd = {
-                          title: 'New attraction: ' + formData.attraction,
-                          timeAgo: 'Added at: ' + formattedDate
+                            title: 'New attraction: ' + formData.attraction,
+                            timeAgo: 'Added at: ' + formattedDate
                         };
                         // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
                         const notificationCounter = document.getElementsByClassName('notification-counter')[0];
                         let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
-            
+
                         if (isNaN(notificationCount)) {
-                          notificationCount = 0;
+                            notificationCount = 0;
                         }
                         notificationCount++; // Sumo
                         notificationCounter.style.visibility = 'visible';
                         notificationCounter.innerText = notificationCount;
-            
+
                         addNotificationToAllUsers(notificationToAdd)
-                          .catch(error => {
-                            console.error('Error adding notification to all users:', error);
-                          });
-                      }
+                            .catch(error => {
+                                console.error('Error adding notification to all users:', error);
+                            });
+                    }
                 })
                 .catch(error => {
                     setErrorMessage(error.message);

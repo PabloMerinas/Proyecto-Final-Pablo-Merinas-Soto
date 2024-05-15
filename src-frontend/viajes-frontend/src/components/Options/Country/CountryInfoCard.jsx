@@ -330,7 +330,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                                   <div className="country-info-card-principal-nivel11-frame0">
                                     <span className="country-info-card-principal-text">
                                       <span>
-                                        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required disabled={countryToEdit} style={{ width: '100%' }} title={countryToEdit ? "You can't edit this field" : ""}/>
+                                        <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required disabled={countryToEdit} style={{ width: '100%' }} title={countryToEdit ? "You can't edit this field" : ""} />
                                       </span>
                                     </span>
                                   </div>
@@ -397,7 +397,7 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                             <div className="country-info-card-principal-nivel8-frame004">
                               <span className="country-info-card-principal-text11">
                                 <span>
-                                  <input type="number" name="population" id="population" onChange={handleChange} placeholder='Population' value={formData.population} required  min="1"/>
+                                  <input type="number" name="population" id="population" onChange={handleChange} placeholder='Population' value={formData.population} required min="1" />
                                 </span>
                               </span>
                             </div>
@@ -448,28 +448,6 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="country-info-card-principal-nivel5-frame5">
-                        <div className="country-info-card-principal-nivel6-frame06">
-                          <div className="country-info-card-principal-nivel7-frame009">
-                            <div className="country-info-card-principal-nivel8-frame009">
-                              <span className="country-info-card-principal-text21">
-                                <span>Currency</span>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="country-info-card-principal-nivel6-frame14">
-                          <div className="country-info-card-principal-nivel7-frame010">
-                            <div className="country-info-card-principal-nivel8-frame010">
-                              <span className="country-info-card-principal-text23">
-                                <span>
-                                  <input type="text" maxLength={1} name="currencySymbol" id="currencySymbol" value={formData.currencySymbol} onChange={handleChange} placeholder='Currecy Symbol' required />
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div className="country-info-card-principal-nivel5-frame4">
                         <div className="country-info-card-principal-nivel6-frame07">
                           <div className="country-info-card-principal-nivel7-frame011">
@@ -492,14 +470,36 @@ export const CountryInfoCard = ({ setSelectedOption, countryToEdit }) => {
                           </div>
                         </div>
                       </div>
+                      <div className="country-info-card-principal-nivel5-frame5">
+                        <div className="country-info-card-principal-nivel6-frame06">
+                          <div className="country-info-card-principal-nivel7-frame009">
+                            <div className="country-info-card-principal-nivel8-frame009">
+                              <span className="country-info-card-principal-text21">
+                                <span>Currency</span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="country-info-card-principal-nivel6-frame14">
+                          <div className="country-info-card-principal-nivel7-frame010">
+                            <div className="country-info-card-principal-nivel8-frame010">
+                              <span className="country-info-card-principal-text23">
+                                <span>
+                                  <input type="text" maxLength={1} name="currencySymbol" id="currencySymbol" value={formData.currencySymbol} onChange={handleChange} placeholder='Currecy Symbol' required />
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
+              {!countryToEdit ? (<div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
                 <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)} />
                 <label htmlFor="myCheckbox">  Send notifications to all user</label>
-              </div>
+              </div>) : null}
               <button type="submit" id='submitCountry'>
                 <div className="country-info-card-principal-nivel8-frame1">
                   <div className="country-info-card-principal-nivel9-frame01">

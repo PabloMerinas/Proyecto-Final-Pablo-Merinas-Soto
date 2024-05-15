@@ -808,6 +808,7 @@ export const AdminUsers = () => {
                                             type="text"
                                             value={searchText}
                                             onChange={handleInputChange}
+                                            name='user-principal-find-bar'
                                             placeholder={`Find ${textToFind}`} style={{ backgroundColor: 'transparent', width: '860px', border: 'none' }}
                                         /> </span>
                                 </div>

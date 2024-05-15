@@ -226,7 +226,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                     <div className="city-card-info-depth11-frame0">
                                         <span className="city-card-info-text" style={{ width: '100%' }}>
                                             <span>
-                                                <input type="text" name="city" id="city" value={formData.city} onChange={handleChange} placeholder='City' required disabled={cityToEdit} style={{ width: '100%' }} title={cityToEdit ? "You can't edit this field" : ""}/></span>
+                                                <input type="text" name="city" id="city" value={formData.city} onChange={handleChange} placeholder='City' required disabled={cityToEdit} style={{ width: '100%' }} title={cityToEdit ? "You can't edit this field" : ""} /></span>
                                         </span>
                                     </div>
                                 </div>
@@ -350,7 +350,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                                 <div className="city-card-info-depth8-frame009">
                                                     <span className="city-card-info-text20">
                                                         <span>
-                                                            <input required type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' min="1"/>
+                                                            <input required type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' min="1" />
                                                         </span>
                                                     </span>
                                                 </div>
@@ -358,10 +358,10 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
-                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)}/>
+                                {!cityToEdit ? (<div className='send-notification-checkbox' style={{ display: 'flex', gap: '10px' }}>
+                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" onChange={(e) => setSendToAllUsers(e.target.checked)} />
                                     <label htmlFor="myCheckbox">  Send notifications to all user</label>
-                                </div>
+                                </div>) : null}
                                 <button type="submit" style={{ display: 'contents' }}>
                                     <div className="city-card-info-depth8-frame1">
                                         <div className="city-card-info-depth9-frame0">
@@ -399,29 +399,29 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                         const year = currentDate.getFullYear();
                         const hours = currentDate.getHours().toString().padStart(2, '0');
                         const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-            
+
                         const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
-            
+
                         const notificationToAdd = {
-                          title: 'New city: ' + formData.city,
-                          timeAgo: 'Added at: ' + formattedDate
+                            title: 'New city: ' + formData.city,
+                            timeAgo: 'Added at: ' + formattedDate
                         };
                         // Una vez añadida la notificacion le añado uno al conteador de notificaciones del header:
                         const notificationCounter = document.getElementsByClassName('notification-counter')[0];
                         let notificationCount = parseInt(notificationCounter.innerText); // Convertir el texto a un número entero
-            
+
                         if (isNaN(notificationCount)) {
-                          notificationCount = 0;
+                            notificationCount = 0;
                         }
                         notificationCount++; // Sumo
                         notificationCounter.style.visibility = 'visible';
                         notificationCounter.innerText = notificationCount;
-            
+
                         addNotificationToAllUsers(notificationToAdd)
-                          .catch(error => {
-                            console.error('Error adding notification to all users:', error);
-                          });
-                      }
+                            .catch(error => {
+                                console.error('Error adding notification to all users:', error);
+                            });
+                    }
                 })
                 .catch(error => {
                     setErrorMessage(error.message);

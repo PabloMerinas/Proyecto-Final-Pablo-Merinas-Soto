@@ -9,6 +9,7 @@ import com.proyecto.viajes.persistence.model.NotificationEntity;
 import com.proyecto.viajes.persistence.repositories.NotificationRepositoryI;
 import com.proyecto.viajes.services.interfaces.NotificationManagementI;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 /**
@@ -44,6 +45,7 @@ public class NotificationManagementImpl implements NotificationManagementI {
 	}
 
 	@Override
+	@Transactional
 	public void addUserToNotification(String username, Long notificationId) {
 		notificationRepository.addUserToNotification(username, notificationId);
 	}

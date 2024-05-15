@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.proyecto.viajes.persistence.model.NotificationEntity;
 
-import jakarta.transaction.Transactional;
-
 /**
  * Interfaz que define un repositorio para la entidad NotificationEntity.
  */
@@ -23,7 +21,7 @@ public interface NotificationRepositoryI extends JpaRepository<NotificationEntit
 	 * @param notificationId El ID de la notificación.
 	 */
 	@Modifying
-	@Query(value = "INSERT INTO T_NOTIFICATION_user_notified (user_notified_username, notification_id) VALUES (:username, :notificationId)", nativeQuery = true)
+	@Query(value = "INSERT INTO t_notification_user_notified (user_notified_username, notification_id) VALUES (:username, :notificationId)", nativeQuery = true)
 	void addUserToNotification(String username, Long notificationId);
 
 	/**
