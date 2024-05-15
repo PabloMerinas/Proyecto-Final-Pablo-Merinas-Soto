@@ -86,7 +86,7 @@ export const UserInfoCard = ({ setSelectedOption, userToEdit }) => {
                 <div className="user-info-card-depth11-frame0">
                   <span className="user-info-card-text">
                     <span>
-                      <input type="text" name="username" id="user-info-card-form-username" placeholder="Username" disabled={userToEdit} value={formData.username} onChange={handleChange} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} />
+                      <input type="text" name="username" id="user-info-card-form-username" placeholder="Username" disabled={userToEdit} value={formData.username} onChange={handleChange} style={{ width: 'auto', border: '1px solid rgb(118, 118, 118)' }} title={userToEdit ? "You can't edit this field" : ""}/>
                     </span>
                   </span>
                 </div>

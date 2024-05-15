@@ -209,7 +209,7 @@ export const AttractionInfoCard = ({ setSelectedOption, attractionToEdit }) => {
                                     <div className="attraction-info-card-depth11-frame0">
                                         <span className="attraction-info-card-text">
                                             <span>
-                                                <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit} />
+                                                <input type="text" name="attraction" id="attraction" value={formData.attraction} onChange={handleChange} placeholder="Attraction" required disabled={attractionToEdit} title={attractionToEdit ? "You can't edit this field" : ""}/>
                                             </span>
                                         </span>
                                     </div>

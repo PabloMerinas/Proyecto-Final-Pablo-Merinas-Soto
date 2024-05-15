@@ -226,7 +226,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                     <div className="city-card-info-depth11-frame0">
                                         <span className="city-card-info-text" style={{ width: '100%' }}>
                                             <span>
-                                                <input type="text" name="city" id="city" value={formData.city} onChange={handleChange} placeholder='City' required disabled={cityToEdit} style={{ width: '100%' }} /></span>
+                                                <input type="text" name="city" id="city" value={formData.city} onChange={handleChange} placeholder='City' required disabled={cityToEdit} style={{ width: '100%' }} title={cityToEdit ? "You can't edit this field" : ""}/></span>
                                         </span>
                                     </div>
                                 </div>
@@ -350,7 +350,7 @@ export const CityInfoCard = ({ setSelectedOption, cityToEdit }) => {
                                                 <div className="city-card-info-depth8-frame009">
                                                     <span className="city-card-info-text20">
                                                         <span>
-                                                            <input required type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' />
+                                                            <input required type="number" name="population" id="population" onChange={handleChange} value={formData.population} placeholder='Population' min="1"/>
                                                         </span>
                                                     </span>
                                                 </div>

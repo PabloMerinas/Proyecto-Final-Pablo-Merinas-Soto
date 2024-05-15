@@ -63,7 +63,6 @@ export const Notification = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const authToken = localStorage.getItem('authToken');
         // Regresa al login si se accede sin logearse antes
         if (!activeUser) {
           return <Navigate to="/" />;
