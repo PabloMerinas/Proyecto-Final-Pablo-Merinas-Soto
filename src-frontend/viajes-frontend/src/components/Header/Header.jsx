@@ -16,7 +16,7 @@ export const Header = () => {
   const [notificationCount, setNotificationCount] = useState(0);
   const { activeUser } = useAuth();
   const location = useLocation();
-  const shouldShowBasicHeader = location.pathname === "/";
+  const shouldShowBasicHeader = location.pathname === "/" || location.pathname === "/register" || activeUser == null;
 
   useEffect(() => {
     // Metodo para contar las notificaciones y asi mostrarlas
@@ -38,7 +38,7 @@ export const Header = () => {
     if (!shouldShowBasicHeader) {
       countNotifications();
     }
-  }, [activeUser]);
+  }, [activeUser, shouldShowBasicHeader]);
 
   // Función para mostrar los popup
   const handlePopupToggle = () => {

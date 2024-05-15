@@ -23,11 +23,9 @@ export const BASE_URL = 'http://13.53.46.224:8080/v1'; // Linea con la ip de con
 function App() {
   document.title = 'EasyTravels' // Cambio el titulo de la pagina
 
-  const shouldShowBasicHeader = window.location.pathname === "/";
-
   return (
     <Router>
-      {shouldShowBasicHeader ? <Header basicHeader={true} /> : <Header />}
+      <Header />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/account" element={<Account />} />

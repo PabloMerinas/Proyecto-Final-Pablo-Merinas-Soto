@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Ignorar los logs ###
+/src-api/viajes/logs/myapp.log

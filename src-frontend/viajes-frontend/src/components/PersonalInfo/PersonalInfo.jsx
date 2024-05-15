@@ -140,6 +140,7 @@ export const PersonalInfo = () => {
                                         placeholder={placeholder}
                                         accept=".png"
                                         autoComplete="text"
+                                        name={"personal-info-option-" + title}
                                     />
                                 </span>
                             </div>
