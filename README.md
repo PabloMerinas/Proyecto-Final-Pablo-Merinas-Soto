@@ -3,7 +3,7 @@
 #### Autor: Pablo Merinas Soto
 #### Tutor: [Antonio Gabriel González Casado(Enlace a su cuenta de GitHub)](https://github.com/antonio-gabriel-gonzalez-casado)
 #### Fecha de Inicio: 15-03-2024
-#### Fecha de Finalización: XX-XX-2024
+#### Fecha de Finalización: 19-05-2024
 
 ## Breve descripción del proyecto
 Este proyecto tiene como objetivo desarrollar una aplicación web que permita a los usuarios llevar un registro de los países, ciudades y atracciones que han visitado. La aplicación ofrecerá funcionalidades para añadir nuevos lugares visitados, visualizar una lista de todos los lugares registrados y acceder a información detallada de cada uno de ellos. De esta manera, la aplicación servirá como un diario de viajes personal, permitiendo a los usuarios llevar un seguimiento de sus experiencias de viaje y compartir información útil sobre los destinos visitados.
