@@ -15,6 +15,8 @@ export const PersonalInfo = () => {
     const [phone, setPhone] = useState(activeUser ? activeUser.phone : '');
     const [bio, setBio] = useState(activeUser ? activeUser.bio : '');
     const [file, setFile] = useState();
+    const [fileName, setFileName] = useState('');
+
     if (!activeUser) {
         return <Navigate to="/" />;
 
@@ -53,6 +55,7 @@ export const PersonalInfo = () => {
                 setEmail(email);
                 setPhone(phone);
                 setBio(bio);
+                setFileName('');
 
 
             } catch (error) {
@@ -93,6 +96,7 @@ export const PersonalInfo = () => {
             const extension = selectedFile.name.split('.').pop().toLowerCase();
             if (extension === 'png') {
                 setFile(selectedFile);
+                setFileName(selectedFile.name);
             } else {
                 alert('Please select a PNG file.');
                 event.target.value = null;
@@ -138,7 +142,6 @@ export const PersonalInfo = () => {
                                         onKeyDown={handleKeyDown}
                                         readOnly={!editMode}
                                         placeholder={placeholder}
-                                        accept=".png"
                                         autoComplete="text"
                                         name={"personal-info-option-" + title}
                                     />
@@ -245,7 +248,46 @@ export const PersonalInfo = () => {
                         {generateOption("fa-solid fa-phone", "text", "Phone number", phone, handlePhoneChange, 'Add your phone number')}
                     </div>
                     <div className="personal-info-principal-nivel4-frame4">
-                        {generateOption("fa-solid fa-user", editMode ? "file" : 'text', "Profile photo", editMode ? "" : 'Change your profile image ( PNG )', handlePhotoChange, activeUser.imgUrl ? activeUser.imgUrl.name : 'Add a profile photo.')}
+                        <div className="personal-info-principal-nivel5-frame06">
+                            <div className="personal-info-principal-nivel6-frame06">
+                                <div className="personal-info-principal-nivel7-frame012">
+                                    <i className="fa-solid fa-user"></i>
+                                </div>
+                            </div>
+                            <div className="personal-info-principal-nivel6-frame16">
+                                <div className="personal-info-principal-nivel7-frame013">
+                                    <div className="personal-info-principal-nivel8-frame017">
+                                        <span className="personal-info-principal-text28">
+                                            <span>Profile photo</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="personal-info-principal-nivel7-frame14">
+                                    <div className="personal-info-principal-nivel8-frame018">
+                                        <span className="personal-info-principal-text30">
+                                            {editMode ? (
+                                                <>
+                                                    <input
+                                                        type="file"
+                                                        className="personal-info-principal-input input-edit-mode"
+                                                        onChange={handlePhotoChange}
+                                                        accept=".png"
+                                                        placeholder="Add a profile photo."
+                                                    />
+                                                    {fileName && (
+                                                        <div className="file-name-display" style={{ position: 'relative', left: '47px', top: '24px', width: '800px', height: '27px', background: 'rgba(247, 249, 252, 1)' }}>
+                                                            {fileName}
+                                                        </div>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <span >{fileName ? fileName : 'Change the photo'}</span>
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="personal-info-principal-nivel4-frame5">
                         {generateOption("fa-solid fa-info", "text", "Bio", bio, handleBioChange, 'Complete your profile for a better experience.')}
