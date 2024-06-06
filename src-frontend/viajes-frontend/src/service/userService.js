@@ -4,7 +4,6 @@ import { BASE_URL } from '../App';
 
 // Función para recuperar la información del usuario utilizando el token
 export const getUserInfo = async (token) => {
-
   try {
     // Obtengo el usuario
     const response = await axios.get(`${BASE_URL}/user/getUserByToken`, {
@@ -16,36 +15,54 @@ export const getUserInfo = async (token) => {
       }
     });
 
-    // Obtengo la URL de la imagen de perfil del usuario
-    const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
-      },
-      params: {
-        username: response.data.username
-      },
-      responseType: 'blob'
-    });
+    const userData = response.data;
 
-    // Para obtener la imagen del perfil ( Esto me ha costado la vida )
-    const imageData = profileImageResponse.data;
-    const imageUrl = URL.createObjectURL(imageData);
-    response.data.imgUrl = imageUrl;
+    if (!userData || !userData.username) {
+      throw new Error('Invalid user data received');
+    }
 
+    let profileImageUrl = null;
+    try {
+      // Obtengo la URL de la imagen de perfil del usuario
+      const profileImageResponse = await axios.get(`${BASE_URL}/file/getProfileImageByUsername`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+        },
+        params: {
+          username: userData.username
+        },
+        responseType: 'blob'
+      });
 
-    // Obtengo sus roles
-    const rolesResponse = await axios.get(`${BASE_URL}/user/getRolesByToken`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
-      },
-      params: {
-        token: token
-      }
-    });
-    const roles = rolesResponse.data;
-    response.data.roles = roles;
+      // Para obtener la imagen del perfil ( Esto me ha costado la vida )
+      const imageData = profileImageResponse.data;
+      profileImageUrl = URL.createObjectURL(imageData);
+    } catch (profileImageError) {
+      console.error('Error fetching profile image:', profileImageError);
+    }
 
-    return response.data; // Devolver los datos del usuario obtenidos del backend
+    userData.imgUrl = profileImageUrl;
+
+    let roles = [];
+    try {
+      // Obtengo sus roles
+      const rolesResponse = await axios.get(`${BASE_URL}/user/getRolesByToken`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Incluir el token en los encabezados de la solicitud
+        },
+        params: {
+          token: token
+        }
+      });
+      roles = rolesResponse.data;
+    } catch (rolesError) {
+      console.error('Error fetching roles:', rolesError);
+      roles = ['CUSTOMER']; // Proporciona un rol predeterminado
+    }
+
+    userData.roles = roles;
+
+    return userData; // Devolver los datos del usuario obtenidos del backend
   } catch (error) {
     console.error('Error recovering user data:', error);
     throw new Error('Error recovering user data');

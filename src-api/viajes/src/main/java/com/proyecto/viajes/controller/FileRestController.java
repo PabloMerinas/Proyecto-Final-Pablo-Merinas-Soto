@@ -86,7 +86,7 @@ public class FileRestController {
 	        LOGGER.error("Error al procesar la solicitud para recuperar la imagen de perfil para el usuario: {}. Detalles: {}", username, e.getMessage());
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
-	}
+	}  
 
 
 	/**

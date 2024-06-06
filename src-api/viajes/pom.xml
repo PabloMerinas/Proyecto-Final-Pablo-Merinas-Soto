@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.proyecto</groupId>
 	<artifactId>viajes</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<name>viajes</name>
 	<description>Proyecto Final Grado - PMS</description>
 	<properties>

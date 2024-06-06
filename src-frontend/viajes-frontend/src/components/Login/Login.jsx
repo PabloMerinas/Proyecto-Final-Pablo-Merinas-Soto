@@ -3,10 +3,11 @@ import "./login.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../service/userService';
 import { useAuth } from '../../authContext/autContext';
+import { CONNECTION } from '../../App';
 
-const BASE_URL = 'http://13.53.46.224:8080/api'; // Linea con la ip de coneccion
 
 export const Login = () => {
+  const BASE_URL = `${CONNECTION}:8080/api`; // Linea con la ip de coneccion
   const { login, logout } = useAuth();
   // Estado para almacenar los valores de los campos del formulario
   const [username, setUsername] = useState('');
@@ -24,7 +25,7 @@ export const Login = () => {
   // Función para manejar el envío del formulario
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
-
+    // console.log(`${BASE_URL}/auth/login`)
     try {
       const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
