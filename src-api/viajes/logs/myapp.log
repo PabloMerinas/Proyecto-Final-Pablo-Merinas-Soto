@@ -13518,3 +13518,453 @@ Consider defining a bean of type 'java.lang.String' in your configuration.
 23:22:36.836 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 23:22:36.836 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
 23:22:36.840 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+16:02:35.576 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 4760 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:02:35.578 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:02:35.602 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:02:35.602 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:02:36.072 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:02:36.115 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 7 JPA repository interfaces.
+16:02:36.409 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+16:02:36.413 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+16:02:36.422 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.proyecto.viajes.MainApp.main(MainApp.java:18)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: Unable to create key store: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:94)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.<init>(JksSslStoreBundle.java:57)
+	at org.springframework.boot.web.server.WebServerSslBundle.createJksKeyStoreBundle(WebServerSslBundle.java:90)
+	at org.springframework.boot.web.server.WebServerSslBundle.createKeyStore(WebServerSslBundle.java:189)
+	at org.springframework.boot.web.server.WebServerSslBundle.createStoreBundle(WebServerSslBundle.java:179)
+	at org.springframework.boot.web.server.WebServerSslBundle.get(WebServerSslBundle.java:174)
+	at org.springframework.boot.web.server.AbstractConfigurableWebServerFactory.getSslBundle(AbstractConfigurableWebServerFactory.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeSsl(TomcatServletWebServerFactory.java:373)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeConnector(TomcatServletWebServerFactory.java:349)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:210)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 11 common frames omitted
+Caused by: java.lang.IllegalStateException: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:123)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:89)
+	... 22 common frames omitted
+Caused by: java.io.FileNotFoundException: \home\pablo\keystore.p12 (El sistema no puede encontrar la ruta especificada)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:84)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:180)
+	at java.base/java.net.URL.openStream(URL.java:1325)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:118)
+	... 23 common frames omitted
+16:03:04.628 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 5424 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:03:04.629 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:03:04.652 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:03:04.652 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:03:05.021 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:03:05.060 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+16:03:05.389 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:03:05.395 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:03:05.396 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:03:05.396 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:03:05.423 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:03:05.424 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 771 ms
+16:03:05.503 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:03:05.541 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+16:03:05.561 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:03:05.699 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:03:05.715 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:03:05.894 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19698e06
+16:03:05.895 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:03:05.936 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:03:06.462 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:03:09.733 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:03:10.706 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+16:03:10.981 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:03:11.142 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@c0f9cc6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@562ba71e, org.springframework.security.web.context.SecurityContextHolderFilter@58a1833e, org.springframework.security.web.header.HeaderWriterFilter@6ef0f6b7, org.springframework.web.filter.CorsFilter@2e7ef662, org.springframework.security.web.authentication.logout.LogoutFilter@6b5f3a96, com.proyecto.viajes.security.JWTAuthorizationFilter@f4220dc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@170e1c3c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4aaecd65, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69a4bdec, org.springframework.security.web.session.SessionManagementFilter@55945b93, org.springframework.security.web.access.ExceptionTranslationFilter@b7ebd68, org.springframework.security.web.access.intercept.AuthorizationFilter@4df8e4f]
+16:03:11.304 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:03:11.314 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:03:11.324 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+16:03:11.328 INFO  com.proyecto.viajes.MainApp - Started MainApp in 6.849 seconds (process running for 7.252)
+16:03:36.474 INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xf70x010x000x000xf30x030x030xe60x8e0x943N?0x8a0x8eW0xd4ie?0x030xb2pi0x12-bGL60x1eu0x810xaa.D0xe80xf90x80 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+16:03:48.959 INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+16:03:48.961 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+16:03:48.965 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:03:48.967 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:03:48.971 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:03:50.258 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 7732 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:03:50.260 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:03:50.282 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:03:50.282 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:03:50.689 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:03:50.729 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+16:03:51.026 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:03:51.031 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:03:51.032 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:03:51.032 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:03:51.056 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:03:51.056 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 774 ms
+16:03:51.124 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:03:51.147 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+16:03:51.162 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:03:51.308 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:03:51.321 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:03:51.491 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13a12f8a
+16:03:51.492 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:03:51.526 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:03:52.017 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:03:55.388 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:03:56.233 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+16:03:56.478 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:03:56.623 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2f1eac1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4df8e4f, org.springframework.security.web.context.SecurityContextHolderFilter@55945b93, org.springframework.security.web.header.HeaderWriterFilter@385ed450, org.springframework.web.filter.CorsFilter@4901d382, org.springframework.security.web.authentication.logout.LogoutFilter@b658201, com.proyecto.viajes.security.JWTAuthorizationFilter@d382bbc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@310d8e06, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58a1833e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c0f9cc6, org.springframework.security.web.session.SessionManagementFilter@6116e88, org.springframework.security.web.access.ExceptionTranslationFilter@27ad05f, org.springframework.security.web.access.intercept.AuthorizationFilter@75e70e98]
+16:03:56.784 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:03:56.795 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:03:56.804 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+16:03:56.808 INFO  com.proyecto.viajes.MainApp - Started MainApp in 6.696 seconds (process running for 7.107)
+16:04:04.808 INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xf70x010x000x000xf30x030x030x9c0x160xfe0xa50xafo0x9b0x16>0x890xd3=f0xe60I0x1110x960xb40x06r>0x820x1b0xe3W0x090x0d0xe20xa7U ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+16:04:58.277 INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+16:04:58.278 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+16:04:58.282 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:04:58.283 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:04:58.288 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:04:59.643 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 3984 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:04:59.645 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:04:59.667 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:04:59.667 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:05:00.058 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:05:00.096 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+16:05:00.425 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:05:00.430 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:05:00.431 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:05:00.431 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:05:00.455 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:05:00.456 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 789 ms
+16:05:00.519 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:05:00.543 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+16:05:00.559 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:05:00.664 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:05:00.676 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:05:00.878 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4dfbc177
+16:05:00.879 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:05:00.914 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:05:01.393 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:05:04.768 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:05:05.614 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+16:05:05.860 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:05:06.012 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@684aae39, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5805f50e, org.springframework.security.web.context.SecurityContextHolderFilter@7bfa2a8e, org.springframework.security.web.header.HeaderWriterFilter@44f736e9, org.springframework.web.filter.CorsFilter@5ebd936, org.springframework.security.web.authentication.logout.LogoutFilter@3e410520, com.proyecto.viajes.security.JWTAuthorizationFilter@29bc16ef, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3720a29, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6c699797, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@355fe64b, org.springframework.security.web.session.SessionManagementFilter@39bedc64, org.springframework.security.web.access.ExceptionTranslationFilter@30030589, org.springframework.security.web.access.intercept.AuthorizationFilter@4e92742c]
+16:05:06.165 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:05:06.178 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:05:06.188 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+16:05:06.191 INFO  com.proyecto.viajes.MainApp - Started MainApp in 6.697 seconds (process running for 7.108)
+16:05:08.503 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:05:08.503 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:05:08.504 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+16:06:13.001 INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xe50x010x000x000xe10x030x030x0d0xd40xb00x800xcc`k0xe60xd70x0d0xe40xb6BUB0xf60xea0xd60xd20xe1J0x9b0xd2t0xf60x840x95A0xe6Z0x050xf3 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+16:08:19.282 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+16:08:19.284 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+16:08:19.289 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:08:19.291 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:08:19.297 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:08:19.392 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 3984 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:08:19.392 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:08:19.539 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:08:19.556 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 7 JPA repository interfaces.
+16:08:19.632 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+16:08:19.634 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+16:08:19.644 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.proyecto.viajes.MainApp.main(MainApp.java:18)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: Unable to create key store: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:94)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.<init>(JksSslStoreBundle.java:57)
+	at org.springframework.boot.web.server.WebServerSslBundle.createJksKeyStoreBundle(WebServerSslBundle.java:90)
+	at org.springframework.boot.web.server.WebServerSslBundle.createKeyStore(WebServerSslBundle.java:189)
+	at org.springframework.boot.web.server.WebServerSslBundle.createStoreBundle(WebServerSslBundle.java:179)
+	at org.springframework.boot.web.server.WebServerSslBundle.get(WebServerSslBundle.java:174)
+	at org.springframework.boot.web.server.AbstractConfigurableWebServerFactory.getSslBundle(AbstractConfigurableWebServerFactory.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeSsl(TomcatServletWebServerFactory.java:373)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeConnector(TomcatServletWebServerFactory.java:349)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:210)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 11 common frames omitted
+Caused by: java.lang.IllegalStateException: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:123)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:89)
+	... 22 common frames omitted
+Caused by: java.io.FileNotFoundException: \home\pablo\keystore.p12 (El sistema no puede encontrar la ruta especificada)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:84)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:180)
+	at java.base/java.net.URL.openStream(URL.java:1325)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:118)
+	... 23 common frames omitted
+16:38:36.751 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 11916 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:38:36.752 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:38:36.775 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:38:36.775 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:38:37.150 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:38:37.189 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+16:38:37.448 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+16:38:37.451 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+16:38:37.459 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.proyecto.viajes.MainApp.main(MainApp.java:18)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: Unable to create key store: Could not load store from 'file:C:UserspabloDocumentskeystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:94)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.<init>(JksSslStoreBundle.java:57)
+	at org.springframework.boot.web.server.WebServerSslBundle.createJksKeyStoreBundle(WebServerSslBundle.java:90)
+	at org.springframework.boot.web.server.WebServerSslBundle.createKeyStore(WebServerSslBundle.java:189)
+	at org.springframework.boot.web.server.WebServerSslBundle.createStoreBundle(WebServerSslBundle.java:179)
+	at org.springframework.boot.web.server.WebServerSslBundle.get(WebServerSslBundle.java:174)
+	at org.springframework.boot.web.server.AbstractConfigurableWebServerFactory.getSslBundle(AbstractConfigurableWebServerFactory.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeSsl(TomcatServletWebServerFactory.java:373)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeConnector(TomcatServletWebServerFactory.java:349)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:210)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 11 common frames omitted
+Caused by: java.lang.IllegalStateException: Could not load store from 'file:C:UserspabloDocumentskeystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:123)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:89)
+	... 22 common frames omitted
+Caused by: java.io.FileNotFoundException: C:UserspabloDocumentskeystore.p12 (El sistema no puede encontrar el archivo especificado)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:84)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:180)
+	at java.base/java.net.URL.openStream(URL.java:1325)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:118)
+	... 23 common frames omitted
+16:39:23.911 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 5580 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:39:23.948 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:39:23.967 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+16:39:23.967 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+16:39:24.349 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:39:24.389 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 7 JPA repository interfaces.
+16:39:24.752 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (https)
+16:39:24.757 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8080"]
+16:39:24.758 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:39:24.759 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:39:24.781 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:39:24.781 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 814 ms
+16:39:24.846 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:39:24.870 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+16:39:24.886 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:39:24.991 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:39:25.004 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:39:25.159 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@14a5d056
+16:39:25.161 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:39:25.194 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:39:25.673 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:39:28.928 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:39:29.742 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+16:39:29.985 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:39:30.124 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56c78912, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@40caaf64, org.springframework.security.web.context.SecurityContextHolderFilter@60ecb07, org.springframework.security.web.header.HeaderWriterFilter@123287fb, org.springframework.web.filter.CorsFilter@24a68098, org.springframework.security.web.authentication.logout.LogoutFilter@45b02d9d, com.proyecto.viajes.security.JWTAuthorizationFilter@14d24bdc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@45c86fce, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50b25ecf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f9ed37f, org.springframework.security.web.session.SessionManagementFilter@782759f0, org.springframework.security.web.access.ExceptionTranslationFilter@5c42a714, org.springframework.security.web.access.intercept.AuthorizationFilter@7372ff4a]
+16:39:30.277 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:39:30.287 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8080"]
+16:39:30.398 INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8080], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\pablo\.keystore] using alias [pablomerinas] with trust store [null]
+16:39:30.407 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (https) with context path ''
+16:39:30.411 INFO  com.proyecto.viajes.MainApp - Started MainApp in 6.649 seconds (process running for 7.06)
+16:40:04.024 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:40:04.024 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:40:04.025 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+16:54:06.545 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+16:54:06.548 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["https-jsse-nio-8080"]
+16:54:06.554 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:54:06.557 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:54:06.561 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:54:06.677 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 5580 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:54:06.677 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:54:06.800 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:54:06.816 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 7 JPA repository interfaces.
+16:54:06.885 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (https)
+16:54:06.886 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8080"]
+16:54:06.886 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:54:06.886 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:54:06.895 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:54:06.895 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 216 ms
+16:54:06.920 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:54:06.921 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:54:06.923 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:54:06.923 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+16:54:06.938 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1608d28
+16:54:06.938 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+16:54:06.940 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:54:06.993 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:54:10.131 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:54:10.754 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:54:10.815 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@652ecc1b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@610045c6, org.springframework.security.web.context.SecurityContextHolderFilter@1b5a7e8b, org.springframework.security.web.header.HeaderWriterFilter@254d1f84, org.springframework.web.filter.CorsFilter@3e2654e1, org.springframework.security.web.authentication.logout.LogoutFilter@44cb3a5e, com.proyecto.viajes.security.JWTAuthorizationFilter@6ea5a378, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f12dff7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@32ee5eae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16a03dff, org.springframework.security.web.session.SessionManagementFilter@291fc1f5, org.springframework.security.web.access.ExceptionTranslationFilter@26184699, org.springframework.security.web.access.intercept.AuthorizationFilter@782a008a]
+16:54:10.881 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:54:10.886 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8080"]
+16:54:10.922 INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8080], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\pablo\.keystore] using alias [pablomerinas] with trust store [null]
+16:54:10.926 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (https) with context path ''
+16:54:10.928 INFO  com.proyecto.viajes.MainApp - Started MainApp in 4.27 seconds (process running for 887.577)
+16:54:10.930 INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+16:54:38.841 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+16:54:38.843 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["https-jsse-nio-8080"]
+16:54:38.849 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:54:38.850 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+16:54:38.854 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+16:54:38.933 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 5580 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:54:38.933 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:54:39.029 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:54:39.043 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 7 JPA repository interfaces.
+16:54:39.099 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (https)
+16:54:39.100 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-8080"]
+16:54:39.100 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:54:39.100 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.18]
+16:54:39.108 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:54:39.109 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 175 ms
+16:54:39.130 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+16:54:39.132 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+16:54:39.133 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+16:54:39.134 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+16:54:39.148 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79419c98
+16:54:39.148 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+16:54:39.149 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+16:54:39.195 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+16:54:42.541 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+16:54:43.150 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+16:54:43.208 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b5f5120, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d6bfe4b, org.springframework.security.web.context.SecurityContextHolderFilter@52b31ac3, org.springframework.security.web.header.HeaderWriterFilter@66892a67, org.springframework.web.filter.CorsFilter@436a2809, org.springframework.security.web.authentication.logout.LogoutFilter@2dc36828, com.proyecto.viajes.security.JWTAuthorizationFilter@452db4bc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@58edca17, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7798097f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b168765, org.springframework.security.web.session.SessionManagementFilter@d63a0f8, org.springframework.security.web.access.ExceptionTranslationFilter@d20fe9c, org.springframework.security.web.access.intercept.AuthorizationFilter@2cac8312]
+16:54:43.262 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+16:54:43.293 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-8080"]
+16:54:43.324 INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8080], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\pablo\.keystore] using alias [pablomerinas] with trust store [null]
+16:54:43.325 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (https) with context path ''
+16:54:43.327 INFO  com.proyecto.viajes.MainApp - Started MainApp in 4.404 seconds (process running for 919.976)
+16:54:43.328 INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+16:54:55.956 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+16:54:55.957 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["https-jsse-nio-8080"]
+16:54:55.959 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+16:54:55.959 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+16:54:55.963 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+16:54:56.035 INFO  com.proyecto.viajes.MainApp - Starting MainApp using Java 21.0.1 with PID 5580 (C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes\target\classes started by pablo in C:\Users\pablo\Desktop\ProyectoFinalPabloMerinasSoto\src-api\viajes)
+16:54:56.036 INFO  com.proyecto.viajes.MainApp - No active profile set, falling back to 1 default profile: "default"
+16:54:56.130 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+16:54:56.144 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 13 ms. Found 7 JPA repository interfaces.
+16:54:56.191 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+16:54:56.193 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+16:54:56.200 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.proyecto.viajes.MainApp.main(MainApp.java:18)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: Unable to create key store: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:94)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.<init>(JksSslStoreBundle.java:57)
+	at org.springframework.boot.web.server.WebServerSslBundle.createJksKeyStoreBundle(WebServerSslBundle.java:90)
+	at org.springframework.boot.web.server.WebServerSslBundle.createKeyStore(WebServerSslBundle.java:189)
+	at org.springframework.boot.web.server.WebServerSslBundle.createStoreBundle(WebServerSslBundle.java:179)
+	at org.springframework.boot.web.server.WebServerSslBundle.get(WebServerSslBundle.java:174)
+	at org.springframework.boot.web.server.AbstractConfigurableWebServerFactory.getSslBundle(AbstractConfigurableWebServerFactory.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeSsl(TomcatServletWebServerFactory.java:373)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.customizeConnector(TomcatServletWebServerFactory.java:349)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:210)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 11 common frames omitted
+Caused by: java.lang.IllegalStateException: Could not load store from 'file:/home/pablo/keystore.p12'
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:123)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.createKeyStore(JksSslStoreBundle.java:89)
+	... 22 common frames omitted
+Caused by: java.io.FileNotFoundException: \home\pablo\keystore.p12 (El sistema no puede encontrar la ruta especificada)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:84)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:180)
+	at java.base/java.net.URL.openStream(URL.java:1325)
+	at org.springframework.boot.ssl.jks.JksSslStoreBundle.loadKeyStore(JksSslStoreBundle.java:118)
+	... 23 common frames omitted

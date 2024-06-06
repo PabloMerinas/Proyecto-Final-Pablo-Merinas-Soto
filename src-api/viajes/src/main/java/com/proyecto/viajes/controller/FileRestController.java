@@ -57,7 +57,6 @@ public class FileRestController {
 	 * @param username Usuario.
 	 * @return la imagen de perfil del usuario como un recurso ByteArrayResource.
 	 */
-	@Secured({ "ROLE_CUSTOMER", "ROLE_ADMIN" })
 	@GetMapping(value = "/getProfileImageByUsername", produces = MediaType.IMAGE_PNG_VALUE)
 	public ResponseEntity<Resource> getProfileImageByUsername(@RequestParam String username) {
 	    try {
@@ -68,6 +67,8 @@ public class FileRestController {
 	        String userHome = System.getProperty("user.home");
 	        String imagePathString = userHome + File.separator + "profile-images" + File.separator + imgUrl;
 	        Path imagePath = Paths.get(imagePathString);
+
+	        LOGGER.info("Buscando imagen de perfil para el usuario {} en la siguiente ruta: {}", username, imagePathString);
 
 	        if (Files.exists(imagePath)) {
 	            byte[] imageBytes = Files.readAllBytes(imagePath);
@@ -81,9 +82,6 @@ public class FileRestController {
 	        }
 	    } catch (IOException e) {
 	        LOGGER.error("Error al intentar recuperar la imagen de perfil para el usuario: {}. Detalles: {}", username, e.getMessage());
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	    } catch (Exception e) {
-	        LOGGER.error("Error al procesar la solicitud para recuperar la imagen de perfil para el usuario: {}. Detalles: {}", username, e.getMessage());
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
 	}  
